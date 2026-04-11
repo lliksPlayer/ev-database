@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Mein EV Rechner – Elektroauto Vergleich, Reichweite, Ladegeschwindigkeit, TCO und mehr." />
+  <title>Mein EV Rechner – Elektroauto Datenbank</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="bg-gray-50 text-gray-900 min-h-screen" style="padding-top:56px">
+
+  <!-- ===== HEADER ===== -->
+  <header class="fixed inset-x-0 top-0 z-50 h-14 bg-white/95 backdrop-blur-sm border-b border-gray-200 shadow-sm">
+    <div class="h-full max-w-[1400px] mx-auto px-4 sm:px-6 flex items-center justify-between gap-3">
+
+      <!-- Branding -->
+      <div class="flex items-center gap-2.5 flex-shrink-0">
+        <div class="w-7 h-7 rounded-lg bg-teal-500 flex items-center justify-center flex-shrink-0">
+          <i data-lucide="zap" class="w-3.5 h-3.5 text-white"></i>
+        </div>
+        <span class="text-gray-900 font-black text-lg tracking-tight">EV Vergleich</span>
+        <span id="carCount" class="hidden sm:inline text-xs text-gray-500 font-medium bg-gray-100 border border-gray-200 px-2 py-0.5 rounded-full">0 Autos</span>
+      </div>
+
+      <!-- Steuerleiste -->
+      <div class="flex items-center gap-1.5 flex-wrap justify-end">
+
+        <!-- Suche -->
+        <div class="relative">
+          <i data-lucide="search" class="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-400 pointer-events-none"></i>
+          <input type="text" id="searchInput" placeholder="Suchen…"
+                 class="h-8 pl-8 pr-3 text-sm text-gray-700 bg-gray-50 border border-gray-200 rounded-lg focus:border-teal-500 focus:outline-none focus:bg-white transition-colors w-28 sm:w-40"
+                 aria-label="Fahrzeug suchen" autocomplete="off" />
+        </div>
+
+        <!-- Sortierung -->
+        <div class="flex items-center gap-1">
+          <select class="ctrl-select h-8 text-sm text-gray-700 bg-gray-50 border border-gray-200 rounded-lg cursor-pointer appearance-none" id="sortSelect" aria-label="Sortierung">
+            <option value="wltpReichweite">Reichweite</option>
+            <option value="ladespeed">kWh/min</option>
+            <option value="basisPreis">Basispreis</option>
+            <option value="psLeistung">PS</option>
+            <option value="nullHundert">0–100</option>
+            <option value="batterieNetto">Batterie Netto</option>
+            <option value="maxLadeleistung">Max. Ladeleistung</option>
+            <option value="ladezeit">Ladezeit 10–80 %</option>
+            <option value="verbrauch">WLTP Verbrauch</option>
+            <option value="anhaengelast">Anhängelast</option>
+            <option value="hoechstgeschwindigkeit">Top Speed</option>
+            <option value="marke">Marke A–Z</option>
+            <option value="markteinfuehrung">Markteinführung</option>
+            <option value="advisor">⭐ Kaufberater</option>
+          </select>
+          <button class="sort-dir-btn h-8 w-8 flex items-center justify-center text-gray-500 bg-gray-50 border border-gray-200 rounded-lg hover:text-gray-800 hover:border-gray-300 transition-colors" id="sortDirBtn" aria-label="Sortierrichtung umkehren" title="Reihenfolge umkehren">
+            <i data-lucide="arrow-up" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+        <!-- Filter-Toggle -->
+        <button class="h-8 px-3 flex items-center gap-1.5 text-sm font-medium text-gray-600 bg-gray-50 border border-gray-200 rounded-lg hover:text-gray-900 hover:border-gray-300 transition-colors" id="filterToggle" aria-expanded="false" aria-controls="filterPanel">
+          <i data-lucide="sliders-horizontal" class="w-4 h-4"></i>
+          <span>Filter</span>
+        </button>
+
+        <!-- Kaufberater-Toggle -->
+        <button class="h-8 px-3 flex items-center gap-1.5 text-sm font-medium text-gray-600 bg-gray-50 border border-gray-200 rounded-lg hover:text-gray-900 hover:border-gray-300 transition-colors" id="advisorToggle" aria-expanded="false" aria-controls="advisorPanel">
+          <i data-lucide="star" class="w-4 h-4"></i>
+          <span>Kaufberater</span>
+        </button>
+
+        <!-- Admin-Login -->
+        <button class="h-8 px-3 flex items-center gap-1.5 text-sm font-medium text-gray-600 bg-gray-50 border border-gray-200 rounded-lg hover:text-gray-900 hover:border-gray-300 transition-colors" id="adminBtn" title="Als Admin anmelden">
+          <i data-lucide="lock" class="w-4 h-4"></i>
+          <span class="hidden sm:inline">Admin</span>
+        </button>
+
+        <!-- Ansichtsgröße -->
+        <div class="flex items-center gap-1" role="group" aria-label="Ansichtsgröße">
+          <button class="view-btn h-8 w-8 flex items-center justify-center text-gray-500 bg-gray-50 border border-gray-200 rounded-lg hover:text-gray-800 hover:border-gray-300 transition-colors" data-view="large" title="Groß" aria-pressed="false">
+            <svg viewBox="0 0 20 20" fill="none" class="w-4 h-4" aria-hidden="true"><rect x="2" y="2" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.8"/><rect x="11" y="2" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.8"/><rect x="2" y="11" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.8"/><rect x="11" y="11" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.8"/></svg>
+          </button>
+          <button class="view-btn h-8 w-8 flex items-center justify-center text-teal-600 bg-teal-50 border border-teal-300 rounded-lg transition-colors" data-view="medium" title="Mittel" aria-pressed="true">
+            <svg viewBox="0 0 20 20" fill="none" class="w-4 h-4" aria-hidden="true"><rect x="2" y="2" width="4" height="4" rx="0.5" stroke="currentColor" stroke-width="1.6"/><rect x="8" y="2" width="4" height="4" rx="0.5" stroke="currentColor" stroke-width="1.6"/><rect x="14" y="2" width="4" height="4" rx="0.5" stroke="currentColor" stroke-width="1.6"/><rect x="2" y="8" width="4" height="4" rx="0.5" stroke="currentColor" stroke-width="1.6"/><rect x="8" y="8" width="4" height="4" rx="0.5" stroke="currentColor" stroke-width="1.6"/><rect x="14" y="8" width="4" height="4" rx="0.5" stroke="currentColor" stroke-width="1.6"/><rect x="2" y="14" width="4" height="4" rx="0.5" stroke="currentColor" stroke-width="1.6"/><rect x="8" y="14" width="4" height="4" rx="0.5" stroke="currentColor" stroke-width="1.6"/><rect x="14" y="14" width="4" height="4" rx="0.5" stroke="currentColor" stroke-width="1.6"/></svg>
+          </button>
+          <button class="view-btn h-8 w-8 flex items-center justify-center text-gray-500 bg-gray-50 border border-gray-200 rounded-lg hover:text-gray-800 hover:border-gray-300 transition-colors" data-view="small" title="Kompakt" aria-pressed="false">
+            <svg viewBox="0 0 20 20" fill="none" class="w-4 h-4" aria-hidden="true"><rect x="1" y="1" width="3" height="3" rx="0.5" stroke="currentColor" stroke-width="1.4"/><rect x="5.5" y="1" width="3" height="3" rx="0.5" stroke="currentColor" stroke-width="1.4"/><rect x="10" y="1" width="3" height="3" rx="0.5" stroke="currentColor" stroke-width="1.4"/><rect x="14.5" y="1" width="3" height="3" rx="0.5" stroke="currentColor" stroke-width="1.4"/><rect x="1" y="5.5" width="3" height="3" rx="0.5" stroke="currentColor" stroke-width="1.4"/><rect x="5.5" y="5.5" width="3" height="3" rx="0.5" stroke="currentColor" stroke-width="1.4"/><rect x="10" y="5.5" width="3" height="3" rx="0.5" stroke="currentColor" stroke-width="1.4"/><rect x="14.5" y="5.5" width="3" height="3" rx="0.5" stroke="currentColor" stroke-width="1.4"/></svg>
+          </button>
+        </div>
+
+        <!-- Daten laden (nur Admin) -->
+        <button class="h-8 px-3 flex items-center gap-1.5 text-sm font-medium text-gray-600 bg-gray-50 border border-gray-200 rounded-lg hover:text-gray-900 hover:border-gray-300 transition-colors hidden" id="loadDataBtn" data-admin-only>
+          <i data-lucide="upload" class="w-4 h-4"></i>
+          <span class="hidden sm:inline">Daten laden</span>
+        </button>
+        <input type="file" id="fileInput" accept=".csv,.xlsx" aria-hidden="true" />
+
+        <!-- Auto hinzufügen (nur Admin) -->
+        <button class="h-8 px-3 flex items-center gap-1.5 text-sm font-bold text-white bg-teal-500 rounded-lg hover:bg-teal-600 transition-colors hidden" id="addCarBtn" data-admin-only>
+          <i data-lucide="plus" class="w-4 h-4"></i>
+          <span class="hidden sm:inline">Auto hinzufügen</span>
+        </button>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== HAUPTINHALT ===== -->
+  <main>
+
+    <!-- HIGHLIGHT-KARTEN -->
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-[1400px] mx-auto px-4 sm:px-6 py-6" aria-label="Highlights">
+
+      <!-- Beste Reichweite -->
+      <div id="hlReichweite" class="relative overflow-hidden rounded-2xl border border-blue-100 bg-gradient-to-br from-blue-50 to-white p-5 flex items-center gap-5 shadow-sm">
+        <div class="absolute -top-6 -left-6 w-32 h-32 bg-blue-100 rounded-full blur-2xl pointer-events-none opacity-60"></div>
+        <div class="relative flex-shrink-0 w-14 h-14 rounded-2xl bg-blue-100 border border-blue-200 flex items-center justify-center">
+          <i data-lucide="gauge" class="w-7 h-7 text-blue-500"></i>
+        </div>
+        <div class="relative min-w-0">
+          <p class="text-blue-500 text-xs font-bold uppercase tracking-widest mb-1">Beste Reichweite</p>
+          <p id="hlReichweiteVal" class="text-gray-900 text-xl font-black leading-tight">–</p>
+          <p id="hlReichweiteNam" class="text-gray-400 text-sm mt-0.5 truncate">–</p>
+        </div>
+      </div>
+
+      <!-- Meiste PS -->
+      <div id="hlPS" class="relative overflow-hidden rounded-2xl border border-orange-100 bg-gradient-to-br from-orange-50 to-white p-5 flex items-center gap-5 shadow-sm">
+        <div class="absolute -top-6 -left-6 w-32 h-32 bg-orange-100 rounded-full blur-2xl pointer-events-none opacity-60"></div>
+        <div class="relative flex-shrink-0 w-14 h-14 rounded-2xl bg-orange-100 border border-orange-200 flex items-center justify-center">
+          <i data-lucide="flame" class="w-7 h-7 text-orange-500"></i>
+        </div>
+        <div class="relative min-w-0">
+          <p class="text-orange-500 text-xs font-bold uppercase tracking-widest mb-1">Meiste PS-Leistung</p>
+          <p id="hlPSVal" class="text-gray-900 text-xl font-black leading-tight">–</p>
+          <p id="hlPSNam" class="text-gray-400 text-sm mt-0.5 truncate">–</p>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- FILTER-PANEL -->
+    <div id="filterPanel" class="overflow-hidden opacity-0 bg-white border-b border-gray-200 shadow-sm" aria-hidden="true">
+      <div class="max-w-[1400px] mx-auto px-4 sm:px-6 py-5">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-sm font-bold text-gray-700 uppercase tracking-wider">Filter</h2>
+          <button id="filterResetBtn" class="text-xs text-gray-400 underline underline-offset-2 hover:text-gray-700 transition-colors">Zurücksetzen</button>
+        </div>
+        <div id="filterSliders" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5"></div>
+      </div>
+    </div>
+
+    <!-- KAUFBERATER-PANEL -->
+    <div id="advisorPanel" class="overflow-hidden opacity-0 border-b border-violet-100 bg-violet-50/40" aria-hidden="true">
+      <div class="max-w-[1400px] mx-auto px-4 sm:px-6 py-5">
+
+        <!-- Header -->
+        <div class="flex items-center justify-between mb-1">
+          <div class="flex items-center gap-3">
+            <div class="w-6 h-6 rounded-lg bg-violet-100 flex items-center justify-center flex-shrink-0">
+              <i data-lucide="star" class="w-3.5 h-3.5 text-violet-600"></i>
+            </div>
+            <h2 class="text-sm font-bold text-gray-700 uppercase tracking-wider">Kaufberater</h2>
+            <span class="text-xs text-gray-400">Autos werden nach Gesamtpunktzahl sortiert</span>
+          </div>
+          <button id="advisorResetBtn" class="text-xs text-gray-400 underline underline-offset-2 hover:text-gray-700 transition-colors">Zurücksetzen</button>
+        </div>
+
+        <!-- Legende -->
+        <div class="flex items-center gap-4 mb-4 pl-9">
+          <span class="flex items-center gap-1.5 text-xs text-gray-500">
+            <span class="w-2 h-2 rounded-full bg-red-400"></span> No go = 0 Pkt &nbsp;<span class="text-gray-300">(automatisch, unter Ok-Schwelle)</span>
+          </span>
+          <span class="flex items-center gap-1.5 text-xs text-gray-500">
+            <span class="w-2 h-2 rounded-full bg-amber-400"></span> Ok = 1 Pkt
+          </span>
+          <span class="flex items-center gap-1.5 text-xs text-gray-500">
+            <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Gut = 2 Pkt
+          </span>
+        </div>
+
+        <!-- Karten (per JS generiert) -->
+        <div id="advisorRows"></div>
+
+      </div>
+    </div>
+
+    <!-- AUTO-KARTEN-RASTER -->
+    <section class="max-w-[1400px] mx-auto px-4 sm:px-6 pt-4 pb-16">
+      <div id="carsGrid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5"></div>
+
+      <!-- Leer-Zustand -->
+      <div id="emptyState" class="hidden flex-col items-center text-center py-24 gap-6">
+        <div class="w-20 h-20 text-gray-300" aria-hidden="true">
+          <svg viewBox="0 0 64 64" fill="none" class="w-full h-full">
+            <rect x="4" y="22" width="56" height="28" rx="6" stroke="currentColor" stroke-width="2.5"/>
+            <path d="M14 22l6-12h24l6 12" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+            <circle cx="18" cy="52" r="6" stroke="currentColor" stroke-width="2.5"/>
+            <circle cx="46" cy="52" r="6" stroke="currentColor" stroke-width="2.5"/>
+            <path d="M24 36h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <p class="text-lg text-gray-400 leading-relaxed">Noch keine Autos geladen.<br/>Lade eine CSV-Datei oder füge ein Auto manuell hinzu.</p>
+        <div class="flex items-center gap-3">
+          <button class="h-9 px-4 flex items-center gap-2 text-sm font-medium text-gray-600 bg-white border border-gray-200 rounded-xl hover:text-gray-900 hover:border-gray-300 transition-colors shadow-sm hidden" id="emptyLoadBtn" data-admin-only>
+            <i data-lucide="upload" class="w-4 h-4"></i>
+            CSV laden
+          </button>
+          <button class="h-9 px-4 flex items-center gap-2 text-sm font-bold text-white bg-teal-500 rounded-xl hover:bg-teal-600 transition-colors hidden" id="emptyAddBtn" data-admin-only>
+            <i data-lucide="plus" class="w-4 h-4"></i>
+            Auto hinzufügen
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== DUPLIKAT-PANEL (Admin) ===== -->
+    <div id="duplicatePanel" class="hidden"></div>
+
+    <!-- ===== TCO RECHNER ===== -->
+    <section id="tcoSection" class="max-w-[1400px] mx-auto px-4 sm:px-6 pb-4">
+      <div class="rounded-2xl border border-gray-200 bg-white shadow-sm overflow-hidden">
+
+        <!-- Toggle-Header -->
+        <button id="tcoToggle" class="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-gray-50 transition-colors" aria-expanded="false" aria-controls="tcoPanel">
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-xl bg-teal-50 border border-teal-200 flex items-center justify-center flex-shrink-0">
+              <i data-lucide="calculator" class="w-4 h-4 text-teal-600"></i>
+            </div>
+            <div>
+              <p class="text-sm font-black text-gray-900 tracking-tight">Wirtschaftlichkeitsrechner (TCO)</p>
+              <p class="text-xs text-gray-400">EV vs. Verbrenner – Total Cost of Ownership</p>
+            </div>
+          </div>
+          <i data-lucide="chevron-down" class="w-4 h-4 text-gray-400 tco-chevron transition-transform duration-300 flex-shrink-0"></i>
+        </button>
+
+        <!-- Panel (eingeklappt per default) -->
+        <div id="tcoPanel" aria-hidden="true">
+          <div class="border-t border-gray-100 px-5 py-6 space-y-6">
+
+            <!-- ── Allgemeine Parameter ── -->
+            <div>
+              <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">Allgemein</p>
+              <div class="grid grid-cols-2 gap-4">
+                <div class="flex flex-col gap-1.5">
+                  <label class="text-xs font-semibold text-gray-500 uppercase tracking-wider" for="tco-jahre">Haltedauer (Jahre)</label>
+                  <input class="tco-input h-9 px-3 text-sm font-bold text-center text-gray-900 bg-gray-50 border border-gray-200 rounded-lg focus:border-teal-500 focus:outline-none focus:bg-white transition-colors" type="number" id="tco-jahre" value="5" min="1" max="20" step="1" />
+                </div>
+                <div class="flex flex-col gap-1.5">
+                  <label class="text-xs font-semibold text-gray-500 uppercase tracking-wider" for="tco-km">Fahrleistung (km/Jahr)</label>
+                  <input class="tco-input h-9 px-3 text-sm font-bold text-center text-gray-900 bg-gray-50 border border-gray-200 rounded-lg focus:border-teal-500 focus:outline-none focus:bg-white transition-colors" type="number" id="tco-km" value="15000" min="1000" max="100000" step="1000" />
+                </div>
+              </div>
+            </div>
+
+            <!-- ── EV vs. ICE Inputs ── -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+              <!-- EV -->
+              <div class="rounded-xl border border-teal-100 bg-teal-50/40 p-4 space-y-3">
+                <p class="text-xs font-bold text-teal-600 uppercase tracking-widest flex items-center gap-1.5">
+                  <i data-lucide="zap" class="w-3.5 h-3.5"></i>
+                  Elektrofahrzeug (EV)
+                </p>
+                <div class="flex flex-col gap-1.5">
+                  <label class="text-xs font-semibold text-gray-500 uppercase tracking-wider" for="tco-ev-select">Aus Datenbank laden</label>
+                  <select id="tco-ev-select" class="h-9 px-3 text-sm text-gray-700 bg-white border border-gray-200 rounded-lg focus:border-teal-500 focus:outline-none transition-colors">
+                    <option value="">– Manuell eingeben –</option>
+                  </select>
+                </div>
+                <div class="flex flex-col gap-1.5">
+                  <label class="text-xs font-semibold text-gray-500 uppercase tracking-wider" for="tco-ev-preis">Kaufpreis (€)</label>
+                  <input class="tco-input h-9 px-3 text-sm font-bold text-center text-gray-900 bg-white border border-gray-200 rounded-lg focus:border-teal-500 focus:outline-none transition-colors" type="number" id="tco-ev-preis" value="45000" min="0" step="500" />
+                </div>
+                <div class="flex flex-col gap-1.5">
+                  <label class="text-xs font-semibold text-gray-500 uppercase tracking-wider" for="tco-ev-verbrauch">Verbrauch (kWh/100km)</label>
+                  <input class="tco-input h-9 px-3 text-sm font-bold text-center text-gray-900 bg-white border border-gray-200 rounded-lg focus:border-teal-500 focus:outline-none transition-colors" type="number" id="tco-ev-verbrauch" value="18" min="0" step="0.5" />
+                </div>
+                <div class="flex flex-col gap-1.5">
+                  <label class="text-xs font-semibold text-gray-500 uppercase tracking-wider" for="tco-ev-epreis">Strompreis (€/kWh)</label>
+                  <input class="tco-input h-9 px-3 text-sm font-bold text-center text-gray-900 bg-white border border-gray-200 rounded-lg focus:border-teal-500 focus:outline-none transition-colors" type="number" id="tco-ev-epreis" value="0.32" min="0" step="0.01" />
+                </div>
+              </div>
+
+              <!-- ICE -->
+              <div class="rounded-xl border border-orange-100 bg-orange-50/40 p-4 space-y-3">
+                <p class="text-xs font-bold text-orange-600 uppercase tracking-widest flex items-center gap-1.5">
+                  <i data-lucide="fuel" class="w-3.5 h-3.5"></i>
+                  Verbrenner (ICE)
+                </p>
+                <div class="flex flex-col gap-1.5">
+                  <label class="text-xs font-semibold text-gray-500 uppercase tracking-wider" for="tco-ice-select">Aus Datenbank laden</label>
+                  <select id="tco-ice-select" class="h-9 px-3 text-sm text-gray-700 bg-white border border-gray-200 rounded-lg focus:border-teal-500 focus:outline-none transition-colors">
+                    <option value="">– Manuell eingeben –</option>
+                  </select>
+                </div>
+                <div class="flex flex-col gap-1.5">
+                  <label class="text-xs font-semibold text-gray-500 uppercase tracking-wider" for="tco-ice-preis">Kaufpreis (€)</label>
+                  <input class="tco-input h-9 px-3 text-sm font-bold text-center text-gray-900 bg-white border border-gray-200 rounded-lg focus:border-teal-500 focus:outline-none transition-colors" type="number" id="tco-ice-preis" value="35000" min="0" step="500" />
+                </div>
+                <div class="flex flex-col gap-1.5">
+                  <label class="text-xs font-semibold text-gray-500 uppercase tracking-wider" for="tco-ice-verbrauch">Verbrauch (L/100km)</label>
+                  <input class="tco-input h-9 px-3 text-sm font-bold text-center text-gray-900 bg-white border border-gray-200 rounded-lg focus:border-teal-500 focus:outline-none transition-colors" type="number" id="tco-ice-verbrauch" value="7" min="0" step="0.1" />
+                </div>
+                <div class="flex flex-col gap-1.5">
+                  <label class="text-xs font-semibold text-gray-500 uppercase tracking-wider" for="tco-ice-epreis">Kraftstoffpreis (€/L)</label>
+                  <input class="tco-input h-9 px-3 text-sm font-bold text-center text-gray-900 bg-white border border-gray-200 rounded-lg focus:border-teal-500 focus:outline-none transition-colors" type="number" id="tco-ice-epreis" value="1.75" min="0" step="0.05" />
+                </div>
+              </div>
+            </div>
+
+            <!-- ── Experten-Modus Toggle ── -->
+            <div class="flex justify-center">
+              <button id="tcoExpertToggle"
+                      class="flex items-center gap-2 h-8 px-4 text-xs font-semibold text-gray-500 bg-gray-50 border border-gray-200 rounded-full hover:text-gray-800 hover:border-gray-300 transition-colors"
+                      aria-expanded="false">
+                <i data-lucide="settings-2" class="w-3.5 h-3.5"></i>
+                <span data-tco-expert-label>Experten-Modus</span>
+                <i data-lucide="chevron-down" class="w-3.5 h-3.5 tco-expert-chevron transition-transform duration-200"></i>
+              </button>
+            </div>
+
+            <!-- ── Experten-Felder (hidden by default) ── -->
+            <div id="tcoExpertFields" class="hidden space-y-3">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- EV Expert -->
+                <div class="rounded-xl border border-teal-100 bg-teal-50/40 p-4 space-y-3">
+                  <p class="text-xs font-bold text-teal-600 uppercase tracking-widest">EV – Erweitert</p>
+                  <div class="flex flex-col gap-1.5">
+                    <label class="text-xs font-semibold text-gray-500 uppercase tracking-wider" for="tco-ev-wv">Wertverlust gesamt (%)</label>
+                    <input class="tco-input h-9 px-3 text-sm font-bold text-center text-gray-900 bg-white border border-gray-200 rounded-lg focus:border-teal-500 focus:outline-none transition-colors" type="number" id="tco-ev-wv" value="55" min="0" max="100" step="1" />
+                  </div>
+                  <div class="flex flex-col gap-1.5">
+                    <label class="text-xs font-semibold text-gray-500 uppercase tracking-wider" for="tco-ev-fix">Jährl. Fixkosten (€/Jahr)</label>
+                    <input class="tco-input h-9 px-3 text-sm font-bold text-center text-gray-900 bg-white border border-gray-200 rounded-lg focus:border-teal-500 focus:outline-none transition-colors" type="number" id="tco-ev-fix" value="1200" min="0" step="50" />
+                  </div>
+                </div>
+                <!-- ICE Expert -->
+                <div class="rounded-xl border border-orange-100 bg-orange-50/40 p-4 space-y-3">
+                  <p class="text-xs font-bold text-orange-600 uppercase tracking-widest">Verbrenner – Erweitert</p>
+                  <div class="flex flex-col gap-1.5">
+                    <label class="text-xs font-semibold text-gray-500 uppercase tracking-wider" for="tco-ice-wv">Wertverlust gesamt (%)</label>
+                    <input class="tco-input h-9 px-3 text-sm font-bold text-center text-gray-900 bg-white border border-gray-200 rounded-lg focus:border-teal-500 focus:outline-none transition-colors" type="number" id="tco-ice-wv" value="65" min="0" max="100" step="1" />
+                  </div>
+                  <div class="flex flex-col gap-1.5">
+                    <label class="text-xs font-semibold text-gray-500 uppercase tracking-wider" for="tco-ice-fix">Jährl. Fixkosten (€/Jahr)</label>
+                    <input class="tco-input h-9 px-3 text-sm font-bold text-center text-gray-900 bg-white border border-gray-200 rounded-lg focus:border-teal-500 focus:outline-none transition-colors" type="number" id="tco-ice-fix" value="1800" min="0" step="50" />
+                  </div>
+                </div>
+              </div>
+              <p class="text-xs text-gray-400 text-center">Im Basis-Modus gelten Standardwerte: EV 55 % / 1.200 €·a⁻¹ &nbsp;·&nbsp; Verbrenner 65 % / 1.800 €·a⁻¹</p>
+            </div>
+
+            <!-- ── Ergebnisse ── -->
+            <div class="rounded-xl border border-gray-200 bg-gray-50 p-5 space-y-5">
+              <p class="text-xs font-bold text-gray-400 uppercase tracking-widest">Ergebnisse</p>
+
+              <!-- Gesamt-Karten -->
+              <div class="grid grid-cols-2 gap-4">
+                <div class="rounded-xl bg-teal-50 border border-teal-100 p-4 text-center">
+                  <p class="text-xs font-semibold text-teal-500 uppercase tracking-widest mb-1">EV Gesamt</p>
+                  <p id="tco-ev-result" class="text-2xl font-black text-teal-700 leading-none tabular-nums">–</p>
+                </div>
+                <div class="rounded-xl bg-orange-50 border border-orange-100 p-4 text-center">
+                  <p class="text-xs font-semibold text-orange-500 uppercase tracking-widest mb-1">Verbrenner Gesamt</p>
+                  <p id="tco-ice-result" class="text-2xl font-black text-orange-700 leading-none tabular-nums">–</p>
+                </div>
+              </div>
+
+              <!-- Vergleichsbalken -->
+              <div class="space-y-2">
+                <div class="flex items-center gap-3">
+                  <span class="w-24 text-xs font-bold text-teal-600 text-right flex-shrink-0">EV</span>
+                  <div class="flex-1 bg-gray-200 rounded-full h-4 overflow-hidden">
+                    <div id="tco-ev-bar" class="h-full bg-teal-400 rounded-full tco-bar-transition" style="width:80%"></div>
+                  </div>
+                </div>
+                <div class="flex items-center gap-3">
+                  <span class="w-24 text-xs font-bold text-orange-600 text-right flex-shrink-0">Verbrenner</span>
+                  <div class="flex-1 bg-gray-200 rounded-full h-4 overflow-hidden">
+                    <div id="tco-ice-bar" class="h-full bg-orange-400 rounded-full tco-bar-transition" style="width:100%"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Aufschlüsselung -->
+              <div class="overflow-hidden rounded-xl border border-gray-200">
+                <table class="w-full text-sm">
+                  <thead>
+                    <tr class="bg-gray-100">
+                      <th class="px-4 py-2.5 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Kostenart</th>
+                      <th class="px-4 py-2.5 text-right text-xs font-bold text-teal-600 uppercase tracking-wider">EV</th>
+                      <th class="px-4 py-2.5 text-right text-xs font-bold text-orange-600 uppercase tracking-wider">Verbrenner</th>
+                    </tr>
+                  </thead>
+                  <tbody class="bg-white divide-y divide-gray-100">
+                    <tr>
+                      <td class="px-4 py-2.5 text-sm text-gray-600">Wertverlust</td>
+                      <td id="tco-ev-depr"    class="px-4 py-2.5 text-sm font-bold text-right text-teal-700 tabular-nums">–</td>
+                      <td id="tco-ice-depr"   class="px-4 py-2.5 text-sm font-bold text-right text-orange-700 tabular-nums">–</td>
+                    </tr>
+                    <tr>
+                      <td class="px-4 py-2.5 text-sm text-gray-600">Energiekosten</td>
+                      <td id="tco-ev-energy"  class="px-4 py-2.5 text-sm font-bold text-right text-teal-700 tabular-nums">–</td>
+                      <td id="tco-ice-energy" class="px-4 py-2.5 text-sm font-bold text-right text-orange-700 tabular-nums">–</td>
+                    </tr>
+                    <tr>
+                      <td class="px-4 py-2.5 text-sm text-gray-600">Fixkosten</td>
+                      <td id="tco-ev-fix-r"   class="px-4 py-2.5 text-sm font-bold text-right text-teal-700 tabular-nums">–</td>
+                      <td id="tco-ice-fix-r"  class="px-4 py-2.5 text-sm font-bold text-right text-orange-700 tabular-nums">–</td>
+                    </tr>
+                    <tr class="bg-gray-50">
+                      <td class="px-4 py-2.5 text-xs text-gray-400 italic">Kosten/km</td>
+                      <td id="tco-ev-km-cost"  class="px-4 py-2.5 text-xs font-semibold text-right text-teal-600 tabular-nums">–</td>
+                      <td id="tco-ice-km-cost" class="px-4 py-2.5 text-xs font-semibold text-right text-orange-600 tabular-nums">–</td>
+                    </tr>
+                    <tr class="bg-gray-50">
+                      <td class="px-4 py-2.5 text-xs text-gray-400 italic">Monatlich</td>
+                      <td id="tco-ev-monthly"  class="px-4 py-2.5 text-xs font-semibold text-right text-teal-600 tabular-nums">–</td>
+                      <td id="tco-ice-monthly" class="px-4 py-2.5 text-xs font-semibold text-right text-orange-600 tabular-nums">–</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Break-even & CO₂ -->
+              <div class="grid grid-cols-2 gap-3">
+                <div class="rounded-xl bg-gray-50 border border-gray-200 p-3 text-center">
+                  <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Break-even</p>
+                  <p id="tco-breakeven" class="text-sm font-bold text-gray-800">–</p>
+                </div>
+                <div class="rounded-xl bg-green-50 border border-green-100 p-3 text-center">
+                  <p class="text-xs font-bold text-green-600 uppercase tracking-widest mb-1">CO₂ gespart</p>
+                  <p id="tco-co2" class="text-sm font-bold text-green-700">–</p>
+                </div>
+              </div>
+
+              <!-- Fazit -->
+              <div class="rounded-xl bg-white border border-gray-200 px-5 py-3.5 text-sm text-center text-gray-600" id="tco-summary-wrap">
+                <span id="tco-summary">–</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== MODAL: AUTO HINZUFÜGEN ===== -->
+  <div id="addCarModal" class="fixed inset-0 z-[300] flex items-start justify-center p-4 sm:p-6 overflow-y-auto bg-black/40 backdrop-blur-sm opacity-0 pointer-events-none" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
+    <div class="modal-inner bg-white border border-gray-200 rounded-2xl w-full max-w-2xl shadow-2xl -translate-y-4 my-4">
+
+      <!-- Modal-Header -->
+      <div class="flex items-center justify-between px-6 py-4 border-b border-gray-100">
+        <h2 id="modalTitle" class="text-lg font-black text-gray-900 tracking-tight">Neues Auto hinzufügen</h2>
+        <button id="modalClose" class="w-8 h-8 flex items-center justify-center rounded-lg text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-colors" aria-label="Schließen">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <form id="addCarForm" class="px-6 pb-6 pt-5" novalidate>
+
+        <!-- Zeile 1: Marke / Modell / Markteinführung -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
+          <div class="flex flex-col gap-1.5">
+            <label class="text-xs font-semibold text-gray-500 uppercase tracking-wider" for="f-marke">Marke <span class="text-teal-500" aria-hidden="true">*</span></label>
+            <input class="h-9 px-3 text-sm text-gray-900 bg-gray-50 border border-gray-200 rounded-lg focus:border-teal-500 focus:outline-none focus:bg-white transition-colors placeholder:text-gray-300" type="text" id="f-marke" name="marke" placeholder="z. B. Tesla" required />
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label class="text-xs font-semibold text-gray-500 uppercase tracking-wider" for="f-modell">Modell <span class="text-teal-500" aria-hidden="true">*</span></label>
+            <input class="h-9 px-3 text-sm text-gray-900 bg-gray-50 border border-gray-200 rounded-lg focus:border-teal-500 focus:outline-none focus:bg-white transition-colors placeholder:text-gray-300" type="text" id="f-modell" name="modell" placeholder="z. B. Model 3" required />
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label class="text-xs font-semibold text-gray-500 uppercase tracking-wider" for="f-markteinfuehrung">Markteinführung</label>
+            <input class="h-9 px-3 text-sm text-gray-900 bg-gray-50 border border-gray-200 rounded-lg focus:border-teal-500 focus:outline-none focus:bg-white transition-colors placeholder:text-gray-300" type="text" id="f-markteinfuehrung" name="markteinfuehrung" placeholder="z. B. 2024-Q1" />
+          </div>
+        </div>
+
+        <!-- Abschnitt: Batterie & Laden -->
+        <p class="text-xs font-bold text-gray-400 uppercase tracking-widest pt-4 pb-3 border-t border-gray-100 mt-1 mb-0">Batterie &amp; Laden</p>
+
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-4">
+          <div class="flex flex-col gap-1.5">
+            <label class="text-xs font-semibold text-gray-500 uppercase tracking-wider" for="f-batterieNetto">Batterie Netto (kWh) <span class="text-teal-500" aria-hidden="true">*</span></label>
+            <input class="h-9 px-3 text-sm text-gray-900 bg-gray-50 border border-gray-200 rounded-lg focus:border-teal-500 focus:outline-none focus:bg-white transition-colors placeholder:text-gray-300" type="number" id="f-batterieNetto" name="batterieNetto" step="0.1" min="0" placeholder="82.0" required />
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label class="text-xs font-semibold text-gray-500 uppercase tracking-wider" for="f-ladezeit">Ladezeit 10–80 % (min) <span class="text-teal-500" aria-hidden="true">*</span></label>
+            <input class="h-9 px-3 text-sm text-gray-900 bg-gray-50 border border-gray-200 rounded-lg focus:border-teal-500 focus:outline-none focus:bg-white transition-colors placeholder:text-gray-300" type="number" id="f-ladezeit" name="ladezeit" step="1" min="0" placeholder="28" required />
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label class="text-xs font-semibold text-gray-500 uppercase tracking-wider flex items-center gap-1.5">kWh nach 70 % <span class="px-1.5 py-0.5 rounded-full bg-teal-50 text-teal-600 text-[10px] font-bold tracking-wider border border-teal-200">auto</span></label>
+            <div class="h-9 px-3 flex items-center text-sm font-bold text-teal-600 bg-teal-50 border border-dashed border-teal-200 rounded-lg" id="c-geladeneEnergie">–</div>
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label class="text-xs font-semibold text-gray-500 uppercase tracking-wider flex items-center gap-1.5">kWh/min <span class="px-1.5 py-0.5 rounded-full bg-teal-50 text-teal-600 text-[10px] font-bold tracking-wider border border-teal-200">auto</span></label>
+            <div class="h-9 px-3 flex items-center text-sm font-bold text-teal-600 bg-teal-50 border border-dashed border-teal-200 rounded-lg" id="c-ladespeed">–</div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4 mb-4">
+          <div class="flex flex-col gap-1.5">
+            <label class="text-xs font-semibold text-gray-500 uppercase tracking-wider" for="f-maxLadeleistung">Max. Ladeleistung (kW)</label>
+            <input class="h-9 px-3 text-sm text-gray-900 bg-gray-50 border border-gray-200 rounded-lg focus:border-teal-500 focus:outline-none focus:bg-white transition-colors placeholder:text-gray-300" type="number" id="f-maxLadeleistung" name="maxLadeleistung" step="1" min="0" placeholder="250" />
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label class="text-xs font-semibold text-gray-500 uppercase tracking-wider" for="f-voltArchitektur">Volt-Architektur (V)</label>
+            <input class="h-9 px-3 text-sm text-gray-900 bg-gray-50 border border-gray-200 rounded-lg focus:border-teal-500 focus:outline-none focus:bg-white transition-colors placeholder:text-gray-300" type="number" id="f-voltArchitektur" name="voltArchitektur" step="100" min="0" placeholder="800" />
+          </div>
+        </div>
+
+        <!-- Abschnitt: Reichweite & Verbrauch -->
+        <p class="text-xs font-bold text-gray-400 uppercase tracking-widest pt-4 pb-3 border-t border-gray-100 mt-1 mb-0">Reichweite &amp; Verbrauch</p>
+
+        <div class="grid grid-cols-2 gap-4 mb-4">
+          <div class="flex flex-col gap-1.5">
+            <label class="text-xs font-semibold text-gray-500 uppercase tracking-wider" for="f-wltpReichweite">WLTP Reichweite (km) <span class="text-teal-500" aria-hidden="true">*</span></label>
+            <input class="h-9 px-3 text-sm text-gray-900 bg-gray-50 border border-gray-200 rounded-lg focus:border-teal-500 focus:outline-none focus:bg-white transition-colors placeholder:text-gray-300" type="number" id="f-wltpReichweite" name="wltpReichweite" step="1" min="0" placeholder="491" required />
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label class="text-xs font-semibold text-gray-500 uppercase tracking-wider flex items-center gap-1.5">WLTP Verbrauch (kWh/100km) <span class="px-1.5 py-0.5 rounded-full bg-teal-50 text-teal-600 text-[10px] font-bold tracking-wider border border-teal-200">auto</span></label>
+            <div class="h-9 px-3 flex items-center text-sm font-bold text-teal-600 bg-teal-50 border border-dashed border-teal-200 rounded-lg" id="c-verbrauch">–</div>
+          </div>
+        </div>
+
+        <!-- Abschnitt: Fahrleistung -->
+        <p class="text-xs font-bold text-gray-400 uppercase tracking-widest pt-4 pb-3 border-t border-gray-100 mt-1 mb-0">Fahrleistung</p>
+
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-4">
+          <div class="flex flex-col gap-1.5">
+            <label class="text-xs font-semibold text-gray-500 uppercase tracking-wider" for="f-nullHundert">0–100 km/h (s)</label>
+            <input class="h-9 px-3 text-sm text-gray-900 bg-gray-50 border border-gray-200 rounded-lg focus:border-teal-500 focus:outline-none focus:bg-white transition-colors placeholder:text-gray-300" type="number" id="f-nullHundert" name="nullHundert" step="0.1" min="0" placeholder="5.8" />
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label class="text-xs font-semibold text-gray-500 uppercase tracking-wider" for="f-psLeistung">PS Leistung</label>
+            <input class="h-9 px-3 text-sm text-gray-900 bg-gray-50 border border-gray-200 rounded-lg focus:border-teal-500 focus:outline-none focus:bg-white transition-colors placeholder:text-gray-300" type="number" id="f-psLeistung" name="psLeistung" step="1" min="0" placeholder="258" />
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label class="text-xs font-semibold text-gray-500 uppercase tracking-wider" for="f-hoechstgeschwindigkeit">Top Speed (km/h)</label>
+            <input class="h-9 px-3 text-sm text-gray-900 bg-gray-50 border border-gray-200 rounded-lg focus:border-teal-500 focus:outline-none focus:bg-white transition-colors placeholder:text-gray-300" type="number" id="f-hoechstgeschwindigkeit" name="hoechstgeschwindigkeit" step="1" min="0" placeholder="201" />
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label class="text-xs font-semibold text-gray-500 uppercase tracking-wider" for="f-anhaengelast">Anhängelast (kg)</label>
+            <input class="h-9 px-3 text-sm text-gray-900 bg-gray-50 border border-gray-200 rounded-lg focus:border-teal-500 focus:outline-none focus:bg-white transition-colors placeholder:text-gray-300" type="number" id="f-anhaengelast" name="anhaengelast" step="50" min="0" placeholder="1000" />
+          </div>
+        </div>
+
+        <!-- Abschnitt: Preis -->
+        <p class="text-xs font-bold text-gray-400 uppercase tracking-widest pt-4 pb-3 border-t border-gray-100 mt-1 mb-0">Preis</p>
+
+        <div class="grid grid-cols-2 gap-4 mb-6">
+          <div class="flex flex-col gap-1.5">
+            <label class="text-xs font-semibold text-gray-500 uppercase tracking-wider" for="f-basisPreis">Basispreis (€) <span class="text-teal-500" aria-hidden="true">*</span></label>
+            <input class="h-9 px-3 text-sm text-gray-900 bg-gray-50 border border-gray-200 rounded-lg focus:border-teal-500 focus:outline-none focus:bg-white transition-colors placeholder:text-gray-300" type="number" id="f-basisPreis" name="basisPreis" step="100" min="0" placeholder="43990" required />
+          </div>
+        </div>
+
+        <!-- Formular-Aktionen -->
+        <div class="flex items-center justify-end gap-3 pt-4 border-t border-gray-100">
+          <button type="button" class="h-9 px-4 text-sm font-medium text-gray-600 bg-white border border-gray-200 rounded-xl hover:text-gray-900 hover:border-gray-300 transition-colors" id="modalCancel">Abbrechen</button>
+          <button type="submit" id="modalSubmitBtn" class="h-9 px-4 text-sm font-bold text-white bg-teal-500 rounded-xl hover:bg-teal-600 transition-colors">Auto speichern</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+  <!-- ===== MODAL: ADMIN LOGIN ===== -->
+  <div id="adminLoginModal" class="fixed inset-0 z-[300] flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm opacity-0 pointer-events-none" role="dialog" aria-modal="true" aria-labelledby="adminModalTitle" aria-hidden="true">
+    <div class="modal-inner bg-white border border-gray-200 rounded-2xl w-full max-w-sm shadow-2xl -translate-y-4">
+
+      <!-- Modal-Header -->
+      <div class="flex items-center justify-between px-6 py-4 border-b border-gray-100">
+        <div class="flex items-center gap-2.5">
+          <div class="w-7 h-7 rounded-lg bg-violet-100 flex items-center justify-center flex-shrink-0">
+            <i data-lucide="lock" class="w-3.5 h-3.5 text-violet-600"></i>
+          </div>
+          <h2 id="adminModalTitle" class="text-base font-black text-gray-900 tracking-tight">Admin-Anmeldung</h2>
+        </div>
+        <button id="adminLoginClose" class="w-8 h-8 flex items-center justify-center rounded-lg text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-colors" aria-label="Schließen">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <form id="adminLoginForm" class="px-6 py-5" novalidate>
+        <p class="text-sm text-gray-500 mb-4">Bitte gib das Admin-Passwort ein, um Autos hinzufügen, bearbeiten oder löschen zu können.</p>
+
+        <div class="flex flex-col gap-1.5 mb-4">
+          <label class="text-xs font-semibold text-gray-500 uppercase tracking-wider" for="adminPasswordInput">Passwort</label>
+          <input class="h-9 px-3 text-sm text-gray-900 bg-gray-50 border border-gray-200 rounded-lg focus:border-violet-500 focus:outline-none focus:bg-white transition-colors placeholder:text-gray-300"
+                 type="password" id="adminPasswordInput" placeholder="••••••••" autocomplete="current-password" />
+        </div>
+
+        <!-- Fehler-Hinweis -->
+        <p id="adminLoginError" class="hidden text-xs text-red-500 font-semibold mb-4 flex items-center gap-1.5">
+          <i data-lucide="alert-circle" class="w-3.5 h-3.5 flex-shrink-0"></i>
+          Falsches Passwort. Bitte erneut versuchen.
+        </p>
+
+        <div class="flex items-center justify-end gap-3">
+          <button type="button" id="adminLoginCancel" class="h-9 px-4 text-sm font-medium text-gray-600 bg-white border border-gray-200 rounded-xl hover:text-gray-900 hover:border-gray-300 transition-colors">Abbrechen</button>
+          <button type="submit" class="h-9 px-4 text-sm font-bold text-white bg-violet-600 rounded-xl hover:bg-violet-700 transition-colors flex items-center gap-1.5">
+            <i data-lucide="log-in" class="w-4 h-4"></i>
+            Anmelden
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===== TOAST / BENACHRICHTIGUNGEN ===== -->
+  <div id="toastContainer" class="fixed bottom-6 right-6 z-[400] flex flex-col gap-2 pointer-events-none" aria-live="polite"></div>
+
+  <script src="js/config.js"></script>
+  <script src="js/state.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/csv.js"></script>
+  <script src="js/filter.js"></script>
+  <script src="js/render.js"></script>
+  <script src="js/filter-ui.js"></script>
+  <script src="js/advisor.js"></script>
+  <script src="js/duplicates.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/events.js"></script>
+  <script src="js/tco.js"></script>
+</body>
+</html>

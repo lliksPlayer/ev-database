@@ -1,0 +1,6 @@
+.DS_Store
+**/.DS_Store
+:USERPROFILE*
+node_modules/
+.env
+.vercel
