@@ -95,9 +95,10 @@ function buildCardHTML(car, rank) {
   const unit = (key) => FIELDS.find(f => f.key === key)?.unit ?? '';
 
   const STATUS_COLOR = {
-    nogo: 'text-red-500',
-    ok:   'text-amber-500',
-    gut:  'text-emerald-600',
+    nogo:       'text-red-500',
+    'near-nogo': 'text-orange-500',
+    ok:         'text-amber-500',
+    gut:        'text-emerald-600',
   };
 
   const isAdvisor = typeof advisorActive !== 'undefined' && advisorActive;
@@ -106,10 +107,13 @@ function buildCardHTML(car, rank) {
     if (val == null || isNaN(val)) return '';
     const status   = isAdvisor ? getFieldStatus(val, key) : null;
     const valColor = status ? (STATUS_COLOR[status] ?? 'text-gray-900') : 'text-gray-900';
+    const nearNogoBadge = status === 'near-nogo'
+      ? `<span title="Knapp unter der No-go-Schwelle (≤15%)" class="ml-1 inline-flex items-center justify-center w-3.5 h-3.5 rounded-full bg-orange-100 text-orange-500 flex-shrink-0" style="font-size:9px;font-weight:900">!</span>`
+      : '';
     return `<div class="flex items-center gap-2">
       <i data-lucide="${icon}" class="w-3.5 h-3.5 ${color} flex-shrink-0"></i>
       <div class="min-w-0">
-        <p class="${valColor} text-sm font-bold leading-none">${fmt(val, key)} <span class="text-gray-400 font-normal text-xs">${unit(key)}</span></p>
+        <p class="${valColor} text-sm font-bold leading-none flex items-center">${fmt(val, key)} <span class="text-gray-400 font-normal text-xs ml-0.5">${unit(key)}</span>${nearNogoBadge}</p>
         <p class="text-gray-400 text-xs mt-0.5">${label}</p>
       </div>
     </div>`;

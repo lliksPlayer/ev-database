@@ -39,11 +39,12 @@
 }
 
 /* Modal: fade + slide */
-#addCarModal, #adminLoginModal          { transition: opacity 200ms ease; }
-#addCarModal.is-open, #adminLoginModal.is-open  { opacity: 1 !important; pointer-events: auto !important; }
+#addCarModal, #adminLoginModal, #githubModal          { transition: opacity 200ms ease; }
+#addCarModal.is-open, #adminLoginModal.is-open, #githubModal.is-open  { opacity: 1 !important; pointer-events: auto !important; }
 .modal-inner                            { transition: transform 250ms ease; }
 #addCarModal.is-open .modal-inner,
-#adminLoginModal.is-open .modal-inner   { transform: translateY(0) !important; }
+#adminLoginModal.is-open .modal-inner,
+#githubModal.is-open .modal-inner       { transform: translateY(0) !important; }
 
 /* Leerer Zustand */
 #emptyState.visible { display: flex; }

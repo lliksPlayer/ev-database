@@ -96,6 +96,18 @@
         </button>
         <input type="file" id="fileInput" accept=".csv,.xlsx" aria-hidden="true" />
 
+        <!-- GitHub-Sync (nur Admin) -->
+        <button class="h-8 px-3 flex items-center gap-1.5 text-sm font-medium text-gray-600 bg-gray-50 border border-gray-200 rounded-lg hover:text-gray-900 hover:border-gray-300 transition-colors hidden" id="githubBtn" data-admin-only title="GitHub Auto-Sync einrichten">
+          <i data-lucide="github" class="w-4 h-4"></i>
+          <span class="hidden sm:inline">GitHub</span>
+        </button>
+
+        <!-- Daten exportieren (nur Admin, Fallback) -->
+        <button class="h-8 px-3 flex items-center gap-1.5 text-sm font-medium text-gray-600 bg-gray-50 border border-gray-200 rounded-lg hover:text-gray-900 hover:border-gray-300 transition-colors hidden" id="exportDataBtn" data-admin-only>
+          <i data-lucide="download" class="w-4 h-4"></i>
+          <span class="hidden sm:inline">Exportieren</span>
+        </button>
+
         <!-- Auto hinzufügen (nur Admin) -->
         <button class="h-8 px-3 flex items-center gap-1.5 text-sm font-bold text-white bg-teal-500 rounded-lg hover:bg-teal-600 transition-colors hidden" id="addCarBtn" data-admin-only>
           <i data-lucide="plus" class="w-4 h-4"></i>
@@ -168,9 +180,12 @@
         </div>
 
         <!-- Legende -->
-        <div class="flex items-center gap-4 mb-4 pl-9">
+        <div class="flex flex-wrap items-center gap-4 mb-4 pl-9">
           <span class="flex items-center gap-1.5 text-xs text-gray-500">
-            <span class="w-2 h-2 rounded-full bg-red-400"></span> No go = 0 Pkt &nbsp;<span class="text-gray-300">(automatisch, unter Ok-Schwelle)</span>
+            <span class="w-2 h-2 rounded-full bg-red-400"></span> No go = ausgeblendet &nbsp;<span class="text-gray-300">(&gt;15% unter Schwelle)</span>
+          </span>
+          <span class="flex items-center gap-1.5 text-xs text-gray-500">
+            <span class="w-2 h-2 rounded-full bg-orange-400"></span> Knapp No go = markiert &nbsp;<span class="text-gray-300">(≤15% unter Schwelle)</span>
           </span>
           <span class="flex items-center gap-1.5 text-xs text-gray-500">
             <span class="w-2 h-2 rounded-full bg-amber-400"></span> Ok = 1 Pkt
@@ -612,11 +627,54 @@
     </div>
   </div>
 
+  <!-- ===== GITHUB TOKEN MODAL ===== -->
+  <div id="githubModal" class="fixed inset-0 z-[300] flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm opacity-0 pointer-events-none" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-inner bg-white border border-gray-200 rounded-2xl w-full max-w-sm shadow-2xl -translate-y-4">
+      <div class="flex items-center justify-between px-6 py-4 border-b border-gray-100">
+        <div class="flex items-center gap-2.5">
+          <div class="w-7 h-7 rounded-lg bg-gray-100 flex items-center justify-center flex-shrink-0">
+            <i data-lucide="github" class="w-3.5 h-3.5 text-gray-700"></i>
+          </div>
+          <h2 class="text-base font-black text-gray-900 tracking-tight">GitHub Auto-Sync</h2>
+        </div>
+        <button onclick="closeGithubModal()" class="w-8 h-8 flex items-center justify-center rounded-lg text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-colors" aria-label="Schließen">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+      <div class="px-6 py-5 space-y-4">
+        <div class="rounded-xl bg-blue-50 border border-blue-100 p-3 text-xs text-blue-700 space-y-1">
+          <p class="font-bold">Token erstellen:</p>
+          <p>github.com → Settings → Developer settings → Personal access tokens → Tokens (classic) → Generate new token → <strong>repo</strong> ankreuzen</p>
+        </div>
+        <div class="flex flex-col gap-1.5">
+          <label class="text-xs font-semibold text-gray-500 uppercase tracking-wider" for="githubRepoInput">Repository (user/repo)</label>
+          <input class="h-9 px-3 text-sm text-gray-900 bg-gray-50 border border-gray-200 rounded-lg focus:border-gray-500 focus:outline-none focus:bg-white transition-colors font-mono placeholder:text-gray-400"
+                 type="text" id="githubRepoInput" placeholder="deinname/mein-ev-rechner" autocomplete="off" />
+        </div>
+        <div class="flex flex-col gap-1.5">
+          <label class="text-xs font-semibold text-gray-500 uppercase tracking-wider" for="githubTokenInput">Personal Access Token</label>
+          <input class="h-9 px-3 text-sm text-gray-900 bg-gray-50 border border-gray-200 rounded-lg focus:border-gray-500 focus:outline-none focus:bg-white transition-colors font-mono placeholder:text-gray-300 placeholder:font-sans"
+                 type="password" id="githubTokenInput" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" autocomplete="off" />
+        </div>
+        <p id="githubModalError" class="hidden text-xs text-red-600 font-semibold bg-red-50 border border-red-100 rounded-lg px-3 py-2"></p>
+        <div class="flex items-center justify-end gap-3 pt-1">
+          <button type="button" onclick="closeGithubModal()" class="h-9 px-4 text-sm font-medium text-gray-600 bg-white border border-gray-200 rounded-xl hover:text-gray-900 hover:border-gray-300 transition-colors">Abbrechen</button>
+          <button type="button" id="githubSaveBtn" onclick="saveGithubToken()" class="h-9 px-4 text-sm font-bold text-white bg-gray-900 rounded-xl hover:bg-gray-700 transition-colors flex items-center gap-1.5">
+            <i data-lucide="save" class="w-4 h-4"></i>
+            Speichern &amp; Testen
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- ===== TOAST / BENACHRICHTIGUNGEN ===== -->
   <div id="toastContainer" class="fixed bottom-6 right-6 z-[400] flex flex-col gap-2 pointer-events-none" aria-live="polite"></div>
 
   <script src="js/config.js"></script>
   <script src="js/state.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/github.js"></script>
   <script src="js/storage.js"></script>
   <script src="js/csv.js"></script>
   <script src="js/filter.js"></script>

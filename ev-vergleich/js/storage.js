@@ -2,12 +2,18 @@
 
 const LS_KEY = 'ev-vergleich-v1-cars';
 
-/** Speichert alle aktuellen Autos in localStorage. */
+/** Speichert alle aktuellen Autos in localStorage und pusht bei Admin-Modus nach GitHub. */
 function saveCars() {
   try {
     localStorage.setItem(LS_KEY, JSON.stringify(state.cars));
-  } catch (_) {
-    // localStorage voll oder nicht verfügbar – ignorieren
+  } catch (_) {}
+
+  if (typeof adminMode !== 'undefined' && adminMode &&
+      typeof githubPushDataJs === 'function' && getGithubToken()) {
+    githubPushDataJs(state.cars).then(ok => {
+      if (ok) toast('✓ GitHub aktualisiert – Seite deployt in ~30 Sek.', 'success');
+      else    toast('GitHub-Push fehlgeschlagen – Token prüfen', 'error');
+    });
   }
 }
 

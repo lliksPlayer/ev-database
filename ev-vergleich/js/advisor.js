@@ -53,10 +53,14 @@ function getFieldStatus(val, key) {
   if (dir === 'higher') {
     if (gut != null && val >= gut) return 'gut';
     if (ok  != null && val >= ok)  return 'ok';
+    // Nogo: innerhalb 15% der Schwelle = "near-nogo", darunter = "nogo"
+    if (ok != null && val >= ok * (1 - 0.15)) return 'near-nogo';
     return 'nogo';
   } else {
     if (gut != null && val <= gut) return 'gut';
     if (ok  != null && val <= ok)  return 'ok';
+    // Nogo: innerhalb 15% der Schwelle = "near-nogo", darüber = "nogo"
+    if (ok != null && val <= ok * (1 + 0.15)) return 'near-nogo';
     return 'nogo';
   }
 }

@@ -19,6 +19,19 @@ function applyFiltersAndSort() {
     });
   });
 
+  // Kaufberater: Autos mit einem "harten" No-go (>15% von der Schwelle) ausblenden
+  if (typeof advisorActive !== 'undefined' && advisorActive) {
+    cars = cars.filter(car =>
+      !FIELDS.some(({ key }) => {
+        const { enabled, ok } = advisorConfig[key];
+        if (!enabled || ok == null) return false;
+        const val = car[key];
+        if (val == null || isNaN(val)) return false;
+        return getFieldStatus(val, key) === 'nogo';
+      })
+    );
+  }
+
   const { sortKey, sortDir } = state;
 
   if (sortKey === 'advisor') {
