@@ -17,6 +17,7 @@ import { TRACKED_FIELDS } from './config.js';
 import { computeBounds } from './csv.js';
 import { buildFilterPanel } from './filter-ui.js';
 import { refresh, toast } from './ui.js';
+import { DEFAULT_CARS } from './data.js';
 
 // ─── Konfiguration ────────────────────────────────────────────────────────────
 const firebaseConfig = {
@@ -55,46 +56,56 @@ function updateUI() {
  * Danach wird localStorage geleert, damit keine doppelte Datenhaltung entsteht.
  */
 async function migrateFromLocalStorageIfNeeded() {
-  const LS_KEY = 'ev-vergleich-v1-cars';
-  const raw = localStorage.getItem(LS_KEY);
-  if (!raw) {
-    console.log('[Firebase] Kein localStorage-Datenbestand gefunden, Migration nicht nötig.');
-    return;
-  }
-
-  let localCars;
-  try {
-    localCars = JSON.parse(raw);
-    if (!Array.isArray(localCars) || localCars.length === 0) return;
-  } catch {
-    console.warn('[Firebase] localStorage-Daten konnten nicht gelesen werden.');
-    return;
-  }
-
   // Prüfen ob Firestore bereits Daten hat
   const snapshot = await getDocs(collection(db, 'cars'));
-  if (!snapshot.empty) {
-    console.log(`[Firebase] Firestore hat bereits ${snapshot.size} Dokument(e) – keine Migration.`);
-    // localStorage trotzdem leeren um Konflikte zu vermeiden
+
+  // 1) localStorage-Migration
+  const LS_KEY = 'ev-vergleich-v1-cars';
+  const raw = localStorage.getItem(LS_KEY);
+  if (raw) {
+    let localCars;
+    try {
+      localCars = JSON.parse(raw);
+    } catch {
+      console.warn('[Firebase] localStorage-Daten konnten nicht gelesen werden.');
+    }
+    if (Array.isArray(localCars) && localCars.length > 0) {
+      if (!snapshot.empty) {
+        console.log(`[Firebase] Firestore hat bereits ${snapshot.size} Dokument(e) – localStorage-Migration übersprungen.`);
+      } else {
+        console.log(`[Firebase] Starte Migration: ${localCars.length} Autos aus localStorage → Firestore`);
+        let erfolg = 0;
+        for (const car of localCars) {
+          try {
+            await addDoc(collection(db, 'cars'), stripDerived(car));
+            erfolg++;
+          } catch (e) {
+            console.error('[Firebase] Fehler beim Migrieren eines Autos:', e.message, car);
+          }
+        }
+        console.log(`[Firebase] ✓ Migration abgeschlossen: ${erfolg}/${localCars.length} Autos hochgeladen`);
+      }
+    }
     localStorage.removeItem(LS_KEY);
     return;
   }
 
-  // Firestore ist leer → alle lokalen Autos hochladen
-  console.log(`[Firebase] Starte Migration: ${localCars.length} Autos aus localStorage → Firestore`);
-  let erfolg = 0;
-  for (const car of localCars) {
-    try {
-      await addDoc(collection(db, 'cars'), stripDerived(car));
-      erfolg++;
-    } catch (e) {
-      console.error('[Firebase] Fehler beim Migrieren eines Autos:', e.message, car);
+  // 2) Fallback: DEFAULT_CARS aus data.js laden, wenn Firestore leer ist
+  if (snapshot.empty) {
+    console.log(`[Firebase] Firestore leer – lade ${DEFAULT_CARS.length} Standard-Fahrzeuge aus data.js`);
+    let erfolg = 0;
+    for (const car of DEFAULT_CARS) {
+      try {
+        await addDoc(collection(db, 'cars'), stripDerived(car));
+        erfolg++;
+      } catch (e) {
+        console.error('[Firebase] Fehler beim Laden der Standarddaten:', e.message, car);
+      }
     }
+    console.log(`[Firebase] ✓ Standarddaten geladen: ${erfolg}/${DEFAULT_CARS.length} Autos`);
+  } else {
+    console.log(`[Firebase] Firestore hat ${snapshot.size} Dokument(e) – keine Migration nötig.`);
   }
-
-  // localStorage leeren – Firestore ist jetzt die einzige Datenquelle
-  localStorage.removeItem(LS_KEY);
-  console.log(`[Firebase] ✓ Migration abgeschlossen: ${erfolg}/${localCars.length} Autos hochgeladen`);
 }
 
 // ─── Vollständigkeitsprüfung ──────────────────────────────────────────────────
@@ -143,12 +154,8 @@ function listenToCars() {
   onSnapshot(
     collection(db, 'cars'),
 
-    async (snapshot) => {
+    (snapshot) => {
       console.log(`[Firebase] Snapshot empfangen: ${snapshot.size} Dokument(e)`);
-
-      // Unvollständige Autos automatisch entfernen (löst ggf. neuen Snapshot aus)
-      const deleted = await purgeIncompleteCars(snapshot);
-      if (deleted > 0) return; // neuer Snapshot kommt gleich
 
       state.cars = snapshot.docs.map(docSnap => {
         const car = { id: docSnap.id, ...docSnap.data() };
