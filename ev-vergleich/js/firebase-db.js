@@ -201,7 +201,7 @@ function listenToIceCars() {
 export async function saveIceCarsToCloud(cars) {
   try {
     const existing = await getDocs(collection(db, 'ice_cars'));
-    for (const d of existing.docs) await deleteDoc(doc(db, 'iceCars', d.id));
+    for (const d of existing.docs) await deleteDoc(doc(db, 'ice_cars', d.id));
     for (const car of cars) {
       const { id, ...data } = car;
       await addDoc(collection(db, 'ice_cars'), data);
