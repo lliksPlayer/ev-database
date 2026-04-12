@@ -1,7 +1,9 @@
-'use strict';
+import { state } from './state.js';
+import { FIELDS } from './config.js';
+import { advisorActive, advisorConfig, getFieldStatus, getCarScore } from './advisor.js';
 
 /** Wendet alle aktiven Filter an und sortiert das Ergebnis in state.visible. */
-function applyFiltersAndSort() {
+export function applyFiltersAndSort() {
   let cars = [...state.cars];
 
   if (state.searchQuery) {
@@ -54,10 +56,10 @@ function applyFiltersAndSort() {
 }
 
 // Zahlenformatierung
-const FMT_DE  = new Intl.NumberFormat('de-DE', { maximumFractionDigits: 2 });
-const FMT_EUR = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 });
+export const FMT_DE  = new Intl.NumberFormat('de-DE', { maximumFractionDigits: 2 });
+export const FMT_EUR = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 });
 
-function fmt(val, key) {
+export function fmt(val, key) {
   if (val == null || isNaN(val)) return '–';
   return key === 'basisPreis' ? FMT_EUR.format(val) : FMT_DE.format(val);
 }

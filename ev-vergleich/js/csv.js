@@ -1,4 +1,5 @@
-'use strict';
+import { state, uid, calcDerived } from './state.js';
+import { FIELDS, CSV_MAP } from './config.js';
 
 /* ══════════════════════════════════════════════════════════════════════════
    WASCHSTRASSE FÜR CSV-DATEN
@@ -16,7 +17,7 @@
  *   ""            → null
  *   "k.A."        → null
  */
-function parseEuroNumber(raw) {
+export function parseEuroNumber(raw) {
   if (raw == null) return null;
   let s = String(raw)
     // Währungssymbole
@@ -80,7 +81,7 @@ function parseEuroNumber(raw) {
 }
 
 // Alias für Abwärtskompatibilität (intern genutzt)
-const parseEUNumber = parseEuroNumber;
+export const parseEUNumber = parseEuroNumber;
 
 
 /* ══════════════════════════════════════════════════════════════════════════
@@ -93,7 +94,7 @@ const parseEUNumber = parseEuroNumber;
  * "WLTP-Reichweite" → "wltp reichweite"
  * " 0–100 km/h (s)" → "0 100 km h"
  */
-function normalizeHeader(raw) {
+export function normalizeHeader(raw) {
   return String(raw)
     .replace(/^\uFEFF/, '')       // BOM
     .replace(/\([^)]*\)/g, ' ')   // Klammern + Inhalt entfernen: (€), (km), (s) …
@@ -112,77 +113,92 @@ function normalizeHeader(raw) {
  * Erweiterte Zuordnungstabelle: normalisierter Header → interner Schlüssel.
  * Schlüssel hier sind BEREITS normalisiert (d.h. durch normalizeHeader gelaufen).
  */
-const CSV_MAP_NORMALIZED = {
-  // Marke
+export const CSV_MAP_NORMALIZED = {
+  // ── Marke ──────────────────────────────────────────────────────────────────
   'marke': 'marke', 'hersteller': 'marke', 'brand': 'marke', 'make': 'marke',
   'hersteller marke': 'marke',
 
-  // Modell
+  // ── Modell ─────────────────────────────────────────────────────────────────
   'modell': 'modell', 'model': 'modell', 'fahrzeug': 'modell', 'name': 'modell',
-  'modellbezeichnung': 'modell', 'fahrzeugbezeichnung': 'modell',
+  'modellbezeichnung': 'modell', 'fahrzeugbezeichnung': 'modell', 'fahrzeugmodell': 'modell',
 
-  // Batterie
+  // ── Batterie ───────────────────────────────────────────────────────────────
   'batterie netto': 'batterieNetto', 'batterie': 'batterieNetto',
   'netto kapazitat': 'batterieNetto', 'nettokapazitat': 'batterieNetto',
   'kapazitat netto': 'batterieNetto', 'batterie netto kwh': 'batterieNetto',
   'akkukapazitat': 'batterieNetto', 'akku': 'batterieNetto',
   'batteriekapazitat': 'batterieNetto', 'nutzbare kapazitat': 'batterieNetto',
+  'nutzbare batteriekapazitat': 'batterieNetto', 'akku kwh': 'batterieNetto',
 
-  // Ladezeit
-  'ladezeit': 'ladezeit', 'ladezeit 10 80': 'ladezeit',
-  'ladezeit 10 80 min': 'ladezeit', 'zeit 10 80': 'ladezeit',
+  // ── Ladezeit ───────────────────────────────────────────────────────────────
+  'ladezeit': 'ladezeit',
+  'ladezeit 10 80': 'ladezeit',       'ladezeit 10 80 min': 'ladezeit',
+  'ladezeit in min': 'ladezeit',      'ladezeit min': 'ladezeit',
+  'zeit 10 80': 'ladezeit',           '10 80 min': 'ladezeit',
+  '10 80 in min': 'ladezeit',         '10 80': 'ladezeit',
   'ladezeit 10 80 percent': 'ladezeit', 'dc ladezeit': 'ladezeit',
+  'laden 10 80': 'ladezeit',          'dc laden min': 'ladezeit',
 
-  // Max. Ladeleistung
+  // ── Max. Ladeleistung ──────────────────────────────────────────────────────
   'max ladeleistung': 'maxLadeleistung', 'max  ladeleistung': 'maxLadeleistung',
-  'ladeleistung': 'maxLadeleistung', 'max ladeleistung kw': 'maxLadeleistung',
+  'ladeleistung': 'maxLadeleistung',    'max ladeleistung kw': 'maxLadeleistung',
   'peak ladeleistung': 'maxLadeleistung', 'dc ladeleistung': 'maxLadeleistung',
-  'maximale ladeleistung': 'maxLadeleistung',
+  'maximale ladeleistung': 'maxLadeleistung', 'spitzenladeleistung': 'maxLadeleistung',
+  'max ladepower': 'maxLadeleistung',   'peak charge': 'maxLadeleistung',
+  'max dc ladeleistung': 'maxLadeleistung',
 
-  // Anhängelast
-  'anhangelast': 'anhaengelast', 'anhangelast kg': 'anhaengelast',
-  'zuglast': 'anhaengelast', 'zugkraft': 'anhaengelast',
+  // ── Anhängelast ────────────────────────────────────────────────────────────
+  'anhangelast': 'anhaengelast',       'anhangelast kg': 'anhaengelast',
+  'zuglast': 'anhaengelast',           'zugkraft': 'anhaengelast',
   'zulassige anhangelast': 'anhaengelast', 'max anhangelast': 'anhaengelast',
+  'anhangelast gebremst': 'anhaengelast',
 
-  // WLTP Reichweite
+  // ── WLTP Reichweite ────────────────────────────────────────────────────────
   'wltp reichweite': 'wltpReichweite', 'reichweite': 'wltpReichweite',
   'wltp reichweite km': 'wltpReichweite', 'wltp': 'wltpReichweite',
-  'max reichweite': 'wltpReichweite', 'reichweite wltp': 'wltpReichweite',
+  'max reichweite': 'wltpReichweite',  'reichweite wltp': 'wltpReichweite',
+  'elektrische reichweite': 'wltpReichweite', 'e reichweite': 'wltpReichweite',
 
-  // Basispreis
-  'basispreis': 'basisPreis', 'basis preis': 'basisPreis',
-  'preis': 'basisPreis', 'kaufpreis': 'basisPreis', 'startpreis': 'basisPreis',
-  'grundpreis': 'basisPreis', 'einstiegspreis': 'basisPreis',
-  'basispreis eur': 'basisPreis',
+  // ── Basispreis ─────────────────────────────────────────────────────────────
+  'basispreis': 'basisPreis',      'basis preis': 'basisPreis',
+  'preis': 'basisPreis',           'kaufpreis': 'basisPreis',
+  'startpreis': 'basisPreis',      'grundpreis': 'basisPreis',
+  'einstiegspreis': 'basisPreis',  'basispreis eur': 'basisPreis',
+  'uvp': 'basisPreis',             'listenpreis': 'basisPreis',
 
-  // 0–100
-  '0 100': 'nullHundert', '0 100 km h': 'nullHundert',
-  '0 100 km h s': 'nullHundert', 'beschleunigung': 'nullHundert',
-  'sprint': 'nullHundert', '0 100 s': 'nullHundert',
-  'beschleunigung 0 100': 'nullHundert',
+  // ── 0–100 ──────────────────────────────────────────────────────────────────
+  '0 100': 'nullHundert',          '0 100 km h': 'nullHundert',
+  '0 100 km h s': 'nullHundert',   '0 100 s': 'nullHundert',
+  'beschleunigung': 'nullHundert', 'sprint': 'nullHundert',
+  'beschleunigung 0 100': 'nullHundert', 'sprint 0 100': 'nullHundert',
 
-  // PS / Leistung
+  // ── PS / Leistung ──────────────────────────────────────────────────────────
   'ps': 'psLeistung', 'ps leistung': 'psLeistung',
-  'leistung ps': 'psLeistung', 'leistung': 'psLeistung',
-  'motorleistung': 'psLeistung', 'systemleistung': 'psLeistung',
-  'leistung kw': 'psLeistung', // wird ggf. umgerechnet – hier als PS gespeichert
+  'leistung ps': 'psLeistung',     'leistung': 'psLeistung',
+  'motorleistung': 'psLeistung',   'systemleistung': 'psLeistung',
+  'motorleistung ps': 'psLeistung', 'systemleistung ps': 'psLeistung',
+  'leistung kw': 'psLeistung', // Hinweis: kW-Werte werden ohne Umrechnung gespeichert
 
-  // Höchstgeschwindigkeit
+  // ── Höchstgeschwindigkeit ──────────────────────────────────────────────────
   'hochstgeschwindigkeit': 'hoechstgeschwindigkeit',
   'hochstgeschwindigkeit km h': 'hoechstgeschwindigkeit',
-  'vmax': 'hoechstgeschwindigkeit', 'topspeed': 'hoechstgeschwindigkeit',
+  'vmax': 'hoechstgeschwindigkeit',  'v max': 'hoechstgeschwindigkeit',
+  'topspeed': 'hoechstgeschwindigkeit', 'top speed': 'hoechstgeschwindigkeit',
   'max geschwindigkeit': 'hoechstgeschwindigkeit',
   'hochstgeschw': 'hoechstgeschwindigkeit',
+  'maximalgeschwindigkeit': 'hoechstgeschwindigkeit',
 
-  // Volt-Architektur
+  // ── Volt-Architektur ───────────────────────────────────────────────────────
   'volt architektur': 'voltArchitektur', 'volt': 'voltArchitektur',
-  'architektur': 'voltArchitektur', 'spannung': 'voltArchitektur',
-  'bordnetzspannung': 'voltArchitektur',
+  'architektur': 'voltArchitektur',      'spannung': 'voltArchitektur',
+  'bordnetzspannung': 'voltArchitektur', 'ladesystem': 'voltArchitektur',
 
-  // Markteinführung
+  // ── Markteinführung ────────────────────────────────────────────────────────
   'markteinfuhrung': 'markteinfuehrung', 'marktstart': 'markteinfuehrung',
-  'einfuhrung': 'markteinfuehrung', 'baujahr': 'markteinfuehrung',
-  'jahr': 'markteinfuehrung', 'modell jahr': 'markteinfuehrung',
+  'einfuhrung': 'markteinfuehrung',      'baujahr': 'markteinfuehrung',
+  'jahr': 'markteinfuehrung',            'modell jahr': 'markteinfuehrung',
+  'modelljahr': 'markteinfuehrung',      'modelljahrgang': 'markteinfuehrung',
+  'produktionsjahr': 'markteinfuehrung',
 };
 
 
@@ -191,7 +207,7 @@ const CSV_MAP_NORMALIZED = {
    ══════════════════════════════════════════════════════════════════════════ */
 
 /** Erkennt den Spaltentrenner automatisch (;  ,  Tab). */
-function detectSeparator(firstLine) {
+export function detectSeparator(firstLine) {
   const counts = {
     ';': (firstLine.match(/;/g) || []).length,
     ',': (firstLine.match(/,/g) || []).length,
@@ -200,8 +216,34 @@ function detectSeparator(firstLine) {
   return Object.entries(counts).sort((a, b) => b[1] - a[1])[0][0];
 }
 
+/**
+ * Token-basiertes Fuzzy-Matching als dritte Fallback-Stufe.
+ * Alle Tokens eines bekannten Map-Schlüssels müssen im normalisierten Header
+ * vorkommen (jedes Token mind. 2 Zeichen). Längerer Schlüssel gewinnt.
+ * Gibt null zurück wenn kein eindeutiger Treffer gefunden.
+ */
+export function fuzzyMatchHeader(normHeader) {
+  const headerSet = new Set(normHeader.split(' ').filter(t => t.length > 1));
+  let bestKey  = null;
+  let bestScore = 0;
+
+  for (const [mapKey, internalKey] of Object.entries(CSV_MAP_NORMALIZED)) {
+    const tokens = mapKey.split(' ').filter(t => t.length > 1);
+    if (tokens.length < 2) continue; // Einzel-Token-Schlüssel nicht per Fuzzy matchen (zu fehleranfällig)
+
+    if (tokens.every(t => headerSet.has(t))) {
+      if (tokens.length > bestScore) {
+        bestScore = tokens.length;
+        bestKey   = internalKey;
+      }
+    }
+  }
+
+  return bestScore >= 2 ? bestKey : null;
+}
+
 /** Parst eine CSV-Datei. Ist extrem fehlertolerant – kein Auto wird wegen fehlender Daten verworfen. */
-function parseCSV(text) {
+export function parseCSV(text) {
   // BOM und überflüssige Whitespace am Ende entfernen
   text = text.replace(/^\uFEFF/, '').trimEnd();
 
@@ -219,9 +261,13 @@ function parseCSV(text) {
   // Jeden Header auf internen Schlüssel mappen:
   // 1. Stufe: exakter Abgleich (lowercase+trim) gegen CSV_MAP aus config.js
   // 2. Stufe: normalisierter Abgleich gegen CSV_MAP_NORMALIZED
+  // 3. Stufe: Token-basiertes Fuzzy-Matching als letzter Fallback
   const keyMap = rawHeaders.map((raw, i) => {
     const exact = raw.trim().toLowerCase();
-    return CSV_MAP[exact] ?? CSV_MAP_NORMALIZED[normHeaders[i]] ?? null;
+    return CSV_MAP[exact]
+        ?? CSV_MAP_NORMALIZED[normHeaders[i]]
+        ?? fuzzyMatchHeader(normHeaders[i])
+        ?? null;
   });
 
   // Nicht erkannte Header in der Konsole loggen (hilfreich beim Debuggen)
@@ -271,7 +317,7 @@ function parseCSV(text) {
 }
 
 /** Teilt eine CSV-Zeile korrekt auf (unterstützt Anführungszeichen und doppelte Escaped-Quotes ""). */
-function splitCSVLine(line, sep) {
+export function splitCSVLine(line, sep) {
   const result = [];
   let inQuotes = false;
   let cur = '';
@@ -300,7 +346,7 @@ function splitCSVLine(line, sep) {
 }
 
 /** Berechnet Wertebereiche aller Felder aus dem aktuellen Datensatz. */
-function computeBounds(cars) {
+export function computeBounds(cars) {
   const bounds = {};
   FIELDS.forEach(({ key }) => {
     const vals = cars.map(c => c[key]).filter(v => v != null && !isNaN(v));

@@ -1,17 +1,18 @@
-'use strict';
+import { state } from './state.js';
+import { toast } from './ui.js';
 
 const GITHUB_FILE      = 'ev-vergleich/js/data.js';
 const GITHUB_TOKEN_KEY = 'ev-gh-token';
 const GITHUB_REPO_KEY  = 'ev-gh-repo';
 
-function getGithubToken() { return localStorage.getItem(GITHUB_TOKEN_KEY) || ''; }
-function getGithubRepo()  { return localStorage.getItem(GITHUB_REPO_KEY)  || ''; }
+export function getGithubToken() { return localStorage.getItem(GITHUB_TOKEN_KEY) || ''; }
+export function getGithubRepo()  { return localStorage.getItem(GITHUB_REPO_KEY)  || ''; }
 
-function setGithubToken(token) {
+export function setGithubToken(token) {
   if (token) localStorage.setItem(GITHUB_TOKEN_KEY, token.trim());
   else        localStorage.removeItem(GITHUB_TOKEN_KEY);
 }
-function setGithubRepo(repo) {
+export function setGithubRepo(repo) {
   if (repo) localStorage.setItem(GITHUB_REPO_KEY, repo.trim());
   else      localStorage.removeItem(GITHUB_REPO_KEY);
 }
@@ -20,7 +21,7 @@ function setGithubRepo(repo) {
  * Schreibt data.js ins GitHub-Repo.
  * Gibt { ok: true } oder { ok: false, error: '...' } zurück.
  */
-async function githubPushDataJs(cars) {
+export async function githubPushDataJs(cars) {
   const token = getGithubToken();
   const repo  = getGithubRepo();
   if (!token || !repo) return { ok: false, error: 'Kein Token oder Repo konfiguriert.' };
@@ -76,7 +77,7 @@ async function githubPushDataJs(cars) {
 
 // ── Token-Modal ───────────────────────────────────────────────────────────────
 
-function openGithubModal() {
+export function openGithubModal() {
   document.getElementById('githubRepoInput').value  = getGithubRepo();
   document.getElementById('githubTokenInput').value = getGithubToken();
   document.getElementById('githubModalError').classList.add('hidden');
@@ -92,14 +93,14 @@ function openGithubModal() {
   }, 100);
 }
 
-function closeGithubModal() {
+export function closeGithubModal() {
   const modal = document.getElementById('githubModal');
   modal.classList.remove('is-open');
   modal.setAttribute('aria-hidden', 'true');
   document.body.style.overflow = '';
 }
 
-async function saveGithubToken() {
+export async function saveGithubToken() {
   const repo  = document.getElementById('githubRepoInput').value.trim();
   const token = document.getElementById('githubTokenInput').value.trim();
   const errEl = document.getElementById('githubModalError');

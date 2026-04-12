@@ -1,7 +1,9 @@
-'use strict';
+import { FIELDS } from './config.js';
+import { state } from './state.js';
+import { refresh } from './ui.js';
 
 /** Baut die Filter-Schieberegler aus den aktuellen Bounds neu auf. */
-function buildFilterPanel() {
+export function buildFilterPanel() {
   const container = document.getElementById('filterSliders');
   container.innerHTML = '';
 

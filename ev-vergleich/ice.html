@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Verbrenner Vergleich – Reichweite, Verbrauch, Preis und mehr." />
+  <title>Verbrenner Vergleich – ICE Fahrzeug-Datenbank</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .shadow-soft { box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.03); }
+  </style>
+</head>
+<body class="bg-[#f8f9fa] text-gray-900 min-h-screen font-sans" style="padding-top:56px">
+
+  <header class="fixed inset-x-0 top-0 z-50 h-14 bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm">
+    <div class="h-full max-w-[1400px] mx-auto px-4 sm:px-6 flex items-center justify-between gap-3">
+
+      <div class="flex items-center gap-2.5 flex-shrink-0">
+        <div class="w-7 h-7 rounded-lg bg-orange-500 flex items-center justify-center flex-shrink-0 shadow-sm shadow-orange-500/20">
+          <i data-lucide="fuel" class="w-3.5 h-3.5 text-white"></i>
+        </div>
+        <span class="text-gray-900 font-black text-base tracking-tight">Verbrenner</span>
+        <span id="carCount" class="hidden sm:inline text-xs text-gray-500 font-bold bg-gray-100 border border-gray-200 px-2 py-0.5 rounded-full">0 Fahrzeuge</span>
+      </div>
+
+      <div class="flex items-center gap-1.5 flex-wrap justify-end">
+
+        <div class="flex items-center gap-1">
+          <select class="ctrl-select h-8 px-2 text-sm font-medium text-gray-700 bg-white border border-gray-200 shadow-sm rounded-lg cursor-pointer appearance-none outline-none focus:border-orange-400 focus:ring-1 focus:ring-orange-400 transition-shadow" id="sortSelect" aria-label="Sortierung">
+            <option value="gesamtreichweite">Reichweite</option>
+            <option value="basisPreis">Basispreis</option>
+            <option value="verbrauch">Verbrauch</option>
+            <option value="psLeistung">PS Leistung</option>
+            <option value="nullHundert">0–100 km/h</option>
+            <option value="tankinhalt">Tankinhalt</option>
+            <option value="hoechstgeschwindigkeit">Höchstgeschwindigkeit</option>
+            <option value="anhaengelast">Anhängelast</option>
+            <option value="marke">Marke A–Z</option>
+            <option value="markteinfuehrung">Markteinführung</option>
+          </select>
+          <button class="sort-dir-btn h-8 w-8 flex items-center justify-center text-gray-400 bg-white border border-gray-200 shadow-sm rounded-lg hover:text-gray-800 hover:bg-gray-50 transition-colors" id="sortDirBtn" aria-label="Sortierrichtung umkehren" title="Reihenfolge umkehren">
+            <i data-lucide="arrow-up" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+        <button class="h-8 px-3 flex items-center gap-1.5 text-sm font-medium text-gray-600 bg-white border border-gray-200 shadow-sm rounded-lg hover:text-gray-900 hover:bg-gray-50 transition-colors" id="filterToggle" aria-expanded="false" aria-controls="filterPanel">
+          <i data-lucide="sliders-horizontal" class="w-4 h-4"></i>
+          <span>Filter</span>
+        </button>
+
+        <a href="index.html" class="h-8 px-3 flex items-center gap-1.5 text-sm font-bold text-teal-600 bg-teal-50 border border-teal-100 rounded-lg hover:bg-teal-100 transition-colors">
+          <i data-lucide="zap" class="w-4 h-4"></i>
+          <span class="hidden sm:inline">Elektroautos</span>
+        </a>
+
+        <div class="flex items-center gap-1" role="group" aria-label="Ansichtsgröße">
+          <button class="view-btn h-8 w-8 flex items-center justify-center text-gray-400 bg-white border border-gray-200 shadow-sm rounded-lg hover:text-gray-800 hover:bg-gray-50 transition-colors" data-view="large" title="Groß" aria-pressed="false">
+            <svg viewBox="0 0 20 20" fill="none" class="w-4 h-4" aria-hidden="true"><rect x="2" y="2" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.8"/><rect x="11" y="2" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.8"/><rect x="2" y="11" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.8"/><rect x="11" y="11" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.8"/></svg>
+          </button>
+          <button class="view-btn h-8 w-8 flex items-center justify-center text-orange-600 bg-orange-50 border border-orange-200 rounded-lg transition-colors" data-view="medium" title="Mittel" aria-pressed="true">
+            <svg viewBox="0 0 20 20" fill="none" class="w-4 h-4" aria-hidden="true"><rect x="2" y="2" width="4" height="4" rx="0.5" stroke="currentColor" stroke-width="1.6"/><rect x="8" y="2" width="4" height="4" rx="0.5" stroke="currentColor" stroke-width="1.6"/><rect x="14" y="2" width="4" height="4" rx="0.5" stroke="currentColor" stroke-width="1.6"/><rect x="2" y="8" width="4" height="4" rx="0.5" stroke="currentColor" stroke-width="1.6"/><rect x="8" y="8" width="4" height="4" rx="0.5" stroke="currentColor" stroke-width="1.6"/><rect x="14" y="8" width="4" height="4" rx="0.5" stroke="currentColor" stroke-width="1.6"/><rect x="2" y="14" width="4" height="4" rx="0.5" stroke="currentColor" stroke-width="1.6"/><rect x="8" y="14" width="4" height="4" rx="0.5" stroke="currentColor" stroke-width="1.6"/><rect x="14" y="14" width="4" height="4" rx="0.5" stroke="currentColor" stroke-width="1.6"/></svg>
+          </button>
+          <button class="view-btn h-8 w-8 flex items-center justify-center text-gray-400 bg-white border border-gray-200 shadow-sm rounded-lg hover:text-gray-800 hover:bg-gray-50 transition-colors" data-view="small" title="Kompakt" aria-pressed="false">
+            <svg viewBox="0 0 20 20" fill="none" class="w-4 h-4" aria-hidden="true"><rect x="1" y="1" width="3" height="3" rx="0.5" stroke="currentColor" stroke-width="1.4"/><rect x="5.5" y="1" width="3" height="3" rx="0.5" stroke="currentColor" stroke-width="1.4"/><rect x="10" y="1" width="3" height="3" rx="0.5" stroke="currentColor" stroke-width="1.4"/><rect x="14.5" y="1" width="3" height="3" rx="0.5" stroke="currentColor" stroke-width="1.4"/><rect x="1" y="5.5" width="3" height="3" rx="0.5" stroke="currentColor" stroke-width="1.4"/><rect x="5.5" y="5.5" width="3" height="3" rx="0.5" stroke="currentColor" stroke-width="1.4"/><rect x="10" y="5.5" width="3" height="3" rx="0.5" stroke="currentColor" stroke-width="1.4"/><rect x="14.5" y="5.5" width="3" height="3" rx="0.5" stroke="currentColor" stroke-width="1.4"/></svg>
+          </button>
+        </div>
+
+        <button class="hidden admin-element h-8 px-3 flex items-center gap-1.5 text-sm font-medium text-gray-600 bg-white border border-gray-200 shadow-sm rounded-lg hover:text-gray-900 hover:bg-gray-50 transition-colors" id="loadDataBtn">
+          <i data-lucide="upload" class="w-4 h-4"></i>
+          <span class="hidden sm:inline">Daten laden</span>
+        </button>
+        <input type="file" id="fileInput" accept=".csv" class="hidden" aria-hidden="true" />
+
+        <button class="hidden admin-element h-8 px-3 flex items-center gap-1.5 text-sm font-bold text-white bg-orange-500 shadow-sm shadow-orange-500/20 rounded-lg hover:bg-orange-600 transition-colors" id="addCarBtn">
+          <i data-lucide="plus" class="w-4 h-4"></i>
+          <span class="hidden sm:inline">Fahrzeug hinzufügen</span>
+        </button>
+        <button class="h-8 px-3 flex items-center gap-1.5 text-sm font-medium text-gray-600 bg-white border border-gray-200 shadow-sm rounded-lg hover:text-gray-900 hover:bg-gray-50 transition-colors" id="adminBtn">
+          <i data-lucide="lock" class="w-4 h-4"></i>
+          <span class="hidden sm:inline">Admin</span>
+        </button>
+
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-[1400px] mx-auto px-4 sm:px-6 py-8" aria-label="Highlights">
+
+      <div class="relative overflow-hidden rounded-2xl bg-white border border-gray-100 shadow-soft p-6 flex items-center gap-5">
+        <div class="relative flex-shrink-0 w-14 h-14 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center">
+          <i data-lucide="gauge" class="w-7 h-7 text-blue-500"></i>
+        </div>
+        <div class="relative min-w-0">
+          <p class="text-blue-500 text-xs font-bold uppercase tracking-widest mb-1">Beste Reichweite</p>
+          <p id="hlReichweiteVal" class="text-gray-900 text-3xl font-black leading-tight">–</p>
+          <p id="hlReichweiteNam" class="text-gray-500 text-sm mt-1 font-medium truncate">–</p>
+        </div>
+      </div>
+
+      <div class="relative overflow-hidden rounded-2xl bg-white border border-gray-100 shadow-soft p-6 flex items-center gap-5">
+        <div class="relative flex-shrink-0 w-14 h-14 rounded-2xl bg-orange-50 border border-orange-100 flex items-center justify-center">
+          <i data-lucide="flame" class="w-7 h-7 text-orange-500"></i>
+        </div>
+        <div class="relative min-w-0">
+          <p class="text-orange-500 text-xs font-bold uppercase tracking-widest mb-1">Meiste PS-Leistung</p>
+          <p id="hlPSVal" class="text-gray-900 text-3xl font-black leading-tight">–</p>
+          <p id="hlPSNam" class="text-gray-500 text-sm mt-1 font-medium truncate">–</p>
+        </div>
+      </div>
+
+    </section>
+
+    <div id="filterPanel" class="overflow-hidden opacity-0 bg-white border-b border-gray-200 shadow-sm mb-6" aria-hidden="true">
+      <div class="max-w-[1400px] mx-auto px-4 sm:px-6 py-5">
+        <div class="flex items-center justify-between mb-5">
+          <h2 class="text-sm font-bold text-gray-800 uppercase tracking-wider">Filter</h2>
+          <button id="filterResetBtn" class="text-xs font-semibold text-gray-500 hover:text-orange-600 transition-colors">Zurücksetzen</button>
+        </div>
+
+        <div class="mb-6 flex items-center gap-3 flex-wrap">
+          <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Kraftstoffart:</span>
+          <button class="kf-btn h-8 px-4 text-xs font-bold uppercase tracking-wider rounded-full border border-gray-200 bg-white text-gray-500 hover:border-gray-300 transition-colors shadow-sm" data-kf="">Alle</button>
+          <button class="kf-btn h-8 px-4 text-xs font-bold uppercase tracking-wider rounded-full border border-blue-200 bg-blue-50 text-blue-600 hover:border-blue-300 transition-colors shadow-sm" data-kf="Benzin">Benzin</button>
+          <button class="kf-btn h-8 px-4 text-xs font-bold uppercase tracking-wider rounded-full border border-amber-200 bg-amber-50 text-amber-600 hover:border-amber-300 transition-colors shadow-sm" data-kf="Diesel">Diesel</button>
+          <button class="kf-btn h-8 px-4 text-xs font-bold uppercase tracking-wider rounded-full border border-teal-200 bg-teal-50 text-teal-600 hover:border-teal-300 transition-colors shadow-sm" data-kf="Hybrid">Hybrid</button>
+        </div>
+
+        <div id="filterSliders" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5"></div>
+      </div>
+    </div>
+
+    <section class="max-w-[1400px] mx-auto px-4 sm:px-6 pb-16">
+      <div class="mb-6">
+        <input type="search"
+               id="searchInput"
+               placeholder="Marke oder Modell suchen …"
+               class="h-10 w-full max-w-sm px-4 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-xl focus:border-orange-400 focus:ring-1 focus:ring-orange-400 focus:outline-none transition-shadow shadow-sm placeholder:text-gray-400" />
+      </div>
+
+      <div id="carsGrid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"></div>
+
+      <div id="emptyState" class="hidden flex-col items-center text-center py-24 gap-6">
+        <div class="w-20 h-20 text-gray-300" aria-hidden="true">
+          <svg viewBox="0 0 64 64" fill="none" class="w-full h-full">
+            <rect x="4" y="22" width="56" height="28" rx="6" stroke="currentColor" stroke-width="2.5"/>
+            <path d="M14 22l6-12h24l6 12" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+            <circle cx="18" cy="52" r="6" stroke="currentColor" stroke-width="2.5"/>
+            <circle cx="46" cy="52" r="6" stroke="currentColor" stroke-width="2.5"/>
+            <path d="M24 36h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <p class="text-lg font-medium text-gray-500 leading-relaxed">Noch keine Verbrenner geladen.<br/><span class="text-base font-normal">Lade eine CSV-Datei oder füge ein Fahrzeug manuell hinzu.</span></p>
+        <div class="flex items-center gap-3 mt-2">
+          <button class="hidden admin-element h-10 px-5 flex items-center gap-2 text-sm font-semibold text-gray-700 bg-white border border-gray-200 rounded-xl hover:bg-gray-50 shadow-sm transition-colors" id="emptyLoadBtn">
+            <i data-lucide="upload" class="w-4 h-4 text-gray-400"></i>
+            CSV laden
+          </button>
+          <button class="hidden admin-element h-10 px-5 flex items-center gap-2 text-sm font-bold text-white bg-orange-500 rounded-xl hover:bg-orange-600 shadow-sm shadow-orange-500/30 transition-colors" id="emptyAddBtn">
+            <i data-lucide="plus" class="w-4 h-4"></i>
+            Fahrzeug hinzufügen
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="addCarModal" class="fixed inset-0 z-[300] flex items-start justify-center p-4 sm:p-6 overflow-y-auto bg-gray-900/50 backdrop-blur-sm opacity-0 pointer-events-none" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
+    <div class="modal-inner bg-white border border-gray-200 rounded-2xl w-full max-w-2xl shadow-2xl -translate-y-4 my-4">
+
+      <div class="flex items-center justify-between px-6 py-5 border-b border-gray-100">
+        <h2 id="modalTitle" class="text-xl font-black text-gray-900 tracking-tight">Neues Fahrzeug hinzufügen</h2>
+        <button id="modalClose" class="w-8 h-8 flex items-center justify-center rounded-lg text-gray-400 hover:text-gray-800 hover:bg-gray-100 transition-colors" aria-label="Schließen">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <form id="addCarForm" class="px-6 pb-6 pt-5" novalidate>
+
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-5 mb-5">
+          <div class="flex flex-col gap-1.5">
+            <label class="text-[10px] font-bold text-gray-500 uppercase tracking-widest" for="f-marke">Marke <span class="text-orange-500" aria-hidden="true">*</span></label>
+            <input class="h-10 px-3 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg focus:border-orange-400 focus:ring-1 focus:ring-orange-400 focus:outline-none transition-shadow placeholder:text-gray-300" type="text" id="f-marke" name="marke" placeholder="z. B. BMW" required />
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label class="text-[10px] font-bold text-gray-500 uppercase tracking-widest" for="f-modell">Modell <span class="text-orange-500" aria-hidden="true">*</span></label>
+            <input class="h-10 px-3 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg focus:border-orange-400 focus:ring-1 focus:ring-orange-400 focus:outline-none transition-shadow placeholder:text-gray-300" type="text" id="f-modell" name="modell" placeholder="z. B. 320i" required />
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label class="text-[10px] font-bold text-gray-500 uppercase tracking-widest" for="f-kraftstoffart">Kraftstoff</label>
+            <select class="h-10 px-3 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg focus:border-orange-400 focus:ring-1 focus:ring-orange-400 focus:outline-none transition-shadow" id="f-kraftstoffart" name="kraftstoffart">
+              <option value="">– wählen –</option>
+              <option value="Benzin">Benzin</option>
+              <option value="Diesel">Diesel</option>
+              <option value="Hybrid">Hybrid</option>
+              <option value="Mild-Hybrid">Mild-Hybrid</option>
+            </select>
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label class="text-[10px] font-bold text-gray-500 uppercase tracking-widest" for="f-markteinfuehrung">Markteinführung</label>
+            <input class="h-10 px-3 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg focus:border-orange-400 focus:ring-1 focus:ring-orange-400 focus:outline-none transition-shadow placeholder:text-gray-300" type="text" id="f-markteinfuehrung" name="markteinfuehrung" placeholder="z. B. 2024-Q1" />
+          </div>
+        </div>
+
+        <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest pt-5 pb-4 border-t border-gray-100 mt-2 mb-0">Tank &amp; Verbrauch</p>
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-5 mb-5">
+          <div class="flex flex-col gap-1.5">
+            <label class="text-[10px] font-bold text-gray-500 uppercase tracking-widest" for="f-tankinhalt">Tankinhalt (L) <span class="text-orange-500" aria-hidden="true">*</span></label>
+            <input class="h-10 px-3 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg focus:border-orange-400 focus:ring-1 focus:ring-orange-400 focus:outline-none transition-shadow placeholder:text-gray-300" type="number" id="f-tankinhalt" name="tankinhalt" step="1" min="0" placeholder="60" required />
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label class="text-[10px] font-bold text-gray-500 uppercase tracking-widest" for="f-verbrauch">Verbrauch (L/100km) <span class="text-orange-500" aria-hidden="true">*</span></label>
+            <input class="h-10 px-3 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg focus:border-orange-400 focus:ring-1 focus:ring-orange-400 focus:outline-none transition-shadow placeholder:text-gray-300" type="number" id="f-verbrauch" name="verbrauch" step="0.1" min="0" placeholder="7.0" required />
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label class="text-[10px] font-bold text-gray-500 uppercase tracking-widest flex items-center gap-1.5">
+              Reichweite (km)
+              <span class="px-1.5 py-0.5 rounded-full bg-orange-50 text-orange-600 text-[9px] font-bold tracking-wider">auto</span>
+            </label>
+            <div class="h-10 px-3 flex items-center text-sm font-bold text-orange-700 bg-orange-50/50 border border-dashed border-orange-200 rounded-lg" id="c-gesamtreichweite">–</div>
+          </div>
+        </div>
+
+        <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest pt-5 pb-4 border-t border-gray-100 mt-2 mb-0">Fahrleistung</p>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-5 mb-5">
+          <div class="flex flex-col gap-1.5">
+            <label class="text-[10px] font-bold text-gray-500 uppercase tracking-widest" for="f-nullHundert">0–100 km/h (s)</label>
+            <input class="h-10 px-3 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg focus:border-orange-400 focus:ring-1 focus:ring-orange-400 focus:outline-none transition-shadow placeholder:text-gray-300" type="number" id="f-nullHundert" name="nullHundert" step="0.1" min="0" placeholder="6.5" />
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label class="text-[10px] font-bold text-gray-500 uppercase tracking-widest" for="f-psLeistung">PS Leistung</label>
+            <input class="h-10 px-3 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg focus:border-orange-400 focus:ring-1 focus:ring-orange-400 focus:outline-none transition-shadow placeholder:text-gray-300" type="number" id="f-psLeistung" name="psLeistung" step="1" min="0" placeholder="184" />
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label class="text-[10px] font-bold text-gray-500 uppercase tracking-widest" for="f-hoechstgeschwindigkeit">Top Speed</label>
+            <input class="h-10 px-3 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg focus:border-orange-400 focus:ring-1 focus:ring-orange-400 focus:outline-none transition-shadow placeholder:text-gray-300" type="number" id="f-hoechstgeschwindigkeit" name="hoechstgeschwindigkeit" step="1" min="0" placeholder="240" />
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label class="text-[10px] font-bold text-gray-500 uppercase tracking-widest" for="f-anhaengelast">Anhängelast</label>
+            <input class="h-10 px-3 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg focus:border-orange-400 focus:ring-1 focus:ring-orange-400 focus:outline-none transition-shadow placeholder:text-gray-300" type="number" id="f-anhaengelast" name="anhaengelast" step="50" min="0" placeholder="1800" />
+          </div>
+        </div>
+
+        <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest pt-5 pb-4 border-t border-gray-100 mt-2 mb-0">Preis &amp; Technik</p>
+        <div class="grid grid-cols-2 gap-5 mb-6">
+          <div class="flex flex-col gap-1.5">
+            <label class="text-[10px] font-bold text-gray-500 uppercase tracking-widest" for="f-basisPreis">Basispreis (€) <span class="text-orange-500" aria-hidden="true">*</span></label>
+            <input class="h-10 px-3 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg focus:border-orange-400 focus:ring-1 focus:ring-orange-400 focus:outline-none transition-shadow placeholder:text-gray-300" type="number" id="f-basisPreis" name="basisPreis" step="100" min="0" placeholder="35000" required />
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label class="text-[10px] font-bold text-gray-500 uppercase tracking-widest" for="f-bordnetzspannung">Bordnetzspannung (V)</label>
+            <select class="h-10 px-3 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg focus:border-orange-400 focus:ring-1 focus:ring-orange-400 focus:outline-none transition-shadow" id="f-bordnetzspannung" name="bordnetzspannung">
+              <option value="">– wählen –</option>
+              <option value="12">12V (Standard)</option>
+              <option value="48">48V (Mild-Hybrid)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-end gap-3 pt-5 border-t border-gray-100">
+          <button type="button" class="h-10 px-5 text-sm font-bold text-gray-600 bg-white border border-gray-200 rounded-xl hover:bg-gray-50 shadow-sm transition-colors" id="modalCancel">Abbrechen</button>
+          <button type="submit" class="h-10 px-5 text-sm font-bold text-white bg-orange-500 rounded-xl hover:bg-orange-600 shadow-sm shadow-orange-500/30 transition-colors" id="modalSubmitBtn">Fahrzeug speichern</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+  <div id="adminLoginModal" class="fixed inset-0 z-[400] flex items-center justify-center p-4 bg-gray-900/50 backdrop-blur-sm opacity-0 pointer-events-none" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-inner bg-white border border-gray-200 rounded-2xl w-full max-w-sm shadow-2xl -translate-y-4 p-6">
+      <div class="flex items-center justify-between mb-5">
+        <h2 class="text-xl font-black text-gray-900">Admin-Login</h2>
+        <button id="adminLoginClose" class="w-8 h-8 flex items-center justify-center rounded-lg text-gray-400 hover:text-gray-800 hover:bg-gray-100 transition-colors">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+      <form id="adminLoginForm" novalidate>
+        <div class="flex flex-col gap-1.5 mb-5">
+          <label class="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Passwort</label>
+          <input type="password" id="adminPasswordInput"
+                 class="h-10 px-3 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg focus:border-orange-400 focus:ring-1 focus:ring-orange-400 focus:outline-none transition-shadow"
+                 placeholder="Admin-Passwort" />
+        </div>
+        <p id="adminLoginError" class="hidden text-xs font-bold text-red-500 mb-4">Falsches Passwort.</p>
+        <div class="flex gap-3">
+          <button type="button" id="adminLoginCancel" class="flex-1 h-10 text-sm font-bold text-gray-600 bg-white border border-gray-200 rounded-xl hover:bg-gray-50 shadow-sm transition-colors">Abbrechen</button>
+          <button type="submit" class="flex-1 h-10 text-sm font-bold text-white bg-orange-500 rounded-xl hover:bg-orange-600 shadow-sm shadow-orange-500/30 transition-colors">Anmelden</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="toastContainer" class="fixed bottom-6 right-6 z-[400] flex flex-col gap-2 pointer-events-none" aria-live="polite"></div>
+
+  <script src="js/ice-config.js"></script>
+  <script src="js/ice-state.js"></script>
+  <script src="js/csv.js"></script>
+  <script type="module" src="js/ice-csv.js"></script>
+  <script src="js/ice-filter.js"></script>
+  <script src="js/ice-render.js"></script>
+  <script src="js/filter-ui.js"></script>
+  <script src="js/ice-ui.js"></script>
+
+  <script>
+  'use strict';
+  document.addEventListener('DOMContentLoaded', () => {
+
+    // Suche
+    document.getElementById('searchInput')?.addEventListener('input', e => {
+      state.searchQuery = e.target.value.trim();
+      refresh();
+    });
+
+    // Sortierung
+    document.getElementById('sortSelect').addEventListener('change', e => {
+      state.sortKey = e.target.value;
+      refresh();
+    });
+    document.getElementById('sortDirBtn').addEventListener('click', () => {
+      state.sortDir = state.sortDir === 'desc' ? 'asc' : 'desc';
+      updateSortUI();
+      refresh();
+    });
+    updateSortUI();
+
+    // Filter
+    document.getElementById('filterToggle').addEventListener('click', toggleFilter);
+    document.getElementById('filterResetBtn').addEventListener('click', () => {
+      state.filters = {};
+      state.kraftstoffFilter = '';
+      document.querySelectorAll('.kf-btn').forEach(b => b.classList.remove('ring-2', 'ring-offset-1', 'ring-offset-white', 'ring-orange-400'));
+      document.querySelector('.kf-btn[data-kf=""]')?.classList.add('ring-2', 'ring-orange-400', 'ring-offset-1', 'ring-offset-white');
+      buildFilterPanel();
+      refresh();
+      toast('Filter zurückgesetzt');
+    });
+
+    // Kraftstoffart-Filter
+    document.querySelectorAll('.kf-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        state.kraftstoffFilter = btn.dataset.kf;
+        document.querySelectorAll('.kf-btn').forEach(b => b.classList.remove('ring-2', 'ring-orange-400', 'ring-offset-1', 'ring-offset-white'));
+        btn.classList.add('ring-2', 'ring-orange-400', 'ring-offset-1', 'ring-offset-white');
+        refresh();
+      });
+    });
+    // "Alle" initial aktiv
+    document.querySelector('.kf-btn[data-kf=""]')?.classList.add('ring-2', 'ring-orange-400', 'ring-offset-1', 'ring-offset-white');
+
+    // Ansichtsgröße
+    document.querySelectorAll('.view-btn').forEach(btn => {
+      btn.addEventListener('click', () => setView(btn.dataset.view));
+    });
+
+    // CSV laden
+    document.getElementById('loadDataBtn').addEventListener('click',  () => document.getElementById('fileInput').click());
+    document.getElementById('emptyLoadBtn').addEventListener('click', () => document.getElementById('fileInput').click());
+    document.getElementById('fileInput').addEventListener('change', e => {
+      const file = e.target.files[0];
+      if (file) loadIceCSVFile(file);
+      e.target.value = '';
+    });
+
+    // Modal
+    document.getElementById('addCarBtn').addEventListener('click',   openModal);
+    document.getElementById('emptyAddBtn').addEventListener('click', openModal);
+    document.getElementById('modalClose').addEventListener('click',  closeModal);
+    document.getElementById('modalCancel').addEventListener('click', closeModal);
+    document.getElementById('addCarModal').addEventListener('click', e => { if (e.target === e.currentTarget) closeModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal(); closeAdminLogin(); } });
+
+    // Reichweiten-Vorschau
+    ['f-tankinhalt', 'f-verbrauch'].forEach(id => {
+      document.getElementById(id)?.addEventListener('input', () => {
+        const t = parseFloat(document.getElementById('f-tankinhalt').value);
+        const v = parseFloat(document.getElementById('f-verbrauch').value);
+        const r = (t > 0 && v > 0) ? Math.round(t / v * 100) : null;
+        document.getElementById('c-gesamtreichweite').textContent = r != null ? r + ' km' : '–';
+      });
+    });
+
+    // Formular absenden
+    document.getElementById('addCarForm').addEventListener('submit', e => {
+      e.preventDefault();
+      const form = e.target;
+      if (!form.marke.value.trim())   { toast('Bitte Marke eingeben.',           'error'); return; }
+      if (!form.modell.value.trim())  { toast('Bitte Modell eingeben.',          'error'); return; }
+      if (!form.tankinhalt.value)     { toast('Bitte Tankinhalt eingeben.',       'error'); return; }
+      if (!form.verbrauch.value)      { toast('Bitte Verbrauch eingeben.',        'error'); return; }
+      if (!form.basisPreis.value)     { toast('Bitte Basispreis eingeben.',       'error'); return; }
+      const data = Object.fromEntries(new FormData(form));
+      if (editCarId) updateCar(editCarId, data);
+      else           addCar(data);
+      closeModal();
+    });
+
+    // Admin
+    document.getElementById('adminBtn')?.addEventListener('click', () => {
+      if (adminMode) logoutAdmin();
+      else openAdminLogin();
+    });
+    document.getElementById('adminLoginForm')?.addEventListener('submit', e => {
+      e.preventDefault();
+      submitAdminLogin();
+    });
+    document.getElementById('adminLoginClose')?.addEventListener('click', closeAdminLogin);
+    document.getElementById('adminLoginCancel')?.addEventListener('click', closeAdminLogin);
+    document.getElementById('adminLoginModal')?.addEventListener('click', e => {
+      if (e.target === e.currentTarget) closeAdminLogin();
+    });
+
+    lucide.createIcons();
+    if (typeof buildFilterPanel === 'function') buildFilterPanel();
+    refresh();
+  });
+  </script>
+
+  <script type="module" src="js/ice-firebase.js"></script>
+
+</body>
+</html>

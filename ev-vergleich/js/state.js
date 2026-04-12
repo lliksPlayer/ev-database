@@ -1,7 +1,6 @@
-'use strict';
-
-const state = {
-  cars:        [],        // alle geladenen Autos
+export const state = {
+  cars:        [],        // alle geladenen Autos (EV, aus Firestore)
+  iceCars:     [],        // importierte Verbrenner-Daten (lokal, für TCO)
   visible:     [],        // gefiltert + sortiert
   viewSize:    'medium',  // 'large' | 'medium' | 'small'
   sortKey:     'wltpReichweite',
@@ -11,15 +10,20 @@ const state = {
   searchQuery: '',        // Suchtext für Marke/Modell
 };
 
-let adminMode  = false;  // true = Admin-Modus
-let editCarId  = null;   // ID des zu bearbeitenden Autos (null = Neu-Modus)
+export let adminMode  = false;  // true = Admin-Modus
+export let editCarId  = null;   // ID des zu bearbeitenden Autos (null = Neu-Modus)
 
-var _nextId = 1; // var, damit storage.js den Zähler nach dem Laden korrigieren kann
-const uid = () => String(_nextId++);
+export let _nextId = 1; // Zähler für lokale IDs (wird von storage.js nach dem Laden korrigiert)
+export const uid = () => String(_nextId++);
 
-function round2(n) { return Math.round(n * 100) / 100; }
+// Setter für Module, die diese Variablen schreiben müssen
+export function setAdminMode(v)  { adminMode  = v; }
+export function setEditCarId(v)  { editCarId  = v; }
+export function setNextId(v)     { _nextId    = v; }
 
-function calcDerived(car) {
+export function round2(n) { return Math.round(n * 100) / 100; }
+
+export function calcDerived(car) {
   // Number() konvertiert Strings → Zahlen; NaN bei ungültigen Werten
   const bn  = car.batterieNetto  != null ? Number(car.batterieNetto)  : NaN;
   const lz  = car.ladezeit       != null ? Number(car.ladezeit)       : NaN;

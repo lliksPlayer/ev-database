@@ -1,9 +1,11 @@
-'use strict';
+import { state, adminMode, calcDerived, _nextId, setNextId } from './state.js';
+import { githubPushDataJs, getGithubToken } from './github.js';
+import { toast } from './ui.js';
 
 const LS_KEY = 'ev-vergleich-v1-cars';
 
 /** Speichert alle aktuellen Autos in localStorage und pusht bei Admin-Modus nach GitHub. */
-function saveCars() {
+export function saveCars() {
   try {
     localStorage.setItem(LS_KEY, JSON.stringify(state.cars));
   } catch (_) {}
@@ -22,7 +24,7 @@ function saveCars() {
  * Gibt das Array zurück oder null wenn nichts gespeichert ist.
  * Setzt _nextId automatisch auf max(vorhandene IDs) + 1.
  */
-function loadSavedCars() {
+export function loadSavedCars() {
   try {
     const raw = localStorage.getItem(LS_KEY);
     if (!raw) return null;
@@ -32,7 +34,7 @@ function loadSavedCars() {
 
     // ID-Zähler so setzen, dass keine Kollisionen entstehen
     const maxId = parsed.reduce((m, c) => Math.max(m, parseInt(c.id) || 0), 0);
-    if (maxId >= _nextId) _nextId = maxId + 1;
+    if (maxId >= _nextId) setNextId(maxId + 1);
 
     // Abgeleitete Felder neu berechnen (für Konsistenz nach App-Updates)
     return parsed.map(c => calcDerived(c));
@@ -42,6 +44,6 @@ function loadSavedCars() {
 }
 
 /** Löscht alle gespeicherten Daten (für "Alles zurücksetzen"). */
-function clearSavedCars() {
+export function clearSavedCars() {
   try { localStorage.removeItem(LS_KEY); } catch (_) {}
 }

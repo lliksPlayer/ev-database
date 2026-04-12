@@ -1,7 +1,9 @@
-'use strict';
+import { FIELDS } from './config.js';
+import { state } from './state.js';
+import { refresh, toast } from './ui.js';
 
 /* Standardrichtung je Feld: 'higher' = mehr ist besser, 'lower' = weniger ist besser */
-const ADVISOR_DIR = {
+export const ADVISOR_DIR = {
   batterieNetto:           'higher',
   ladezeit:                'lower',
   geladeneEnergie:         'higher',
@@ -26,7 +28,7 @@ const ADVISOR_DIR = {
  * }
  * Gewichtung wurde entfernt – jedes aktive Feld zählt gleich.
  */
-const advisorConfig = {};
+export const advisorConfig = {};
 FIELDS.forEach(({ key }) => {
   advisorConfig[key] = {
     ok:      null,
@@ -36,7 +38,7 @@ FIELDS.forEach(({ key }) => {
   };
 });
 
-let advisorActive = false;
+export let advisorActive = false;
 
 /* ── Auswertungslogik ─────────────────────────────────────────────────────── */
 
@@ -45,7 +47,7 @@ let advisorActive = false;
  * null = Feld nicht konfiguriert oder deaktiviert.
  * No go = 0 Punkte, Ok = 1 Punkt, Gut = 2 Punkte.
  */
-function getFieldStatus(val, key) {
+export function getFieldStatus(val, key) {
   if (val == null || isNaN(val)) return null;
   const { ok, gut, dir, enabled } = advisorConfig[key];
   if (!enabled || (ok == null && gut == null)) return null;
@@ -66,20 +68,20 @@ function getFieldStatus(val, key) {
 }
 
 /** Gesamtpunktzahl eines Autos: Σ (0/1/2 Punkte). */
-function getCarScore(car) {
+export function getCarScore(car) {
   let total = 0;
   FIELDS.forEach(({ key }) => {
     const { ok, gut, enabled } = advisorConfig[key];
     if (!enabled || (ok == null && gut == null)) return;
     const status = getFieldStatus(car[key], key);
     if (status == null) return;
-    total += status === 'gut' ? 2 : status === 'ok' ? 1 : 0;
+    total += status === 'gut' ? 2 : status === 'ok' ? 1 : status === 'near-nogo' ? -1 : 0;
   });
   return total;
 }
 
 /** Maximal erreichbare Punktzahl mit aktueller Konfiguration. */
-function getMaxScore() {
+export function getMaxScore() {
   return FIELDS.reduce((sum, { key }) => {
     const { ok, gut, enabled } = advisorConfig[key];
     if (!enabled || (ok == null && gut == null)) return sum;
@@ -89,7 +91,7 @@ function getMaxScore() {
 
 /* ── Panel-UI ────────────────────────────────────────────────────────────── */
 
-function buildAdvisorPanel() {
+export function buildAdvisorPanel() {
   const container = document.getElementById('advisorRows');
   container.innerHTML = '';
 
@@ -202,7 +204,7 @@ function buildAdvisorPanel() {
 
 /* ── Toggle & Reset ───────────────────────────────────────────────────────── */
 
-function toggleAdvisor() {
+export function toggleAdvisor() {
   const panel = document.getElementById('advisorPanel');
   const btn   = document.getElementById('advisorToggle');
   advisorActive = panel.classList.toggle('is-open');
@@ -222,7 +224,7 @@ function toggleAdvisor() {
   refresh();
 }
 
-function resetAdvisor() {
+export function resetAdvisor() {
   FIELDS.forEach(({ key }) => {
     advisorConfig[key] = {
       ok:      null,

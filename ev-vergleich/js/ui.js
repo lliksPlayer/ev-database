@@ -1,19 +1,26 @@
-'use strict';
+import { state, adminMode, editCarId, setAdminMode, setEditCarId, round2 } from './state.js';
+import { TRACKED_FIELDS, ADMIN_PASSWORD } from './config.js';
+import { applyFiltersAndSort, FMT_DE } from './filter.js';
+import { renderHighlights, renderCards, escapeHtml } from './render.js';
+import { refreshTCOCarSelects } from './tco.js';
+import { renderDuplicatePanel } from './duplicates.js';
+import { parseCSV } from './csv.js';
+import { saveCarToCloud, updateCarInCloud, deleteCarFromCloud } from './firebase-db.js';
 
 // ── Haupt-Render-Funktion ────────────────────────────────────────────────────
-function refresh() {
+export function refresh() {
   applyFiltersAndSort();
   renderHighlights();
   renderCards();
   if (typeof refreshTCOCarSelects === 'function') refreshTCOCarSelects();
   renderDuplicatePanel();
+  refreshIncompleteWidget();
 }
 
 // ── Autos hinzufügen / löschen ───────────────────────────────────────────────
-function addCar(formData) {
+export function addCar(formData) {
   const num = (k) => { const v = parseFloat(formData[k]); return isNaN(v) ? null : v; };
   const car = {
-    id: uid(),
     marke:                 (formData.marke  || '').trim(),
     modell:                (formData.modell || '').trim(),
     markteinfuehrung:      (formData.markteinfuehrung || '').trim() || null,
@@ -28,61 +35,55 @@ function addCar(formData) {
     hoechstgeschwindigkeit:num('hoechstgeschwindigkeit'),
     voltArchitektur:       num('voltArchitektur'),
   };
-  calcDerived(car);
-  state.cars.push(car);
-  const removed = autoFixDuplicates();
-  const carAdded = state.cars.some(c => c.id === car.id);
-  computeBounds(state.cars);
-  saveCars();
-  buildFilterPanel();
-  refresh();
-  if (carAdded) {
-    toast(`${car.marke} ${car.modell} hinzugefügt`, 'success');
-    if (removed > 0) toast(`${removed} nahezu identisches Duplikat${removed !== 1 ? 'e' : ''} automatisch entfernt`, 'info');
-  } else {
-    toast(`${car.marke} ${car.modell} ist fast identisch mit einem vorhandenen Eintrag und wurde nicht hinzugefügt`, 'info');
+
+  // Duplikat-Prüfung gegen den aktuellen lokalen Stand
+  const isDuplicate = state.cars.some(c =>
+    (c.marke  || '').trim().toLowerCase() === car.marke.toLowerCase() &&
+    (c.modell || '').trim().toLowerCase() === car.modell.toLowerCase()
+  );
+  if (isDuplicate) {
+    toast(`${car.marke} ${car.modell} ist bereits vorhanden und wurde nicht hinzugefügt.`, 'info');
+    return;
   }
+
+  // In Firestore speichern – onSnapshot aktualisiert state und UI automatisch
+  saveCarToCloud(car);
+  toast(`${car.marke} ${car.modell} hinzugefügt`, 'success');
 }
 
-function deleteCar(id) {
-  const idx = state.cars.findIndex(c => c.id === id);
-  if (idx === -1) return;
-  const removed = state.cars.splice(idx, 1)[0];
-  computeBounds(state.cars);
-  saveCars();
-  buildFilterPanel();
-  refresh();
-  toast(`${removed.marke} ${removed.modell} entfernt`);
+export function deleteCar(id) {
+  const car = state.cars.find(c => c.id === id);
+  if (!car) return;
+  // In Firestore löschen – onSnapshot aktualisiert state und UI automatisch
+  deleteCarFromCloud(id);
+  toast(`${car.marke} ${car.modell} entfernt`);
 }
 
 // ── CSV laden ────────────────────────────────────────────────────────────────
-function loadCSVFile(file) {
+export function loadCSVFile(file) {
   const reader = new FileReader();
   reader.onload = (e) => {
     try {
       const newCars = parseCSV(e.target.result);
       if (newCars.length === 0) throw new Error('Keine Datensätze in der CSV gefunden.');
 
-      // Bestehende Autos beibehalten – nur neue Einträge hinzufügen
+      // Bestehende Autos beibehalten – nur neue Einträge in Firestore schreiben
       let added = 0;
       for (const car of newCars) {
         const exists = state.cars.some(c =>
           (c.marke  || '').trim().toLowerCase() === (car.marke  || '').trim().toLowerCase() &&
           (c.modell || '').trim().toLowerCase() === (car.modell || '').trim().toLowerCase()
         );
-        if (!exists) { state.cars.push(car); added++; }
+        if (!exists) {
+          saveCarToCloud(car); // onSnapshot aktualisiert state und UI automatisch
+          added++;
+        }
       }
 
-      const removed = autoFixDuplicates();
       state.filters = {};
-      computeBounds(state.cars);
-      saveCars();
-      buildFilterPanel();
-      refresh();
       const skipped = newCars.length - added;
-      let msg = `${added} neue${added !== 1 ? ' Autos' : 's Auto'} aus CSV hinzugefügt`;
+      let msg = `${added} neue${added !== 1 ? ' Autos' : 's Auto'} aus CSV hochgeladen`;
       if (skipped > 0) msg += ` (${skipped} bereits vorhanden, übersprungen)`;
-      if (removed > 0) msg += ` · ${removed} Duplikat${removed !== 1 ? 'e' : ''} automatisch entfernt`;
       toast(msg, 'success');
     } catch (err) {
       toast('Fehler beim Laden: ' + err.message, 'error');
@@ -93,8 +94,31 @@ function loadCSVFile(file) {
   reader.readAsText(file, 'UTF-8');
 }
 
+// ── Verbrenner CSV laden (für TCO-Rechner) ────────────────────────────────────
+/**
+ * Parst eine ICE-CSV und speichert das Ergebnis in state.iceCars.
+ * Lädt die Daten NICHT in Firestore – nur lokale Nutzung im TCO-Rechner.
+ */
+export function loadIceCSVFile(file) {
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    try {
+      const newCars = parseIceCSV(e.target.result);
+      if (newCars.length === 0) throw new Error('Keine Datensätze in der CSV gefunden.');
+      state.iceCars = newCars;
+      if (typeof refreshTCOCarSelects === 'function') refreshTCOCarSelects();
+      toast(`${newCars.length} Verbrenner importiert – jetzt im TCO-Rechner auswählbar`, 'success');
+    } catch (err) {
+      toast('Fehler beim Laden: ' + err.message, 'error');
+      console.error(err);
+    }
+  };
+  reader.onerror = () => toast('Datei konnte nicht gelesen werden.', 'error');
+  reader.readAsText(file, 'UTF-8');
+}
+
 // ── Toast ────────────────────────────────────────────────────────────────────
-function toast(msg, type = 'info') {
+export function toast(msg, type = 'info') {
   const border = type === 'success' ? 'border-teal-200'  : type === 'error' ? 'border-red-200'  : 'border-gray-200';
   const dot    = type === 'success' ? 'bg-teal-500'      : type === 'error' ? 'bg-red-500'      : 'bg-gray-400';
   const el = document.createElement('div');
@@ -105,7 +129,7 @@ function toast(msg, type = 'info') {
 }
 
 // ── Formular-Livekalkulation ──────────────────────────────────────────────────
-function updateFormCalc() {
+export function updateFormCalc() {
   const bn  = parseFloat(document.getElementById('f-batterieNetto').value);
   const lz  = parseFloat(document.getElementById('f-ladezeit').value);
   const rei = parseFloat(document.getElementById('f-wltpReichweite').value);
@@ -118,7 +142,7 @@ function updateFormCalc() {
 }
 
 // ── Modal ────────────────────────────────────────────────────────────────────
-function openModal() {
+export function openModal() {
   const overlay = document.getElementById('addCarModal');
   overlay.classList.add('is-open');
   overlay.setAttribute('aria-hidden', 'false');
@@ -126,8 +150,8 @@ function openModal() {
   setTimeout(() => document.getElementById('f-marke')?.focus(), 100);
 }
 
-function closeModal() {
-  editCarId = null;
+export function closeModal() {
+  setEditCarId(null);
   document.getElementById('modalTitle').textContent     = 'Neues Auto hinzufügen';
   document.getElementById('modalSubmitBtn').textContent = 'Auto speichern';
   const overlay = document.getElementById('addCarModal');
@@ -138,8 +162,8 @@ function closeModal() {
   updateFormCalc();
 }
 
-function openEditModal(car) {
-  editCarId = car.id;
+export function openEditModal(car) {
+  setEditCarId(car.id);
   const f = document.getElementById('addCarForm');
   f.marke.value                     = car.marke                    || '';
   f.modell.value                    = car.modell                   || '';
@@ -160,35 +184,30 @@ function openEditModal(car) {
   openModal();
 }
 
-function updateCar(id, formData) {
-  const idx = state.cars.findIndex(c => c.id === id);
-  if (idx === -1) return;
+export function updateCar(id, formData) {
   const num = k => { const v = parseFloat(formData[k]); return isNaN(v) ? null : v; };
-  const car = state.cars[idx];
-  car.marke                  = (formData.marke  || '').trim();
-  car.modell                 = (formData.modell || '').trim();
-  car.markteinfuehrung       = (formData.markteinfuehrung || '').trim() || null;
-  car.batterieNetto          = num('batterieNetto');
-  car.ladezeit               = num('ladezeit');
-  car.maxLadeleistung        = num('maxLadeleistung');
-  car.anhaengelast           = num('anhaengelast');
-  car.wltpReichweite         = num('wltpReichweite');
-  car.basisPreis             = num('basisPreis');
-  car.nullHundert            = num('nullHundert');
-  car.psLeistung             = num('psLeistung');
-  car.hoechstgeschwindigkeit = num('hoechstgeschwindigkeit');
-  car.voltArchitektur        = num('voltArchitektur');
-  calcDerived(car);
-  autoFixDuplicates(); // Prüft ob Bearbeitung ein neues Duplikat erzeugt hat
-  computeBounds(state.cars);
-  saveCars();
-  buildFilterPanel();
-  refresh();
-  toast(`${car.marke} ${car.modell} aktualisiert`, 'success');
+  const updates = {
+    marke:                 (formData.marke  || '').trim(),
+    modell:                (formData.modell || '').trim(),
+    markteinfuehrung:      (formData.markteinfuehrung || '').trim() || null,
+    batterieNetto:         num('batterieNetto'),
+    ladezeit:              num('ladezeit'),
+    maxLadeleistung:       num('maxLadeleistung'),
+    anhaengelast:          num('anhaengelast'),
+    wltpReichweite:        num('wltpReichweite'),
+    basisPreis:            num('basisPreis'),
+    nullHundert:           num('nullHundert'),
+    psLeistung:            num('psLeistung'),
+    hoechstgeschwindigkeit:num('hoechstgeschwindigkeit'),
+    voltArchitektur:       num('voltArchitektur'),
+  };
+  // In Firestore aktualisieren – onSnapshot aktualisiert state und UI automatisch
+  updateCarInCloud(id, updates);
+  toast(`${updates.marke} ${updates.modell} aktualisiert`, 'success');
 }
 
 // ── Filter-Panel ─────────────────────────────────────────────────────────────
-function toggleFilter() {
+export function toggleFilter() {
   const panel  = document.getElementById('filterPanel');
   const btn    = document.getElementById('filterToggle');
   const isOpen = panel.classList.toggle('is-open');
@@ -197,15 +216,15 @@ function toggleFilter() {
 }
 
 // ── Ansichtsgröße ────────────────────────────────────────────────────────────
-const VIEW_GRID = {
+export const VIEW_GRID = {
   large:  'grid grid-cols-1 md:grid-cols-2 gap-5',
   medium: 'grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5',
   small:  'grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4',
 };
-const BTN_ON  = 'view-btn h-8 w-8 flex items-center justify-center text-teal-600 bg-teal-50 border border-teal-300 rounded-lg transition-colors';
-const BTN_OFF = 'view-btn h-8 w-8 flex items-center justify-center text-gray-500 bg-gray-50 border border-gray-200 rounded-lg hover:text-gray-800 hover:border-gray-300 transition-colors';
+export const BTN_ON  = 'view-btn h-8 w-8 flex items-center justify-center text-teal-600 bg-teal-50 border border-teal-300 rounded-lg transition-colors';
+export const BTN_OFF = 'view-btn h-8 w-8 flex items-center justify-center text-gray-500 bg-gray-50 border border-gray-200 rounded-lg hover:text-gray-800 hover:border-gray-300 transition-colors';
 
-function setView(size) {
+export function setView(size) {
   state.viewSize = size;
   document.getElementById('carsGrid').className = VIEW_GRID[size] ?? VIEW_GRID.medium;
   document.querySelectorAll('.view-btn').forEach(btn => {
@@ -217,10 +236,28 @@ function setView(size) {
 
 // ── Admin-Modus ───────────────────────────────────────────────────────────────
 
-/** Zeigt/versteckt alle [data-admin-only]-Elemente und aktualisiert den Admin-Button. */
-function updateAdminUI() {
-  document.querySelectorAll('[data-admin-only]').forEach(el => {
-    el.classList.toggle('hidden', !adminMode);
+/** Zeigt/versteckt alle [data-admin-only] und .admin-element Elemente und aktualisiert den Admin-Button. */
+export function updateAdminUI() {
+  // Admin-Bar ein-/ausblenden + Body-Padding anpassen
+  const adminBar = document.getElementById('adminBar');
+  if (adminBar) {
+    if (adminMode) {
+      adminBar.classList.remove('hidden');
+      document.body.style.paddingTop = '100px'; // 56px Header + 44px Admin-Bar
+    } else {
+      adminBar.classList.add('hidden');
+      document.body.style.paddingTop = '56px';
+    }
+  }
+
+  // Alle anderen [data-admin-only] und .admin-element Elemente (Karten-Buttons, Header-Buttons etc.)
+  document.querySelectorAll('[data-admin-only], .admin-element').forEach(el => {
+    if (el.id === 'adminBar') return; // bereits oben behandelt
+    if (adminMode) {
+      el.classList.remove('hidden');
+    } else {
+      el.classList.add('hidden');
+    }
   });
 
   const btn = document.getElementById('adminBtn');
@@ -238,7 +275,7 @@ function updateAdminUI() {
   renderDuplicatePanel();
 }
 
-function openAdminLogin() {
+export function openAdminLogin() {
   const modal = document.getElementById('adminLoginModal');
   modal.classList.add('is-open');
   modal.setAttribute('aria-hidden', 'false');
@@ -246,7 +283,7 @@ function openAdminLogin() {
   setTimeout(() => document.getElementById('adminPasswordInput')?.focus(), 100);
 }
 
-function closeAdminLogin() {
+export function closeAdminLogin() {
   const modal = document.getElementById('adminLoginModal');
   modal.classList.remove('is-open');
   modal.setAttribute('aria-hidden', 'true');
@@ -255,10 +292,10 @@ function closeAdminLogin() {
   document.getElementById('adminLoginError').classList.add('hidden');
 }
 
-function submitAdminLogin() {
+export function submitAdminLogin() {
   const pw = document.getElementById('adminPasswordInput').value;
   if (pw === ADMIN_PASSWORD) {
-    adminMode = true;
+    setAdminMode(true);
     closeAdminLogin();
     updateAdminUI();
     refresh();
@@ -270,15 +307,66 @@ function submitAdminLogin() {
   }
 }
 
-function logoutAdmin() {
-  adminMode = false;
+export function logoutAdmin() {
+  setAdminMode(false);
   updateAdminUI();
   refresh();
   toast('Admin-Modus beendet');
 }
 
+// ── Incomplete-Widget ─────────────────────────────────────────────────────────
+
+/** Zählt fehlende Felder eines einzelnen Autos (anhand TRACKED_FIELDS). */
+export function countMissingFields(car) {
+  return TRACKED_FIELDS.filter(f => car[f] == null || car[f] === '').length;
+}
+
+/** Gibt alle Autos zurück, bei denen mehr als `limit` Felder fehlen. */
+export function getIncompleteCars(limit) {
+  return (state.cars || []).filter(car => countMissingFields(car) > limit);
+}
+
+/** Aktualisiert Badge und Button-Zustand des Incomplete-Widgets. */
+export function refreshIncompleteWidget() {
+  const input  = document.getElementById('incompleteLimitInput');
+  const badge  = document.getElementById('incompleteCount');
+  const btn    = document.getElementById('incompleteDeleteBtn');
+  if (!input || !badge || !btn) return;
+
+  const limit = parseInt(input.value, 10);
+  const count = getIncompleteCars(limit).length;
+
+  badge.textContent = count;
+  badge.className   = count > 0
+    ? 'min-w-[1.5rem] h-6 px-1.5 flex items-center justify-center text-xs font-black rounded-full bg-red-100 text-red-700'
+    : 'min-w-[1.5rem] h-6 px-1.5 flex items-center justify-center text-xs font-black rounded-full bg-gray-100 text-gray-400';
+
+  btn.disabled = count === 0;
+  btn.title    = count > 0
+    ? `${count} Fahrzeug${count !== 1 ? 'e' : ''} mit mehr als ${limit} fehlenden Daten löschen`
+    : 'Keine Fahrzeuge gefunden';
+}
+
+/** Löscht alle Autos mit mehr als `limit` fehlenden Feldern. */
+export async function deleteIncompleteCars(limit) {
+  const targets = getIncompleteCars(limit);
+  if (targets.length === 0) return;
+
+  const confirmed = confirm(
+    `${targets.length} Fahrzeug${targets.length !== 1 ? 'e' : ''} mit mehr als ${limit} fehlenden Daten werden unwiderruflich gelöscht:\n\n` +
+    targets.map(c => `• ${c.marke} ${c.modell} (${countMissingFields(c)} fehlend)`).join('\n') +
+    '\n\nFortfahren?'
+  );
+  if (!confirmed) return;
+
+  for (const car of targets) {
+    await deleteCarFromCloud(car.id);
+  }
+  toast(`${targets.length} unvollständige${targets.length !== 1 ? ' Fahrzeuge' : 's Fahrzeug'} gelöscht`, 'success');
+}
+
 // ── Sortier-UI ───────────────────────────────────────────────────────────────
-function updateSortUI() {
+export function updateSortUI() {
   const btn = document.getElementById('sortDirBtn');
   btn.classList.toggle('desc', state.sortDir === 'desc');
   btn.title = state.sortDir === 'desc'

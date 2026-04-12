@@ -1,4 +1,7 @@
-'use strict';
+import { state, adminMode } from './state.js';
+import { escapeHtml } from './render.js';
+import { fmt } from './filter.js';
+import { deleteCar, openEditModal, toast } from './ui.js';
 
 // ── Felder für den Duplikat-Vergleich ────────────────────────────────────────
 const DUP_FIELDS = [
@@ -52,7 +55,7 @@ function _sameModell(a, b) { return (a.modell || '').trim().toLowerCase() === (b
  * numerischen Werte ≤10% voneinander abweichen.
  * Gibt die Anzahl entfernter Autos zurück.
  */
-function autoFixDuplicates() {
+export function autoFixDuplicates() {
   const cars = state.cars;
   const toDelete = new Set();
   const checked  = new Set();
@@ -87,7 +90,7 @@ function autoFixDuplicates() {
  *  - conflicts: gleiche Marke+Modell, Abweichung >10%  → Admin entscheidet
  *  - similar:   gleiche Marke, anderer Modellname, ≤5% → Warnung
  */
-function scanDuplicates() {
+export function scanDuplicates() {
   const cars = state.cars;
   const conflicts = [], similar = [], seen = new Set();
 
@@ -115,7 +118,7 @@ function scanDuplicates() {
 
 // ── Panel-Rendering ───────────────────────────────────────────────────────────
 
-function renderDuplicatePanel() {
+export function renderDuplicatePanel() {
   const panel = document.getElementById('duplicatePanel');
   if (!panel) return;
 
