@@ -13,7 +13,6 @@ import {
 
 // ─── Lokale Module ────────────────────────────────────────────────────────────
 import { state, calcDerived } from './state.js';
-import { TRACKED_FIELDS } from './config.js';
 import { computeBounds } from './csv.js';
 import { buildFilterPanel } from './filter-ui.js';
 import { refresh, toast } from './ui.js';
