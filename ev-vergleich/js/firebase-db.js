@@ -108,41 +108,6 @@ async function migrateFromLocalStorageIfNeeded() {
   }
 }
 
-// ─── Vollständigkeitsprüfung ──────────────────────────────────────────────────
-// TRACKED_FIELDS kommt aus config.js (globale Variable)
-const MAX_MISSING = 5;
-
-/**
- * Löscht automatisch alle Dokumente aus dem Snapshot, die mehr als
- * MAX_MISSING Felder ohne gültigen Wert haben.
- * Gibt die Anzahl gelöschter Dokumente zurück.
- */
-async function purgeIncompleteCars(snapshot) {
-  const toDelete = [];
-
-  snapshot.docs.forEach(docSnap => {
-    const data    = docSnap.data();
-    const missing = TRACKED_FIELDS.filter(f => data[f] == null || data[f] === '');
-    if (missing.length > MAX_MISSING) {
-      toDelete.push({ id: docSnap.id, marke: data.marke ?? '?', modell: data.modell ?? '?', missing });
-    }
-  });
-
-  for (const car of toDelete) {
-    console.warn(
-      `[Firebase] Auto gelöscht – ${car.missing.length}/${TRACKED_FIELDS.length} Felder fehlen:`,
-      `${car.marke} ${car.modell}`, car.missing,
-    );
-    await deleteDoc(doc(db, 'cars', car.id));
-  }
-
-  if (toDelete.length > 0) {
-    toast(`${toDelete.length} unvollständige${toDelete.length === 1 ? 's' : ''} Fahrzeug${toDelete.length === 1 ? '' : 'e'} automatisch gelöscht`, 'info');
-  }
-
-  return toDelete.length;
-}
-
 // ─── Live-Listener: onSnapshot auf Collection "cars" ─────────────────────────
 /**
  * Startet einen permanenten Echtzeit-Listener.
