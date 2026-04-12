@@ -8,7 +8,9 @@ import {
   addDoc,
   updateDoc,
   deleteDoc,
+  getDocs,
 } from 'https://www.gstatic.com/firebasejs/12.12.0/firebase-firestore.js';
+import { parseCSV } from './csv.js';
 
 // ─── Konfiguration (gleiches Projekt wie EV-Seite) ────────────────────────────
 const firebaseConfig = {
@@ -107,10 +109,33 @@ async function deleteIceCarFromCloud(id) {
   }
 }
 
+// ─── EV-Daten aus CSV in 'cars'-Collection laden ─────────────────────────────
+async function loadEvCarsFromCSV(text) {
+  const cars = parseCSV(text);
+  const existing = await getDocs(collection(db, 'cars'));
+  const existingKeys = new Set(existing.docs.map(d => {
+    const data = d.data();
+    return `${(data.marke||'').toLowerCase()}|${(data.modell||'').toLowerCase()}`;
+  }));
+  let added = 0;
+  for (const car of cars) {
+    const key = `${(car.marke||'').toLowerCase()}|${(car.modell||'').toLowerCase()}`;
+    if (!existingKeys.has(key)) {
+      const { id, geladeneEnergie, ladespeed, verbrauch, ...data } = car;
+      await addDoc(collection(db, 'cars'), Object.fromEntries(
+        Object.entries(data).filter(([, v]) => v !== null && v !== undefined && v !== '')
+      ));
+      added++;
+    }
+  }
+  return added;
+}
+
 // ─── Globale Exports für klassische (non-module) Scripts ──────────────────────
 window.saveIceCarToCloud     = saveIceCarToCloud;
 window.updateIceCarInCloud   = updateIceCarInCloud;
 window.deleteIceCarFromCloud = deleteIceCarFromCloud;
+window.loadEvCarsFromCSV     = loadEvCarsFromCSV;
 
 // ─── Start ────────────────────────────────────────────────────────────────────
 listenToIceCars();

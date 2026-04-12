@@ -188,7 +188,7 @@ export async function deleteCarFromCloud(id) {
 
 function listenToIceCars() {
   onSnapshot(
-    collection(db, 'iceCars'),
+    collection(db, 'ice_cars'),
     (snapshot) => {
       if (snapshot.empty) return;
       state.iceCars = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
@@ -200,11 +200,11 @@ function listenToIceCars() {
 
 export async function saveIceCarsToCloud(cars) {
   try {
-    const existing = await getDocs(collection(db, 'iceCars'));
+    const existing = await getDocs(collection(db, 'ice_cars'));
     for (const d of existing.docs) await deleteDoc(doc(db, 'iceCars', d.id));
     for (const car of cars) {
       const { id, ...data } = car;
-      await addDoc(collection(db, 'iceCars'), data);
+      await addDoc(collection(db, 'ice_cars'), data);
     }
     console.log(`[Firebase] ✓ ${cars.length} Verbrenner gespeichert`);
   } catch (e) {

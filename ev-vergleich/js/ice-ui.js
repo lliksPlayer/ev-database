@@ -101,6 +101,17 @@ function loadIceCSVFile(file) {
   reader.readAsText(file, 'UTF-8');
 }
 
+function loadEvCSVFile(file) {
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    window.loadEvCarsFromCSV(e.target.result)
+      .then(count => toast(`${count} neue EV-Fahrzeuge gespeichert`, 'success'))
+      .catch(err  => toast('Fehler beim Laden: ' + err.message, 'error'));
+  };
+  reader.onerror = () => toast('Datei konnte nicht gelesen werden.', 'error');
+  reader.readAsText(file, 'UTF-8');
+}
+
 // ── Toast ─────────────────────────────────────────────────────────────────────
 function toast(msg, type = 'info') {
   const border = type === 'success' ? 'border-teal-200' : type === 'error' ? 'border-red-200' : 'border-gray-200';
@@ -196,6 +207,7 @@ function submitAdminLogin() {
   const pw = document.getElementById('adminPasswordInput').value;
   if (pw === ADMIN_PASSWORD) {
     adminMode = true;
+    sessionStorage.setItem('ev-admin', '1');
     closeAdminLogin();
     updateAdminUI();
     toast('Admin-Modus aktiviert', 'success');
@@ -208,6 +220,7 @@ function submitAdminLogin() {
 
 function logoutAdmin() {
   adminMode = false;
+  sessionStorage.removeItem('ev-admin');
   updateAdminUI();
   toast('Admin-Modus beendet');
 }
