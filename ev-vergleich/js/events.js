@@ -1,4 +1,4 @@
-import { state } from './state.js';
+import { state, adminMode, editCarId } from './state.js';
 import {
   refresh, toggleFilter, setView, openModal, closeModal, loadCSVFile, loadIceCSVFile,
   updateFormCalc, updateCar, addCar, toast, updateAdminUI, openAdminLogin, closeAdminLogin,
