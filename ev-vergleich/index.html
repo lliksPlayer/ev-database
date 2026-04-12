@@ -106,6 +106,11 @@
           <span class="hidden sm:inline">Hinzufügen</span>
         </button>
 
+        <button class="h-8 px-3 flex items-center gap-1.5 text-sm font-medium text-gray-600 bg-white border border-gray-200 shadow-sm rounded-lg hover:text-gray-900 hover:bg-gray-50 transition-colors" id="adminBtn">
+          <i data-lucide="lock" class="w-4 h-4"></i>
+          <span class="hidden sm:inline">Admin</span>
+        </button>
+
       </div>
     </div>
   </header>
@@ -217,11 +222,11 @@
         </div>
         <p class="text-lg font-medium text-gray-500 leading-relaxed">Noch keine Autos geladen.<br/><span class="text-base font-normal">Lade eine Datei oder füge ein Auto manuell hinzu.</span></p>
         <div class="flex items-center gap-3 mt-2">
-          <button class="h-10 px-5 flex items-center gap-2 text-sm font-semibold text-gray-700 bg-white border border-gray-200 rounded-xl hover:bg-gray-50 shadow-sm transition-colors" id="emptyLoadBtn">
+          <button class="hidden admin-element h-10 px-5 flex items-center gap-2 text-sm font-semibold text-gray-700 bg-white border border-gray-200 rounded-xl hover:bg-gray-50 shadow-sm transition-colors" id="emptyLoadBtn">
             <i data-lucide="upload" class="w-4 h-4 text-gray-400"></i>
             Daten laden
           </button>
-          <button class="h-10 px-5 flex items-center gap-2 text-sm font-bold text-white bg-teal-500 rounded-xl hover:bg-teal-600 shadow-sm shadow-teal-500/30 transition-colors" id="emptyAddBtn">
+          <button class="hidden admin-element h-10 px-5 flex items-center gap-2 text-sm font-bold text-white bg-teal-500 rounded-xl hover:bg-teal-600 shadow-sm shadow-teal-500/30 transition-colors" id="emptyAddBtn">
             <i data-lucide="plus" class="w-4 h-4"></i>
             Auto hinzufügen
           </button>
@@ -301,10 +306,10 @@
               <div id="tco-ice-card" class="rounded-xl border border-gray-200 bg-gray-50/50 p-5 space-y-4">
                 <p id="tco-ice-card-title" class="text-xs font-bold text-orange-600 uppercase tracking-widest flex items-center gap-1.5">
                   <i id="tco-ice-card-icon" data-lucide="fuel" class="w-4 h-4"></i>
-                  Verbrenner (ICE)
+                  <span id="tco-ice-card-title-text">Verbrenner (ICE)</span>
                 </p>
-                <div id="tco-ice-select-wrap" class="hidden flex-col gap-1.5">
-                  <label class="text-[10px] font-bold text-gray-500 uppercase tracking-widest" for="tco-ice-select">Aus Datenbank laden</label>
+                <div id="tco-ice-select-wrap" class="flex flex-col gap-1.5">
+                  <label id="tco-ice-select-label" class="text-[10px] font-bold text-gray-500 uppercase tracking-widest" for="tco-ice-select">Aus Datenbank laden</label>
                   <select id="tco-ice-select" class="h-10 px-3 text-sm font-medium text-gray-700 bg-white border border-gray-200 rounded-lg focus:border-orange-400 focus:outline-none focus:ring-1 focus:ring-orange-400 transition-shadow">
                     <option value="">– Manuell eingeben –</option>
                   </select>
@@ -318,7 +323,7 @@
                   <input class="tco-input h-10 px-3 text-sm font-bold text-center text-gray-900 bg-white border border-gray-200 rounded-lg focus:border-orange-400 focus:ring-1 focus:ring-orange-400 focus:outline-none transition-shadow" type="number" id="tco-ice-epreis" value="1.75" min="0" step="0.05" />
                 </div>
                 <div class="flex flex-col gap-1.5">
-                  <label class="text-[10px] font-bold text-gray-500 uppercase tracking-widest" for="tco-ice-preis">Kaufpreis (€)</label>
+                  <label id="tco-ice-preis-label" class="text-[10px] font-bold text-gray-500 uppercase tracking-widest" for="tco-ice-preis">Kaufpreis (€)</label>
                   <input class="tco-input h-10 px-3 text-sm font-bold text-center text-gray-900 bg-white border border-gray-200 rounded-lg focus:border-orange-400 focus:ring-1 focus:ring-orange-400 focus:outline-none transition-shadow" type="number" id="tco-ice-preis" value="35000" min="0" step="500" />
                 </div>
               </div>
@@ -560,6 +565,30 @@
           <button type="submit" class="h-10 px-5 text-sm font-bold text-white bg-teal-500 rounded-xl hover:bg-teal-600 shadow-sm shadow-teal-500/30 transition-colors">Auto speichern</button>
         </div>
 
+      </form>
+    </div>
+  </div>
+
+  <div id="adminLoginModal" class="fixed inset-0 z-[400] flex items-center justify-center p-4 bg-gray-900/50 backdrop-blur-sm opacity-0 pointer-events-none" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-inner bg-white border border-gray-200 rounded-2xl w-full max-w-sm shadow-2xl -translate-y-4 p-6">
+      <div class="flex items-center justify-between mb-5">
+        <h2 class="text-xl font-black text-gray-900">Admin-Login</h2>
+        <button id="adminLoginClose" class="w-8 h-8 flex items-center justify-center rounded-lg text-gray-400 hover:text-gray-800 hover:bg-gray-100 transition-colors">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+      <form id="adminLoginForm" novalidate>
+        <div class="flex flex-col gap-1.5 mb-5">
+          <label class="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Passwort</label>
+          <input type="password" id="adminPasswordInput"
+                 class="h-10 px-3 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg focus:border-teal-500 focus:ring-1 focus:ring-teal-500 focus:outline-none transition-shadow"
+                 placeholder="Admin-Passwort" />
+        </div>
+        <p id="adminLoginError" class="hidden text-xs font-bold text-red-500 mb-4">Falsches Passwort.</p>
+        <div class="flex gap-3">
+          <button type="button" id="adminLoginCancel" class="flex-1 h-10 text-sm font-bold text-gray-600 bg-white border border-gray-200 rounded-xl hover:bg-gray-50 shadow-sm transition-colors">Abbrechen</button>
+          <button type="submit" class="flex-1 h-10 text-sm font-bold text-white bg-teal-500 rounded-xl hover:bg-teal-600 shadow-sm shadow-teal-500/30 transition-colors">Anmelden</button>
+        </div>
       </form>
     </div>
   </div>
