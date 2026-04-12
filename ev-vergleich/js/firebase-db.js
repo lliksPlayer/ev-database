@@ -184,6 +184,35 @@ export async function deleteCarFromCloud(id) {
   }
 }
 
+// ─── ICE-Fahrzeuge ────────────────────────────────────────────────────────────
+
+function listenToIceCars() {
+  onSnapshot(
+    collection(db, 'iceCars'),
+    (snapshot) => {
+      if (snapshot.empty) return;
+      state.iceCars = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+      refresh();
+    },
+    (error) => console.error('[Firebase] iceCars Listener-Fehler:', error.message)
+  );
+}
+
+export async function saveIceCarsToCloud(cars) {
+  try {
+    const existing = await getDocs(collection(db, 'iceCars'));
+    for (const d of existing.docs) await deleteDoc(doc(db, 'iceCars', d.id));
+    for (const car of cars) {
+      const { id, ...data } = car;
+      await addDoc(collection(db, 'iceCars'), data);
+    }
+    console.log(`[Firebase] ✓ ${cars.length} Verbrenner gespeichert`);
+  } catch (e) {
+    console.error('[Firebase] ✗ iceCars speichern fehlgeschlagen:', e.message);
+    toast('Verbrenner speichern fehlgeschlagen: ' + e.message, 'error');
+  }
+}
+
 // ─── Start ────────────────────────────────────────────────────────────────────
 // Reihenfolge: erst Migration (einmalig), dann Live-Listener starten.
 // migrateFromLocalStorageIfNeeded ist async – listenToCars() startet danach,
@@ -191,4 +220,5 @@ export async function deleteCarFromCloud(id) {
 (async () => {
   await migrateFromLocalStorageIfNeeded();
   listenToCars();
+  listenToIceCars();
 })();

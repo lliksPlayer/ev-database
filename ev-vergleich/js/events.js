@@ -1,4 +1,4 @@
-import { state, adminMode, editCarId } from './state.js';
+import { state, adminMode, editCarId, setAdminMode } from './state.js';
 import {
   refresh, toggleFilter, setView, openModal, closeModal, loadCSVFile, loadIceCSVFile,
   updateFormCalc, updateCar, addCar, toast, updateAdminUI, openAdminLogin, closeAdminLogin,
@@ -137,6 +137,11 @@ document.addEventListener('DOMContentLoaded', () => {
     deleteIncompleteCars(limit);
   });
 
+  // Admin-Session wiederherstellen
+  if (sessionStorage.getItem('ev-admin') === '1') {
+    setAdminMode(true);
+  }
+
   // Initiales Rendering
   lucide.createIcons();
   buildFilterPanel();
@@ -144,5 +149,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initiales Rendering (Firestore-Daten kommen via onSnapshot in firebase-db.js)
   refresh();
-  updateAdminUI(); // Admin-only-Elemente beim Start verstecken
+  updateAdminUI();
 });

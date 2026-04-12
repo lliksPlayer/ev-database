@@ -5,7 +5,7 @@ import { renderHighlights, renderCards, escapeHtml } from './render.js';
 import { refreshTCOCarSelects } from './tco.js';
 import { renderDuplicatePanel } from './duplicates.js';
 import { parseCSV } from './csv.js';
-import { saveCarToCloud, updateCarInCloud, deleteCarFromCloud } from './firebase-db.js';
+import { saveCarToCloud, updateCarInCloud, deleteCarFromCloud, saveIceCarsToCloud } from './firebase-db.js';
 
 // ── Haupt-Render-Funktion ────────────────────────────────────────────────────
 export function refresh() {
@@ -106,6 +106,7 @@ export function loadIceCSVFile(file) {
       const newCars = parseIceCSV(e.target.result);
       if (newCars.length === 0) throw new Error('Keine Datensätze in der CSV gefunden.');
       state.iceCars = newCars;
+      saveIceCarsToCloud(newCars);
       if (typeof refreshTCOCarSelects === 'function') refreshTCOCarSelects();
       toast(`${newCars.length} Verbrenner importiert – jetzt im TCO-Rechner auswählbar`, 'success');
     } catch (err) {
@@ -296,6 +297,7 @@ export function submitAdminLogin() {
   const pw = document.getElementById('adminPasswordInput').value;
   if (pw === ADMIN_PASSWORD) {
     setAdminMode(true);
+    sessionStorage.setItem('ev-admin', '1');
     closeAdminLogin();
     updateAdminUI();
     refresh();
@@ -309,6 +311,7 @@ export function submitAdminLogin() {
 
 export function logoutAdmin() {
   setAdminMode(false);
+  sessionStorage.removeItem('ev-admin');
   updateAdminUI();
   refresh();
   toast('Admin-Modus beendet');
