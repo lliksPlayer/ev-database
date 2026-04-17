@@ -1,0 +1,13 @@
+.car-form { display: flex; flex-direction: column; gap: 0; }
+.car-form h2 { margin-bottom: 1.5rem; }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+.form-group label { font-size: 0.8rem; font-weight: 600; color: #555; text-transform: uppercase; letter-spacing: 0.03em; }
+.form-group input {
+  padding: 0.55rem 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+.form-group input[readonly] { background: #f5f5f5; color: #888; cursor: default; }
+.form-actions { display: flex; gap: 0.75rem; margin-top: 1.5rem; }
