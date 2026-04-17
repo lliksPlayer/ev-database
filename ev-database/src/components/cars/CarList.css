@@ -1,0 +1,17 @@
+.car-list { display: flex; flex-direction: column; gap: 0.75rem; }
+.car-list-row {
+  background: white;
+  border-radius: 10px;
+  padding: 0.9rem 1.2rem;
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+  transition: box-shadow 0.15s;
+  flex-wrap: wrap;
+}
+.car-list-row:hover { box-shadow: 0 4px 14px rgba(0,0,0,0.12); }
+.car-list-name { font-weight: 700; min-width: 160px; }
+.car-list-field { font-size: 0.85rem; color: #555; white-space: nowrap; }
+.car-list-field span { font-weight: 600; color: #1a1a2e; margin-left: 4px; }

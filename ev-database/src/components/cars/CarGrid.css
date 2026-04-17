@@ -1,0 +1,4 @@
+.car-grid { display: grid; gap: 1rem; }
+.car-grid.small  { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+.car-grid.medium { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+.car-grid.large  { grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); }
