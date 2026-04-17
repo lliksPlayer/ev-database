@@ -14,19 +14,19 @@ Master index of all wiki pages. Updated by the LLM on every ingest, query (if a 
 
 | Page | Summary | Sources |
 |------|---------|---------|
-| *(none yet)* | | |
+| [[wiki/projects/ev-vergleich]] | EV-Vergleichstool mit React und Firebase | 1 |
 
 ## Decisions
 
 | Page | Summary | Date |
 |------|---------|------|
-| *(none yet)* | | |
+| [[wiki/decisions/firebase-als-datenbank]] | Firebase Firestore als primäre Datenbank | 2026-04-17 |
 
 ## Concepts
 
 | Page | Summary |
 |------|---------|
-| *(none yet)* | |
+| [[wiki/concepts/tco]] | Total Cost of Ownership — primäre Vergleichsmetrik |
 
 ## Entities
 
@@ -38,4 +38,4 @@ Master index of all wiki pages. Updated by the LLM on every ingest, query (if a 
 
 | Page | Original file | Date |
 |------|--------------|------|
-| *(none yet)* | | |
+| [[wiki/sources/test-ingest]] | `raw/test-ingest.md` | 2026-04-17 |
