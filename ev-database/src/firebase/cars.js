@@ -13,9 +13,9 @@ export const subscribeToCars = (callback) =>
 
 export const addCar = (data) => addDoc(carsRef(), data)
 
-export const updateCar = (id, data) => updateDoc(doc(db, 'ev_cars', id), data)
+export const updateCar = (id, data) => updateDoc(doc(carsRef(), id), data)
 
-export const deleteCar = (id) => deleteDoc(doc(db, 'ev_cars', id))
+export const deleteCar = (id) => deleteDoc(doc(carsRef(), id))
 
 export const importCars = async (cars) => {
   const batch = writeBatch(db)
