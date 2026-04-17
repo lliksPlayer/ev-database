@@ -1,0 +1,49 @@
+{
+  "nav": {
+    "evDatabase": "EV Database",
+    "admin": "Admin"
+  },
+  "home": {
+    "title": "Electric Car Database",
+    "loading": "Loading...",
+    "noCars": "No vehicles found."
+  },
+  "viewToggle": {
+    "grid": "Grid",
+    "list": "List",
+    "small": "Small",
+    "medium": "Medium",
+    "large": "Large"
+  },
+  "admin": {
+    "title": "Admin Panel",
+    "vehicles": "Vehicles",
+    "fields": "Card Fields",
+    "addVehicle": "Add Vehicle",
+    "importVehicles": "Import",
+    "edit": "Edit",
+    "delete": "Delete",
+    "deleteConfirm": "Really delete this vehicle?",
+    "save": "Save",
+    "cancel": "Cancel",
+    "saving": "Saving...",
+    "importFile": "Upload Excel / CSV",
+    "importMapping": "Map Columns",
+    "importPreview": "Preview (first 5 rows)",
+    "importConfirm": "Import",
+    "fieldVisible": "Visible",
+    "fieldHidden": "Hidden"
+  },
+  "login": {
+    "title": "Admin Login",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Sign In",
+    "error": "Invalid credentials"
+  },
+  "detail": {
+    "title": "Vehicle Details",
+    "close": "Close",
+    "comingSoon": "More details coming soon."
+  }
+}

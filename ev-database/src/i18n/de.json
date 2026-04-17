@@ -1,0 +1,49 @@
+{
+  "nav": {
+    "evDatabase": "EV-Datenbank",
+    "admin": "Admin"
+  },
+  "home": {
+    "title": "Elektroauto-Datenbank",
+    "loading": "Lädt...",
+    "noCars": "Keine Fahrzeuge gefunden."
+  },
+  "viewToggle": {
+    "grid": "Raster",
+    "list": "Liste",
+    "small": "Klein",
+    "medium": "Mittel",
+    "large": "Groß"
+  },
+  "admin": {
+    "title": "Admin-Bereich",
+    "vehicles": "Fahrzeuge",
+    "fields": "Kartenfelder",
+    "addVehicle": "Fahrzeug hinzufügen",
+    "importVehicles": "Importieren",
+    "edit": "Bearbeiten",
+    "delete": "Löschen",
+    "deleteConfirm": "Fahrzeug wirklich löschen?",
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "saving": "Speichert...",
+    "importFile": "Excel / CSV hochladen",
+    "importMapping": "Spalten zuordnen",
+    "importPreview": "Vorschau (erste 5 Zeilen)",
+    "importConfirm": "Importieren",
+    "fieldVisible": "Sichtbar",
+    "fieldHidden": "Ausgeblendet"
+  },
+  "login": {
+    "title": "Admin Login",
+    "email": "E-Mail",
+    "password": "Passwort",
+    "submit": "Anmelden",
+    "error": "Ungültige Anmeldedaten"
+  },
+  "detail": {
+    "title": "Fahrzeugdetails",
+    "close": "Schließen",
+    "comingSoon": "Weitere Details folgen."
+  }
+}
