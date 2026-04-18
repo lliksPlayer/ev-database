@@ -14,3 +14,5 @@
 .car-table td { padding: 0.6rem 0.75rem; border-bottom: 1px solid #eee; }
 .car-table tr:hover td { background: #fafafa; }
 .car-table-edit { margin-right: 6px; }
+.seed-prompt { padding: 2rem; text-align: center; }
+.seed-prompt p { margin-bottom: 1rem; color: #666; }
