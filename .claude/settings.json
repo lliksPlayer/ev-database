@@ -9,7 +9,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "grep -q \"^## \\[$(date +%Y-%m-%d)\\]\" \"Brain/log.md\" && echo '{\"continue\": true}' || echo '{\"continue\": false, \"stopReason\": \"Obsidian noch nicht aktualisiert — bitte Brain/log.md und relevante Wiki-Seiten schreiben, dann fertig.\"}'",
+            "command": "grep -q \"^## \\[$(date +%Y-%m-%d)\\]\" \"Brain/log.md\" 2>/dev/null && echo '{\"continue\": true}' || echo '{\"continue\": false, \"stopReason\": \"Obsidian noch nicht aktualisiert — bitte Brain/log.md und relevante Wiki-Seiten schreiben, dann fertig.\"}'",
             "timeout": 10
           }
         ]
