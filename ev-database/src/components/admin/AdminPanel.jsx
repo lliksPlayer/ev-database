@@ -1,15 +1,13 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useCars } from '../../hooks/useCars'
 import { useSettings } from '../../hooks/useSettings'
-import { deleteCar } from '../../firebase/cars'
 import { saveSettings } from '../../firebase/settings'
 import CarForm from './CarForm'
 import CarImport from './CarImport'
 import FieldToggle from './FieldToggle'
 import './AdminPanel.css'
 
-const DEFAULT_FIELDS = [
+const EV_DEFAULT_FIELDS = [
   { key: 'marke', label_de: 'Marke', label_en: 'Brand', visible: true, order: 0 },
   { key: 'modell', label_de: 'Modell', label_en: 'Model', visible: true, order: 1 },
   { key: 'batterie_netto', label_de: 'Batterie Netto', label_en: 'Battery Net', visible: true, order: 2 },
@@ -29,21 +27,35 @@ const DEFAULT_FIELDS = [
   { key: 'markteinfuehrung', label_de: 'Markteinführung', label_en: 'Market Launch', visible: false, order: 16 },
 ]
 
-export default function AdminPanel() {
+export default function AdminPanel({
+  cars,
+  formFields,
+  addFn,
+  updateFn,
+  deleteFn,
+  importFn,
+  transformFn,
+  summaryKeys,
+  showFieldSettings = false,
+}) {
   const { t } = useTranslation()
-  const { cars } = useCars()
   const { fields } = useSettings()
   const [tab, setTab] = useState('vehicles')
   const [view, setView] = useState('list')
   const [editCar, setEditCar] = useState(null)
 
+  const summaryLabels = summaryKeys.map(key => {
+    const field = formFields.find(f => f.key === key)
+    return { key, label: field?.label || key }
+  })
+
   const handleSeedFields = async () => {
-    await saveSettings(DEFAULT_FIELDS)
+    await saveSettings(EV_DEFAULT_FIELDS)
   }
 
   const handleDelete = async (id) => {
     if (!window.confirm(t('admin.deleteConfirm'))) return
-    await deleteCar(id)
+    await deleteFn(id)
   }
 
   return (
@@ -53,9 +65,11 @@ export default function AdminPanel() {
         <button className={`admin-tab ${tab === 'vehicles' ? 'active' : ''}`} onClick={() => { setTab('vehicles'); setView('list') }}>
           {t('admin.vehicles')} ({cars.length})
         </button>
-        <button className={`admin-tab ${tab === 'fields' ? 'active' : ''}`} onClick={() => setTab('fields')}>
-          {t('admin.fields')}
-        </button>
+        {showFieldSettings && (
+          <button className={`admin-tab ${tab === 'fields' ? 'active' : ''}`} onClick={() => setTab('fields')}>
+            {t('admin.fields')}
+          </button>
+        )}
       </div>
 
       {tab === 'vehicles' && (
@@ -68,15 +82,21 @@ export default function AdminPanel() {
               </div>
               <table className="car-table">
                 <thead>
-                  <tr><th>{t('admin.tableMake')}</th><th>{t('admin.tableModel')}</th><th>{t('admin.tableBattery')}</th><th>{t('admin.tablePrice')}</th><th></th></tr>
+                  <tr>
+                    <th>{t('admin.tableMake')}</th>
+                    <th>{t('admin.tableModel')}</th>
+                    {summaryLabels.map(s => <th key={s.key}>{s.label}</th>)}
+                    <th></th>
+                  </tr>
                 </thead>
                 <tbody>
                   {cars.map(car => (
                     <tr key={car.id}>
                       <td>{car.marke}</td>
                       <td>{car.modell}</td>
-                      <td>{car.batterie_netto} kWh</td>
-                      <td>{car.basis_preis ? `${car.basis_preis.toLocaleString('de-DE')} €` : '–'}</td>
+                      {summaryLabels.map(s => (
+                        <td key={s.key}>{car[s.key] ?? '–'}</td>
+                      ))}
                       <td>
                         <button className="btn btn-secondary btn-small car-table-edit"
                           onClick={() => { setEditCar(car); setView('edit') }}>
@@ -93,19 +113,32 @@ export default function AdminPanel() {
             </>
           )}
           {(view === 'add' || view === 'edit') && (
-            <CarForm car={view === 'edit' ? editCar : null} onDone={() => { setView('list'); setEditCar(null) }} />
+            <CarForm
+              fields={formFields}
+              addFn={addFn}
+              updateFn={updateFn}
+              car={view === 'edit' ? editCar : null}
+              onDone={() => { setView('list'); setEditCar(null) }}
+            />
           )}
-          {view === 'import' && <CarImport onDone={() => setView('list')} />}
+          {view === 'import' && (
+            <CarImport
+              fields={formFields}
+              importFn={importFn}
+              transformFn={transformFn}
+              onDone={() => setView('list')}
+            />
+          )}
         </>
       )}
 
-      {tab === 'fields' && fields.length === 0 && (
+      {showFieldSettings && tab === 'fields' && fields.length === 0 && (
         <div className="seed-prompt">
           <p>Konfiguration noch nicht angelegt.</p>
           <button className="btn btn-primary" onClick={handleSeedFields}>Standard-Felder anlegen</button>
         </div>
       )}
-      {tab === 'fields' && fields.length > 0 && <FieldToggle fields={fields} />}
+      {showFieldSettings && tab === 'fields' && fields.length > 0 && <FieldToggle fields={fields} />}
     </div>
   )
 }

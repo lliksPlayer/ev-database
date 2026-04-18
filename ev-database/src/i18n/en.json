@@ -1,10 +1,12 @@
 {
   "nav": {
-    "evDatabase": "EV Database",
+    "evDatabase": "E-Vehicles",
+    "iceDatabase": "ICE Vehicles",
     "admin": "Admin"
   },
   "home": {
     "title": "Electric Car Database",
+    "iceTitle": "ICE Vehicle Database",
     "loading": "Loading...",
     "noCars": "No vehicles found."
   },
@@ -49,6 +51,61 @@
   "detail": {
     "title": "Vehicle Details",
     "close": "Close",
-    "comingSoon": "More details coming soon."
+    "sections": {
+      "basis": "Basics",
+      "range_battery": "Range & Battery",
+      "charging": "Charging",
+      "performance": "Performance",
+      "dimensions": "Dimensions",
+      "weight": "Weight & Towing",
+      "cargo": "Cargo",
+      "misc": "Miscellaneous"
+    },
+    "fields": {
+      "baujahr": "Year",
+      "preis_de": "Price (DE)",
+      "reichweite_wltp": "WLTP Range",
+      "akku_kapazitaet_kwh": "Battery Capacity",
+      "architektur_volt": "Architecture",
+      "laden_ac_kw": "AC Charging",
+      "laden_dc_kw": "DC Charging",
+      "ladezeit_10_80_min": "Charge Time 10→80%",
+      "beschleunigung_sec": "0–100 km/h",
+      "hoechstgeschwindigkeit_kmh": "Top Speed",
+      "leistung_kw": "Power",
+      "laenge_mm": "Length",
+      "breite_mm": "Width",
+      "hoehe_mm": "Height",
+      "radstand_mm": "Wheelbase",
+      "gewicht_leer_kg": "Unladen Weight",
+      "zul_gesamtgewicht_kg": "Gross Weight",
+      "zuladung_kg": "Max Payload",
+      "anhaengelast_gebremst_kg": "Towing Braked",
+      "anhaengelast_ungebremst_kg": "Towing Unbraked",
+      "kofferraum_l": "Cargo Volume",
+      "kofferraum_max_l": "Cargo Volume Max",
+      "frunk_l": "Frunk",
+      "dachlast_kg": "Roof Load",
+      "sitze": "Seats",
+      "isofix": "Isofix",
+      "wendekreis_m": "Turning Circle",
+      "karosserie": "Body Type",
+      "segment": "Segment",
+      "waermepumpe": "Heat Pump",
+      "plattform": "Platform"
+    },
+    "units": {
+      "km": "km",
+      "kwh": "kWh",
+      "volt": "V",
+      "kw": "kW",
+      "min": "min",
+      "sec": "s",
+      "kmh": "km/h",
+      "mm": "mm",
+      "kg": "kg",
+      "liter": "L",
+      "meter": "m"
+    }
   }
 }

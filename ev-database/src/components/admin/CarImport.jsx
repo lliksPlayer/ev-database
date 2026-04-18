@@ -1,44 +1,23 @@
 import { useState } from 'react'
 import * as XLSX from 'xlsx'
 import { useTranslation } from 'react-i18next'
-import { importCars } from '../../firebase/cars'
-import { applyCalculations } from '../../utils/calculations'
 import './CarImport.css'
 
-const DB_FIELDS = [
-  { key: '', label: '— ignorieren —' },
-  { key: 'marke', label: 'Marke' },
-  { key: 'modell', label: 'Modell' },
-  { key: 'batterie_netto', label: 'Batterie Netto (kWh)' },
-  { key: 'laden_10_80_min', label: '10%–80% (min)' },
-  { key: 'max_ladeleistung', label: 'Max. Ladeleistung (kW)' },
-  { key: 'anhaengelast', label: 'Anhängelast (kg)' },
-  { key: 'wltp_reichweite', label: 'WLTP Reichweite (km)' },
-  { key: 'wltp_verbrauch', label: 'WLTP Verbrauch (kWh/100km)' },
-  { key: 'basis_preis', label: 'Basispreis (€)' },
-  { key: 'hoechster_preis', label: 'Höchster Preis (€)' },
-  { key: 'null_hundert', label: '0–100 (s)' },
-  { key: 'ps', label: 'PS' },
-  { key: 'top_speed', label: 'Top Speed (km/h)' },
-  { key: 'volt', label: 'Volt' },
-  { key: 'markteinfuehrung', label: 'Markteinführung' },
-]
-
-const NUM_FIELDS = ['batterie_netto','laden_10_80_min','max_ladeleistung','anhaengelast',
-  'wltp_reichweite','wltp_verbrauch','basis_preis','hoechster_preis','null_hundert','ps','top_speed','volt']
-
-const autoMatch = (colName) => {
+const autoMatch = (colName, fields) => {
   const lower = colName.toLowerCase().replace(/\s/g, '_')
-  const found = DB_FIELDS.find(f => f.key && (f.key === lower || f.label.toLowerCase().replace(/\s/g, '_') === lower))
+  const found = fields.find(f => f.key && (f.key === lower || f.label.toLowerCase().replace(/\s/g, '_') === lower))
   return found?.key || ''
 }
 
-export default function CarImport({ onDone }) {
+export default function CarImport({ fields, importFn, transformFn = (c) => c, onDone }) {
   const { t } = useTranslation()
   const [columns, setColumns] = useState([])
   const [mapping, setMapping] = useState({})
   const [rows, setRows] = useState([])
   const [saving, setSaving] = useState(false)
+
+  const dbFields = [{ key: '', label: '— ignorieren —' }, ...fields.filter(f => !f.calc)]
+  const numKeys = fields.filter(f => f.type === 'number' && !f.calc).map(f => f.key)
 
   const handleFile = (e) => {
     const file = e.target.files[0]
@@ -53,7 +32,7 @@ export default function CarImport({ onDone }) {
       setColumns(headers)
       setRows(dataRows)
       const autoMap = {}
-      headers.forEach(h => { autoMap[h] = autoMatch(String(h)) })
+      headers.forEach(h => { autoMap[h] = autoMatch(String(h), fields) })
       setMapping(autoMap)
     }
     reader.readAsArrayBuffer(file)
@@ -67,12 +46,12 @@ export default function CarImport({ onDone }) {
         const dbKey = mapping[col]
         if (!dbKey) return
         const val = row[i]
-        car[dbKey] = NUM_FIELDS.includes(dbKey) ? (parseFloat(val) || 0) : (String(val || ''))
+        car[dbKey] = numKeys.includes(dbKey) ? (parseFloat(val) || 0) : (String(val || ''))
       })
-      return applyCalculations(car)
+      return transformFn(car)
     }).filter(c => c.marke || c.modell)
     try {
-      await importCars(cars)
+      await importFn(cars)
       onDone()
     } finally {
       setSaving(false)
@@ -100,7 +79,7 @@ export default function CarImport({ onDone }) {
                   <td>{col}</td>
                   <td>
                     <select value={mapping[col] || ''} onChange={e => setMapping(m => ({ ...m, [col]: e.target.value }))}>
-                      {DB_FIELDS.map(f => <option key={f.key} value={f.key}>{f.label}</option>)}
+                      {dbFields.map(f => <option key={f.key} value={f.key}>{f.label}</option>)}
                     </select>
                   </td>
                 </tr>

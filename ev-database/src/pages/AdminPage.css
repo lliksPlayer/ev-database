@@ -1,7 +1,8 @@
 .admin-page { min-height: calc(100vh - 56px); }
 .admin-header {
-  display: flex; justify-content: flex-end;
+  display: flex; justify-content: space-between; align-items: center;
   padding: 0.75rem 1.5rem;
   background: white; border-bottom: 1px solid #eee;
 }
 .admin-logout { border: 1px solid #ddd; background: white; }
+.admin-type-tabs { display: flex; gap: 0.5rem; }

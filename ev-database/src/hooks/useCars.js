@@ -1,17 +1,25 @@
 import { useState, useEffect } from 'react'
-import { subscribeToCars } from '../firebase/cars'
+import { collection, onSnapshot, query, orderBy } from 'firebase/firestore'
+import { db } from '../firebase/config'
 
-export function useCars() {
+export function useCarsCollection(collectionName) {
   const [cars, setCars] = useState([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const unsub = subscribeToCars((data) => {
-      setCars(data)
-      setLoading(false)
-    })
+    const unsub = onSnapshot(
+      query(collection(db, collectionName), orderBy('marke')),
+      (snap) => {
+        setCars(snap.docs.map(d => ({ id: d.id, ...d.data() })))
+        setLoading(false)
+      }
+    )
     return unsub
-  }, [])
+  }, [collectionName])
 
   return { cars, loading }
+}
+
+export function useCars() {
+  return useCarsCollection('ev_cars')
 }
