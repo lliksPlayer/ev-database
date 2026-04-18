@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { useAuth } from './hooks/useAuth'
 import TopNav from './components/layout/TopNav'
 import HomePage from './pages/HomePage'
+import IceHomePage from './pages/IceHomePage'
 import LoginPage from './pages/LoginPage'
 import AdminPage from './pages/AdminPage'
 
@@ -17,6 +18,7 @@ export default function App() {
       <TopNav />
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/verbrenner" element={<IceHomePage />} />
         <Route path="/admin/login" element={<LoginPage />} />
         <Route path="/admin" element={
           <ProtectedRoute><AdminPage /></ProtectedRoute>

@@ -1,10 +1,12 @@
 {
   "nav": {
-    "evDatabase": "EV Database",
+    "evDatabase": "E-Vehicles",
+    "iceDatabase": "ICE Vehicles",
     "admin": "Admin"
   },
   "home": {
     "title": "Electric Car Database",
+    "iceTitle": "ICE Vehicle Database",
     "loading": "Loading...",
     "noCars": "No vehicles found."
   },
