@@ -37,7 +37,7 @@ const EXTRACT_SCHEMA = {
     anhaengelast_ungebremst_kg: { type: 'number',  description: 'Towing weight unbraked in kg' },
     kofferraum_l:               { type: 'number',  description: 'Cargo volume in liters' },
     kofferraum_max_l:           { type: 'number',  description: 'Maximum cargo volume with rear seats folded in liters' },
-    frunk_l:                    { type: 'number',  description: 'Front trunk frunk volume in liters, 0 if none' },
+    frunk_l:                    { type: 'number',  description: 'Front trunk frunk volume in liters, null if none or not present' },
     dachlast_kg:                { type: 'number',  description: 'Maximum roof load in kg' },
     sitze:                      { type: 'number',  description: 'Number of seats' },
     isofix:                     { type: 'string',  description: 'Isofix info e.g. "Yes, 2 seats" or "No"' },
@@ -91,7 +91,7 @@ async function main() {
   console.log(`Found ${urls.length} car URLs\n`)
 
   const cars = []
-  for (let i = 0; i < Math.min(1, urls.length); i++) {
+  for (let i = 0; i < urls.length; i++) {
     const url = urls[i]
     try {
       const data = await scrapeOne(url)
