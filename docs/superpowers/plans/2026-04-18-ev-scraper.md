@@ -185,12 +185,26 @@ async function getCarUrls() {
   return [...new Set(urls)]
 }
 
-async function scrapeOne(url) {
-  const result = await firecrawl.scrapeUrl(url, {
-    formats: ['extract'],
-    extract: { schema: EXTRACT_SCHEMA },
-  })
-  return result?.extract ?? null
+// ev-database.org ist durch Cloudflare geschützt.
+// Firecrawl handled das über ihre Proxy-Infrastruktur + Stealth-Headers.
+// Zusätzlich: Retry-Logik und erhöhter Delay schützen vor Rate-Limits.
+async function scrapeOne(url, retries = 3) {
+  for (let attempt = 1; attempt <= retries; attempt++) {
+    try {
+      const result = await firecrawl.scrapeUrl(url, {
+        formats: ['extract'],
+        extract: { schema: EXTRACT_SCHEMA },
+        timeout: 30000,
+      })
+      if (result?.extract?.marke) return result.extract
+      // Leeres Ergebnis = Seite nicht gefunden oder geblockt — kurz warten und retry
+      if (attempt < retries) await sleep(2000 * attempt)
+    } catch (err) {
+      if (attempt === retries) throw err
+      await sleep(2000 * attempt)
+    }
+  }
+  return null
 }
 
 async function sleep(ms) {
@@ -215,8 +229,8 @@ async function main() {
     } catch (err) {
       console.log(`[${i + 1}/${urls.length}] ✗ ${url}: ${err.message}`)
     }
-    // 300ms zwischen Requests — Firecrawl-Rate-Limit schonen
-    if (i < urls.length - 1) await sleep(300)
+    // 800ms zwischen Requests — Cloudflare-Schutz respektieren
+    if (i < urls.length - 1) await sleep(800)
   }
 
   console.log(`\nImporting ${cars.length} cars to Firestore...`)
