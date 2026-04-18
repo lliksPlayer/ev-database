@@ -12,7 +12,8 @@ export default function TopNav() {
     <nav className="nav">
       <Link to="/" className="nav-brand">⚡ EV Database</Link>
       <div className="nav-links">
-        <NavLink to="/" className="nav-link">{t('nav.evDatabase')}</NavLink>
+        <NavLink to="/" end className="nav-link">{t('nav.evDatabase')}</NavLink>
+        <NavLink to="/verbrenner" className="nav-link">{t('nav.iceDatabase')}</NavLink>
       </div>
       <div className="nav-right">
         <LanguageSwitch />

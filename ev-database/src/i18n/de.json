@@ -1,10 +1,12 @@
 {
   "nav": {
-    "evDatabase": "EV-Datenbank",
+    "evDatabase": "E-Fahrzeuge",
+    "iceDatabase": "Verbrenner",
     "admin": "Admin"
   },
   "home": {
     "title": "Elektroauto-Datenbank",
+    "iceTitle": "Verbrenner-Datenbank",
     "loading": "Lädt...",
     "noCars": "Keine Fahrzeuge gefunden."
   },
