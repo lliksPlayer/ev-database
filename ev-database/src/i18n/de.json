@@ -51,6 +51,61 @@
   "detail": {
     "title": "Fahrzeugdetails",
     "close": "Schließen",
-    "comingSoon": "Weitere Details folgen."
+    "sections": {
+      "basis": "Basis",
+      "range_battery": "Reichweite & Akku",
+      "charging": "Laden",
+      "performance": "Performance",
+      "dimensions": "Maße",
+      "weight": "Gewicht & Anhängelast",
+      "cargo": "Kofferraum",
+      "misc": "Diverses"
+    },
+    "fields": {
+      "baujahr": "Baujahr",
+      "preis_de": "Preis (DE)",
+      "reichweite_wltp": "Reichweite WLTP",
+      "akku_kapazitaet_kwh": "Akkukapazität",
+      "architektur_volt": "Architektur",
+      "laden_ac_kw": "Laden AC",
+      "laden_dc_kw": "Laden DC",
+      "ladezeit_10_80_min": "Ladezeit 10→80%",
+      "beschleunigung_sec": "0–100 km/h",
+      "hoechstgeschwindigkeit_kmh": "Höchstgeschwindigkeit",
+      "leistung_kw": "Leistung",
+      "laenge_mm": "Länge",
+      "breite_mm": "Breite",
+      "hoehe_mm": "Höhe",
+      "radstand_mm": "Radstand",
+      "gewicht_leer_kg": "Leergewicht",
+      "zul_gesamtgewicht_kg": "Zul. Gesamtgewicht",
+      "zuladung_kg": "Zuladung",
+      "anhaengelast_gebremst_kg": "Anhängelast gebremst",
+      "anhaengelast_ungebremst_kg": "Anhängelast ungebremst",
+      "kofferraum_l": "Kofferraum",
+      "kofferraum_max_l": "Kofferraum max.",
+      "frunk_l": "Frunk",
+      "dachlast_kg": "Dachlast",
+      "sitze": "Sitze",
+      "isofix": "Isofix",
+      "wendekreis_m": "Wendekreis",
+      "karosserie": "Karosserie",
+      "segment": "Segment",
+      "waermepumpe": "Wärmepumpe",
+      "plattform": "Plattform"
+    },
+    "units": {
+      "km": "km",
+      "kwh": "kWh",
+      "volt": "V",
+      "kw": "kW",
+      "min": "Min.",
+      "sec": "s",
+      "kmh": "km/h",
+      "mm": "mm",
+      "kg": "kg",
+      "liter": "L",
+      "meter": "m"
+    }
   }
 }
