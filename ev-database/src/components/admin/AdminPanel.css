@@ -13,4 +13,4 @@
 .car-table th { background: #f5f5f5; padding: 0.6rem 0.75rem; text-align: left; font-size: 0.8rem; text-transform: uppercase; color: #555; }
 .car-table td { padding: 0.6rem 0.75rem; border-bottom: 1px solid #eee; }
 .car-table tr:hover td { background: #fafafa; }
-.btn-danger:hover { background: #c0392b; }
+.car-table-edit { margin-right: 6px; }

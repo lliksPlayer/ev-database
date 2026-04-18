@@ -32,7 +32,12 @@
     "importPreview": "Vorschau (erste 5 Zeilen)",
     "importConfirm": "Importieren",
     "fieldVisible": "Sichtbar",
-    "fieldHidden": "Ausgeblendet"
+    "fieldHidden": "Ausgeblendet",
+    "logout": "Abmelden",
+    "tableMake": "Marke",
+    "tableModel": "Modell",
+    "tableBattery": "Batterie",
+    "tablePrice": "Preis"
   },
   "login": {
     "title": "Admin Login",

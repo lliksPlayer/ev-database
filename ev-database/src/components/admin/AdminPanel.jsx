@@ -13,7 +13,7 @@ export default function AdminPanel() {
   const { cars } = useCars()
   const { fields } = useSettings()
   const [tab, setTab] = useState('vehicles')
-  const [view, setView] = useState('list') // 'list' | 'add' | 'edit' | 'import'
+  const [view, setView] = useState('list')
   const [editCar, setEditCar] = useState(null)
 
   const handleDelete = async (id) => {
@@ -43,7 +43,7 @@ export default function AdminPanel() {
               </div>
               <table className="car-table">
                 <thead>
-                  <tr><th>Marke</th><th>Modell</th><th>Batterie</th><th>Preis</th><th></th></tr>
+                  <tr><th>{t('admin.tableMake')}</th><th>{t('admin.tableModel')}</th><th>{t('admin.tableBattery')}</th><th>{t('admin.tablePrice')}</th><th></th></tr>
                 </thead>
                 <tbody>
                   {cars.map(car => (
@@ -53,7 +53,7 @@ export default function AdminPanel() {
                       <td>{car.batterie_netto} kWh</td>
                       <td>{car.basis_preis ? `${car.basis_preis.toLocaleString('de-DE')} €` : '–'}</td>
                       <td>
-                        <button className="btn btn-secondary btn-small" style={{ marginRight: 6 }}
+                        <button className="btn btn-secondary btn-small car-table-edit"
                           onClick={() => { setEditCar(car); setView('edit') }}>
                           {t('admin.edit')}
                         </button>

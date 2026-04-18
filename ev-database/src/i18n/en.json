@@ -32,7 +32,12 @@
     "importPreview": "Preview (first 5 rows)",
     "importConfirm": "Import",
     "fieldVisible": "Visible",
-    "fieldHidden": "Hidden"
+    "fieldHidden": "Hidden",
+    "logout": "Logout",
+    "tableMake": "Make",
+    "tableModel": "Model",
+    "tableBattery": "Battery",
+    "tablePrice": "Price"
   },
   "login": {
     "title": "Admin Login",
