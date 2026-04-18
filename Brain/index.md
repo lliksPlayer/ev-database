@@ -21,6 +21,7 @@ Master index of all wiki pages. Updated by the LLM on every ingest, query (if a 
 | Page | Summary | Date |
 |------|---------|------|
 | [[wiki/decisions/firebase-als-datenbank]] | Firebase Firestore als primäre Datenbank | 2026-04-17 |
+| [[wiki/decisions/obsidian-sync-stop-hook]] | Automatische Obsidian-Sync via CLAUDE.md + Stop-Hook | 2026-04-18 |
 
 ## Concepts
 
