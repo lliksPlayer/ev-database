@@ -1,0 +1,261 @@
+/* ─── VehicleSlot ────────────────────────────────────────────────────────── */
+
+.vehicle-slot {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 0;
+  position: relative;
+}
+
+/* Subtle top accent line per type */
+.vehicle-slot--ev::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: #2563eb;
+  border-radius: 8px 8px 0 0;
+}
+
+.vehicle-slot--ice::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: #dc2626;
+  border-radius: 8px 8px 0 0;
+}
+
+/* ─── Header ─────────────────────────────────────────────────────────────── */
+
+.slot-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.slot-label-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.slot-label-wrap h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1a1a2e;
+}
+
+.slot-type-badge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+}
+
+.slot-type-badge--ev {
+  background: #eff6ff;
+  color: #2563eb;
+  border: 1px solid #bfdbfe;
+}
+
+.slot-type-badge--ice {
+  background: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+}
+
+/* ─── Source Toggle ──────────────────────────────────────────────────────── */
+
+.slot-source-toggle {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.slot-source-toggle button {
+  padding: 0.2rem 0.6rem;
+  border: 1px solid #ddd;
+  background: #f5f5f5;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.78rem;
+  font-family: inherit;
+  color: #555;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.slot-source-toggle button:hover:not(:disabled) {
+  background: #ebebeb;
+  border-color: #bbb;
+}
+
+.slot-source-toggle button.active {
+  background: #1a1a2e;
+  color: #fff;
+  border-color: #1a1a2e;
+}
+
+.slot-source-toggle button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ─── DB Picker ──────────────────────────────────────────────────────────── */
+
+.slot-db-picker select {
+  width: 100%;
+  padding: 0.5rem 0.6rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  background: #fff;
+  color: #1a1a2e;
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.slot-db-picker select:focus {
+  outline: none;
+  border-color: #1a1a2e;
+  box-shadow: 0 0 0 3px rgba(26, 26, 46, 0.08);
+}
+
+.slot-loading {
+  font-size: 0.85rem;
+  color: #999;
+  font-style: italic;
+}
+
+.slot-empty {
+  color: #999;
+  font-size: 0.85rem;
+}
+
+/* ─── Vehicle Info ───────────────────────────────────────────────────────── */
+
+.slot-vehicle-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.88rem;
+  background: #f8f9fa;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  border: 1px solid #eee;
+}
+
+.slot-vehicle-name {
+  font-weight: 600;
+  color: #1a1a2e;
+}
+
+.slot-vehicle-price {
+  color: #555;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ─── Params ─────────────────────────────────────────────────────────────── */
+
+.slot-params {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.param-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.param-row label {
+  font-size: 0.8rem;
+  color: #555;
+  min-width: 160px;
+  flex-shrink: 0;
+}
+
+.param-row input {
+  width: 100px;
+  padding: 0.3rem 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 0.88rem;
+  font-family: inherit;
+  text-align: right;
+  color: #1a1a2e;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  font-variant-numeric: tabular-nums;
+}
+
+.param-row input:focus {
+  outline: none;
+  border-color: #1a1a2e;
+  box-shadow: 0 0 0 3px rgba(26, 26, 46, 0.08);
+}
+
+/* ─── Expert Params Section ──────────────────────────────────────────────── */
+
+.slot-expert-params {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-top: 0.25rem;
+}
+
+.slot-expert-divider {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.25rem 0 0.1rem;
+}
+
+.slot-expert-divider::before,
+.slot-expert-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #e8e8e8;
+}
+
+.slot-expert-divider span {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #aaa;
+  white-space: nowrap;
+}
+
+/* ─── Responsive ─────────────────────────────────────────────────────────── */
+
+@media (max-width: 500px) {
+  .slot-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .param-row label {
+    min-width: 120px;
+  }
+
+  .param-row input {
+    width: 80px;
+  }
+}
