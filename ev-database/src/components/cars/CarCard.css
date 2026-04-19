@@ -17,3 +17,17 @@
 .car-field { display: flex; justify-content: space-between; font-size: 0.85rem; }
 .car-field-label { color: #777; }
 .car-field-value { font-weight: 600; }
+.calc-btn {
+  margin-top: 0.75rem;
+  width: 100%;
+  padding: 0.4rem 0;
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.82rem;
+  font-weight: 500;
+  transition: background 0.15s;
+}
+.calc-btn:hover { background: #1d4ed8; }
