@@ -1,0 +1,88 @@
+/* ─── Calculator Page ─────────────────────────────────────────────────────── */
+
+.calculator-page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* ─── Header ─────────────────────────────────────────────────────────────── */
+
+.calc-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.calc-header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #1a1a2e;
+}
+
+.calc-controls {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* ─── Comparison Mode Toggle ─────────────────────────────────────────────── */
+
+.comp-mode-toggle {
+  display: flex;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.comp-mode-toggle button {
+  padding: 0.4rem 1rem;
+  border: none;
+  background: #f5f5f5;
+  cursor: pointer;
+  font-size: 0.88rem;
+  font-family: inherit;
+  color: #444;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.comp-mode-toggle button:hover:not(.active) {
+  background: #ebebeb;
+}
+
+.comp-mode-toggle button.active {
+  background: #2563eb;
+  color: #fff;
+}
+
+/* ─── Vehicle Slots Grid ─────────────────────────────────────────────────── */
+
+.calc-slots {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 700px) {
+  .calc-slots {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ─── Placeholder (no vehicles selected) ────────────────────────────────── */
+
+.calc-placeholder {
+  text-align: center;
+  padding: 2rem;
+  color: #999;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px dashed #ddd;
+  font-size: 0.95rem;
+}
