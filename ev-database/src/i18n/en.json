@@ -126,6 +126,12 @@
       "kaufpreis": "Purchase price (€)",
       "jahresKm": "Annual kilometres",
       "stromPreis": "Electricity price (€/kWh)",
+      "acPreis": "AC price (€/kWh)",
+      "dcPreis": "DC price (€/kWh)",
+      "acProzent": "AC share (%)",
+      "acLadeverlust": "AC charging loss (%)",
+      "dcLadeverlust": "DC charging loss (%)",
+      "thgQuote": "THG quota (€/year)",
       "kraftstoffPreis": "Fuel price (€/L)",
       "jahre": "Period (years)",
       "wartung": "Maintenance (€/year)",
@@ -152,7 +158,8 @@
       "costVersicherung": "Insurance",
       "costSteuer": "Tax",
       "costFinanzierung": "Financing",
-      "costRestwert": "Residual value"
+      "costRestwert": "Residual value",
+      "costThg": "THG quota (income)"
     },
     "ice": {
       "templateLabel": "Choose template",
@@ -166,6 +173,9 @@
     "addToCalculator": "Add to Calculator",
     "selectBoth": "Please select both vehicles",
     "vehicleA": "Vehicle A",
-    "vehicleB": "Vehicle B"
+    "vehicleB": "Vehicle B",
+    "acDcSplit": "Charging split AC / DC",
+    "acLabel": "AC",
+    "dcLabel": "DC"
   }
 }

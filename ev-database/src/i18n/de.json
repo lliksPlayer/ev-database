@@ -126,6 +126,12 @@
       "kaufpreis": "Kaufpreis (€)",
       "jahresKm": "Jahreskilometer (km)",
       "stromPreis": "Strompreis (€/kWh)",
+      "acPreis": "AC-Preis (€/kWh)",
+      "dcPreis": "DC-Preis (€/kWh)",
+      "acProzent": "AC-Anteil (%)",
+      "acLadeverlust": "Ladeverlust AC (%)",
+      "dcLadeverlust": "Ladeverlust DC (%)",
+      "thgQuote": "THG-Quote (€/Jahr)",
       "kraftstoffPreis": "Kraftstoffpreis (€/L)",
       "jahre": "Betrachtungszeitraum (Jahre)",
       "wartung": "Wartungskosten (€/Jahr)",
@@ -152,7 +158,8 @@
       "costVersicherung": "Versicherung",
       "costSteuer": "Steuer",
       "costFinanzierung": "Finanzierung",
-      "costRestwert": "Restwert"
+      "costRestwert": "Restwert",
+      "costThg": "THG-Quote (Einnahmen)"
     },
     "ice": {
       "templateLabel": "Vorlage wählen",
@@ -166,6 +173,9 @@
     "addToCalculator": "In Rechner laden",
     "selectBoth": "Bitte beide Fahrzeuge wählen",
     "vehicleA": "Fahrzeug A",
-    "vehicleB": "Fahrzeug B"
+    "vehicleB": "Fahrzeug B",
+    "acDcSplit": "Ladeverteilung AC / DC",
+    "acLabel": "AC",
+    "dcLabel": "DC"
   }
 }
