@@ -1,30 +1,32 @@
 import { config } from 'dotenv'
 import { resolve, dirname } from 'path'
 import { fileURLToPath } from 'url'
-import { initializeApp } from 'firebase/app'
-import { getFirestore, collection, doc, writeBatch } from 'firebase/firestore'
+import { createRequire } from 'module'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 config({ path: resolve(__dirname, '../.env') })
 
-const app = initializeApp({
-  apiKey: process.env.VITE_FIREBASE_API_KEY,
-  authDomain: process.env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.VITE_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.VITE_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.VITE_FIREBASE_APP_ID,
-})
+const require = createRequire(import.meta.url)
+const admin = require('firebase-admin')
 
-export const db = getFirestore(app)
+// Requires serviceAccountKey.json in the ev-database/ directory.
+// Download from: Firebase Console → Project Settings → Service Accounts → Generate new private key
+const serviceAccountPath = resolve(__dirname, '../serviceAccountKey.json')
+
+if (!admin.apps.length) {
+  admin.initializeApp({
+    credential: admin.credential.cert(serviceAccountPath),
+  })
+}
+
+const db = admin.firestore()
 
 export async function importCars(cars) {
-  const ref = collection(db, 'ev_cars')
-  // Firestore batch ist auf 500 Operationen limitiert — bei mehr als 500 Autos in Chunks splitten
+  const ref = db.collection('ev_cars')
   const CHUNK = 499
   for (let i = 0; i < cars.length; i += CHUNK) {
-    const batch = writeBatch(db)
-    cars.slice(i, i + CHUNK).forEach(car => batch.set(doc(ref), car))
+    const batch = db.batch()
+    cars.slice(i, i + CHUNK).forEach(car => batch.set(ref.doc(), car))
     await batch.commit()
     console.log(`  Chunk ${Math.floor(i / CHUNK) + 1} committed (${Math.min(i + CHUNK, cars.length)}/${cars.length})`)
   }
