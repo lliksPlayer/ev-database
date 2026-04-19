@@ -1,27 +1,34 @@
 .view-toggle {
   display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 1.5rem;
-  flex-wrap: wrap;
+  background: var(--color-surface-alt);
+  border-radius: var(--radius-btn);
+  padding: 3px;
+  gap: 2px;
 }
-.toggle-group {
-  display: flex;
-  background: white;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-  overflow: hidden;
-}
-.toggle-btn {
-  padding: 6px 14px;
+
+.view-toggle button {
+  padding: 0.3rem 0.75rem;
   border: none;
   background: transparent;
+  border-radius: 9px;
   cursor: pointer;
   font-size: 0.85rem;
-  color: #555;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  color: var(--color-muted);
+  font-weight: 500;
+  transition: background 0.15s, color 0.15s, box-shadow 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
 }
-.toggle-btn.active {
-  background: #1a1a2e;
-  color: white;
+
+.view-toggle button.active {
+  background: var(--color-surface);
+  color: var(--color-text);
   font-weight: 600;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.10);
+}
+
+.view-toggle button:hover:not(.active) {
+  color: var(--color-text);
 }
