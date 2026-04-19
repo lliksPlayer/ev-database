@@ -259,3 +259,10 @@
     width: 80px;
   }
 }
+
+.param-row--slider { flex-direction: column; align-items: flex-start; gap: 0.35rem; }
+.param-row--slider label { min-width: unset; }
+.slider-wrap { display: flex; align-items: center; gap: 0.6rem; width: 100%; }
+.slider-label { font-size: 0.78rem; color: #555; white-space: nowrap; min-width: 52px; }
+.slider-label--right { text-align: right; }
+.ac-dc-slider { flex: 1; accent-color: #2563eb; cursor: pointer; }
