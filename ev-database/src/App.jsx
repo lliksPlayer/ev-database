@@ -5,6 +5,7 @@ import HomePage from './pages/HomePage'
 import IceHomePage from './pages/IceHomePage'
 import LoginPage from './pages/LoginPage'
 import AdminPage from './pages/AdminPage'
+import Calculator from './pages/Calculator'
 
 function ProtectedRoute({ children }) {
   const { user, loading } = useAuth()
@@ -19,6 +20,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/verbrenner" element={<IceHomePage />} />
+        <Route path="/rechner" element={<Calculator />} />
         <Route path="/admin/login" element={<LoginPage />} />
         <Route path="/admin" element={
           <ProtectedRoute><AdminPage /></ProtectedRoute>

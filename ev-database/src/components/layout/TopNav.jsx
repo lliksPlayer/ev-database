@@ -14,6 +14,7 @@ export default function TopNav() {
       <div className="nav-links">
         <NavLink to="/" end className="nav-link">{t('nav.evDatabase')}</NavLink>
         <NavLink to="/verbrenner" className="nav-link">{t('nav.iceDatabase')}</NavLink>
+        <NavLink to="/rechner" className="nav-link">{t('nav.calculator')}</NavLink>
       </div>
       <div className="nav-right">
         <LanguageSwitch />
