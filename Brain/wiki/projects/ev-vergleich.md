@@ -39,6 +39,7 @@ Ein Webvergleichstool für Elektrofahrzeuge, das Nutzern ermöglicht, EV-Modelle
 - Berechnung via `utils/tcoCalculation.js`: `calculateTCO`, `buildYearlySeries`, `findBreakeven`
 - Diagramme via Recharts (`TotalCostChart`, `MonthlyCostChart`)
 - i18n-Keys unter `calc.results.*`
+- EV-Ladeparameter: separate AC/DC-Preise, AC/DC-Split-Slider (5%-Schritte), Ladeverluste AC/DC (Experten-Modus), THG-Quote (€/Jahr als Einnahmen)
 
 ## Fahrzeugvergleich (CarCard-Komponente)
 

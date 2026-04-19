@@ -2,6 +2,8 @@
 
 Append-only operation history. Each entry starts with `## [YYYY-MM-DD] operation | title`.
 
+## [2026-04-19] task | EV-Slot mit AC/DC-Strompreisen, Split-Slider, THG-Quote und Ladeverlust-Expert-Params
+
 ## [2026-04-18] task | EV-Scraper + CarDetail-Sektionen implementiert
 
 Parse last 5 entries: `grep "^## \[" log.md | tail -5`
@@ -42,3 +44,7 @@ Parse last 5 entries: `grep "^## \[" log.md | tail -5`
 ## [2026-04-19] task | TCO-Berechnungslogik implementiert (tcoCalculation.js)
 
 ## [2026-04-19] task | Wirtschaftlichkeitsrechner vollständig implementiert (Route /rechner, EV vs ICE + EV vs EV, Normal/Experten-Modus, Recharts, CarCard-Button)
+
+## [2026-04-19] fix | CarImport: Dezimaltrennzeichen-Bug behoben (parseNumber mit DE/EN-Format-Erkennung)
+
+## [2026-04-19] task | EV Ladekosten: AC/DC-Split-Slider, separate Preise, Ladeverluste, THG-Quote im Rechner
