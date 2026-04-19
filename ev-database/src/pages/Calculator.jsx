@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router-dom'
 import { doc, getDoc } from 'firebase/firestore'
 import { db } from '../firebase/config'
 import { useTranslation } from 'react-i18next'
+import { Zap } from 'lucide-react'
 import UserModeToggle from '../components/calculator/UserModeToggle'
 import VehicleSlot from '../components/calculator/VehicleSlot'
 import ResultsPanel from '../components/calculator/ResultsPanel'
@@ -102,7 +103,10 @@ export default function Calculator() {
 
       {canShowResults
         ? <ResultsPanel vehicleA={vehicleA} paramsA={paramsA} vehicleB={vehicleB} paramsB={paramsB} />
-        : <div className="calc-placeholder">{t('calc.selectBoth')}</div>
+        : <div className="calc-placeholder">
+            <Zap className="calc-placeholder-icon" size={40} />
+            {t('calc.selectBoth')}
+          </div>
       }
     </div>
   )
