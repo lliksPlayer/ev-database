@@ -2,7 +2,8 @@
   "nav": {
     "evDatabase": "E-Vehicles",
     "iceDatabase": "ICE Vehicles",
-    "admin": "Admin"
+    "admin": "Admin",
+    "calculator": "Calculator"
   },
   "home": {
     "title": "Electric Car Database",
@@ -107,5 +108,64 @@
       "liter": "L",
       "meter": "m"
     }
+  },
+  "calc": {
+    "title": "Cost Calculator",
+    "modeEvIce": "EV vs. ICE",
+    "modeEvEv": "EV vs. EV",
+    "slotA": "Vehicle A",
+    "slotB": "Vehicle B",
+    "selectVehicle": "Select vehicle",
+    "loadingVehicles": "Loading vehicles...",
+    "noVehiclesInDb": "No vehicles in database yet",
+    "manualEntry": "Enter manually",
+    "fromDatabase": "From database",
+    "modeNormal": "Normal",
+    "modeExpert": "Expert",
+    "params": {
+      "kaufpreis": "Purchase price (€)",
+      "jahresKm": "Annual kilometres",
+      "stromPreis": "Electricity price (€/kWh)",
+      "kraftstoffPreis": "Fuel price (€/L)",
+      "jahre": "Period (years)",
+      "wartung": "Maintenance (€/year)",
+      "versicherung": "Insurance (€/year)",
+      "steuer": "Vehicle tax (€/year)",
+      "restwertProzent": "Residual value (%)",
+      "foerderung": "Subsidy/Grant (€)",
+      "zinsSatz": "Financing rate (%)",
+      "verbrauchKwh": "Consumption (kWh/100km)",
+      "verbrauchL": "Consumption (L/100km)"
+    },
+    "results": {
+      "tabMonthly": "Monthly Costs",
+      "tabTotal": "Total over time",
+      "tabBreakeven": "Break-even",
+      "monthly": "Monthly costs",
+      "totalCost": "Total cost",
+      "breakevenAt": "Break-even after {{years}} years",
+      "noBreakeven": "No break-even within period",
+      "cheaper": "{{name}} is cheaper",
+      "costKaufpreis": "Purchase price",
+      "costEnergie": "Energy",
+      "costWartung": "Maintenance",
+      "costVersicherung": "Insurance",
+      "costSteuer": "Tax",
+      "costFinanzierung": "Financing",
+      "costRestwert": "Residual value"
+    },
+    "ice": {
+      "templateLabel": "Choose template",
+      "templateNone": "No template",
+      "templateGolf": "VW Golf 2.0 TDI",
+      "templateBmw": "BMW 320d",
+      "templatePassat": "VW Passat TDI",
+      "make": "Make",
+      "model": "Model"
+    },
+    "addToCalculator": "Add to Calculator",
+    "selectBoth": "Please select both vehicles",
+    "vehicleA": "Vehicle A",
+    "vehicleB": "Vehicle B"
   }
 }
