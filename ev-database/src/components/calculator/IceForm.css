@@ -1,0 +1,62 @@
+.ice-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+}
+
+.ice-form-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.ice-form-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #555;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.ice-form-select,
+.ice-form-input {
+  padding: 0.6rem 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ice-form-input:focus,
+.ice-form-select:focus {
+  outline: none;
+  border-color: #1a1a2e;
+  box-shadow: 0 0 0 3px rgba(26, 26, 46, 0.1);
+}
+
+.ice-form-input::placeholder {
+  color: #aaa;
+  font-size: 0.9rem;
+}
+
+.ice-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 600px) {
+  .ice-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ice-form {
+    padding: 1rem;
+    gap: 1rem;
+  }
+}
