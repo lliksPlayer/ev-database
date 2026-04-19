@@ -21,7 +21,7 @@ export default function ResultsPanel({ vehicleA, paramsA, vehicleB, paramsB }) {
   const formatEur = (v) =>
     new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(v)
 
-  const costKeys = ['kaufpreis', 'energie', 'wartung', 'versicherung', 'steuer', 'finanzierung', 'restwert']
+  const costKeys = ['kaufpreis', 'energie', 'wartung', 'versicherung', 'steuer', 'finanzierung', 'restwert', 'thg']
 
   const tabs = [
     { id: 'monthly', label: t('calc.results.tabMonthly') },
