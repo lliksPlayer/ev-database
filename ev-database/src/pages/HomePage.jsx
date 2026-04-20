@@ -20,18 +20,32 @@ export default function HomePage() {
   const handleSetView = (v) => { setView(v); localStorage.setItem('view', v) }
   const handleSetSize = (s) => { setSize(s); localStorage.setItem('gridSize', s) }
 
-  if (carsLoading || fieldsLoading) return <div className="home-page"><p className="home-loading">{t('home.loading')}</p></div>
+  if (carsLoading || fieldsLoading) {
+    return (
+      <div className="home-page">
+        <aside className="home-sidebar" />
+        <main className="home-main">
+          <p className="home-loading">{t('home.loading')}</p>
+        </main>
+      </div>
+    )
+  }
 
   return (
     <div className="home-page">
-      <h1>{t('home.title')}</h1>
-      <ViewToggle view={view} setView={handleSetView} size={size} setSize={handleSetSize} />
-      {cars.length === 0
-        ? <p className="home-empty">{t('home.noCars')}</p>
-        : view === 'grid'
-          ? <CarGrid cars={cars} fields={fields} size={size} onCarClick={setSelectedCar} />
-          : <CarList cars={cars} fields={fields} onCarClick={setSelectedCar} />
-      }
+      <aside className="home-sidebar">
+        <h2 className="home-sidebar-title">{t('home.title')}</h2>
+        <div className="home-sidebar-count">{cars.length} {t('home.vehicles', 'Fahrzeuge')}</div>
+        <ViewToggle view={view} setView={handleSetView} size={size} setSize={handleSetSize} />
+      </aside>
+      <main className="home-main">
+        {cars.length === 0
+          ? <p className="home-empty">{t('home.noCars')}</p>
+          : view === 'grid'
+            ? <CarGrid cars={cars} fields={fields} size={size} onCarClick={setSelectedCar} />
+            : <CarList cars={cars} fields={fields} onCarClick={setSelectedCar} />
+        }
+      </main>
       {selectedCar && <CarDetail car={selectedCar} onClose={() => setSelectedCar(null)} />}
     </div>
   )

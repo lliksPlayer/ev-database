@@ -1,15 +1,37 @@
 .home-page {
-  padding: 2rem 1.5rem;
-  max-width: 1400px;
-  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  min-height: calc(100vh - 60px);
 }
 
-.home-page h1 {
-  font-size: 1.8rem;
+.home-sidebar {
+  padding: 2rem 1.5rem;
+  border-right: 1px solid var(--color-border);
+  position: sticky;
+  top: 60px;
+  height: calc(100vh - 60px);
+  overflow-y: auto;
+  background: var(--color-surface);
+}
+
+.home-sidebar-title {
   font-family: 'Outfit', system-ui, sans-serif;
+  font-size: 1rem;
   font-weight: 800;
   color: var(--color-text);
+  margin-bottom: 0.25rem;
+}
+
+.home-sidebar-count {
+  font-size: 0.8rem;
+  color: var(--color-muted);
+  font-weight: 500;
   margin-bottom: 1.5rem;
+}
+
+.home-main {
+  padding: 2rem 1.75rem;
+  min-width: 0;
 }
 
 .home-loading,
@@ -17,4 +39,22 @@
   color: var(--color-muted);
   font-style: italic;
   padding: 2rem 0;
+}
+
+@media (max-width: 768px) {
+  .home-page {
+    grid-template-columns: 1fr;
+  }
+
+  .home-sidebar {
+    position: static;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--color-border);
+    padding: 1rem 1.5rem;
+  }
+
+  .home-main {
+    padding: 1.25rem 1rem;
+  }
 }
