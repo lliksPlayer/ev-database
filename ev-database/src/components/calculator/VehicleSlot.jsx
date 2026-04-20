@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useCarsCollection } from '../../hooks/useCars'
+import { Zap, Fuel } from 'lucide-react'
 import IceForm from './IceForm'
 import './VehicleSlot.css'
 
@@ -29,6 +30,7 @@ export default function VehicleSlot({ label, type, vehicle, params, expertMode, 
       <div className="slot-header">
         <div className="slot-label-wrap">
           <span className={`slot-type-badge slot-type-badge--${type}`}>
+            {type === 'ev' ? <Zap size={11} strokeWidth={2.5} /> : <Fuel size={11} strokeWidth={2.5} />}
             {type === 'ev' ? 'EV' : 'ICE'}
           </span>
           <h3>{label}</h3>
