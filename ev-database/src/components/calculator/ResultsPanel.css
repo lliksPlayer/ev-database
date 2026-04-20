@@ -1,45 +1,47 @@
 /* ─── ResultsPanel ───────────────────────────────────────────────────────── */
 
 .results-panel {
-  background: #fff;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
   overflow: hidden;
 }
 
-/* ─── Tab bar ────────────────────────────────────────────────────────────── */
+/* ─── Tab bar (Pill-Switcher) ─────────────────────────────────────────────── */
 
 .results-tabs {
   display: flex;
-  border-bottom: 1px solid #e0e0e0;
-  background: #f8f9fa;
+  background: var(--color-surface-alt);
+  border-bottom: 1px solid var(--color-border);
+  padding: 4px;
+  gap: 2px;
 }
 
 .results-tab {
   flex: 1;
   padding: 0.7rem 0.5rem;
   border: none;
-  border-bottom: 2px solid transparent;
-  background: none;
+  border-radius: 10px;
+  background: transparent;
   cursor: pointer;
   font-size: 0.875rem;
-  font-family: inherit;
-  color: #666;
+  font-family: 'DM Sans', sans-serif;
+  color: var(--color-muted);
   letter-spacing: 0.01em;
-  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+  transition: color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
   outline: none;
 }
 
 .results-tab:hover:not(.active) {
-  color: #1a1a2e;
-  background: #f0f1f3;
+  color: var(--color-text);
 }
 
 .results-tab.active {
-  color: #2563eb;
-  border-bottom-color: #2563eb;
+  background: var(--color-surface);
+  color: var(--color-text);
   font-weight: 600;
-  background: #fff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.10);
 }
 
 /* ─── Content area ───────────────────────────────────────────────────────── */
@@ -60,20 +62,20 @@
   flex: 1;
   padding: 0.75rem 1rem;
   border-left: 4px solid;
-  border-radius: 0 6px 6px 0;
-  background: #f8f9fa;
-  border-top: 1px solid #eee;
-  border-right: 1px solid #eee;
-  border-bottom: 1px solid #eee;
+  border-radius: 0 var(--radius-input) var(--radius-input) 0;
+  background: var(--color-surface-alt);
+  border-top: 1px solid var(--color-border);
+  border-right: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
   min-width: 0;
 }
 
-.summary-card--a { border-left-color: #2563eb; }
-.summary-card--b { border-left-color: #dc2626; }
+.summary-card--a { border-left-color: var(--color-ev); }
+.summary-card--b { border-left-color: var(--color-ice); }
 
 .summary-label {
   font-size: 0.78rem;
-  color: #777;
+  color: var(--color-muted);
   margin-bottom: 0.3rem;
   white-space: nowrap;
   overflow: hidden;
@@ -84,14 +86,15 @@
 .summary-value {
   font-size: 1.35rem;
   font-weight: 700;
-  color: #1a1a2e;
+  font-family: 'Outfit', sans-serif;
+  color: var(--color-text);
   font-variant-numeric: tabular-nums;
 }
 
 .summary-unit {
   font-size: 0.78rem;
   font-weight: 400;
-  color: #888;
+  color: var(--color-muted);
   margin-left: 2px;
 }
 
@@ -107,12 +110,12 @@
 .cost-table th {
   padding: 0.45rem 0.75rem;
   text-align: right;
-  background: #f8f9fa;
+  background: var(--color-surface-alt);
   font-weight: 600;
   font-size: 0.8rem;
-  color: #555;
+  color: var(--color-muted);
   letter-spacing: 0.02em;
-  border-bottom: 2px solid #e0e0e0;
+  border-bottom: 2px solid var(--color-border);
 }
 
 .cost-table th:first-child {
@@ -121,8 +124,8 @@
 
 .cost-table td {
   padding: 0.45rem 0.75rem;
-  border-bottom: 1px solid #f0f0f0;
-  color: #333;
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-text);
 }
 
 .cost-table td:first-child {
@@ -135,19 +138,19 @@
 }
 
 .cost-table .row-even {
-  background: #fff;
+  background: var(--color-surface);
 }
 
 .cost-table .row-odd {
-  background: #fafafa;
+  background: var(--color-bg);
 }
 
 .cost-table .total-row td {
-  border-top: 2px solid #d0d0d0;
+  border-top: 2px solid var(--color-border);
   border-bottom: none;
   padding-top: 0.6rem;
-  color: #1a1a2e;
-  background: #f8f9fa;
+  color: var(--color-text);
+  background: var(--color-surface-alt);
 }
 
 /* ─── Break-even section ─────────────────────────────────────────────────── */
@@ -162,10 +165,11 @@
 .breakeven-badge {
   font-size: 1.25rem;
   font-weight: 700;
-  color: #16a34a;
+  font-family: 'Outfit', sans-serif;
+  color: var(--color-positive);
   background: #f0fdf4;
   border: 1px solid #bbf7d0;
-  border-radius: 8px;
+  border-radius: var(--radius-btn);
   padding: 0.85rem 2rem;
   text-align: center;
   letter-spacing: -0.01em;
@@ -173,7 +177,7 @@
 }
 
 .breakeven-badge--none {
-  color: #dc2626;
+  color: var(--color-danger);
   background: #fef2f2;
   border-color: #fecaca;
 }
@@ -181,7 +185,7 @@
 .breakeven-desc {
   margin: 0;
   font-size: 0.9rem;
-  color: #555;
+  color: var(--color-muted);
 }
 
 .breakeven-chart {
