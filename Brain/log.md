@@ -57,3 +57,8 @@ Parse last 5 entries: `grep "^## \[" log.md | tail -5`
 ## [2026-04-19] fix | CarImport: Dezimaltrennzeichen-Bug behoben (parseNumber mit DE/EN-Format-Erkennung)
 
 ## [2026-04-19] task | EV Ladekosten: AC/DC-Split-Slider, separate Preise, Ladeverluste, THG-Quote im Rechner
+
+## [2026-04-20] task | .claudeignore angelegt — Token-Verbrauch reduziert (docs/superpowers/, .worktrees/, Brain/wiki/, node_modules/ etc. ausgeblendet)
+## [2026-04-20] task | Projekt-Cleanup: Worktrees entfernt, 10k Zeilen alte Pläne gelöscht, Build-Artefakte bereinigt, .vscode/settings.json angelegt
+## [2026-04-20] task | ev-vergleich/ dauerhaft ignoriert: .claudeignore + .vscode/settings.json (files.exclude + search.exclude) aktualisiert
+## [2026-04-20] task | ev-vergleich Refactor: ui.js → toast.js + admin.js + cars.js aufgeteilt; 3 render.js-Bugs gefixt (fehlende Imports); CLAUDE.md auf 15 Zeilen gekürzt

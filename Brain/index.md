@@ -22,6 +22,8 @@ Master index of all wiki pages. Updated by the LLM on every ingest, query (if a 
 |------|---------|------|
 | [[wiki/decisions/firebase-als-datenbank]] | Firebase Firestore als primäre Datenbank | 2026-04-17 |
 | [[wiki/decisions/obsidian-sync-stop-hook]] | Automatische Obsidian-Sync via CLAUDE.md + Stop-Hook | 2026-04-18 |
+| [[wiki/decisions/projekt-cleanup-token-optimierung]] | .claudeignore + Worktrees/Pläne löschen um Token-Verbrauch zu senken | 2026-04-20 |
+| [[wiki/decisions/ev-vergleich-module-split]] | ui.js → toast.js + admin.js + cars.js aufgeteilt, 3 Bugs gefixt | 2026-04-20 |
 
 ## Concepts
 

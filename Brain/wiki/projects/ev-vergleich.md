@@ -27,8 +27,6 @@ Ein Webvergleichstool für Elektrofahrzeuge, das Nutzern ermöglicht, EV-Modelle
 - Farben: Cyan `#0ea5e9` (EV), Orange `#f97316` (ICE), Grün `#22c55e` (Ersparnisse)
 - Fonts: Outfit 700/800 (Headlines), DM Sans 400/600 (Body) via Google Fonts
 - Icons: lucide-react — farblich kategorisiert (Zap=cyan, Fuel=orange, Leaf=grün, Settings2=violet)
-- Spec: `docs/superpowers/specs/2026-04-19-global-redesign-electric-clean.md`
-- Plan: `docs/superpowers/plans/2026-04-19-global-redesign-electric-clean.md` (12 Tasks)
 
 ## Wichtige Entscheidungen
 
@@ -69,8 +67,6 @@ Ein Webvergleichstool für Elektrofahrzeuge, das Nutzern ermöglicht, EV-Modelle
 - GitHub Action: `.github/workflows/enrich-cars.yml` — täglich 03:00 UTC + manuell auslösbar
 - Secrets nötig: `FIREBASE_SERVICE_ACCOUNT`, `ANTHROPIC_API_KEY`
 - Tests: 14/14 (plausibility.js — isEmpty, mergeEnrichment)
-- Spec: `docs/superpowers/specs/2026-04-20-ev-data-enrichment-design.md`
-- Plan: `docs/superpowers/plans/2026-04-20-ev-data-enrichment.md`
 
 ## Datenimport
 

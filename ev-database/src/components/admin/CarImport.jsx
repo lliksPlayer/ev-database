@@ -3,6 +3,23 @@ import * as XLSX from 'xlsx'
 import { useTranslation } from 'react-i18next'
 import './CarImport.css'
 
+// Parst Zahlen in deutschem (89,8 / 1.234,56) und englischem (89.8 / 1,234.56) Format
+function parseNumber(val) {
+  if (val === null || val === undefined || val === '') return 0
+  if (typeof val === 'number') return val
+  const s = String(val).trim()
+  // Deutsches Format: optionale Tausenderpunkte + Komma als Dezimaltrennzeichen
+  if (/^\d{1,3}(\.\d{3})*(,\d+)?$/.test(s))
+    return parseFloat(s.replace(/\./g, '').replace(',', '.')) || 0
+  // Einfaches Dezimalkomma: 89,8 → 89.8
+  if (/^\d+,\d+$/.test(s))
+    return parseFloat(s.replace(',', '.')) || 0
+  // Englisches Format: optionale Tausenderkommas + Punkt als Dezimaltrennzeichen
+  if (/^\d{1,3}(,\d{3})*(\.\d+)?$/.test(s))
+    return parseFloat(s.replace(/,/g, '')) || 0
+  return parseFloat(s) || 0
+}
+
 const autoMatch = (colName, fields) => {
   const lower = colName.toLowerCase().replace(/\s/g, '_')
   const found = fields.find(f => f.key && (f.key === lower || f.label.toLowerCase().replace(/\s/g, '_') === lower))
@@ -24,9 +41,9 @@ export default function CarImport({ fields, importFn, transformFn = (c) => c, on
     if (!file) return
     const reader = new FileReader()
     reader.onload = (ev) => {
-      const wb = XLSX.read(ev.target.result, { type: 'array' })
+      const wb = XLSX.read(ev.target.result, { type: 'array', cellText: true })
       const ws = wb.Sheets[wb.SheetNames[0]]
-      const data = XLSX.utils.sheet_to_json(ws, { header: 1 })
+      const data = XLSX.utils.sheet_to_json(ws, { header: 1, raw: false })
       const headers = data[0] || []
       const dataRows = data.slice(1).filter(r => r.some(c => c !== undefined && c !== ''))
       setColumns(headers)
@@ -46,7 +63,7 @@ export default function CarImport({ fields, importFn, transformFn = (c) => c, on
         const dbKey = mapping[col]
         if (!dbKey) return
         const val = row[i]
-        car[dbKey] = numKeys.includes(dbKey) ? (parseFloat(val) || 0) : (String(val || ''))
+        car[dbKey] = numKeys.includes(dbKey) ? parseNumber(val) : (String(val || ''))
       })
       return transformFn(car)
     }).filter(c => c.marke || c.modell)
