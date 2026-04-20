@@ -1,7 +1,5 @@
 import Anthropic from '@anthropic-ai/sdk'
 
-const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
-
 const FIELD_DESCRIPTIONS = {
   reichweite_wltp:             'WLTP range in km (integer)',
   akku_kapazitaet_kwh:         'usable battery capacity in kWh (number)',
@@ -38,6 +36,9 @@ const FIELD_DESCRIPTIONS = {
 export async function enrichFromClaude(car, missingFields) {
   const relevantFields = missingFields.filter(f => FIELD_DESCRIPTIONS[f])
   if (relevantFields.length === 0) return {}
+
+  if (!process.env.ANTHROPIC_API_KEY) return {}
+  const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 
   const fieldLines = relevantFields
     .map(f => `"${f}": ${FIELD_DESCRIPTIONS[f]}`)

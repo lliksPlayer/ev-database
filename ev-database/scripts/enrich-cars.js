@@ -21,7 +21,7 @@ initializeApp({ credential: cert(serviceAccount) })
 const db = getFirestore()
 
 const ENRICHABLE_FIELDS = [
-  'preis_de', 'bild_url', 'reichweite_wltp', 'akku_kapazitaet_kwh', 'architektur_volt',
+  'preis_de', 'reichweite_wltp', 'akku_kapazitaet_kwh', 'architektur_volt',
   'laden_ac_kw', 'laden_dc_kw', 'ladezeit_10_80_min', 'beschleunigung_sec',
   'hoechstgeschwindigkeit_kmh', 'leistung_kw', 'laenge_mm', 'breite_mm', 'hoehe_mm',
   'radstand_mm', 'gewicht_leer_kg', 'zul_gesamtgewicht_kg', 'zuladung_kg',
@@ -71,7 +71,7 @@ async function enrichCar(car) {
   // 3. Claude fallback
   const stillMissing2 = getMissingFields(currentCar)
   if (stillMissing2.length > 0) {
-    const claudeData = await enrichFromClaude(car, stillMissing2)
+    const claudeData = await enrichFromClaude(currentCar, stillMissing2)
     applyUpdates(mergeEnrichment(currentCar, claudeData, 'claude', 'low'))
     if (Object.keys(claudeData).length) console.log(`    claude: ${Object.keys(claudeData).length} fields found`)
   }

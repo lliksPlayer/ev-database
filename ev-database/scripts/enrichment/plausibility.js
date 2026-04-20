@@ -19,7 +19,7 @@ export function mergeEnrichment(car, newData, source, confidence) {
     enrichedMeta[key] = {
       source,
       confidence,
-      action: car[key] === 0 || car[key] === '0' ? 'corrected' : 'filled',
+      action: car[key] === 0 ? 'corrected' : 'filled',
       at: today,
     }
   }
