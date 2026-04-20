@@ -1,4 +1,6 @@
 import { useTranslation } from 'react-i18next'
+import { useAuth } from '../../hooks/useAuth'
+import EnrichmentBadge from '../admin/EnrichmentBadge'
 import './CarDetail.css'
 
 const SECTIONS = [
@@ -87,6 +89,9 @@ function formatValue(value, unit, format, t) {
 
 export default function CarDetail({ car, onClose }) {
   const { t } = useTranslation()
+  const { user } = useAuth()
+  const isAdmin = !!user
+
   if (!car) return null
 
   return (
@@ -107,6 +112,7 @@ export default function CarDetail({ car, onClose }) {
               ...f,
               label: t(`detail.fields.${f.key}`),
               value: formatValue(car[f.key], f.unit, f.format, t),
+              enrichedMeta: car._enriched?.[f.key] ?? null,
             }))
             .filter(f => f.value !== null)
 
@@ -118,7 +124,10 @@ export default function CarDetail({ car, onClose }) {
               {visibleFields.map(f => (
                 <div key={f.key} className="detail-field">
                   <span className="detail-field-label">{f.label}</span>
-                  <span className="detail-field-value">{f.value}</span>
+                  <span className="detail-field-value">
+                    {f.value}
+                    {isAdmin && <EnrichmentBadge meta={f.enrichedMeta} />}
+                  </span>
                 </div>
               ))}
             </div>
