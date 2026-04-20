@@ -4,6 +4,6 @@
   padding: 0.75rem 1.5rem;
   background: var(--color-surface); border-bottom: 1px solid var(--color-border);
 }
-.admin-logout { border: 1.5px solid var(--color-border); background: var(--color-surface); color: var(--color-text); border-radius: var(--radius-btn); font-family: 'DM Sans', sans-serif; cursor: pointer; padding: 0.4rem 0.9rem; transition: border-color 0.2s ease; }
+.admin-logout { border: 1.5px solid var(--color-border); background: var(--color-surface); color: var(--color-text); border-radius: var(--radius-btn); font-family: 'Plus Jakarta Sans', system-ui, sans-serif; cursor: pointer; padding: 0.4rem 0.9rem; transition: border-color 0.2s ease; }
 .admin-logout:hover { border-color: var(--color-primary); color: var(--color-primary); }
 .admin-type-tabs { display: flex; gap: 0.5rem; }

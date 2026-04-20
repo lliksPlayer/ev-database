@@ -30,6 +30,41 @@
   flex-wrap: wrap;
 }
 
+/* ─── Normal/Expert mode toggle ─────────────────────────────────────────── */
+
+.mode-toggle {
+  display: flex;
+  background: var(--color-surface-alt);
+  border-radius: var(--radius-btn);
+  padding: 3px;
+  gap: 2px;
+}
+
+.mode-btn {
+  padding: 0.35rem 0.9rem;
+  border: none;
+  background: transparent;
+  border-radius: 9px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  color: var(--color-muted);
+  font-weight: 500;
+  transition: background 0.15s, color 0.15s, box-shadow 0.15s;
+  white-space: nowrap;
+}
+
+.mode-btn:hover:not(.active) {
+  color: var(--color-text);
+}
+
+.mode-btn.active {
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-weight: 600;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.10);
+}
+
 /* ─── Pill-Switcher ──────────────────────────────────────────────────────── */
 
 .comp-mode-toggle {
@@ -47,7 +82,7 @@
   border-radius: 9px;
   cursor: pointer;
   font-size: 0.88rem;
-  font-family: 'DM Sans', system-ui, sans-serif;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
   color: var(--color-muted);
   font-weight: 500;
   transition: background 0.15s, color 0.15s, box-shadow 0.15s;

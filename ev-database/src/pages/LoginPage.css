@@ -40,7 +40,7 @@
   font-size: 0.85rem;
   font-weight: 600;
   color: var(--color-muted);
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
 }
 
 .form-group input {
@@ -48,7 +48,7 @@
   border: 1.5px solid var(--color-border);
   border-radius: var(--radius-input);
   font-size: 1rem;
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
   color: var(--color-text);
   background: var(--color-surface);
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
@@ -70,7 +70,7 @@
   font-size: 1rem;
   cursor: pointer;
   font-weight: 600;
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
   transition: background 0.2s ease;
 }
 

@@ -99,7 +99,7 @@
   border-radius: 9px;
   cursor: pointer;
   font-size: 0.78rem;
-  font-family: 'DM Sans', system-ui, sans-serif;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
   color: var(--color-muted);
   font-weight: 500;
   transition: background 0.15s, color 0.15s, box-shadow 0.15s;
@@ -127,7 +127,7 @@
   border: 1.5px solid var(--color-border);
   border-radius: var(--radius-input);
   font-size: 0.9rem;
-  font-family: 'DM Sans', system-ui, sans-serif;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
   background: var(--color-surface);
   color: var(--color-text);
   cursor: pointer;
@@ -183,7 +183,7 @@
   border: 1.5px solid var(--color-border);
   border-radius: var(--radius-input);
   font-size: 0.88rem;
-  font-family: 'DM Sans', system-ui, sans-serif;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
   text-align: right;
   color: var(--color-text);
   transition: border-color 0.15s, box-shadow 0.15s;

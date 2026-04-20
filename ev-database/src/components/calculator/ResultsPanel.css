@@ -26,7 +26,7 @@
   background: transparent;
   cursor: pointer;
   font-size: 0.875rem;
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
   color: var(--color-muted);
   letter-spacing: 0.01em;
   transition: color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;

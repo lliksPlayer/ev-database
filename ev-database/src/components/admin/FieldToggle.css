@@ -13,7 +13,7 @@
 }
 .field-item.dragging { opacity: 0.4; }
 .drag-handle { color: var(--color-border); font-size: 1.1rem; cursor: grab; }
-.field-label { flex: 1; font-size: 0.9rem; color: var(--color-text); font-family: 'DM Sans', sans-serif; }
+.field-label { flex: 1; font-size: 0.9rem; color: var(--color-text); font-family: 'Plus Jakarta Sans', system-ui, sans-serif; }
 .field-toggle-switch {
   position: relative; width: 42px; height: 24px;
   display: inline-block;
