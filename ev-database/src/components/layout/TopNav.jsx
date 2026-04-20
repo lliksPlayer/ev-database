@@ -13,17 +13,28 @@ export default function TopNav() {
     <nav className="nav">
       <Link to="/" className="nav-brand">
         <Zap className="nav-brand-icon" fill="currentColor" strokeWidth={0} />
-        EV Database
+        EV Vergleich
       </Link>
       <div className="nav-links">
-        <NavLink to="/" end className="nav-link">{t('nav.evDatabase')}</NavLink>
-        <NavLink to="/verbrenner" className="nav-link">{t('nav.iceDatabase')}</NavLink>
-        <NavLink to="/rechner" className="nav-link">{t('nav.calculator')}</NavLink>
+        <NavLink to="/autos" className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}>
+          {t('nav.evDatabase')}
+        </NavLink>
+        <NavLink
+          to="/verbrenner"
+          className={({ isActive }) => `nav-link nav-link-ice${isActive ? ' active' : ''}`}
+        >
+          {t('nav.iceDatabase')}
+        </NavLink>
+        <NavLink to="/rechner" className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}>
+          {t('nav.calculator')}
+        </NavLink>
       </div>
       <div className="nav-right">
         <LanguageSwitch />
         {user && (
-          <NavLink to="/admin" className="nav-link">{t('nav.admin')}</NavLink>
+          <NavLink to="/admin" className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}>
+            {t('nav.admin')}
+          </NavLink>
         )}
       </div>
     </nav>
