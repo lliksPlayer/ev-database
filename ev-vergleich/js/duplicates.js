@@ -1,7 +1,8 @@
 import { state, adminMode } from './state.js';
 import { escapeHtml } from './render.js';
 import { fmt } from './filter.js';
-import { deleteCar, openEditModal, toast } from './ui.js';
+import { deleteCar, openEditModal } from './ui.js';
+import { toast } from './toast.js';
 
 // ── Felder für den Duplikat-Vergleich ────────────────────────────────────────
 const DUP_FIELDS = [

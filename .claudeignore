@@ -1,0 +1,24 @@
+# Git worktrees — vollständige Projektkopien, nie direkt bearbeiten
+.worktrees/
+
+# Abgeschlossene Implementierungspläne (nur bei aktiver Plan-Ausführung relevant)
+docs/superpowers/
+
+# Obsidian Wiki-Details (nur auf Anfrage lesen)
+Brain/wiki/
+Brain/raw/
+Brain/.obsidian/
+
+# Build-Artefakte
+dist/
+.vite/
+node_modules/
+
+# Einmalige Utility-Scripts (Import, Scrape, Export)
+ev-database/scripts/
+
+# Datendateien
+ev-database/serviceAccountKey.json
+
+# Alte Vanilla-JS-Website (nicht mehr aktiv genutzt)
+ev-vergleich/

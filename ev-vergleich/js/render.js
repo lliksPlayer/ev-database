@@ -3,7 +3,9 @@ import { FIELDS } from './config.js';
 import { fmt } from './filter.js';
 import { advisorActive, getFieldStatus, getCarScore, getMaxScore } from './advisor.js';
 import { updateCarInCloud } from './firebase-db.js';
-import { toast } from './ui.js';
+import { toast } from './toast.js';
+import { deleteCar, openEditModal } from './ui.js';
+import { importCarToTCO } from './tco.js';
 
 export function escapeHtml(str) {
   return String(str ?? '')

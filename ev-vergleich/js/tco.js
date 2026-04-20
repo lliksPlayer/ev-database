@@ -1,5 +1,5 @@
 import { state } from './state.js';
-import { toast } from './ui.js';
+import { toast } from './toast.js';
 
 /* ── Standardwerte (gelten im Basis-Modus) ────────────────────────────────── */
 const TCO_DEFAULTS = {
