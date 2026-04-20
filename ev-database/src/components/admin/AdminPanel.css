@@ -1,18 +1,19 @@
 .admin-panel { padding: 2rem 1.5rem; max-width: 1100px; margin: 0 auto; }
-.admin-panel h1 { margin-bottom: 1.5rem; }
-.admin-tabs { display: flex; gap: 0; border-bottom: 2px solid #eee; margin-bottom: 2rem; }
+.admin-panel h1 { margin-bottom: 1.5rem; font-family: 'Outfit', sans-serif; font-weight: 800; color: var(--color-text); }
+.admin-tabs { display: flex; gap: 0; border-bottom: 2px solid var(--color-border); margin-bottom: 2rem; }
 .admin-tab {
   padding: 0.6rem 1.4rem;
   background: none; border: none;
-  font-size: 0.95rem; cursor: pointer; color: #777;
+  font-size: 0.95rem; cursor: pointer; color: var(--color-muted);
   border-bottom: 2px solid transparent; margin-bottom: -2px;
+  transition: color 0.15s ease, border-color 0.15s ease;
 }
-.admin-tab.active { color: #1a1a2e; font-weight: 700; border-bottom-color: #1a1a2e; }
+.admin-tab.active { color: var(--color-primary); font-weight: 700; border-bottom-color: var(--color-primary); }
 .admin-actions { display: flex; gap: 0.75rem; margin-bottom: 1.5rem; }
 .car-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
-.car-table th { background: #f5f5f5; padding: 0.6rem 0.75rem; text-align: left; font-size: 0.8rem; text-transform: uppercase; color: #555; }
-.car-table td { padding: 0.6rem 0.75rem; border-bottom: 1px solid #eee; }
-.car-table tr:hover td { background: #fafafa; }
+.car-table th { background: var(--color-surface-alt); padding: 0.6rem 0.75rem; text-align: left; font-size: 0.8rem; text-transform: uppercase; color: var(--color-muted); }
+.car-table td { padding: 0.6rem 0.75rem; border-bottom: 1px solid var(--color-border); color: var(--color-text); }
+.car-table tr:hover td { background: var(--color-bg); }
 .car-table-edit { margin-right: 6px; }
 .seed-prompt { padding: 2rem; text-align: center; }
-.seed-prompt p { margin-bottom: 1rem; color: #666; }
+.seed-prompt p { margin-bottom: 1rem; color: var(--color-muted); }

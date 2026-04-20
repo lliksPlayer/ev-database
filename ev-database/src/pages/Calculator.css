@@ -1,0 +1,98 @@
+.calculator-page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.calc-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.calc-header h1 {
+  margin: 0;
+  font-size: 1.6rem;
+  font-family: 'Outfit', system-ui, sans-serif;
+  font-weight: 800;
+  color: var(--color-text);
+}
+
+.calc-controls {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* ─── Pill-Switcher ──────────────────────────────────────────────────────── */
+
+.comp-mode-toggle {
+  display: flex;
+  background: var(--color-surface-alt);
+  border-radius: var(--radius-btn);
+  padding: 3px;
+  gap: 2px;
+}
+
+.comp-mode-toggle button {
+  padding: 0.35rem 0.9rem;
+  border: none;
+  background: transparent;
+  border-radius: 9px;
+  cursor: pointer;
+  font-size: 0.88rem;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  color: var(--color-muted);
+  font-weight: 500;
+  transition: background 0.15s, color 0.15s, box-shadow 0.15s;
+}
+
+.comp-mode-toggle button:hover:not(.active) {
+  color: var(--color-text);
+}
+
+.comp-mode-toggle button.active {
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-weight: 600;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.10);
+}
+
+/* ─── Vehicle Slots Grid ─────────────────────────────────────────────────── */
+
+.calc-slots {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 700px) {
+  .calc-slots { grid-template-columns: 1fr; }
+}
+
+/* ─── Placeholder ────────────────────────────────────────────────────────── */
+
+.calc-placeholder {
+  text-align: center;
+  padding: 2.5rem;
+  color: var(--color-muted);
+  background: var(--color-surface);
+  border-radius: var(--radius-card);
+  border: 2px dashed #bae6fd;
+  font-size: 0.95rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.calc-placeholder-icon {
+  color: var(--color-primary);
+  opacity: 0.7;
+}

@@ -2,7 +2,8 @@
   "nav": {
     "evDatabase": "E-Fahrzeuge",
     "iceDatabase": "Verbrenner",
-    "admin": "Admin"
+    "admin": "Admin",
+    "calculator": "Rechner"
   },
   "home": {
     "title": "Elektroauto-Datenbank",
@@ -107,5 +108,74 @@
       "liter": "L",
       "meter": "m"
     }
+  },
+  "calc": {
+    "title": "Wirtschaftlichkeitsrechner",
+    "modeEvIce": "EV vs. Verbrenner",
+    "modeEvEv": "EV vs. EV",
+    "slotA": "Fahrzeug A",
+    "slotB": "Fahrzeug B",
+    "selectVehicle": "Fahrzeug wählen",
+    "loadingVehicles": "Lade Fahrzeuge...",
+    "noVehiclesInDb": "Noch keine Fahrzeuge in der Datenbank",
+    "manualEntry": "Manuell eingeben",
+    "fromDatabase": "Aus Datenbank",
+    "modeNormal": "Normal",
+    "modeExpert": "Experte",
+    "params": {
+      "kaufpreis": "Kaufpreis (€)",
+      "jahresKm": "Jahreskilometer (km)",
+      "stromPreis": "Strompreis (€/kWh)",
+      "acPreis": "AC-Preis (€/kWh)",
+      "dcPreis": "DC-Preis (€/kWh)",
+      "acProzent": "AC-Anteil (%)",
+      "acLadeverlust": "Ladeverlust AC (%)",
+      "dcLadeverlust": "Ladeverlust DC (%)",
+      "thgQuote": "THG-Quote (€/Jahr)",
+      "kraftstoffPreis": "Kraftstoffpreis (€/L)",
+      "jahre": "Betrachtungszeitraum (Jahre)",
+      "wartung": "Wartungskosten (€/Jahr)",
+      "versicherung": "Versicherung (€/Jahr)",
+      "steuer": "KFZ-Steuer (€/Jahr)",
+      "restwertProzent": "Restwert (%)",
+      "foerderung": "Förderung/BAFA (€)",
+      "zinsSatz": "Finanzierungszins (%)",
+      "verbrauchKwh": "Verbrauch (kWh/100km)",
+      "verbrauchL": "Verbrauch (L/100km)"
+    },
+    "results": {
+      "tabMonthly": "Monatliche Kosten",
+      "tabTotal": "Gesamtverlauf",
+      "tabBreakeven": "Break-even",
+      "monthly": "Monatliche Kosten",
+      "totalCost": "Gesamtkosten",
+      "breakevenAt": "Break-even nach {{years}} Jahren",
+      "noBreakeven": "Kein Break-even im Betrachtungszeitraum",
+      "cheaper": "{{name}} ist günstiger",
+      "costKaufpreis": "Kaufpreis",
+      "costEnergie": "Energie",
+      "costWartung": "Wartung",
+      "costVersicherung": "Versicherung",
+      "costSteuer": "Steuer",
+      "costFinanzierung": "Finanzierung",
+      "costRestwert": "Restwert",
+      "costThg": "THG-Quote (Einnahmen)"
+    },
+    "ice": {
+      "templateLabel": "Vorlage wählen",
+      "templateNone": "Keine Vorlage",
+      "templateGolf": "VW Golf 2.0 TDI",
+      "templateBmw": "BMW 320d",
+      "templatePassat": "VW Passat TDI",
+      "make": "Marke",
+      "model": "Modell"
+    },
+    "addToCalculator": "In Rechner laden",
+    "selectBoth": "Bitte beide Fahrzeuge wählen",
+    "vehicleA": "Fahrzeug A",
+    "vehicleB": "Fahrzeug B",
+    "acDcSplit": "Ladeverteilung AC / DC",
+    "acLabel": "AC",
+    "dcLabel": "DC"
   }
 }
