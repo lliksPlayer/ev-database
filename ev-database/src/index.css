@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  font-family: 'DM Sans', system-ui, sans-serif;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
   background: var(--color-bg);
   color: var(--color-text);
   line-height: 1.5;
@@ -26,9 +28,21 @@ h1, h2, h3, h4, h5, h6 {
   --color-expert:        #8b5cf6;
   --color-surface-alt:   #f1f5f9;
 
+  /* Metric accent colors — used in CarCard icon circles */
+  --metric-range:    #3b82f6;
+  --metric-charge:   #f59e0b;
+  --metric-power:    #ef4444;
+  --metric-efficiency: #10b981;
+  --metric-battery:  #8b5cf6;
+  --metric-price:    #06b6d4;
+  --metric-tow:      #84cc16;
+  --metric-sprint:   #f43f5e;
+  --metric-speed:    #14b8a6;
+  --metric-volt:     #a855f7;
+
   --shadow-card:         0 2px 12px rgba(0,0,0,0.06);
-  --shadow-ev-hover:     0 8px 32px rgba(14,165,233,0.18);
-  --shadow-ice-hover:    0 8px 32px rgba(249,115,22,0.18);
+  --shadow-ev-hover:     0 12px 40px rgba(14,165,233,0.18);
+  --shadow-ice-hover:    0 12px 40px rgba(249,115,22,0.18);
   --shadow-btn:          0 2px 8px rgba(14,165,233,0.30);
 
   --radius-card:   20px;
@@ -47,8 +61,8 @@ h1, h2, h3, h4, h5, h6 {
   cursor: pointer;
   font-weight: 600;
   font-size: 0.9rem;
-  font-family: 'DM Sans', system-ui, sans-serif;
-  transition: background 0.15s, box-shadow 0.15s, transform 0.1s;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
 }
 
 .btn:disabled { opacity: 0.6; cursor: not-allowed; }
@@ -59,7 +73,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 .btn-primary:hover:not(:disabled) {
   background: var(--color-primary-hover);
-  box-shadow: var(--shadow-btn);
+  box-shadow: 0 0 0 3px rgba(14,165,233,0.25), var(--shadow-btn);
+  transform: translateY(-1px);
 }
 
 .btn-secondary {
