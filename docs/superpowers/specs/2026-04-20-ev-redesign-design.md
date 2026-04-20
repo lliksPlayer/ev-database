@@ -112,29 +112,31 @@ Kompakter Single-Screen Hero — kein Scrollen erforderlich:
 
 ```
 ┌─────────────────────────────────────────────────────┐
-│ [TopNav — glassmorphism, transparent über Hero]     │
+│ [TopNav — glassmorphism, transparent]               │
 ├─────────────────────────────────────────────────────┤
 │                                                     │
-│   [Hintergrundbild: EV auf Straße, dunkles Overlay] │
+│  [Bleistift-Sketch-Illustration: viele EVs]         │
+│  (heller Hintergrund, rechte Bildhälfte)            │
 │                                                     │
-│          "Der smarteste Weg zum               │
-│           richtigen Auto."                          │
-│   Subtext: "399 Autos. Echte Daten. Klare Kosten." │
+│  "Der smarteste Weg        [Sketch-Illustration]    │
+│   zum richtigen Auto."                              │
+│  "399 Autos. Echte Daten."                          │
 │                                                     │
-│   [Autos entdecken →]   [Kosten berechnen →]       │
-│   (Teal/Primary)         (White/Outline)            │
+│  [Autos entdecken →]  [Kosten berechnen →]         │
+│  (Teal/Primary)        (Teal/Outline)               │
 │                                                     │
 └─────────────────────────────────────────────────────┘
 ```
 
 ### Details
 
-- Hintergrundbild: Ein EV-Foto auf moderner Straße (Querformat, Tag). Im Code wird ein Unsplash-Platzhalter-URL verwendet (`https://images.unsplash.com/...`). Der Nutzer kann jederzeit durch ein eigenes Bild in `public/` ersetzen.
-- Overlay: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.4))`
-- Headline: Outfit 800, weiß, 56px Desktop / 36px Mobile
-- Subtext: Plus Jakarta Sans 500, `rgba(255,255,255,0.8)`, 18px
-- CTA-Buttons: nebeneinander, großzügig padding, mit Hover-Glow
-- TopNav auf Landing: transparent → scrollt zu `rgba(248,250,252,0.95)` (aber kein Scroll auf dieser Seite)
+- Hintergrundbild: Eigene Bleistift-Sketch-Illustration aller EVs (weiße Basis, Bleistift-Zeichnungen). Datei wird in `ev-database/public/hero-sketch.jpg` abgelegt.
+- **Kein dunkles Overlay** — da Hintergrund bereits hell ist. Stattdessen: links leichter weißer Gradient (`linear-gradient(to right, rgba(248,250,252,0.95) 40%, transparent)`) damit Text gut lesbar bleibt.
+- Layout: Text + Buttons links-zentriert, Illustration rechts (auf Mobile: Illustration unter Text, leicht transparent)
+- Headline: Outfit 800, `--color-text` (#0f172a), 56px Desktop / 36px Mobile
+- Subtext: Plus Jakarta Sans 500, `--color-muted`, 18px
+- CTA-Buttons: nebeneinander, großzügig padding, mit Hover-Glow; zweiter Button als Teal-Outline
+- TopNav auf Landing: weißer/transparenter Hintergrund (da Seite hell ist)
 - Höhe: `100vh`
 
 ---
