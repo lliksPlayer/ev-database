@@ -9,7 +9,8 @@
     "title": "Electric Car Database",
     "iceTitle": "ICE Vehicle Database",
     "loading": "Loading...",
-    "noCars": "No vehicles found."
+    "noCars": "No vehicles found.",
+    "vehicles": "vehicles"
   },
   "viewToggle": {
     "grid": "Grid",
@@ -177,5 +178,12 @@
     "acDcSplit": "Charging split AC / DC",
     "acLabel": "AC",
     "dcLabel": "DC"
+  },
+  "landing": {
+    "badge": "399 vehicles · Real data",
+    "headline": "The smartest way to find the right car.",
+    "sub": "Compare electric cars and combustion engines — range, charging, costs.",
+    "ctaAutos": "Explore cars",
+    "ctaRechner": "Calculate costs"
   }
 }
