@@ -2,6 +2,10 @@
 
 Append-only operation history. Each entry starts with `## [YYYY-MM-DD] operation | title`.
 
+## [2026-04-19] task | T8–T11: CSS-Token-Anpassung ResultsPanel, IceForm, LoginPage, Admin-Seiten
+## [2026-04-19] task | Implementierungsplan für Global Redesign "Electric Clean" erstellt (12 Tasks)
+## [2026-04-19] task | Design-Spec "Electric Clean" für globales Redesign erarbeitet und committed
+## [2026-04-19] task | frontend-design Skill aktiviert und als Pflicht in CLAUDE.md verankert
 ## [2026-04-19] task | EV-Slot mit AC/DC-Strompreisen, Split-Slider, THG-Quote und Ladeverlust-Expert-Params
 
 ## [2026-04-18] task | EV-Scraper + CarDetail-Sektionen implementiert

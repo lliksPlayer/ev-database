@@ -21,6 +21,15 @@ Ein Webvergleichstool für Elektrofahrzeuge, das Nutzern ermöglicht, EV-Modelle
 - Firebase / Firestore (Datenbank, Hosting)
 - Vercel (Deployment-Alternative)
 
+## Globales Redesign "Electric Clean" (implementiert 2026-04-19/20)
+
+- Ästhetik: Hell, modern, kontrastreich, runde Ecken (20px Cards), bunte Icons per Kategorie
+- Farben: Cyan `#0ea5e9` (EV), Orange `#f97316` (ICE), Grün `#22c55e` (Ersparnisse)
+- Fonts: Outfit 700/800 (Headlines), DM Sans 400/600 (Body) via Google Fonts
+- Icons: lucide-react — farblich kategorisiert (Zap=cyan, Fuel=orange, Leaf=grün, Settings2=violet)
+- Spec: `docs/superpowers/specs/2026-04-19-global-redesign-electric-clean.md`
+- Plan: `docs/superpowers/plans/2026-04-19-global-redesign-electric-clean.md` (12 Tasks)
+
 ## Wichtige Entscheidungen
 
 - [[wiki/decisions/firebase-als-datenbank]] — Firebase Firestore als primäre Datenbank
