@@ -1,7 +1,7 @@
 ---
 type: project
 tags: [ev, firebase, react]
-last_updated: 2026-04-19
+last_updated: 2026-04-20
 source_count: 1
 ---
 
@@ -57,6 +57,20 @@ Ein Webvergleichstool für Elektrofahrzeuge, das Nutzern ermöglicht, EV-Modelle
 - Button "In Rechner laden" ermöglicht schnelle Navigation zur TCO-Berechnung
 - Button-Logik: localStorage-basiert, erste Auswahl → ev1 Parameter, zweite Auswahl → ev1+ev2 Parameter
 - Styling: Blauer Button (#2563eb) mit Hover-Effekt (#1d4ed8), volle Breite der Karte
+
+## Automatische Datenanreicherung (EV Enrichment System, 2026-04-20)
+
+- Branch: `feature/ev-data-enrichment` (PR offen)
+- Script: `ev-database/scripts/enrich-cars.js` — liest Firestore, füllt leere/0-Felder, schreibt zurück
+- Pipeline (3-stufig): ev-database.org (fetch+cheerio) → Herstellerwebseite → Claude haiku Fallback
+- "Leer" = nur `0` oder `""` — keine Wertebereiche, bestehende Werte werden nie überschrieben
+- Metadata: `_enriched.<field>` = `{ source, confidence, action, at }` pro Feld
+- Admin-UI: `EnrichmentBadge`-Komponente in CarDetail — zeigt ↺ (ergänzt) oder ⚠ (KI) für Admins
+- GitHub Action: `.github/workflows/enrich-cars.yml` — täglich 03:00 UTC + manuell auslösbar
+- Secrets nötig: `FIREBASE_SERVICE_ACCOUNT`, `ANTHROPIC_API_KEY`
+- Tests: 14/14 (plausibility.js — isEmpty, mergeEnrichment)
+- Spec: `docs/superpowers/specs/2026-04-20-ev-data-enrichment-design.md`
+- Plan: `docs/superpowers/plans/2026-04-20-ev-data-enrichment.md`
 
 ## Datenimport
 

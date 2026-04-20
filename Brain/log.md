@@ -2,6 +2,8 @@
 
 Append-only operation history. Each entry starts with `## [YYYY-MM-DD] operation | title`.
 
+## [2026-04-20] task | EV Data Enrichment System vollständig implementiert — PR feature/ev-data-enrichment gepusht (9 Tasks, 14 Tests grün)
+## [2026-04-20] task | EV Data Enrichment — Tasks 6+7: Orchestrator-Script + GitHub Action (nightly cron pipeline)
 ## [2026-04-20] task | EV Data Enrichment System — Design-Spec und Implementierungsplan erstellt (9 Tasks, fetch+cheerio+Claude)
 ## [2026-04-20] task | Global Redesign "Electric Clean" abgeschlossen — alle 12 Tasks implementiert
 ## [2026-04-19] task | T8–T11: CSS-Token-Anpassung ResultsPanel, IceForm, LoginPage, Admin-Seiten
