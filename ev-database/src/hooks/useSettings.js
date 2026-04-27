@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { subscribeToSettings } from '../firebase/settings'
+import { normalizeCardFields } from '../entities/vehicle/fields.js'
 
 export function useSettings() {
   const [fields, setFields] = useState([])
@@ -7,7 +8,7 @@ export function useSettings() {
 
   useEffect(() => {
     const unsub = subscribeToSettings((data) => {
-      setFields(data)
+      setFields(normalizeCardFields(data, 'ev'))
       setLoading(false)
     })
     return unsub

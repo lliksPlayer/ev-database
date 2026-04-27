@@ -1,9 +1,10 @@
 import { useTranslation } from 'react-i18next'
-import { ICE_TEMPLATES } from '../../utils/tcoCalculation'
+import { ICE_TEMPLATES } from '../../features/comparison/model/tcoCalculation.js'
 import './IceForm.css'
 
 export default function IceForm({ vehicle, onChange }) {
   const { t } = useTranslation()
+  const baseVehicle = vehicle ?? {}
 
   const handleTemplate = (key) => {
     if (!key) return
@@ -12,7 +13,7 @@ export default function IceForm({ vehicle, onChange }) {
 
   const handleField = (field, value) => {
     onChange({
-      ...vehicle,
+      ...baseVehicle,
       [field]: field === 'verbrauch_l_100km' || field === 'basis_preis' ? Number(value) : value,
     })
   }

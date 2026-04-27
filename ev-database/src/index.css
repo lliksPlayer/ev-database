@@ -7,6 +7,7 @@ body {
   background: var(--color-bg);
   color: var(--color-text);
   line-height: 1.5;
+  min-height: 100vh;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -14,7 +15,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 :root {
-  --color-bg:            #f8fafc;
+  --color-bg:            #f4f7fb;
   --color-surface:       #ffffff;
   --color-primary:       #0ea5e9;
   --color-primary-hover: #0284c7;
@@ -25,8 +26,11 @@ h1, h2, h3, h4, h5, h6 {
   --color-text:          #0f172a;
   --color-muted:         #64748b;
   --color-border:        #e2e8f0;
+  --color-border-strong: rgba(203, 213, 225, 0.88);
   --color-expert:        #8b5cf6;
   --color-surface-alt:   #f1f5f9;
+  --color-surface-soft:  rgba(255, 255, 255, 0.82);
+  --color-surface-quiet: rgba(248, 250, 252, 0.78);
 
   /* Metric accent colors — used in CarCard icon circles */
   --metric-range:    #3b82f6;
@@ -44,12 +48,74 @@ h1, h2, h3, h4, h5, h6 {
   --shadow-ev-hover:     0 12px 40px rgba(14,165,233,0.18);
   --shadow-ice-hover:    0 12px 40px rgba(249,115,22,0.18);
   --shadow-btn:          0 2px 8px rgba(14,165,233,0.30);
+  --shadow-soft:         0 18px 40px rgba(15, 23, 42, 0.08);
+  --shadow-quiet:        0 10px 24px rgba(15, 23, 42, 0.05);
+  --shadow-floating:     0 24px 60px rgba(15, 23, 42, 0.14);
+
+  --layout-max:          1480px;
+  --layout-narrow:       1180px;
+  --page-gutter:         clamp(1rem, 2vw, 2rem);
+  --surface-panel-bg:    linear-gradient(180deg, rgba(248, 250, 252, 0.96) 0%, rgba(255, 255, 255, 1) 100%);
+  --surface-panel-alt:   linear-gradient(180deg, rgba(255, 255, 255, 0.92) 0%, rgba(248, 250, 252, 0.96) 100%);
 
   --radius-card:   20px;
+  --radius-panel:  28px;
   --radius-btn:    12px;
   --radius-input:  10px;
   --radius-pill:   999px;
   --radius-small:  8px;
+}
+
+#root {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(14, 165, 233, 0.08), transparent 28%),
+    radial-gradient(circle at top right, rgba(249, 115, 22, 0.06), transparent 24%),
+    var(--color-bg);
+}
+
+.app-page-shell {
+  width: min(100%, var(--layout-max));
+  margin: 0 auto;
+  padding: clamp(1.25rem, 2vw, 2.25rem) var(--page-gutter) 3rem;
+}
+
+.app-page-shell--narrow {
+  width: min(100%, var(--layout-narrow));
+}
+
+.app-panel {
+  background: var(--surface-panel-bg);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-panel);
+  box-shadow: var(--shadow-soft);
+}
+
+.app-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.app-title {
+  margin: 0;
+  font-size: clamp(2rem, 3vw, 3.25rem);
+  line-height: 0.96;
+  letter-spacing: -0.04em;
+  color: var(--color-text);
+}
+
+.app-subtitle {
+  margin: 0;
+  max-width: 64ch;
+  color: var(--color-muted);
+  font-size: 1rem;
+  line-height: 1.6;
 }
 
 /* ─── Buttons ─────────────────────────────────────────────────────────────── */
@@ -92,3 +158,10 @@ h1, h2, h3, h4, h5, h6 {
 .btn-danger:hover:not(:disabled) { background: #dc2626; }
 
 .btn-small { padding: 4px 10px; font-size: 0.8rem; border-radius: var(--radius-small); }
+
+.app-route-loading {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  color: var(--color-muted);
+}

@@ -1,32 +1,35 @@
 ---
 type: project
-tags: [ev, firebase, react]
-last_updated: 2026-04-20
+tags: [ev, firebase, legacy, vanilla-js]
+last_updated: 2026-04-24
 source_count: 1
 ---
 
-*EN: EV comparison tool — a web app for comparing electric vehicles, built with React and Firebase.*
+*EN: Legacy vanilla-JS EV comparison app retained as reference after `ev-database` became the active application.*
 
 # ev-vergleich
 
-**Status:** aktiv
+**Status:** pausiert
+
+## Rolle
+
+Historischer Altstand der frueheren Vanilla-JS-Website. Dieser Ordner bleibt als Referenz erhalten, ist aber nicht mehr die aktive Entwicklungsbasis.
+
+## Arbeitsregel
+
+- Keine neue Standard-Entwicklung in `ev-vergleich/`
+- Nur noch auf ausdrueckliche Anfrage aendern
+- Aktive App: [[wiki/projects/ev-database]]
 
 ## Ziele
 
-Ein Webvergleichstool für Elektrofahrzeuge, das Nutzern ermöglicht, EV-Modelle anhand von Reichweite, Preis, Ladezeit und TCO (Total Cost of Ownership) zu vergleichen.
+Dokumentiert den frueheren Stand des Vergleichstools und dient nur noch als Referenz fuer Altlogik, Migrationen oder Rueckvergleiche.
 
 ## Technologie-Stack
 
-- React (Frontend)
-- Firebase / Firestore (Datenbank, Hosting)
-- Vercel (Deployment-Alternative)
-
-## Globales Redesign "Electric Clean" (implementiert 2026-04-19/20)
-
-- Ästhetik: Hell, modern, kontrastreich, runde Ecken (20px Cards), bunte Icons per Kategorie
-- Farben: Cyan `#0ea5e9` (EV), Orange `#f97316` (ICE), Grün `#22c55e` (Ersparnisse)
-- Fonts: Outfit 700/800 (Headlines), DM Sans 400/600 (Body) via Google Fonts
-- Icons: lucide-react — farblich kategorisiert (Zap=cyan, Fuel=orange, Leaf=grün, Settings2=violet)
+- HTML, CSS, Vanilla JavaScript
+- Firebase (historische Konfigurationen)
+- Kein aktiver Frontend-Stack mehr fuer neue Arbeit
 
 ## Wichtige Entscheidungen
 
@@ -35,50 +38,22 @@ Ein Webvergleichstool für Elektrofahrzeuge, das Nutzern ermöglicht, EV-Modelle
 
 ## Wirtschaftlichkeitsrechner (TCO-Vergleich)
 
-- Hauptseite: `ev-database/src/pages/Calculator.jsx` + `Calculator.css`
-- Zwei Fahrzeug-Slots (Fahrzeug A / Fahrzeug B) via `VehicleSlot`-Komponente
-- Vergleichsmodus wählbar: EV vs. ICE oder EV vs. EV
-- Expert-Mode-Toggle steuert sichtbare Parameter in beiden Slots
-- URL-Parameter `?ev1=<id>&ev2=<id>` für Direktlink aus CarCard
-- Ergebnisse werden via `ResultsPanel` angezeigt, sobald beide Slots befüllt sind
-- Komponente: `ev-database/src/components/calculator/ResultsPanel.jsx`
-- Drei Tabs: Monatliche Kosten (Bar-Chart), Gesamtverlauf (Line-Chart + Tabelle), Break-even (Jahr + Chart)
-- Berechnung via `utils/tcoCalculation.js`: `calculateTCO`, `buildYearlySeries`, `findBreakeven`
-- Diagramme via Recharts (`TotalCostChart`, `MonthlyCostChart`)
-- i18n-Keys unter `calc.results.*`
-- EV-Ladeparameter: separate AC/DC-Preise, AC/DC-Split-Slider (5%-Schritte), Ladeverluste AC/DC (Experten-Modus), THG-Quote (€/Jahr als Einnahmen)
+- Historische TCO-/Vergleichslogik liegt im Legacy-Code
+- Die aktive Weiterentwicklung des Rechners findet in [[wiki/projects/ev-database]] statt
 
 ## Fahrzeugvergleich (CarCard-Komponente)
 
-- Komponente: `ev-database/src/components/cars/CarCard.jsx`
-- Zeigt strukturierte Fahrzeugdaten (Marke, Modell, konfigurierbare Felder)
-- Button "In Rechner laden" ermöglicht schnelle Navigation zur TCO-Berechnung
-- Button-Logik: localStorage-basiert, erste Auswahl → ev1 Parameter, zweite Auswahl → ev1+ev2 Parameter
-- Styling: Blauer Button (#2563eb) mit Hover-Effekt (#1d4ed8), volle Breite der Karte
-
-## Automatische Datenanreicherung (EV Enrichment System, 2026-04-20)
-
-- Branch: `feature/ev-data-enrichment` (PR offen)
-- Script: `ev-database/scripts/enrich-cars.js` — liest Firestore, füllt leere/0-Felder, schreibt zurück
-- Pipeline (3-stufig): ev-database.org (fetch+cheerio) → Herstellerwebseite → Claude haiku Fallback
-- "Leer" = nur `0` oder `""` — keine Wertebereiche, bestehende Werte werden nie überschrieben
-- Metadata: `_enriched.<field>` = `{ source, confidence, action, at }` pro Feld
-- Admin-UI: `EnrichmentBadge`-Komponente in CarDetail — zeigt ↺ (ergänzt) oder ⚠ (KI) für Admins
-- GitHub Action: `.github/workflows/enrich-cars.yml` — täglich 03:00 UTC + manuell auslösbar
-- Secrets nötig: `FIREBASE_SERVICE_ACCOUNT`, `ANTHROPIC_API_KEY`
-- Tests: 14/14 (plausibility.js — isEmpty, mergeEnrichment)
+- Historische Karten- und Listenlogik bleibt nur noch als Referenz erhalten
+- Aktive Kartenlogik ist in [[wiki/projects/ev-database]] dokumentiert
 
 ## Datenimport
 
-- Scraper: `ev-database/scripts/scrape-ev-database.js`
-- Quelle: ev-database.org (Cloudflare-geschützt, via Firecrawl)
-- Methode: `formats: ['markdown']` + Regex-Parser (~1 Credit/Auto)
-- Felder: 34 Felder pro Fahrzeug (Basis, Reichweite, Akku, Laden, Performance, Maße, Gewicht, Kofferraum, Diverses)
-- Fortsetzen ab Position N: `SCRAPER_START=N node scripts/scrape-ev-database.js`
+- Altimporte und historische Datenpflege befinden sich weiterhin im Legacy-Ordner
+- Neue Import- und Scraper-Arbeit passiert in [[wiki/projects/ev-database]]
 
 ## Offene Fragen
 
-*(Werden beim nächsten Ingest gesammelt.)*
+- Soll der Ordner spaeter physisch nach `legacy/ev-vergleich/` verschoben werden?
 
 ## Quellen
 

@@ -14,7 +14,8 @@ Master index of all wiki pages. Updated by the LLM on every ingest, query (if a 
 
 | Page | Summary | Sources |
 |------|---------|---------|
-| [[wiki/projects/ev-vergleich]] | EV-Vergleichstool mit React und Firebase | 1 |
+| [[wiki/projects/ev-database]] | Aktive React/Vite-App fuer das Vergleichstool | 1 |
+| [[wiki/projects/ev-vergleich]] | Legacy-Stand der frueheren Vanilla-JS-App | 1 |
 
 ## Decisions
 

@@ -1,5 +1,6 @@
 {
   "nav": {
+    "advisor": "Advisor",
     "evDatabase": "E-Vehicles",
     "iceDatabase": "ICE Vehicles",
     "admin": "Admin",
@@ -8,9 +9,1215 @@
   "home": {
     "title": "Electric Car Database",
     "iceTitle": "ICE Vehicle Database",
+    "heroPurpose": "Browse the catalog",
+    "heroTitleEv": "Discover the right EVs",
+    "heroTitleIce": "Discover the right ICE vehicles",
+    "heroSubtitleEv": "Browse the database, save relevant EVs and start your comparison directly from the catalog.",
+    "heroSubtitleIce": "Find suitable ICE vehicles, keep your shortlist in view and send them straight into the cost comparison.",
+    "resultsPurpose": "Browse results",
+    "resultsTitleEv": "EVs at a glance",
+    "resultsTitleIce": "ICE vehicles at a glance",
+    "resultsDescriptionEv": "Scan the database, switch the view mode and save candidates you want to compare next.",
+    "resultsDescriptionIce": "Review the models calmly, switch the view and mark vehicles for the next comparison step.",
+    "evSubtitle": "Find matching EVs and send them directly from card, list or detail view into the calculator.",
+    "iceSubtitle": "Review matching combustion cars and move them straight into the cost comparison without breaking the flow.",
     "loading": "Loading...",
     "noCars": "No vehicles found.",
-    "vehicles": "vehicles"
+    "searchPlaceholder": "Search by brand, model or category",
+    "sortLabel": "Sort",
+    "sortAsc": "Ascending",
+    "sortDesc": "Descending",
+    "sortAscLabel": "ascending",
+    "sortDescLabel": "descending",
+    "sortingBy": "Sorted by {{field}} · {{direction}}",
+    "vehicles": "vehicles",
+    "browseKicker": "Catalog",
+    "ctaCalculator": "Open calculator",
+    "ctaExploreIce": "View ICE vehicles",
+    "ctaExploreEv": "View EVs",
+    "flowHint": "Every card, list row and detail view can send a vehicle directly into the calculator.",
+    "steps": {
+      "findTitle": "Find a vehicle",
+      "findDescription": "Browse the database and use whichever view lets you scan the vehicles fastest.",
+      "compareTitle": "Compare directly",
+      "compareDescription": "Send vehicles from card, list or detail view straight into the calculator without losing context.",
+      "decideTitle": "Understand the cost",
+      "decideDescription": "Use TCO, break-even and cost drivers to make the decision financially, not just technically."
+    }
+  },
+  "landing": {
+    "heroPurpose": "Find the right vehicle",
+    "meta": "Advisor, comparison and cost understanding in one flow",
+    "headlinePrimary": "Find the right car",
+    "headlineAccent": "without guesswork",
+    "sub": "Start guided in the advisor, jump straight into the comparison or browse the database if you prefer exploring on your own.",
+    "ctaAdvisor": "Start advisor",
+    "ctaRechner": "Compare directly",
+    "pathsPurpose": "Three paths, one decision",
+    "pathsTitle": "How the website guides you to a choice",
+    "advisorCardPurpose": "1. Find a vehicle",
+    "advisorCardTitle": "Advisor",
+    "advisorCardDescription": "Later you will define what counts as good, okay or irrelevant. The advisor should only evaluate once you click search.",
+    "advisorCardAction": "Open advisor",
+    "calculatorCardPurpose": "2. Compare directly",
+    "calculatorCardTitle": "Calculator",
+    "calculatorCardDescription": "Send vehicles straight into the TCO calculator and review break-even, cost structure and scenarios.",
+    "calculatorCardAction": "Open calculator",
+    "browseCardPurpose": "3. Explore the database",
+    "browseCardTitle": "Catalog",
+    "browseCardDescription": "Browse EVs and ICE vehicles freely, save favorites and move into comparison or the calculator afterwards.",
+    "browseCardActionEv": "EVs",
+    "browseCardActionIce": "ICE vehicles",
+    "truckFeaturePurpose": "Separate entry",
+    "truckFeatureMeta": "E-trucks as their own homepage area",
+    "truckFeatureTitlePrimary": "Find the right",
+    "truckFeatureTitleAccent": "E-truck area",
+    "truckFeatureDescription": "The E-truck area has its own homepage entry, separate from the regular car flow. That gives fleet topics, knowledge and tools a clearly dedicated space.",
+    "truckFeaturePointOne": "Reachable only from the homepage",
+    "truckFeaturePointTwo": "Own content for electric trucks",
+    "truckFeaturePointThree": "Can evolve independently",
+    "truckFeatureAction": "Open E-truck area",
+    "truckFeatureAria": "Illustration of an electric pickup used as a placeholder for the E-truck area"
+  },
+  "truck": {
+    "mastheadBrand": "E-truck area",
+    "heroPurpose": "Strategy, market and operations",
+    "titlePrimary": "Understand,",
+    "titleAccent": "frame the economics",
+    "subtitle": "This is a dedicated E-truck area with clear paths: first understand relevance, then frame economics and operations, and finally choose suitable models.",
+    "heroPrimaryAction": "Start with understanding",
+    "heroSecondaryAction": "Go straight to Find & Compare",
+    "heroPanelBadge": "Clear entry",
+    "heroPanelTitle": "Three paths, depending on your question",
+    "heroPanelDescription": "The area is deliberately split into three entry points so you land in the right topic directly instead of scrolling through one long mixed page.",
+    "heroPanelPointOne": "Understand: market, use cases, technology",
+    "heroPanelPointTwo": "Economics: TCO, charging, regulation",
+    "heroPanelPointThree": "Find & compare: advisor, models, TCO",
+    "groupHubPurpose": "Three main areas",
+    "groupHubTitle": "Choose the right entry point into the E-truck area first",
+    "groupHubDescription": "When someone opens the truck area, not everything should appear at once. These three main paths lead into the topic first, and only then into deeper content.",
+    "openSection": "Open area",
+    "backToOverview": "Back to E-truck overview",
+    "jumpToContent": "Jump to section",
+    "understandingOverviewPurpose": "Quick framing",
+    "understandingOverviewTitle": "Three things to understand about E-trucks first",
+    "understandingOverviewDescription": "Before comparing models, charging power or cost numbers in detail, a short framing helps: why E-trucks matter, where they fit well and why timing matters now.",
+    "understandingOverview": {
+      "cards": {
+        "relevance": {
+          "purpose": "Why relevant",
+          "title": "E-trucks are not just a climate topic, but a cost and future topic",
+          "stat": "Market + tolls + regulation",
+          "description": "Market pressure, CO2 targets and toll advantages all push the topic at the same time. That makes the transition more commercially and strategically relevant than a few years ago."
+        },
+        "fit": {
+          "purpose": "Where they fit",
+          "title": "Not every operation fits equally well, but many profiles are already realistic",
+          "stat": "Urban to regional",
+          "description": "Predictable routes, return-to-depot logic and clear charging windows already make E-trucks plausible in many urban and regional applications."
+        },
+        "timing": {
+          "purpose": "Why now",
+          "title": "The question is no longer only 'if', but 'when and where first?'",
+          "stat": "Pilot before full rollout",
+          "description": "For many companies, now is the right time to define the first credible pilot operations and build real operating experience."
+        }
+      }
+    },
+    "understandingSubnav": {
+      "whyNow": "Why now?",
+      "signals": "Four signals",
+      "usecases": "Use cases",
+      "comparison": "Technology comparison",
+      "faq": "FAQ"
+    },
+    "architecturePurpose": "Area logic",
+    "architectureTitle": "How the E-truck area will be built",
+    "architectureDescription": "The page should not just show data. It should guide companies from orientation to vehicle selection. That is why the area gets three dedicated working directions.",
+    "showDetails": "Open details",
+    "hideDetails": "Close details",
+    "pillars": {
+      "advisor": {
+        "purpose": "1. Find",
+        "title": "Truck advisor",
+        "description": "An advisor for use case, range, charging windows, depot charging, payload and fleet requirements."
+      },
+      "database": {
+        "purpose": "2. Compare",
+        "title": "Model and comparison database",
+        "description": "A dedicated data layer for E-truck models, technical metrics, charging capability and commercial cornerstones."
+      },
+      "knowledge": {
+        "purpose": "3. Understand",
+        "title": "Information and strategy hub",
+        "description": "Curated knowledge on market dynamics, TCO, tolls, charging infrastructure, range, safety and rollout into operations."
+      }
+    },
+    "advisorPreviewPurpose": "Next functional block",
+    "advisorPreviewTitle": "How the truck advisor works",
+    "advisorPreviewDescription": "Before individual models are compared, the truck advisor should first understand operational reality. These four questions form the first working structure.",
+    "advisorPreview": {
+      "cards": {
+        "useCase": {
+          "purpose": "1. Use case",
+          "title": "Where does the truck actually run?",
+          "description": "Urban logistics, regional transport and long haul need very different range, charging and timing assumptions."
+        },
+        "route": {
+          "purpose": "2. Route & range buffer",
+          "title": "How predictable is the route?",
+          "description": "Daily mileage, return-to-depot logic, weather and topography buffer, and the desired safety margin all shape model suitability early."
+        },
+        "charging": {
+          "purpose": "3. Charging & energy",
+          "title": "What charging base really exists?",
+          "description": "Depot charging, public fast-charging need, grid connection and available charging windows need to be understood before spec comparisons make sense."
+        },
+        "operations": {
+          "purpose": "4. Operations & constraints",
+          "title": "Which limits must not break?",
+          "description": "Payload, body type, toll leverage, shift logic and TCO targets define whether a model fits not just technically, but commercially."
+        }
+      }
+    },
+    "advisorPreviewNote": "Like the passenger-car advisor, the truck advisor only evaluates after a deliberate click instead of recalculating on every input change.",
+    "findVisualPurpose": "Entry",
+    "findVisualTitle": "From use case to a plausible truck shortlist",
+    "findVisualDescription": "The decision starts with route logic, charging setup and operating reality, not with spec sheets. That is what makes the vehicle shortlist meaningful.",
+    "findVisualAria": "Stylised illustration of an electric truck with glowing charging and decision signals",
+    "findVisual": {
+      "tags": {
+        "route": "Use case before spec sheet",
+        "charging": "Make charging realistic",
+        "tco": "Only judge TCO in context"
+      },
+      "metrics": {
+        "range": {
+          "purpose": "1. Use case",
+          "value": "Route + buffer",
+          "label": "Not only range, but the real tour logic determines fit."
+        },
+        "charging": {
+          "purpose": "2. Charging base",
+          "value": "Depot + backup",
+          "label": "A truck only fits once charging works in practice."
+        },
+        "decision": {
+          "purpose": "3. Framing",
+          "value": "TCO in context",
+          "label": "Spec sheets only become reliable when tolls, energy and operations are included."
+        }
+      }
+    },
+    "findFlowPurpose": "Flow",
+    "findFlowTitle": "How Find & Compare is structured",
+    "findFlowDescription": "First define the use case, then narrow the suitable models, and only then validate the business case.",
+    "findFlow": {
+      "steps": {
+        "profile": {
+          "purpose": "Step 1",
+          "title": "Define the use case",
+          "value": "Profile before model",
+          "description": "Daily mileage, payload, return-to-base logic and range buffer narrow the relevant vehicle space first."
+        },
+        "compare": {
+          "purpose": "Step 2",
+          "title": "Compare suitable models",
+          "value": "Fit over data noise",
+          "description": "Only vehicles that are operationally plausible should move into deeper data and model comparisons."
+        },
+        "business": {
+          "purpose": "Step 3",
+          "title": "Validate the business case",
+          "value": "TCO with toll leverage",
+          "description": "At the end, tolls, charging, GHG and infrastructure show how the real economics shift."
+        }
+      }
+    },
+    "findFlowNote": "This keeps the area logical: use case first, then model fit, then the business case.",
+    "findRouteNav": {
+      "overview": "Overview",
+      "berater": "Advisor",
+      "modelle": "Models"
+    },
+    "findAreas": {
+      "berater": {
+        "purpose": "Truck advisor",
+        "title": "Turn the use case into suitable trucks",
+        "description": "Set route, charging and operating limits and review the shortlist on the right."
+      },
+      "modelle": {
+        "purpose": "Model overview",
+        "title": "Compare the current truck data base directly",
+        "description": "Compare the current data base directly by range, payload and charging logic."
+      }
+    },
+    "findHelpPurpose": "Guidance",
+    "findHelpTitle": "When each entry path makes sense",
+    "findHelpDescription": "The deeper answers live here so the overview and work surfaces can stay compact.",
+    "findHelp": {
+      "items": {
+        "advisor": {
+          "question": "When should I start directly in the truck advisor?",
+          "answer": "The advisor is the right entry when the route profile, charging window, payload and trailer requirement need to be clarified first. It helps turn the use-case logic into a robust operational shortlist."
+        },
+        "models": {
+          "question": "When is the model overview enough on its own?",
+          "answer": "The model overview fits when you already know what you are looking for and want to inspect the current data base directly. It is the faster path for comparing range, battery, payload and charging logic."
+        },
+        "tco": {
+          "question": "When should the economic check follow?",
+          "answer": "The TCO check only makes sense once the operational shortlist is stable. Before that, it is often still unclear whether charging base, use case and trailer requirements really fit the trucks being considered."
+        }
+      }
+    },
+    "workspace": {
+      "purpose": "Workspace",
+      "title": "Truck advisor as an operations console",
+      "description": "Define the operation on the left. The right side keeps only the trucks that still fit it operationally.",
+      "modes": {
+        "interactive": "Interactive",
+        "info": "Info"
+      },
+      "expand": "Open panel",
+      "expandShort": "Open",
+      "collapse": "Close panel",
+      "search": "Apply search",
+      "searchShort": "Search",
+      "reset": "Reset",
+      "sidebarTitle": "Filters & input",
+      "sidebarDescription": "Build the draft here first. The right side only reorders after Apply search.",
+      "useCases": {
+        "urban": "Urban & municipal",
+        "regional": "Regional transport",
+        "longhaul": "Long haul"
+      },
+      "routePredictability": {
+        "stable": "Highly predictable",
+        "mixed": "Partly variable",
+        "volatile": "Highly volatile"
+      },
+      "chargeWindow": {
+        "overnight": "Overnight",
+        "between_shifts": "Between shifts",
+        "tight": "Only tight windows"
+      },
+      "vehicleFormat": {
+        "any": "Format open",
+        "rigid": "Rigid / solo truck",
+        "tractor": "Tractor unit"
+      },
+      "trailerUse": {
+        "not_required": "No trailer needed",
+        "optional": "Trailer optional",
+        "required": "Trailer required"
+      },
+      "chargingStandard": {
+        "ccs": "CCS is enough",
+        "mcs": "MCS preferred"
+      },
+      "gridStatus": {
+        "secured": "Grid connection secured",
+        "unclear": "Grid connection unclear",
+        "none": "No charging base yet"
+      },
+      "fields": {
+        "dailyKm": "Daily kilometres",
+        "rangeBuffer": "Range buffer (%)",
+        "routePredictability": "Route predictability",
+        "returnToDepot": "Return to depot on the same day",
+        "depotCharging": "Depot charging is realistically available",
+        "publicFastCharge": "Public fast charging is acceptable",
+        "chargeWindow": "Available charging window",
+        "gridStatus": "Charging and grid status",
+        "payloadNeed": "Payload need (t)",
+        "vehicleFormat": "Vehicle format",
+        "trailerUse": "Trailer requirement",
+        "chargingStandard": "Charging standard",
+        "modelQuery": "Search manufacturer or model",
+        "sortKey": "Sort by",
+        "sortOrder": "Order"
+      },
+      "placeholders": {
+        "modelQuery": "e.g. eActros, Volvo or Scania"
+      },
+      "sortKey": {
+        "fit": "Best fit",
+        "range": "Range",
+        "payload": "Payload",
+        "charging": "Charging standard",
+        "model": "Brand / model"
+      },
+      "sortOrder": {
+        "desc": "High to low",
+        "asc": "Low to high"
+      },
+      "steps": {
+        "useCase": {
+          "title": "Define the use case",
+          "description": "First clarify in which operational corridor the truck is supposed to run.",
+          "short": "Profile"
+        },
+        "route": {
+          "title": "Frame route and range",
+          "description": "Daily kilometres, buffer and return logic define the operational base.",
+          "short": "Route"
+        },
+        "charging": {
+          "title": "Frame charging and infrastructure",
+          "description": "Depot charging, fast charging and grid status all shape the first fit picture.",
+          "short": "Charging"
+        },
+        "operations": {
+          "title": "Set the operating limits",
+          "description": "Payload and similar constraints keep the first matches realistic.",
+          "short": "Ops"
+        },
+        "refinement": {
+          "title": "Refine operations and tech",
+          "description": "Vehicle format, trailer requirement and charging standard make the shortlist more operationally reliable.",
+          "short": "Refine"
+        },
+        "results": {
+          "title": "Control the result view",
+          "description": "Search and sorting organize the right side without recalculating the operational fit itself.",
+          "short": "Results"
+        }
+      },
+      "status": {
+        "applied": "Active conditions",
+        "useCase": "Use case",
+        "dailyKm": "Daily km",
+        "requiredRange": "Target range",
+        "routePredictability": "Route profile",
+        "chargeWindow": "Charge window",
+        "chargeBase": "Charging base",
+        "vehicleFormat": "Format",
+        "trailerUse": "Trailer",
+        "chargingStandard": "Charging standard",
+        "depotYes": "Depot charging",
+        "depotNo": "without depot charging"
+      },
+      "summary": {
+        "filtersPurpose": "Current state",
+        "filtersText": "This many inputs currently shape the fit picture.",
+        "matchesPurpose": "Strong fit corridors",
+        "matchesText": "These models currently fit well or very well.",
+        "nextPurpose": "Hidden models",
+        "nextValue": "Exclusions",
+        "nextText": "This many trucks are currently hidden because range, payload or charging base do not fit.",
+        "catalogPurpose": "Model base",
+        "catalogText": "The current base already covers {{brands}} manufacturers."
+      },
+      "resultsPurpose": "Fit picture",
+      "resultsTitle": "Which trucks currently fit your draft best?",
+      "resultsDescription": "This shortlist only keeps the models that currently fit your operational draft best.",
+      "results": {
+        "states": {
+          "excellent": "Very strong fit",
+          "good": "Good fit",
+          "limited": "With trade-offs",
+          "poor": "Critical"
+        },
+        "fields": {
+          "range": "Range",
+          "payload": "Payload",
+          "charging": "Charging logic",
+          "format": "Format",
+          "standard": "Charging standard",
+          "trailer": "Trailer"
+        },
+        "trailerStates": {
+          "ready": "Trailer capable",
+          "notReady": "No trailer focus"
+        },
+        "charging": {
+          "depot": "Depot first",
+          "depotPublic": "Depot + fast-charge backup",
+          "publicReady": "Fast charging usable",
+          "fastPriority": "Fast charging central"
+        },
+        "leadPurpose": "Current frontrunner",
+        "leadAhead": "currently leads the next model by {{gap}} points.",
+        "leadSolo": "is currently the only plausible match in your setup.",
+        "whyFit": "Why it fits",
+        "watchouts": "What to watch",
+        "noWatchouts": "No critical issues in the first fit picture right now.",
+        "emptyTitle": "No plausible truck match right now",
+        "emptyDescription": "Check the charging base, daily kilometres and payload first. In the current draft, all available models are excluded.",
+        "emptySearchTitle": "The current search hides all visible matches",
+        "emptySearchDescription": "There are plausible models for your draft, but the current search or sort setup is not showing any right now.",
+        "excludedNote": "{{count}} models are currently hidden because range, payload or charging base do not fit the draft.",
+        "toolbarPurpose": "Result controls",
+        "toolbarMatches": "visible models",
+        "hiddenBySearch": "{{count}} more hidden by search",
+        "reasons": {
+          "directUseCase": "use case matches directly",
+          "adjacentUseCase": "close to your use case",
+          "useCaseTension": "meaningfully differs on use case",
+          "rangeStrong": "range buffer is robust",
+          "rangeOkay": "range remains plausible",
+          "rangeTight": "range is close to the limit",
+          "payloadStrong": "payload is well covered",
+          "payloadOkay": "payload remains plausible",
+          "payloadTight": "payload is close to the limit",
+          "routeFit": "route predictability fits well",
+          "routeChallenge": "route logic stays demanding",
+          "returnDepot": "return-to-depot logic fits well",
+          "openOperation": "open operation remains plausible",
+          "depotReady": "depot charging supports the fit",
+          "fastChargeReady": "fast charging can stabilize the case",
+          "chargeWindowFit": "charging window fits the model",
+          "chargeWindowWeak": "charging window stays tight",
+          "vehicleFormatFit": "vehicle format fits directly",
+          "trailerReady": "trailer use can be covered",
+          "trailerOptionalMissing": "trailer use would stay limited",
+          "mcsReady": "MCS matches the fast-charge focus",
+          "mcsMissing": "charging standard stays more conservative",
+          "ccsEnough": "CCS is sufficient for the current draft",
+          "gridSecured": "secured grid status helps",
+          "gridMissing": "grid status should still be clarified"
+        }
+      },
+      "business": {
+        "purpose": "Economic follow-up layer",
+        "title": "How economically viable does this truck fit look?",
+        "description": "After the operational shortlist comes the first business-case framing. This is not the full calculation yet, but it already makes the next commercial step visible.",
+        "stagePurpose": "Current stage",
+        "leveragePurpose": "Strongest cost lever",
+        "riskPurpose": "Biggest business risk",
+        "nextPurpose": "Next review step",
+        "openEconomics": "Open economics & operations",
+        "stage": {
+          "ready": {
+            "title": "Business case looks connectable",
+            "description": "The operational fit is strong, and infrastructure no longer looks like the main blocker. It now makes sense to move into a real TCO review."
+          },
+          "pilot": {
+            "title": "Pilot looks commercially plausible",
+            "description": "The shortlist looks credible, but operations or infrastructure should still be stress-tested before scaling."
+          },
+          "review": {
+            "title": "Refine the operating logic first",
+            "description": "There are usable paths, but range, charging or trailer logic are not strong enough yet for a clean business case."
+          },
+          "blocked": {
+            "title": "No viable business case yet",
+            "description": "As long as no plausible operational model remains, the commercial assessment should not start yet."
+          }
+        },
+        "leverage": {
+          "highMileage": {
+            "title": "High daily mileage strengthens the toll lever",
+            "description": "With many kilometres per day, the CO2-differentiated toll advantage becomes a meaningful positive cost driver."
+          },
+          "midMileage": {
+            "title": "Tolls and energy can already work well",
+            "description": "At a medium daily profile, toll savings and operating costs can already start to offset the higher entry price."
+          },
+          "selectiveMileage": {
+            "title": "Economics stay more use-case dependent",
+            "description": "At lower utilisation, the business case becomes more sensitive. Charging readiness, operational discipline and incentives then matter more."
+          }
+        },
+        "risk": {
+          "stableBase": {
+            "title": "No dominant business blocker is visible",
+            "description": "In the current draft, no single blocker dominates. That suggests the next step is to connect tolls, charging costs and TCO assumptions."
+          },
+          "missingChargeBase": {
+            "title": "Without a charging base the business case collapses",
+            "description": "If neither depot charging nor reliable fast charging is viable, the commercial logic becomes unstable very quickly."
+          },
+          "gridMissing": {
+            "title": "The grid issue remains the main blocker",
+            "description": "If depot charging is planned but the grid status is unresolved, the business case remains too uncertain operationally and commercially."
+          },
+          "mcsGap": {
+            "title": "Charging ambition and truck capability still diverge",
+            "description": "If MCS is preferred but the truck charges more conservatively, the real break-window and recharge case should be checked in detail."
+          },
+          "rangeTight": {
+            "title": "Range remains commercially sensitive",
+            "description": "A tight range fit can force unplanned charging windows and extra time pressure, which can hurt commercial viability indirectly."
+          },
+          "payloadTight": {
+            "title": "Payload is close to the limit",
+            "description": "If payload demand has almost no buffer, a technically fitting truck can still become commercially inflexible in daily operation."
+          },
+          "chargeWindowTight": {
+            "title": "Charging window remains too narrow",
+            "description": "Tight charging windows increase the risk that charging power, break structure and cost logic will not line up cleanly."
+          },
+          "noOperationalFit": {
+            "title": "The operational base is not viable yet",
+            "description": "Before tolls, GHG or energy prices are discussed, there needs to be a plausible truck fit in the operation itself."
+          }
+        },
+        "next": {
+          "buildBusinessCase": {
+            "title": "Now connect the full economics layer",
+            "description": "Next, tolls, charging price, infrastructure and rollout assumptions should be applied to this shortlist."
+          },
+          "clarifyGrid": {
+            "title": "Clarify grid connection and charging base first",
+            "description": "Before running TCO, verify whether the intended charging base is realistic and available in time."
+          },
+          "pricePublicCharging": {
+            "title": "Price public fast charging properly",
+            "description": "If the fit relies heavily on public charging, the business case should be mirrored early with realistic fast-charging costs."
+          },
+          "testCcsFallback": {
+            "title": "Test the MCS expectation against the truck reality",
+            "description": "A short scenario check helps here: is CCS enough in practice, or does the long-haul case become too tight commercially?"
+          },
+          "runPilot": {
+            "title": "Move forward with a controlled pilot",
+            "description": "The fit looks promising, but a limited pilot is the cleanest way to validate operations and economics together."
+          },
+          "reworkProfile": {
+            "title": "Refine the use case first",
+            "description": "Before deepening the numbers, the draft should become more precise on range, charging or trailer need."
+          }
+        }
+      },
+      "tco": {
+        "purpose": "5-year preview",
+        "title": "What does the first TCO view of the frontrunner look like?",
+        "description": "For the current frontrunner we now run a simplified 5-year preview against a diesel equivalent. This shows whether tolls, energy, GHG and maintenance are already able to carry the higher upfront cost.",
+        "leadPurpose": "Current frontrunner vs. diesel",
+        "advantageText": "already comes in below the diesel equivalent across this five-year preview.",
+        "extraCostText": "still remains above the diesel equivalent in this five-year preview.",
+        "breakEvenBefore": "The extra investment would break even after roughly {{years}} years.",
+        "breakEvenAfter": "Under these assumptions the extra investment would not fully break even within five years.",
+        "assumptions": "Simplified preview across {{years}} years. The current assumption set uses {{depotShare}} depot charging and {{publicShare}} public fast charging. Before a final decision, mirror this preview against real fleet, energy and toll assumptions.",
+        "tags": {
+          "advantage": "5Y advantage",
+          "check": "Check TCO"
+        },
+        "summary": {
+          "annualBenefit": "Annual benefit",
+          "annualBenefitText": "How strong the current running-cost delta looks per year.",
+          "capexDelta": "Upfront premium",
+          "capexDeltaText": "How far the truck currently sits above the diesel equivalent.",
+          "chargingMix": "Charging mix",
+          "chargingMixText": "Depot versus public fast-charge share in the current preview.",
+          "yearlyDistance": "Annual mileage",
+          "yearlyDistanceText": "Derived from daily km and use-case profile."
+        },
+        "fields": {
+          "energyCost": "Annual power cost",
+          "energyCostText": "Based on consumption, charging mix and power-price assumptions.",
+          "tollBenefit": "Annual toll benefit",
+          "tollBenefitText": "The CO2-differentiated toll effect remains one of the strongest levers.",
+          "thg": "Annual GHG revenue",
+          "thgText": "Mirrored as a rough N3 preview using the current quota logic.",
+          "maintenance": "Annual maintenance benefit",
+          "maintenanceText": "Simplified difference between an e-truck and diesel in operation."
+        }
+      }
+    },
+    "findComparePurpose": "Product areas",
+    "findCompareTitle": "Choose the right entry into Find & Compare",
+    "findCompareDescription": "Start in the advisor from the use case or inspect the models directly.",
+    "findCompare": {
+      "cards": {
+        "advisor": {
+          "purpose": "1. Truck advisor",
+          "title": "Derive suitable vehicles from the use case",
+          "description": "Not only specs, but also tour type, charging window, payload and operational rules shape the first shortlist."
+        },
+        "database": {
+          "purpose": "2. Comparison database",
+          "title": "Compare models in a structured way",
+          "description": "The database puts charging power, battery, range, weights, body options and other model data side by side cleanly."
+        },
+        "tco": {
+          "purpose": "3. Economics",
+          "title": "Frame TCO, tolls and charging assumptions",
+          "description": "After model selection, the economic layer shows how tolls, energy, GHG and infrastructure shift the business case."
+        }
+      }
+    },
+    "findCompareNote": "The economic follow-up sits directly behind the advisor once the operational shortlist is in place.",
+    "findModelsPurpose": "Model overview",
+    "findModelsTitle": "Current truck data base at a glance",
+    "findModelsDescription": "All available E-trucks at a glance. Use it to quickly check which models are already part of the current base.",
+    "findModelsNote": "{{models}} models from {{brands}} manufacturers currently make up the active truck data base.",
+    "findModelsOpenAdvisor": "Evaluate in advisor",
+    "topicsPurpose": "Knowledge modules",
+    "topicsTitle": "The first content blocks for high-value information",
+    "topicsDescription": "From your material, we pull the highest-value topics to the front first. That gives us a solid information area before we expand every detail.",
+    "sections": {
+      "verstehen": {
+        "purpose": "1. Understand",
+        "titlePrimary": "Understand",
+        "titleAccent": "and frame E-trucks",
+        "description": "This is the big-picture area: why E-trucks matter, what market logic is driving them, and in which operational profiles the technology already fits well today.",
+        "cardTitle": "Understand",
+        "cardDescription": "Get a quick view of market logic, use cases and technology.",
+        "panelBadge": "Strategic entry",
+        "panelTitle": "Why E-trucks are becoming relevant now",
+        "panelDescription": "This area bundles market context, strategic signals and real-world use cases into a first clear orientation.",
+        "panel": {
+          "pointOne": "Market & OEMs",
+          "pointTwo": "Four signal statements",
+          "pointThree": "Urban to long haul"
+        },
+        "highlights": {
+          "one": "Market picture",
+          "two": "Signal overview",
+          "three": "Use cases"
+        }
+      },
+      "wirtschaftlichkeit-betrieb": {
+        "purpose": "2. Economics & operations",
+        "titlePrimary": "Frame cost,",
+        "titleAccent": "charging and operations",
+        "description": "This is the operational core: which cost drivers matter, how tolls and GHG help, and what depot charging, regulation and operating reality actually mean.",
+        "cardTitle": "Economics & operations",
+        "cardDescription": "TCO, charging, rollout and regulation for real fleet decisions.",
+        "panelBadge": "Operating logic",
+        "panelTitle": "Economics come from multiple levers at once",
+        "panelDescription": "The purchase price alone does not decide the business case. This area combines TCO, tolls, charging infrastructure and rollout into one operating view.",
+        "panel": {
+          "pointOne": "TCO & tolls",
+          "pointTwo": "Rollout & grid connection",
+          "pointThree": "Charging systems & regulation"
+        },
+        "highlights": {
+          "one": "TCO levers",
+          "two": "Charging operations",
+          "three": "Regulation"
+        }
+      },
+      "finden-vergleichen": {
+        "purpose": "3. Find & compare",
+        "titlePrimary": "Find the right trucks",
+        "titleAccent": "and compare them",
+        "description": "This area brings the truck advisor, model overview and economic follow-up together in one clear decision surface.",
+        "cardTitle": "Find & compare",
+        "cardDescription": "Advisor, model view and economics as one working area.",
+        "panelBadge": "Product buildout",
+        "panelTitle": "From use case to a robust model decision",
+        "panelDescription": "This area connects the truck advisor, model overview and commercial follow-up in a single workflow.",
+        "panel": {
+          "pointOne": "Truck advisor",
+          "pointTwo": "Comparison database",
+          "pointThree": "Truck TCO"
+        },
+        "highlights": {
+          "one": "Advisor logic",
+          "two": "Model data",
+          "three": "Economics calculator"
+        }
+      }
+    },
+    "topics": {
+      "market": {
+        "purpose": "Market & OEMs",
+        "title": "Market development and suppliers",
+        "description": "An overview of why E-trucks are becoming economically relevant now and which manufacturers are shaping the market.",
+        "pointOne": "Germany as a key lead market for heavy E-trucks",
+        "pointTwo": "Big Seven, new models and competitive pressure",
+        "pointThree": "How to frame scaling, market share and long-haul readiness"
+      },
+      "economics": {
+        "purpose": "TCO & revenue",
+        "title": "Economics instead of gut feeling",
+        "description": "A structured view of extra CapEx, toll benefits, GHG quota, energy prices and operational savings.",
+        "pointOne": "Toll savings as the strongest economic lever",
+        "pointTwo": "GHG quota as an additional revenue stream",
+        "pointThree": "Lifecycle cost thinking instead of upfront price only"
+      },
+      "infrastructure": {
+        "purpose": "Charging & grid",
+        "title": "Infrastructure as the key constraint",
+        "description": "The page should explain why depot charging, grid connection and MCS determine operational success.",
+        "pointOne": "Depot charging as the main charging scenario",
+        "pointTwo": "Plan grid connection and load management early",
+        "pointThree": "Classify CCS and MCS logically by use case"
+      },
+      "operations": {
+        "purpose": "Operations & safety",
+        "title": "Range, operations and qualification",
+        "description": "A module for real-world range, payload rules, DGUV qualification, fire safety and driver training.",
+        "pointOne": "Operational capability instead of brochure values",
+        "pointTwo": "Weight allowance, 44-ton rule and dispatch planning",
+        "pointThree": "Safe operation through training and standards"
+      }
+    },
+    "signalsPurpose": "Why now?",
+    "signalsTitle": "Four signals that make E-trucks strategically relevant right now",
+    "signalsDescription": "This first orientation condenses market movement, toll logic, scaling pressure and infrastructure into four clear reasons why E-trucks belong on the decision agenda already today.",
+    "signals": {
+      "momentum": {
+        "purpose": "Market momentum",
+        "stat": "+37.9%",
+        "title": "Heavy E-trucks are growing despite a weak overall market",
+        "description": "According to the material you provided, registrations of heavy E-trucks above 16 tonnes in Germany rose to 1,398 units in 2025. That is real momentum even while the overall truck market softened."
+      },
+      "scale": {
+        "purpose": "Scaling gap",
+        "stat": "2.6%",
+        "title": "Market share is still small, but scaling is now mandatory",
+        "description": "The share of heavy E-trucks in sales remains low. That is exactly why the current phase matters so much for OEMs, hauliers and charging infrastructure players."
+      },
+      "toll": {
+        "purpose": "Cost lever",
+        "stat": "34.8 ct/km",
+        "title": "The toll system is the strongest short-term economic lever",
+        "description": "Heavy diesel trucks carry high toll costs, while zero-emission trucks were exempt through the end of 2025 and remain strongly advantaged afterwards."
+      },
+      "infrastructure": {
+        "purpose": "Operational reality",
+        "stat": "~80%",
+        "title": "Success depends on depot charging and grid connection",
+        "description": "Most charging events are expected to happen at the depot. That makes charging infrastructure an operational core issue rather than a side topic."
+      }
+    },
+    "economicsPurpose": "Economics",
+    "economicsTitle": "Frame the most important economic levers first",
+    "economicsDescription": "Before comparing individual models, the area needs a clear economic logic. These four levers explain why heavy-duty decisions are almost always made through TCO thinking.",
+    "economics": {
+      "capex": {
+        "purpose": "Upfront cost",
+        "stat": "+€200,000",
+        "title": "The entry price is high, but the delta is visible",
+        "description": "For heavy tractor units, the extra cost versus diesel is currently often in the range of roughly €200,000. The traction battery remains the biggest cost block."
+      },
+      "toll": {
+        "purpose": "Toll advantage",
+        "stat": "~€34,800/year",
+        "title": "Tolls can offset a large share of the extra CapEx",
+        "description": "At 100,000 km of annual mileage, the toll advantage for heavy vehicles becomes a major economic driver compared with diesel in Germany."
+      },
+      "thg": {
+        "purpose": "Additional revenue",
+        "stat": "€3,340–4,175",
+        "title": "The GHG quota can further support the business case",
+        "description": "For heavy N3 vehicles, the GHG premium can become a meaningful additional revenue stream. At the same time, both timing and value remain market-dependent."
+      },
+      "opex": {
+        "purpose": "Operating costs",
+        "stat": "up to -50%",
+        "title": "Maintenance drops, energy becomes a management topic",
+        "description": "Electric drivetrains remove many classic maintenance burdens. At the same time, profitability depends heavily on how much energy is charged cheaply at the depot versus expensively in public."
+      }
+    },
+    "economicsNote": "Note: tolls, GHG premiums, incentives and energy prices are time-sensitive. Values like these should always be read with a review date and context.",
+    "opsOverviewPurpose": "Quick framing",
+    "opsOverviewTitle": "Three things decide this page first",
+    "opsOverviewDescription": "Before opening the deeper modules, this short view helps frame the page: where the biggest lever sits, where the biggest risk sits, and which question should be answered first.",
+    "opsOverview": {
+      "cards": {
+        "lever": {
+          "purpose": "Biggest lever",
+          "title": "Tolls and energy logic shift the TCO picture most strongly",
+          "stat": "Tolls + depot charging",
+          "description": "The biggest shift rarely comes from one component alone. It usually comes from the combination of toll advantage and low-cost depot electricity."
+        },
+        "risk": {
+          "purpose": "Biggest risk",
+          "title": "Charging infrastructure and grid connection delay rollouts more often than the truck itself",
+          "stat": "Grid before vehicle",
+          "description": "Many projects do not fail on vehicle technology, but on lead times for power capacity, transformer work or robust charging windows."
+        },
+        "decision": {
+          "purpose": "First decision",
+          "title": "The first question is not 'Which truck?' but 'Which route first?'",
+          "stat": "Route before model",
+          "description": "A commercially sensible transition almost always starts with a viable route, not with the technically most exciting vehicle."
+        }
+      }
+    },
+    "opsSubnav": {
+      "economics": "TCO levers",
+      "rollout": "Rollout",
+      "regulation": "Tolls & incentives",
+      "charging": "Charging systems",
+      "checklist": "Review checklist"
+    },
+    "opsRouteNav": {
+      "overview": "Overview",
+      "business-case": "Business case",
+      "laden-betrieb": "Charging & operations",
+      "regulatorik": "Regulation"
+    },
+    "opsSplitPurpose": "Three sub-areas",
+    "opsSplitTitle": "Start with the question you actually need to answer",
+    "opsSplitDescription": "Instead of stacking cost logic, charging reality and regulation on one long mixed page, this area is now split into three clearer perspectives.",
+    "opsAreas": {
+      "business-case": {
+        "purpose": "Cost & viability",
+        "title": "Make the business case reliable first",
+        "description": "This view focuses on extra CapEx, toll savings, GHG revenue, operating costs and the four questions that should be answered before ordering."
+      },
+      "laden-betrieb": {
+        "purpose": "Rollout & operations",
+        "title": "Plan charging and operations properly",
+        "description": "This view checks how pilot rollout, depot charging, charging windows, grid connection and day-to-day operations fit together."
+      },
+      "regulatorik": {
+        "purpose": "Framework & pressure",
+        "title": "Frame tolls, incentives and targets",
+        "description": "This view focuses on the rules that increase pressure, change timing and influence the business case beyond the vehicle itself."
+      }
+    },
+    "rolloutPurpose": "Rollout path",
+    "rolloutTitle": "How a company should prepare the transition structurally",
+    "rolloutDescription": "Instead of switching the whole fleet at once, almost everything points to a staged, data-driven rollout. These four steps form the first working pattern.",
+    "rollout": {
+      "steps": {
+        "one": {
+          "title": "Pilot routes before full rollout",
+          "description": "Start with 1:1 replacements on predictable short-haul and regional routes and gather real operating data before scaling the fleet."
+        },
+        "two": {
+          "title": "Secure grid connection early",
+          "description": "Involve the grid operator early, because higher capacity and new transformer stations can require one to two years of lead time."
+        },
+        "three": {
+          "title": "Build the energy mix strategically",
+          "description": "Think depot charging, load management, PV and energy management as one system so low-cost electricity becomes a durable advantage."
+        },
+        "four": {
+          "title": "Make TCO and route simulation the standard",
+          "description": "The list price alone should never drive the decision. TCO, tolls, GHG, charging windows and real routes need to define the business case."
+        }
+      }
+    },
+    "rolloutNote": "Future check: incentives, toll rates and public high-power charging availability will keep changing. The final knowledge area should therefore maintain all such content with clear time references.",
+    "regulationPurpose": "Incentives & regulation",
+    "regulationTitle": "Tolls, GHG revenue and incentives are part of the investment logic",
+    "regulationDescription": "For heavy E-trucks, some of the biggest business differences do not sit in the vehicle alone. They sit in toll treatment, GHG revenue, the incentive landscape and the timing logic around all of them.",
+    "regulation": {
+      "toll": {
+        "purpose": "Toll system",
+        "stat": "34.8 ct/km",
+        "title": "CO2-differentiated tolls massively shift the business case",
+        "description": "Heavy diesel trucks carry high per-kilometre toll costs, while zero-emission trucks were exempt through the end of 2025 and remain strongly advantaged afterwards. This lever affects every real route."
+      },
+      "thg": {
+        "purpose": "GHG quota",
+        "stat": "€3,340–4,175",
+        "title": "The GHG quota can become a meaningful extra layer in the business case",
+        "description": "Heavy N3 vehicles can earn noticeable premiums through their estimated electricity consumption. At the same time, market pricing, filing partner and deadlines remain critical."
+      },
+      "incentives": {
+        "purpose": "Incentive landscape",
+        "stat": "regional rather than central",
+        "title": "Incentives now need much stronger regional checking",
+        "description": "After the central KsNI programme stopped for new applications, state-level and regional programmes became much more important. For companies that means checking location, timing and funding windows carefully."
+      },
+      "compliance": {
+        "purpose": "Deadlines & targets",
+        "stat": "2030 as pressure point",
+        "title": "Regulation pushes OEMs and operators toward earlier decisions",
+        "description": "EU fleet targets, CO2 pressure and the rollout of new infrastructure mean that waiting can itself become a strategic risk. Timing therefore becomes part of the business case."
+      }
+    },
+    "regulationNote": "Important: this area deliberately separates core knowledge from current status. Toll rates, incentives, GHG revenues and deadlines can change quickly.",
+    "chargingPurpose": "Charging systems",
+    "chargingTitle": "Which charging types make sense for which job today",
+    "chargingDescription": "Not every charging level solves the same problem. For the E-truck area, the key is to classify systems by use case, dwell time and operational role.",
+    "charging": {
+      "ac": {
+        "purpose": "Slow & low-cost",
+        "title": "AC charging",
+        "power": "11–44 kW",
+        "description": "AC is mainly a depot and dwell-time topic. For large long-haul batteries it is too slow, but for calm overnight windows it can be very economical.",
+        "time": "Typical: around 10–15 hours for a large battery",
+        "useCase": "Best for: overnight charging when time matters more than speed"
+      },
+      "ccs": {
+        "purpose": "Depot & regional",
+        "title": "CCS",
+        "power": "50–150 kW",
+        "description": "CCS already covers many structured regional use cases. It is a useful bridge between simple depot charging and very fast public charging.",
+        "time": "Typical: around 4–8 hours for a large battery",
+        "useCase": "Best for: depot, day-edge windows and predictable charging slots"
+      },
+      "hpc": {
+        "purpose": "Faster on the road",
+        "title": "CCS high power",
+        "power": "250–400 kW",
+        "description": "High-power CCS matters when the truck needs faster top-ups on route without yet reaching megawatt charging levels.",
+        "time": "Typical: around 1.5–2.5 hours for a large battery",
+        "useCase": "Best for: line haul, faster intermediate charging and regional long-distance"
+      },
+      "mcs": {
+        "purpose": "Long haul",
+        "title": "Megawatt Charging System",
+        "power": "750–1,200 kW",
+        "description": "MCS is the real unlock for heavy long-haul operations. It is what makes large batteries economically chargeable inside operational break windows.",
+        "time": "Typical: around 30–45 minutes for ~600 kWh",
+        "useCase": "Best for: motorway corridors, long haul and pause-based charging"
+      }
+    },
+    "chargingNote": "Important: real charging time depends not only on charger power, but also on battery size, charge curve, temperature and available grid capacity.",
+    "checklistPurpose": "Review structure",
+    "checklistTitle": "These four questions should be clear before ordering",
+    "checklistDescription": "These four items move the topic from orientation into a credible pre-check. They form a sensible minimum structure before any pilot or vehicle order.",
+    "checklist": {
+      "items": {
+        "route": {
+          "title": "Which real route is the first E-truck candidate?",
+          "description": "Start with a real tour including mileage, topography, dwell times and safety reserve instead of a generic wish profile."
+        },
+        "charging": {
+          "title": "Where and when will the truck actually charge?",
+          "description": "Without a clear charging window, depot logic and backup scenario, even a technically suitable vehicle remains operationally weak."
+        },
+        "grid": {
+          "title": "Can the required electrical capacity actually be secured?",
+          "description": "Grid connection, load management and likely upgrade lead times must be clarified early or the whole rollout timeline shifts."
+        },
+        "economics": {
+          "title": "Is the business case based on real assumptions?",
+          "description": "Tolls, GHG, charging-price mix, maintenance and actual route logic should be reviewed together before fleet quantities are decided."
+        }
+      }
+    },
+    "opsFaqPurpose": "Deeper questions",
+    "opsFaqTitle": "The detail questions that usually appear after the first numbers",
+    "opsFaqDescription": "The main page only shows the core logic. The deeper points live here for the second review round.",
+    "opsFaq": {
+      "items": {
+        "timing": {
+          "question": "When is it worth moving into a real TCO review?",
+          "answer": "As soon as the use case, range and charging base look operationally plausible. Only then do tolls, energy price, GHG revenue and infrastructure assumptions become reliable enough for a fleet decision."
+        },
+        "chargingBase": {
+          "question": "Why must the charging base be clarified before scaling?",
+          "answer": "Without a secured charging base, even a strong model fit can fall apart in day-to-day operations. Depot charging, grid connection, charging windows and a fast-charge backup all influence whether the economics can really be achieved."
+        },
+        "pricing": {
+          "question": "Which cost assumptions deserve the closest scrutiny?",
+          "answer": "Above all public fast charging, real annual mileage, toll leverage and infrastructure costs. These four points often move the business case more than small differences between individual truck models."
+        }
+      }
+    },
+    "useCasesPurpose": "Use cases",
+    "useCasesTitle": "Where E-trucks already fit well and where the hurdles are still higher",
+    "useCasesDescription": "Not every use case is equally mature. This first framing helps think about E-trucks through operational fit rather than through specs alone.",
+    "useCases": {
+      "urban": {
+        "purpose": "Urban & municipal",
+        "title": "Urban and municipal operation",
+        "description": "This is often the clearest current fit: predictable routes, many stops, recuperation and regular return to depot all support the drivetrain well.",
+        "strength": "Strength: predictable routes and strong recuperation",
+        "constraint": "Constraint: depot and charging-space organisation",
+        "focus": "Check first: dwell times, charging windows and municipal route patterns"
+      },
+      "regional": {
+        "purpose": "Regional transport",
+        "title": "Regional distribution and line haul",
+        "description": "Regional profiles are often the best bridge into scale. They combine higher daily output with still manageable charging planning.",
+        "strength": "Strength: good balance between range and predictability",
+        "constraint": "Constraint: public intermediate charging may become relevant",
+        "focus": "Check first: depot charging plus a robust backup charging scenario"
+      },
+      "longhaul": {
+        "purpose": "Long haul",
+        "title": "Heavy long-distance transport",
+        "description": "Long haul is becoming increasingly realistic, but it is most dependent on battery size, charge rate, MCS rollout and dispatch quality.",
+        "strength": "Strength: strong toll lever and fast technology progress",
+        "constraint": "Constraint: public high-power infrastructure and tight time windows",
+        "focus": "Check first: real route, MCS outlook and operational margin"
+      }
+    },
+    "comparisonPurpose": "Technology comparison",
+    "comparisonTitle": "Why the E-truck is currently the most plausible next step",
+    "comparisonDescription": "This framing does not replace a complete market study, but it helps explain quickly why battery-electric trucks currently offer the strongest operational perspective in road freight.",
+    "comparison": {
+      "cards": {
+        "bev": {
+          "purpose": "Battery-electric",
+          "title": "Strongest perspective for many predictable road operations",
+          "stat": "high efficiency",
+          "description": "Direct electricity use, toll advantages and predictable depot charging make BEV trucks the most realistic transformation path for many fleets today."
+        },
+        "diesel": {
+          "purpose": "Diesel",
+          "title": "Still the current reference, but under growing cost pressure",
+          "stat": "familiar, but burdened",
+          "description": "Diesel remains the starting point in many fleets, but it is steadily losing ground because of tolls, CO2 pressure and future strategy requirements."
+        },
+        "hydrogen": {
+          "purpose": "Hydrogen",
+          "title": "Interesting for special cases, but currently weaker operationally and commercially",
+          "stat": "still less mature",
+          "description": "For broad road freight use, hydrogen is currently usually more expensive and far less infrastructure-ready than battery-electric solutions."
+        }
+      }
+    },
+    "comparisonNote": "For many fleets, battery-electric is already the most plausible entry point, as long as use case, charging setup and TCO are assessed together.",
+    "faqPurpose": "Common objections",
+    "faqTitle": "Four questions that usually come up first",
+    "faqDescription": "These short answers help frame the most common reservations before going deeper into models, infrastructure or business-case details.",
+    "faq": {
+      "cards": {
+        "fit": {
+          "purpose": "Operational fit",
+          "question": "Do E-trucks already fit many real routes today?",
+          "answer": "Yes, especially where routes are predictable, vehicles return to depot regularly and charging windows can be organised reliably."
+        },
+        "charging": {
+          "purpose": "Charging setup",
+          "question": "Does every operation need megawatt charging from day one?",
+          "answer": "No. For many urban and regional profiles, depot charging or structured CCS charging is enough. MCS becomes critical mainly in heavy long-haul use."
+        },
+        "cost": {
+          "purpose": "Economics",
+          "question": "Is the higher purchase price automatically a deal breaker?",
+          "answer": "Not necessarily. Only when toll savings, energy cost, GHG revenue, maintenance and real mileage are considered together does the business case become clear."
+        },
+        "timing": {
+          "purpose": "Timing",
+          "question": "Should companies wait for later model generations?",
+          "answer": "Not as a rule. For many operators it is more valuable to start with a credible pilot now and build operating experience than to wait for a supposedly perfect moment."
+        }
+      }
+    },
+    "nextPurpose": "Next build step",
+    "nextTitle": "The groundwork is now in place",
+    "nextDescription": "Next we can deepen one of the three strands on purpose: truck advisor, model database or high-quality knowledge modules with real content.",
+    "backHome": "Back to homepage",
+    "goAdvisor": "Go to advisor"
+  },
+  "advisor": {
+    "heroPurpose": "1. Find a vehicle",
+    "title": "Advisor",
+    "subtitle": "The first advisor version now guides the user through switchable criteria, good and okay thresholds and a deliberate search click toward suitable vehicles.",
+    "statusSearch": "Scoring only starts after clicking Search.",
+    "statusToggle": "Every criterion can be switched on or off individually.",
+    "statusFlow": "Suitable vehicles then move directly into comparison and calculator.",
+    "setupPurpose": "Prepare criteria",
+    "setupTitle": "Choose relevant values and apply them deliberately",
+    "setupDescription": "First pick the drivetrain. Then only activate the criteria that really matter to you and define a good and okay threshold for every active field.",
+    "drivetrainLabel": "Drivetrain",
+    "drivetrains": {
+      "all": "All",
+      "ev": "EVs",
+      "ice": "ICE vehicles"
+    },
+    "appliesTo": {
+      "both": "For all",
+      "ev": "EV only",
+      "ice": "ICE only"
+    },
+    "moreIsBetter": "More is better",
+    "lessIsBetter": "Less is better",
+    "exactMatch": "Exact match",
+    "multiSelect": "Multi-select",
+    "goodThreshold": "Good",
+    "okThreshold": "Okay",
+    "desiredValue": "Wanted",
+    "desiredValues": "Wanted",
+    "noUnit": "Value",
+    "groupKicker": "Criteria group",
+    "enableCriterion": "Enable criterion",
+    "disableCriterion": "Disable criterion",
+    "criterionDisabledHint": "This criterion is currently switched off and does not influence scoring or filtering.",
+    "invalidThresholds": "Please enter sensible good and okay thresholds.",
+    "selectValueHint": "Please choose a desired value.",
+    "selectValuePlaceholder": "Select a value",
+    "exactMatchHelp": "This criterion only rewards exact matches.",
+    "multiSelectHelp": "You can pick multiple values. Every selected value counts as an exact match.",
+    "legend": {
+      "good": "Good · +2",
+      "ok": "Okay · +1",
+      "weak": "Weak · -1",
+      "off": "Ignore · off"
+    },
+    "boolean": {
+      "yes": "Yes",
+      "no": "No"
+    },
+    "ruleExact": "Only exact matches for {{value}} are recommended.",
+    "ruleExactMultiple": "Only exact matches for these values are recommended: {{values}}.",
+    "ruleHigher": "Good from {{good}}, okay from {{ok}}, still visible until {{weak}}. Below that it is excluded.",
+    "ruleLower": "Good up to {{good}}, okay up to {{ok}}, still visible until {{weak}}. Above that it is excluded.",
+    "groups": {
+      "basis": {
+        "title": "Basics",
+        "description": "Price, body style and first core values for the quick shortlist."
+      },
+      "praxis": {
+        "title": "Real-world use",
+        "description": "Daily life, family use and utility for the actual job."
+      },
+      "technik": {
+        "title": "Tech",
+        "description": "Range, efficiency, charging and drivetrain details for fine tuning."
+      }
+    },
+    "searchPurpose": "Apply search",
+    "searchTitle": "Only score on click",
+    "searchDescription": "{{count}} active criteria will only be applied to vehicles after clicking Search.",
+    "loadingVehicles": "Loading vehicles...",
+    "searchCta": "Search",
+    "resultsPurpose": "First recommendations",
+    "resultsTitle": "Suitable vehicles sorted by score",
+    "resultsDescription": "Results are calculated only from the applied criteria. Vehicles below the exclusion threshold no longer appear here.",
+    "metricCandidates": "Candidates",
+    "metricShown": "Shown",
+    "metricExcluded": "Excluded",
+    "searchPending": "Set up your criteria and deliberately start the search with a click.",
+    "noResults": "No suitable vehicles were found for this combination of criteria.",
+    "points": "pts",
+    "fit": {
+      "strong": "Very suitable",
+      "okay": "Suitable",
+      "warning": "With compromises",
+      "neutral": "Unrated"
+    },
+    "resultStatus": {
+      "good": "Good",
+      "ok": "Okay",
+      "weak": "Weak",
+      "missing": "Missing data",
+      "neutral": "Neutral"
+    },
+    "topMatches": "Top matches",
+    "watchouts": "Watchouts",
+    "noTopMatches": "No clear top matches yet.",
+    "noWatchouts": "No watchouts.",
+    "resultReasonLead": "Ahead because of: {{criteria}}.",
+    "resultReasonFallback": "Ahead because the active criteria fit better overall.",
+    "openCalculator": "Open calculator",
+    "addCompare": "Save",
+    "removeCompare": "Saved",
+    "resultsLimitNote": "Showing the first {{shown}} of {{total}} matching vehicles.",
+    "principlesPurpose": "Core logic",
+    "principlesTitle": "How the advisor will work",
+    "principlesDescription": "Phase 1 sets up the entry point and the rules before the actual scoring engine and criteria forms are implemented.",
+    "principles": {
+      "criteriaTitle": "Good and okay thresholds",
+      "criteriaDescription": "You define two thresholds for relevant metrics. These create points, warnings and exclusions.",
+      "toggleTitle": "Disable criteria",
+      "toggleDescription": "If a value does not matter to you, you switch it off. Then it no longer influences scoring or filtering.",
+      "searchTitle": "Search only on click",
+      "searchDescription": "The advisor should not recalculate live on every input. Criteria are only applied and sorted after clicking Search."
+    },
+    "flowPurpose": "Product flow",
+    "flowTitle": "From search to purchase decision",
+    "flowDescription": "The advisor should lead into comparison and then into the cost calculator instead of being three disconnected tools.",
+    "flow": {
+      "step1Title": "Find a vehicle",
+      "step1Description": "Set drivetrain, profile and active criteria.",
+      "step2Title": "Compare directly",
+      "step2Description": "Save suitable vehicles and inspect them side by side.",
+      "step3Title": "Understand the cost",
+      "step3Description": "Read TCO, break-even and cost drivers in the calculator."
+    },
+    "browsePurpose": "Available right now",
+    "browseTitle": "Until the scoring logic is ready",
+    "browseDescription": "The database remains the fastest way to discover vehicles already now and collect them for the next step.",
+    "browsePrimary": "Explore EVs",
+    "browseSecondary": "Explore ICE vehicles",
+    "calculatorCta": "Go to calculator"
   },
   "viewToggle": {
     "grid": "Grid",
@@ -57,6 +1264,7 @@
       "basis": "Basics",
       "range_battery": "Range & Battery",
       "charging": "Charging",
+      "ice_powertrain": "Powertrain & Consumption",
       "performance": "Performance",
       "dimensions": "Dimensions",
       "weight": "Weight & Towing",
@@ -111,7 +1319,17 @@
     }
   },
   "calc": {
+    "heroPurpose": "Understand the cost",
     "title": "Cost Calculator",
+    "pageSubtitle": "Compare EVs and ICE vehicles within the same product language as the catalog and review the key assumptions in context.",
+    "setupPurpose": "Set up the comparison",
+    "setupTitle": "Prepare vehicles and assumptions",
+    "setupDescription": "Choose your vehicles, define the usage profile and review the most important cost assumptions before jumping into the result.",
+    "resultsPurpose": "Read the result",
+    "resultsTitle": "Understand cost picture and differences",
+    "resultsDescription": "As soon as both sides are complete, the calculator shows the most important conclusions first and the deeper explanations afterwards.",
+    "compareModeLabel": "Comparison type",
+    "detailModeLabel": "Detail level",
     "modeEvIce": "EV vs. ICE",
     "modeEvEv": "EV vs. EV",
     "slotA": "Vehicle A",
@@ -123,15 +1341,88 @@
     "fromDatabase": "From database",
     "modeNormal": "Normal",
     "modeExpert": "Expert",
+    "sections": {
+      "vehicleTitle": "Choose vehicle",
+      "vehicleDescriptionEv": "Pick the electric vehicle from the database and review the imported base data.",
+      "vehicleDescriptionIce": "Choose an ICE vehicle from the database or enter it manually.",
+      "usageTitle": "Usage profile",
+      "usageDescription": "These values apply to both vehicles and determine how strongly the running costs matter over time.",
+      "costsTitle": "Standard assumptions",
+      "costsDescriptionEv": "Set purchase price, charging prices and charging shares for home, public AC and fast charging.",
+      "costsDescriptionIce": "Set purchase price and fuel cost for the baseline comparison.",
+      "expertTitle": "Expert assumptions",
+      "expertDescriptionEv": "Fine-tune financing, maintenance, insurance, residual value, subsidies, THG, wallbox and charging losses.",
+      "expertDescriptionIce": "Fine-tune financing, maintenance, insurance, tax and residual value."
+    },
+    "summary": {
+      "source": "Source",
+      "acquisition": "Acquisition",
+      "financing": "Financing",
+      "usage": "Usage",
+      "drivingProfile": "Driving profile",
+      "consumption": "Consumption",
+      "energy": "Energy profile",
+      "database": "Database",
+      "manual": "Manual"
+    },
+    "profile": {
+      "cityLabel": "City",
+      "ruralLabel": "Country road",
+      "highwayLabel": "Highway",
+      "modes": {
+        "normal": "Normal",
+        "city": "City",
+        "rural": "Country road",
+        "highway": "Highway"
+      }
+    },
+    "financingTypes": {
+      "cash": "Cash purchase",
+      "loan": "Loan",
+      "lease": "Lease"
+    },
+    "hints": {
+      "chargeProfile": "Charging shares can be entered freely. The calculator normalises them to 100% internally if needed.",
+      "drivingProfile": "Driving profile shares can be entered freely. The calculator normalises them to 100% internally if needed.",
+      "drivingProfileNeutral": "Normal keeps consumption neutral and intentionally adds no extra effect to the calculation.",
+      "drivingProfilePreset": "Active weighting",
+      "fuelPrice": "Use your realistic average price here instead of only today's fuel price."
+    },
+    "validation": {
+      "fixSlotBeforeResults": "Please correct the highlighted inputs before the calculator can show a reliable result.",
+      "positiveRequired": "Please enter a value greater than 0.",
+      "nonNegativeRequired": "Please enter a value greater than or equal to 0.",
+      "percentRange": "Please enter a percentage between 0 and 100.",
+      "lossRange": "Please enter a charging loss between 0 and 50%.",
+      "grantExceedsPurchasePrice": "The grant currently exceeds the purchase price and will be capped in the calculation.",
+      "profileShareTotalZero": "At least one driving profile share must be greater than 0%.",
+      "profileShareNormalized": "The driving profile shares add up to {{total}}%. The calculator normalises them to 100% internally.",
+      "chargeShareTotalZero": "At least one charging share must be greater than 0%.",
+      "chargeShareNormalized": "The charging shares add up to {{total}}%. The calculator normalises them to 100% internally.",
+      "leaseIgnoresResidual": "Residual value is currently not included when financing type is lease."
+    },
     "params": {
       "kaufpreis": "Purchase price (€)",
       "jahresKm": "Annual kilometres",
+      "drivingPreset": "Driving profile",
+      "cityShare": "City share (%)",
+      "ruralShare": "Rural share (%)",
+      "highwayShare": "Highway share (%)",
       "stromPreis": "Electricity price (€/kWh)",
       "acPreis": "AC price (€/kWh)",
       "dcPreis": "DC price (€/kWh)",
+      "homePrice": "Home (€/kWh)",
+      "publicPrice": "Public AC (€/kWh)",
+      "fastPrice": "Fast charge (€/kWh)",
       "acProzent": "AC share (%)",
+      "homeShare": "Home share (%)",
+      "publicShare": "Public AC share (%)",
+      "fastShare": "Fast charge share (%)",
       "acLadeverlust": "AC charging loss (%)",
       "dcLadeverlust": "DC charging loss (%)",
+      "homeLoss": "Home charging loss (%)",
+      "publicLoss": "Public AC charging loss (%)",
+      "fastLoss": "Fast charging loss (%)",
       "thgQuote": "THG quota (€/year)",
       "kraftstoffPreis": "Fuel price (€/L)",
       "jahre": "Period (years)",
@@ -140,20 +1431,95 @@
       "steuer": "Vehicle tax (€/year)",
       "restwertProzent": "Residual value (%)",
       "foerderung": "Subsidy/Grant (€)",
+      "financingType": "Financing type",
       "zinsSatz": "Financing rate (%)",
+      "leaseMonthlyRate": "Lease rate (€/month)",
+      "leaseDownPayment": "Down payment (€)",
+      "wallboxPurchaseCost": "Wallbox purchase (€)",
+      "wallboxInstallationCost": "Wallbox installation (€)",
       "verbrauchKwh": "Consumption (kWh/100km)",
       "verbrauchL": "Consumption (L/100km)"
     },
     "results": {
-      "tabMonthly": "Monthly Costs",
-      "tabTotal": "Total over time",
-      "tabBreakeven": "Break-even",
+      "kicker": "Result overview",
+      "title": "How the total cost really differs",
+      "subtitle": "This view highlights the most important cost drivers over {{years}} years at a glance.",
+      "bestChoice": "Currently cheaper",
+      "cheaperThan": "{{winner}} is cheaper than {{loser}} over the selected period.",
+      "savingsTotal": "Total savings",
+      "savingsMonthly": "Savings per month",
+      "kpiTotal": "Total cost",
+      "kpiMonthly": "Per month",
+      "kpiPerKm": "Per kilometre",
       "monthly": "Monthly costs",
+      "monthlyView": "Monthly drivers",
       "totalCost": "Total cost",
       "breakevenAt": "Break-even after {{years}} years",
+      "breakevenImmediate": "{{name}} is already cheaper from year 1.",
+      "breakevenDescription": "{{name}} catches up with the cost gap after {{years}} years.",
       "noBreakeven": "No break-even within period",
+      "noBreakevenDescription": "{{name}} stays the cheaper option over the selected period.",
       "cheaper": "{{name}} is cheaper",
-      "costKaufpreis": "Purchase price",
+      "sectionDecision": "Decision",
+      "sectionProfile": "Driving profile",
+      "sectionProfileTitle": "How does your driving profile change consumption?",
+      "sectionProfileDescription": "This view shows how your mix of city, rural and highway driving shifts the effective consumption of each vehicle.",
+      "profileInsightPill": "Profile effect visible",
+      "profileBaseConsumption": "Base consumption",
+      "profileAdjustedConsumption": "Effective profile consumption",
+      "profileDelta": "Delta vs base value",
+      "profileNarrativeNormal": "In Normal mode the consumption stays neutral and is not shifted by a special driving profile.",
+      "profileNarrativeEvCity": "A city-heavy usage profile generally benefits this EV and lowers its effective consumption.",
+      "profileNarrativeEvRural": "A strong rural share keeps this EV close to its base consumption.",
+      "profileNarrativeEvHighway": "A high highway share noticeably increases this EV's effective consumption.",
+      "profileNarrativeIceCity": "A city-heavy usage profile pushes this combustion car's effective consumption up.",
+      "profileNarrativeIceRural": "A strong rural share is usually the most efficient case for this combustion car.",
+      "profileNarrativeIceHighway": "A highway-heavy profile keeps this combustion car closer to its base value than city traffic.",
+      "sectionBreakEvenTitle": "When does the cost comparison flip?",
+      "sectionCostDrivers": "Cost structure",
+      "sectionBreakdownTitle": "Which blocks drive the monthly cost?",
+      "sectionBreakdownDescription": "This chart shows which cost categories create the biggest monthly burden.",
+      "driverLeadPill": "{{category}} shapes the gap",
+      "driverAdvantage": "Cost advantage",
+      "driverValueLoss": "Depreciation",
+      "driverRunning": "Running costs",
+      "driverNarrativeValueLoss": "This mainly reflects acquisition cost and residual value over the holding period.",
+      "driverNarrativeEnergy": "This is driven primarily by consumption, driving profile and energy price.",
+      "driverNarrativeFinancing": "This reflects differences in loan cost or lease payments.",
+      "driverNarrativeRunning": "This combines maintenance, insurance and tax.",
+      "driverNarrativeInfrastructure": "This is mostly wallbox and installation cost.",
+      "sectionScenario": "Scenario analysis",
+      "sectionScenarioTitle": "How robust is the result under different assumptions?",
+      "sectionScenarioDescription": "Test annual kilometres as well as electricity and fuel prices here. The result cards react immediately to your changes.",
+      "sectionScenarioControls": "Three quick what-if controls",
+      "scenarioAnnualKm": "Annual kilometres in scenario",
+      "scenarioAnnualKmHint": "This scenario value is applied to both vehicles.",
+      "scenarioAnnualKmUnit": "km/year",
+      "scenarioElectricityDelta": "Electricity price scenario",
+      "scenarioElectricityHint": "Applies to home, public AC and fast charging at the same time.",
+      "scenarioFuelDelta": "Fuel price scenario",
+      "scenarioFuelHint": "Applies to the average fuel price per litre.",
+      "scenarioDisabledEv": "There is currently no EV in the active comparison.",
+      "scenarioDisabledIce": "There is currently no combustion car in the active comparison.",
+      "scenarioReset": "Reset scenario",
+      "scenarioOutcome": "Scenario outcome",
+      "scenarioGap": "Scenario cost gap",
+      "scenarioMonthlyGap": "Difference per month",
+      "scenarioComparedToBase": "compared to your base assumption",
+      "scenarioDeltaTotal": "Total delta",
+      "scenarioDeltaMonthly": "Monthly delta",
+      "scenarioNoChange": "No change",
+      "scenarioElectricityPill": "Electricity",
+      "scenarioFuelPill": "Fuel",
+      "scenarioInactive": "inactive",
+      "sectionDetails": "Detailed comparison",
+      "sectionTableTitle": "All cost positions at a glance",
+      "sectionTableDescription": "The table includes the full breakdown, including residual value and THG income.",
+      "yearsLabel": "years",
+      "compareAllCosts": "Compare all costs",
+      "costPosition": "Cost item",
+      "costKaufpreis": "Acquisition / Lease",
+      "costInfrastruktur": "Infrastructure",
       "costEnergie": "Energy",
       "costWartung": "Maintenance",
       "costVersicherung": "Insurance",
@@ -173,17 +1539,15 @@
     },
     "addToCalculator": "Add to Calculator",
     "selectBoth": "Please select both vehicles",
+    "fixInputs": "Please complete or correct the highlighted inputs to see results.",
+    "loadingResults": "Loading results...",
     "vehicleA": "Vehicle A",
     "vehicleB": "Vehicle B",
-    "acDcSplit": "Charging split AC / DC",
+    "chargingSplit": "Charging split",
     "acLabel": "AC",
-    "dcLabel": "DC"
-  },
-  "landing": {
-    "badge": "399 vehicles · Real data",
-    "headline": "The smartest way. Find the right car.",
-    "sub": "Compare electric cars and combustion engines — range, charging, costs.",
-    "ctaAutos": "Explore cars",
-    "ctaRechner": "Calculate costs"
+    "dcLabel": "DC",
+    "homeLabel": "Home",
+    "publicLabel": "Public",
+    "fastLabel": "Fast charge"
   }
 }

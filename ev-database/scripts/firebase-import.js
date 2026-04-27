@@ -2,6 +2,7 @@ import { config } from 'dotenv'
 import { resolve, dirname } from 'path'
 import { fileURLToPath } from 'url'
 import { createRequire } from 'module'
+import { prepareVehicleForStorage } from '../src/entities/vehicle/vehicleSchema.js'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 config({ path: resolve(__dirname, '../.env') })
@@ -26,7 +27,9 @@ export async function importCars(cars) {
   const CHUNK = 499
   for (let i = 0; i < cars.length; i += CHUNK) {
     const batch = db.batch()
-    cars.slice(i, i + CHUNK).forEach(car => batch.set(ref.doc(), car))
+    cars
+      .slice(i, i + CHUNK)
+      .forEach((car) => batch.set(ref.doc(), prepareVehicleForStorage(car, 'ev')))
     await batch.commit()
     console.log(`  Chunk ${Math.floor(i / CHUNK) + 1} committed (${Math.min(i + CHUNK, cars.length)}/${cars.length})`)
   }

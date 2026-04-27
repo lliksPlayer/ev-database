@@ -1,99 +1,90 @@
 import { useTranslation } from 'react-i18next'
+import { useNavigate } from 'react-router-dom'
+import { CalculatorIcon, Check, Plus } from 'lucide-react'
+import { getFieldDefinition } from '../../entities/vehicle/fields.js'
+import { useCompareTray } from '../../features/comparison/useCompareTray.js'
 import './CarDetail.css'
 
-const SECTIONS = [
-  {
-    key: 'basis',
-    fields: [
-      { key: 'baujahr' },
-      { key: 'preis_de', unit: null, format: 'currency' },
-    ],
-  },
-  {
-    key: 'range_battery',
-    fields: [
-      { key: 'reichweite_wltp',     unit: 'km' },
-      { key: 'akku_kapazitaet_kwh', unit: 'kwh' },
-      { key: 'architektur_volt',    unit: 'volt' },
-    ],
-  },
-  {
-    key: 'charging',
-    fields: [
-      { key: 'laden_ac_kw',         unit: 'kw' },
-      { key: 'laden_dc_kw',         unit: 'kw' },
-      { key: 'ladezeit_10_80_min',  unit: 'min' },
-    ],
-  },
-  {
-    key: 'performance',
-    fields: [
-      { key: 'beschleunigung_sec',         unit: 'sec' },
-      { key: 'hoechstgeschwindigkeit_kmh', unit: 'kmh' },
-      { key: 'leistung_kw',               unit: 'kw' },
-    ],
-  },
-  {
-    key: 'dimensions',
-    fields: [
-      { key: 'laenge_mm',   unit: 'mm' },
-      { key: 'breite_mm',   unit: 'mm' },
-      { key: 'hoehe_mm',    unit: 'mm' },
-      { key: 'radstand_mm', unit: 'mm' },
-    ],
-  },
-  {
-    key: 'weight',
-    fields: [
-      { key: 'gewicht_leer_kg',            unit: 'kg' },
-      { key: 'zul_gesamtgewicht_kg',       unit: 'kg' },
-      { key: 'zuladung_kg',                unit: 'kg' },
-      { key: 'anhaengelast_gebremst_kg',   unit: 'kg' },
-      { key: 'anhaengelast_ungebremst_kg', unit: 'kg' },
-    ],
-  },
-  {
-    key: 'cargo',
-    fields: [
-      { key: 'kofferraum_l',     unit: 'liter' },
-      { key: 'kofferraum_max_l', unit: 'liter' },
-      { key: 'frunk_l',          unit: 'liter' },
-      { key: 'dachlast_kg',      unit: 'kg' },
-    ],
-  },
-  {
-    key: 'misc',
-    fields: [
-      { key: 'sitze' },
-      { key: 'isofix' },
-      { key: 'wendekreis_m', unit: 'meter' },
-      { key: 'karosserie' },
-      { key: 'segment' },
-      { key: 'waermepumpe' },
-      { key: 'plattform' },
-    ],
-  },
-]
+const DETAIL_SECTIONS = {
+  ev: [
+    { key: 'basis', fields: ['markteinfuehrung', 'basis_preis', 'hoechster_preis'] },
+    { key: 'range_battery', fields: ['wltp_reichweite', 'batterie_netto', 'wltp_verbrauch', 'volt'] },
+    { key: 'charging', fields: ['laden_ac_kw', 'laden_dc_kw', 'max_ladeleistung', 'laden_10_80_min', 'kwh_nach_70', 'kwh_pro_min'] },
+    { key: 'performance', fields: ['null_hundert', 'top_speed', 'leistung_kw', 'ps'] },
+    { key: 'dimensions', fields: ['laenge_mm', 'breite_mm', 'hoehe_mm', 'radstand_mm', 'gewicht_leer_kg', 'zul_gesamtgewicht_kg', 'zuladung_kg'] },
+    { key: 'weight', fields: ['anhaengelast', 'anhaengelast_ungebremst_kg', 'dachlast_kg'] },
+    { key: 'cargo', fields: ['kofferraum_l', 'kofferraum_max_l', 'frunk_l', 'sitze', 'isofix'] },
+    { key: 'misc', fields: ['wendekreis_m', 'karosserie', 'segment', 'waermepumpe', 'plattform'] },
+  ],
+  ice: [
+    { key: 'basis', fields: ['markteinfuehrung', 'basis_preis', 'hoechster_preis'] },
+    { key: 'ice_powertrain', fields: ['kraftstoff', 'verbrauch_l_100km', 'co2_g_km', 'hubraum_ccm', 'zylinder', 'getriebe'] },
+    { key: 'performance', fields: ['null_hundert', 'top_speed', 'ps', 'anhaengelast'] },
+  ],
+}
 
-const UNITS = { km: true, kwh: true, volt: true, kw: true, min: true, sec: true, kmh: true, mm: true, kg: true, liter: true, meter: true }
-
-function formatValue(value, unit, format, t) {
+function formatValue(value, unit, format) {
   if (value === undefined || value === null || value === '') return null
   if (format === 'currency')
     return new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(value)
-  if (unit && UNITS[unit]) return `${value} ${t(`detail.units.${unit}`)}`
+  if (unit) return `${value} ${unit}`
   return String(value)
 }
 
 export default function CarDetail({ car, onClose }) {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
+  const navigate = useNavigate()
+  const { isSelected, toggleVehicle } = useCompareTray()
   if (!car) return null
+
+  const language = i18n.resolvedLanguage?.startsWith('de') ? 'de' : 'en'
+  const sections = DETAIL_SECTIONS[car.vehicleType === 'ice' ? 'ice' : 'ev']
+  const isIce = car.vehicleType === 'ice'
+  const selected = isSelected(car.id)
+
+  const handleAddToCalculator = () => {
+    navigate(isIce ? `/rechner?mode=ev-ice&ice1=${car.id}` : `/rechner?mode=ev-ice&ev1=${car.id}`)
+    onClose?.()
+  }
+
+  const handleToggleCompare = () => {
+    toggleVehicle({
+      ...car,
+      vehicleType: isIce ? 'ice' : 'ev',
+    })
+  }
 
   return (
     <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-card" onClick={e => e.stopPropagation()}>
+      <div className={`modal-card ${isIce ? 'modal-card--ice' : 'modal-card--ev'}`} onClick={e => e.stopPropagation()}>
         <button className="modal-close" onClick={onClose}>✕</button>
-        <div className="modal-title">{car.marke} {car.modell}</div>
+        <div className="modal-header">
+          <div className="modal-header-copy">
+            <span className={`modal-kicker ${isIce ? 'modal-kicker--ice' : ''}`}>
+              {t(isIce ? 'nav.iceDatabase' : 'nav.evDatabase')}
+            </span>
+            <div className="modal-title">{car.marke} {car.modell}</div>
+          </div>
+          <div className="detail-actions">
+            <button
+              type="button"
+              className={`detail-calc-btn${isIce ? ' detail-calc-btn--ice' : ''}`}
+              onClick={handleAddToCalculator}
+            >
+              <CalculatorIcon size={15} />
+              {t('calc.addToCalculator')}
+            </button>
+            <button
+              type="button"
+              className={`detail-compare-btn${selected ? ' detail-compare-btn--active' : ''}`}
+              onClick={handleToggleCompare}
+              aria-pressed={selected}
+            >
+              {selected ? <Check size={15} /> : <Plus size={15} />}
+              {t(selected ? 'compare.removeShort' : 'compare.addShort')}
+            </button>
+          </div>
+        </div>
 
         {car.bild_url && (
           <div className="detail-image-wrap">
@@ -101,29 +92,38 @@ export default function CarDetail({ car, onClose }) {
           </div>
         )}
 
-        {SECTIONS.map(section => {
-          const visibleFields = section.fields
-            .map(f => ({
-              ...f,
-              label: t(`detail.fields.${f.key}`),
-              value: formatValue(car[f.key], f.unit, f.format, t),
-            }))
-            .filter(f => f.value !== null)
+        <div className="detail-sections">
+          {sections.map((section) => {
+            const visibleFields = section.fields
+              .map((key) => {
+                const definition = getFieldDefinition(key)
+                return {
+                  key,
+                  label: definition?.labels?.[language] ?? key,
+                  value: formatValue(
+                    car[key],
+                    definition?.unit,
+                    ['basis_preis', 'hoechster_preis'].includes(key) ? 'currency' : undefined
+                  ),
+                }
+              })
+              .filter((field) => field.value !== null)
 
-          if (visibleFields.length === 0) return null
+            if (visibleFields.length === 0) return null
 
-          return (
-            <div key={section.key} className="detail-section">
-              <div className="detail-section-title">{t(`detail.sections.${section.key}`)}</div>
-              {visibleFields.map(f => (
-                <div key={f.key} className="detail-field">
-                  <span className="detail-field-label">{f.label}</span>
-                  <span className="detail-field-value">{f.value}</span>
-                </div>
-              ))}
-            </div>
-          )
-        })}
+            return (
+              <section key={section.key} className="detail-section">
+                <div className="detail-section-title">{t(`detail.sections.${section.key}`)}</div>
+                {visibleFields.map(f => (
+                  <div key={f.key} className="detail-field">
+                    <span className="detail-field-label">{f.label}</span>
+                    <span className="detail-field-value">{f.value}</span>
+                  </div>
+                ))}
+              </section>
+            )
+          })}
+        </div>
       </div>
     </div>
   )

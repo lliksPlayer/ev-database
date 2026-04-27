@@ -15,3 +15,29 @@
 .car-list-name { font-weight: 700; min-width: 160px; }
 .car-list-field { font-size: 0.85rem; color: var(--color-muted); white-space: nowrap; }
 .car-list-field span { font-weight: 600; color: var(--color-text); margin-left: 4px; }
+.car-list-calc-btn {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.7rem 0.95rem;
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--color-primary), #0284c7);
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 12px 24px rgba(2, 132, 199, 0.18);
+}
+.car-list-calc-btn--ice {
+  background: linear-gradient(135deg, var(--color-ice), #ea580c);
+  box-shadow: 0 12px 24px rgba(249, 115, 22, 0.2);
+}
+
+@media (max-width: 720px) {
+  .car-list-calc-btn {
+    margin-left: 0;
+    width: 100%;
+    justify-content: center;
+  }
+}

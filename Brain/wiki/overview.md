@@ -8,11 +8,12 @@ last_updated: 2026-04-17
 
 # Übersicht
 
-Dieses Wiki wird vom LLM gepflegt und dokumentiert Softwareentwicklungswissen, beginnend mit dem Projekt **ev-vergleich**.
+Dieses Wiki wird vom LLM gepflegt und dokumentiert das Vergleichstool mit einer aktiven React-App und einem separaten Legacy-Altstand.
 
 ## Projekte
 
-- [[wiki/projects/ev-vergleich]] — EV-Vergleichstool mit React und Firebase (aktiv)
+- [[wiki/projects/ev-database]] — aktive React/Vite-App fuer neue Entwicklung
+- [[wiki/projects/ev-vergleich]] — Legacy-Stand der frueheren Vanilla-JS-Website
 
 ## Schlüsselentscheidungen
 
@@ -28,4 +29,4 @@ Dieses Wiki wird vom LLM gepflegt und dokumentiert Softwareentwicklungswissen, b
 
 ## Letzte Änderung
 
-2026-04-17 — Erster Smoke-Test Ingest abgeschlossen.
+2026-04-24 — `ev-database` als aktive App festgelegt, `ev-vergleich` als Legacy markiert.

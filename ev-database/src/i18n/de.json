@@ -1,5 +1,6 @@
 {
   "nav": {
+    "advisor": "Kaufberater",
     "evDatabase": "E-Fahrzeuge",
     "iceDatabase": "Verbrenner",
     "admin": "Admin",
@@ -8,9 +9,1215 @@
   "home": {
     "title": "Elektroauto-Datenbank",
     "iceTitle": "Verbrenner-Datenbank",
+    "heroPurpose": "Katalog durchsuchen",
+    "heroTitleEv": "Passende Elektroautos entdecken",
+    "heroTitleIce": "Passende Verbrenner entdecken",
+    "heroSubtitleEv": "Durchsuche die Datenbank, merke passende Elektroautos und starte deinen Vergleich direkt aus dem Katalog.",
+    "heroSubtitleIce": "Finde passende Verbrenner, behalte Favoriten im Blick und übergib sie ohne Umweg in den Kostenvergleich.",
+    "resultsPurpose": "Ergebnisse durchsuchen",
+    "resultsTitleEv": "Elektroautos im Überblick",
+    "resultsTitleIce": "Verbrenner im Überblick",
+    "resultsDescriptionEv": "Scanne die Datenbank, ändere die Ansicht und merke Kandidaten, die du direkt weiter vergleichen willst.",
+    "resultsDescriptionIce": "Prüfe die Modelle in Ruhe, wechsle die Ansicht und markiere Fahrzeuge für den nächsten Vergleichsschritt.",
+    "evSubtitle": "Finde passende Elektroautos und lade sie direkt aus Karte, Liste oder Detailansicht in den Rechner.",
+    "iceSubtitle": "Prüfe passende Verbrenner und übernimm sie ohne Umweg direkt in den Kostenvergleich.",
     "loading": "Lädt...",
     "noCars": "Keine Fahrzeuge gefunden.",
-    "vehicles": "Fahrzeuge"
+    "searchPlaceholder": "Nach Marke, Modell oder Kategorie suchen",
+    "sortLabel": "Sortieren",
+    "sortAsc": "Aufsteigend",
+    "sortDesc": "Absteigend",
+    "sortAscLabel": "aufsteigend",
+    "sortDescLabel": "absteigend",
+    "sortingBy": "Sortiert nach {{field}} · {{direction}}",
+    "vehicles": "Fahrzeuge",
+    "browseKicker": "Katalog",
+    "ctaCalculator": "Zum Rechner",
+    "ctaExploreIce": "Verbrenner ansehen",
+    "ctaExploreEv": "E-Fahrzeuge ansehen",
+    "flowHint": "Jede Karte, Listenzeile und Detailansicht kann direkt in den Rechner laden.",
+    "steps": {
+      "findTitle": "Fahrzeug finden",
+      "findDescription": "Durchsuche die Datenbank und öffne die Ansicht, die für dich am schnellsten lesbar ist.",
+      "compareTitle": "Direkt vergleichen",
+      "compareDescription": "Lade Fahrzeuge direkt aus Karte, Liste oder Detailansicht in den Rechner, ohne den Flow zu verlieren.",
+      "decideTitle": "Kosten verstehen",
+      "decideDescription": "Nutze TCO, Break-even und Kostentreiber, um die Entscheidung nicht nur technisch, sondern wirtschaftlich zu treffen."
+    }
+  },
+  "landing": {
+    "heroPurpose": "Fahrzeug finden",
+    "meta": "Kaufberater, Vergleich und Kosten in einem Flow",
+    "headlinePrimary": "Finde das passende Auto",
+    "headlineAccent": "ohne Rätselraten",
+    "sub": "Starte geführt im Kaufberater, springe direkt in den Vergleich oder entdecke die Datenbank, wenn du lieber selbst stöbern willst.",
+    "ctaAdvisor": "Kaufberater starten",
+    "ctaRechner": "Direkt vergleichen",
+    "pathsPurpose": "Drei Wege, ein Ziel",
+    "pathsTitle": "So führt dich die Website zur Entscheidung",
+    "advisorCardPurpose": "1. Fahrzeug finden",
+    "advisorCardTitle": "Kaufberater",
+    "advisorCardDescription": "Lege fest, was gut, ok oder egal ist. Später wertet der Berater nur auf Klick mit Suchen aus.",
+    "advisorCardAction": "Zum Kaufberater",
+    "calculatorCardPurpose": "2. Direkt vergleichen",
+    "calculatorCardTitle": "Rechner",
+    "calculatorCardDescription": "Übernimm Fahrzeuge direkt in den TCO-Rechner und prüfe Break-even, Kostenstruktur und Szenarien.",
+    "calculatorCardAction": "Rechner öffnen",
+    "browseCardPurpose": "3. Datenbank entdecken",
+    "browseCardTitle": "Katalog",
+    "browseCardDescription": "Stöbere frei in EVs und Verbrennern, merke Favoriten und steige erst danach in Vergleich oder Rechner ein.",
+    "browseCardActionEv": "E-Fahrzeuge",
+    "browseCardActionIce": "Verbrenner",
+    "truckFeaturePurpose": "Getrennter Einstieg",
+    "truckFeatureMeta": "E-Lkw als eigener Bereich auf der Startseite",
+    "truckFeatureTitlePrimary": "Finde den richtigen",
+    "truckFeatureTitleAccent": "E-Lkw-Bereich",
+    "truckFeatureDescription": "Der E-Lkw-Bereich hat auf der Homepage einen eigenen Einstieg, getrennt vom restlichen Auto-Flow. So finden Flotten-Themen, Wissen und Werkzeuge einen klaren eigenen Raum.",
+    "truckFeaturePointOne": "Nur über die Startseite erreichbar",
+    "truckFeaturePointTwo": "Eigene Inhalte für elektrische Lkw",
+    "truckFeaturePointThree": "Eigenständig weiterführbar",
+    "truckFeatureAction": "E-Lkw-Bereich öffnen",
+    "truckFeatureAria": "Illustration eines elektrischen Pickups als Platzhalter für den E-Lkw-Bereich"
+  },
+  "truck": {
+    "mastheadBrand": "E-Lkw Bereich",
+    "heroPurpose": "Strategie, Markt und Einsatz",
+    "titlePrimary": "E-Lkw verstehen,",
+    "titleAccent": "wirtschaftlich einordnen",
+    "subtitle": "Hier findest du einen eigenen E-Lkw-Bereich mit klaren Wegen: zuerst Relevanz verstehen, dann Kosten und Betrieb einordnen und am Ende passende Modelle auswählen.",
+    "heroPrimaryAction": "Mit Verstehen starten",
+    "heroSecondaryAction": "Direkt zu Finden & Vergleichen",
+    "heroPanelBadge": "Klarer Einstieg",
+    "heroPanelTitle": "Drei Wege je nach Frage",
+    "heroPanelDescription": "Der Bereich ist bewusst in drei Einstiege gegliedert, damit du nicht durch lange Sammelseiten musst, sondern direkt beim passenden Thema landest.",
+    "heroPanelPointOne": "Verstehen: Markt, Einsatzprofile, Technologie",
+    "heroPanelPointTwo": "Wirtschaftlichkeit: TCO, Laden, Regulatorik",
+    "heroPanelPointThree": "Finden & Vergleichen: Berater, Modelle, TCO",
+    "groupHubPurpose": "Drei Hauptbereiche",
+    "groupHubTitle": "Wähle zuerst den passenden Einstieg in den E-Lkw-Bereich",
+    "groupHubDescription": "Beim Öffnen des Lkw-Bereichs soll nicht sofort alles sichtbar sein. Diese drei Hauptwege führen erst in das Thema, danach folgen die tieferen Inhalte.",
+    "openSection": "Bereich öffnen",
+    "backToOverview": "Zur E-Lkw-Übersicht",
+    "jumpToContent": "Zum Bereich springen",
+    "understandingOverviewPurpose": "Schnelleinordnung",
+    "understandingOverviewTitle": "Drei Dinge sollte man über E-Lkw zuerst verstehen",
+    "understandingOverviewDescription": "Bevor Modelle, Zahlen oder Ladeleistungen im Detail verglichen werden, hilft eine kurze Einordnung: warum E-Lkw wichtig sind, wo sie gut passen und warum das Timing gerade jetzt relevant ist.",
+    "understandingOverview": {
+      "cards": {
+        "relevance": {
+          "purpose": "Warum relevant",
+          "title": "E-Lkw sind nicht nur ein Klimathema, sondern ein Kosten- und Zukunftsthema",
+          "stat": "Markt + Maut + Regulierung",
+          "description": "Marktdruck, CO2-Vorgaben und Mautvorteile schieben das Thema gleichzeitig. Dadurch wird der Umstieg betriebswirtschaftlich und strategisch relevanter als noch vor wenigen Jahren."
+        },
+        "fit": {
+          "purpose": "Wo passend",
+          "title": "Nicht jeder Einsatz ist gleich gut geeignet, aber viele Profile sind heute schon realistisch",
+          "stat": "Stadt bis Regional",
+          "description": "Planbare Touren, Rückkehr ins Depot und klare Ladefenster machen E-Lkw schon heute in vielen Stadt- und Regionalanwendungen plausibel."
+        },
+        "timing": {
+          "purpose": "Warum jetzt",
+          "title": "Die richtige Frage ist nicht mehr nur 'ob', sondern 'wann und wo zuerst?'",
+          "stat": "Pilot statt Vollumstieg",
+          "description": "Für viele Unternehmen ist jetzt der richtige Zeitpunkt, erste belastbare Pilotanwendungen zu definieren und operative Erfahrung aufzubauen."
+        }
+      }
+    },
+    "understandingSubnav": {
+      "whyNow": "Warum jetzt?",
+      "signals": "Vier Signale",
+      "usecases": "Einsatzprofile",
+      "comparison": "Technologievergleich",
+      "faq": "FAQ"
+    },
+    "architecturePurpose": "Bereichslogik",
+    "architectureTitle": "So wird der E-Lkw-Bereich aufgebaut",
+    "architectureDescription": "Die Seite soll nicht nur Daten zeigen, sondern Unternehmen von der Einordnung bis zur Fahrzeugauswahl führen. Dafür bekommt der Bereich drei eigene Arbeitsrichtungen.",
+    "showDetails": "Details öffnen",
+    "hideDetails": "Details schließen",
+    "pillars": {
+      "advisor": {
+        "purpose": "1. Finden",
+        "title": "Truck-Kaufberater",
+        "description": "Ein Berater für Einsatzprofil, Reichweite, Ladefenster, Depotladen, Nutzlast und Flottenanforderungen."
+      },
+      "database": {
+        "purpose": "2. Vergleichen",
+        "title": "Modell- und Vergleichsdatenbank",
+        "description": "Eine eigene Datenebene für E-Lkw-Modelle, technische Kennzahlen, Ladefähigkeit und wirtschaftliche Eckdaten."
+      },
+      "knowledge": {
+        "purpose": "3. Verstehen",
+        "title": "Informations- und Strategiehub",
+        "description": "Kuratiertes Wissen zu Markt, TCO, Maut, Ladeinfrastruktur, Reichweite, Sicherheit und Einführung in den Betrieb."
+      }
+    },
+    "advisorPreviewPurpose": "Nächster Funktionsblock",
+    "advisorPreviewTitle": "So arbeitet der Truck-Kaufberater",
+    "advisorPreviewDescription": "Noch bevor einzelne Modelle verglichen werden, sollte der Truck-Kaufberater zuerst die betriebliche Realität verstehen. Diese vier Fragen bilden dafür das erste Grundgerüst.",
+    "advisorPreview": {
+      "cards": {
+        "useCase": {
+          "purpose": "1. Einsatzprofil",
+          "title": "Wo fährt der Truck wirklich?",
+          "description": "Nahlogistik, Regionalverkehr und Fernverkehr brauchen völlig unterschiedliche Reichweiten-, Lade- und Zeitfensterlogiken."
+        },
+        "route": {
+          "purpose": "2. Tour & Reichweitenpuffer",
+          "title": "Wie planbar ist die Strecke?",
+          "description": "Tageskilometer, Rückkehr ins Depot, Reserve bei Wetter und Topografie und die gewünschte Sicherheitsmarge entscheiden früh über die Modellwahl."
+        },
+        "charging": {
+          "purpose": "3. Laden & Energie",
+          "title": "Welche Ladebasis ist wirklich vorhanden?",
+          "description": "Depotladen, öffentlicher Schnellladebedarf, Netzanschluss und Ladefenster müssen zusammen gedacht werden, bevor Technikdaten sinnvoll verglichen werden."
+        },
+        "operations": {
+          "purpose": "4. Betrieb & Grenzen",
+          "title": "Welche Restriktionen dürfen nicht reißen?",
+          "description": "Nutzlast, Aufbau, Mauthebel, Schichtlogik und TCO-Ziele definieren, ob ein Modell nur technisch passt oder auch wirtschaftlich tragfähig ist."
+        }
+      }
+    },
+    "advisorPreviewNote": "Wie beim Pkw-Kaufberater wertet auch der Truck-Berater erst nach einem bewussten Klick aus und rechnet nicht bei jeder Eingabe im Hintergrund neu.",
+    "findVisualPurpose": "Einstieg",
+    "findVisualTitle": "Vom Einsatzprofil zur passenden Truck-Shortlist",
+    "findVisualDescription": "Hier beginnt die Entscheidung nicht mit Datenblättern, sondern mit Route, Laden und Betrieb. Erst daraus entsteht eine belastbare Fahrzeugauswahl.",
+    "findVisualAria": "Stilisierte Illustration eines elektrischen Lkw mit leuchtenden Entscheidungs- und Ladesignalen",
+    "findVisual": {
+      "tags": {
+        "route": "Einsatzprofil vor Datenblatt",
+        "charging": "Laden realistisch absichern",
+        "tco": "TCO erst im Kontext bewerten"
+      },
+      "metrics": {
+        "range": {
+          "purpose": "1. Einsatzprofil",
+          "value": "Route + Puffer",
+          "label": "Nicht nur Reichweite, sondern echte Tourlogik entscheidet."
+        },
+        "charging": {
+          "purpose": "2. Ladebasis",
+          "value": "Depot + Backup",
+          "label": "Der Lkw passt erst, wenn Laden praktisch mitgeplant ist."
+        },
+        "decision": {
+          "purpose": "3. Einordnung",
+          "value": "TCO im Kontext",
+          "label": "Technikdaten werden erst mit Maut, Energie und Betrieb belastbar."
+        }
+      }
+    },
+    "findFlowPurpose": "Ablauf",
+    "findFlowTitle": "So ist Finden & Vergleichen aufgebaut",
+    "findFlowDescription": "Zuerst wird der Einsatz geklärt, dann werden passende Modelle eingegrenzt und danach folgt die wirtschaftliche Einordnung.",
+    "findFlow": {
+      "steps": {
+        "profile": {
+          "purpose": "Schritt 1",
+          "title": "Einsatzprofil festziehen",
+          "value": "Profil vor Modell",
+          "description": "Tageskilometer, Nutzlast, Rückkehrlogik und Reichweitenpuffer sortieren zuerst den relevanten Fahrzeugraum."
+        },
+        "compare": {
+          "purpose": "Schritt 2",
+          "title": "Passende Modelle vergleichen",
+          "value": "Fit statt Datenrauschen",
+          "description": "Nur Fahrzeuge, die operativ plausibel sind, sollen danach in Daten- und Modellvergleiche gehen."
+        },
+        "business": {
+          "purpose": "Schritt 3",
+          "title": "Business Case absichern",
+          "value": "TCO mit Mauthebel",
+          "description": "Zum Schluss wird geprüft, wie Maut, Laden, THG und Infrastruktur die echte Wirtschaftlichkeit verschieben."
+        }
+      }
+    },
+    "findFlowNote": "So bleibt der Bereich logisch: erst Einsatzprofil, dann Modellfit, dann Business Case.",
+    "findRouteNav": {
+      "overview": "Überblick",
+      "berater": "Berater",
+      "modelle": "Modelle"
+    },
+    "findAreas": {
+      "berater": {
+        "purpose": "Truck-Berater",
+        "title": "Einsatzprofil in passende Trucks übersetzen",
+        "description": "Lege Tour, Laden und Betrieb fest und prüfe rechts die passende Shortlist."
+      },
+      "modelle": {
+        "purpose": "Modellübersicht",
+        "title": "Die aktuelle Truck-Datenbasis direkt vergleichen",
+        "description": "Vergleiche die aktuelle Datenbasis direkt nach Reichweite, Nutzlast und Ladelogik."
+      }
+    },
+    "findHelpPurpose": "Orientierung",
+    "findHelpTitle": "Wann welcher Einstieg im Bereich sinnvoll ist",
+    "findHelpDescription": "Hier liegen die tieferen Antworten, damit Überblick und Arbeitsflächen selbst kompakter bleiben.",
+    "findHelp": {
+      "items": {
+        "advisor": {
+          "question": "Wann starte ich direkt im Truck-Berater?",
+          "answer": "Der Berater ist der richtige Einstieg, wenn zuerst Tourprofil, Ladefenster, Nutzlast und Trailerbedarf geklärt werden sollen. Er hilft dabei, aus der Einsatzlogik eine belastbare operative Shortlist abzuleiten."
+        },
+        "models": {
+          "question": "Wann reicht die Modellübersicht allein aus?",
+          "answer": "Die Modellübersicht passt, wenn du bereits weißt, wonach du suchst und die aktuelle Datenbasis direkt prüfen willst. Sie ist der schnellere Weg für Reichweite, Batterie, Nutzlast und Ladelogik im direkten Vergleich."
+        },
+        "tco": {
+          "question": "Wann sollte die wirtschaftliche Prüfung folgen?",
+          "answer": "Die TCO-Prüfung lohnt sich erst, wenn die operative Shortlist steht. Vorher fehlt oft die Klarheit, ob Ladebasis, Einsatzprofil und Traileranforderung überhaupt belastbar zu den betrachteten Trucks passen."
+        }
+      }
+    },
+    "workspace": {
+      "purpose": "Arbeitsfläche",
+      "title": "Truck-Kaufberater als Leitstand",
+      "description": "Links definierst du den Einsatz. Rechts bleiben die Trucks sichtbar, die dazu operativ passen.",
+      "modes": {
+        "interactive": "Interaktiv",
+        "info": "Info"
+      },
+      "expand": "Leiste öffnen",
+      "expandShort": "Öffnen",
+      "collapse": "Leiste schließen",
+      "search": "Suche anwenden",
+      "searchShort": "Suchen",
+      "reset": "Zurücksetzen",
+      "sidebarTitle": "Filter & Eingaben",
+      "sidebarDescription": "Hier setzt du den Entwurf auf. Erst mit Suche anwenden wird rechts neu sortiert.",
+      "useCases": {
+        "urban": "Stadt & kommunal",
+        "regional": "Regionalverkehr",
+        "longhaul": "Fernverkehr"
+      },
+      "routePredictability": {
+        "stable": "Gut planbar",
+        "mixed": "Teilweise schwankend",
+        "volatile": "Stark wechselnd"
+      },
+      "chargeWindow": {
+        "overnight": "Über Nacht",
+        "between_shifts": "Zwischen Schichten",
+        "tight": "Nur enge Zeitfenster"
+      },
+      "vehicleFormat": {
+        "any": "Format offen",
+        "rigid": "Verteiler / Solofahrzeug",
+        "tractor": "Sattelzugmaschine"
+      },
+      "trailerUse": {
+        "not_required": "Kein Anhänger nötig",
+        "optional": "Anhänger optional",
+        "required": "Anhänger zwingend"
+      },
+      "chargingStandard": {
+        "ccs": "CCS reicht aus",
+        "mcs": "MCS bevorzugt"
+      },
+      "gridStatus": {
+        "secured": "Netzanschluss gesichert",
+        "unclear": "Netzanschluss noch offen",
+        "none": "Noch keine Ladebasis"
+      },
+      "fields": {
+        "dailyKm": "Tageskilometer",
+        "rangeBuffer": "Reichweitenpuffer (%)",
+        "routePredictability": "Planbarkeit der Route",
+        "returnToDepot": "Rückkehr ins Depot am selben Tag",
+        "depotCharging": "Depotladen ist realistisch verfügbar",
+        "publicFastCharge": "Öffentliche Schnellladung ist akzeptabel",
+        "chargeWindow": "Verfügbares Ladefenster",
+        "gridStatus": "Lade- und Netzstatus",
+        "payloadNeed": "Nutzlastbedarf (t)",
+        "vehicleFormat": "Fahrzeugformat",
+        "trailerUse": "Anhänger- / Trailerbedarf",
+        "chargingStandard": "Ladestandard",
+        "modelQuery": "Hersteller oder Modell suchen",
+        "sortKey": "Sortieren nach",
+        "sortOrder": "Reihenfolge"
+      },
+      "placeholders": {
+        "modelQuery": "z. B. eActros, Volvo oder Scania"
+      },
+      "sortKey": {
+        "fit": "Bester Fit",
+        "range": "Reichweite",
+        "payload": "Nutzlast",
+        "charging": "Ladestandard",
+        "model": "Hersteller / Modell"
+      },
+      "sortOrder": {
+        "desc": "Hoch nach niedrig",
+        "asc": "Niedrig nach hoch"
+      },
+      "steps": {
+        "useCase": {
+          "title": "Einsatzprofil festlegen",
+          "description": "Zuerst wird geklärt, in welchem betrieblichen Korridor der Truck arbeiten soll.",
+          "short": "Profil"
+        },
+        "route": {
+          "title": "Tour & Reichweite abstecken",
+          "description": "Tageskilometer, Puffer und Rückkehrlogik definieren die operative Basis.",
+          "short": "Route"
+        },
+        "charging": {
+          "title": "Laden & Infrastruktur einordnen",
+          "description": "Depotladen, Schnellladung und Netzstatus entscheiden mit über die Trefferlage.",
+          "short": "Laden"
+        },
+        "operations": {
+          "title": "Grenzen des Betriebs setzen",
+          "description": "Nutzlast und ähnliche Randbedingungen sorgen dafür, dass die Treffer plausibel bleiben.",
+          "short": "Betrieb"
+        },
+        "refinement": {
+          "title": "Betrieb & Technik schärfen",
+          "description": "Fahrzeugformat, Trailerbedarf und Ladestandard machen aus dem groben Fit ein belastbareres Shortlist-Bild.",
+          "short": "Feinschliff"
+        },
+        "results": {
+          "title": "Trefferbild steuern",
+          "description": "Suche und Sortierung ordnen die rechte Seite, ohne den operativen Fit neu zu rechnen.",
+          "short": "Ergebnis"
+        }
+      },
+      "status": {
+        "applied": "Aktive Rahmenbedingungen",
+        "useCase": "Einsatz",
+        "dailyKm": "Tages-km",
+        "requiredRange": "Ziel-Reichweite",
+        "routePredictability": "Routenlage",
+        "chargeWindow": "Ladefenster",
+        "chargeBase": "Ladebasis",
+        "vehicleFormat": "Format",
+        "trailerUse": "Trailer",
+        "chargingStandard": "Ladestandard",
+        "depotYes": "Depotladen",
+        "depotNo": "ohne Depotladen"
+      },
+      "summary": {
+        "filtersPurpose": "Aktiver Stand",
+        "filtersText": "So viele Eingaben prägen aktuell das Fit-Bild.",
+        "matchesPurpose": "Gute Trefferbilder",
+        "matchesText": "Diese Modelle passen aktuell gut oder sehr gut.",
+        "nextPurpose": "Ausgeblendete Modelle",
+        "nextValue": "Ausschlüsse",
+        "nextText": "So viele Trucks wurden derzeit ausgeblendet, weil Reichweite, Nutzlast oder Ladebasis nicht passen.",
+        "catalogPurpose": "Modellbasis",
+        "catalogText": "Die aktuelle Basis umfasst {{brands}} Hersteller."
+      },
+      "resultsPurpose": "Trefferbild",
+      "resultsTitle": "Welche Trucks passen mit deinem Entwurf aktuell am besten?",
+      "resultsDescription": "Hier stehen die Modelle, die aus deinem Entwurf aktuell die beste operative Passung ableiten.",
+      "results": {
+        "states": {
+          "excellent": "Sehr passend",
+          "good": "Passend",
+          "limited": "Mit Abweichungen",
+          "poor": "Kritisch"
+        },
+        "fields": {
+          "range": "Reichweite",
+          "payload": "Nutzlast",
+          "charging": "Ladelogik",
+          "format": "Format",
+          "standard": "Ladestandard",
+          "trailer": "Trailer"
+        },
+        "trailerStates": {
+          "ready": "Trailer tauglich",
+          "notReady": "Ohne Trailer-Fokus"
+        },
+        "charging": {
+          "depot": "Depot zuerst",
+          "depotPublic": "Depot + Schnelllade-Backup",
+          "publicReady": "Schnellladen nutzbar",
+          "fastPriority": "Schnellladen zentral"
+        },
+        "leadPurpose": "Aktueller Favorit",
+        "leadAhead": "liegt aktuell {{gap}} Punkte vor dem nächsten Modell.",
+        "leadSolo": "ist aktuell der einzige plausible Treffer in deiner Konfiguration.",
+        "whyFit": "Warum passend",
+        "watchouts": "Worauf achten",
+        "noWatchouts": "Aktuell keine kritischen Hinweise im ersten Fit-Bild.",
+        "emptyTitle": "Aktuell kein plausibler Truck-Treffer",
+        "emptyDescription": "Prüfe vor allem Ladebasis, Tageskilometer und Nutzlast. Im jetzigen Entwurf werden alle verfügbaren Modelle ausgeschlossen.",
+        "emptySearchTitle": "Die Suche blendet aktuell alle Treffer aus",
+        "emptySearchDescription": "Für deinen Entwurf gäbe es passende Modelle, aber die aktuelle Suche oder Sortierung zeigt gerade nichts mehr an.",
+        "excludedNote": "{{count}} Modelle werden aktuell nicht gezeigt, weil Reichweite, Nutzlast oder Ladebasis nicht zum Entwurf passen.",
+        "toolbarPurpose": "Ergebnissteuerung",
+        "toolbarMatches": "sichtbare Modelle",
+        "hiddenBySearch": "{{count}} weitere durch Suche ausgeblendet",
+        "reasons": {
+          "directUseCase": "Einsatzprofil passt direkt",
+          "adjacentUseCase": "liegt nah an deinem Einsatzprofil",
+          "useCaseTension": "weicht beim Einsatzprofil spürbar ab",
+          "rangeStrong": "Reichweitenpuffer ist robust",
+          "rangeOkay": "Reichweite bleibt plausibel",
+          "rangeTight": "Reichweite liegt nah an der Grenze",
+          "payloadStrong": "Nutzlast ist gut abdeckbar",
+          "payloadOkay": "Nutzlast bleibt plausibel",
+          "payloadTight": "Nutzlast liegt nah an der Grenze",
+          "routeFit": "Planbarkeit der Route passt",
+          "routeChallenge": "Routenlogik bleibt anspruchsvoll",
+          "returnDepot": "Rückkehr ins Depot passt gut",
+          "openOperation": "offener Betrieb ist plausibel",
+          "depotReady": "Depotladen stützt den Fit",
+          "fastChargeReady": "Schnellladen kann absichern",
+          "chargeWindowFit": "Ladefenster passt zum Modell",
+          "chargeWindowWeak": "Ladefenster bleibt knapp",
+          "vehicleFormatFit": "Fahrzeugformat passt direkt",
+          "trailerReady": "Trailer-Einsatz ist abdeckbar",
+          "trailerOptionalMissing": "Anhänger wäre nur eingeschränkt denkbar",
+          "mcsReady": "MCS passt zum Schnellladefokus",
+          "mcsMissing": "Ladestandard bleibt konservativer",
+          "ccsEnough": "CCS reicht für den aktuellen Entwurf aus",
+          "gridSecured": "gesicherter Netzstatus hilft",
+          "gridMissing": "Netzstatus sollte noch geklärt werden"
+        }
+      },
+      "business": {
+        "purpose": "Wirtschaftliche Anschlussstufe",
+        "title": "Wie tragfähig wirkt dieser Truck-Fit wirtschaftlich?",
+        "description": "Nach der operativen Shortlist folgt direkt die Einordnung des Business Cases. Hier wird noch nicht voll gerechnet, aber der wirtschaftliche nächste Schritt wird sichtbar.",
+        "stagePurpose": "Aktueller Stand",
+        "leveragePurpose": "Stärkster Kostenhebel",
+        "riskPurpose": "Größtes wirtschaftliches Risiko",
+        "nextPurpose": "Nächster Prüfschritt",
+        "openEconomics": "Wirtschaftlichkeit & Betrieb öffnen",
+        "stage": {
+          "ready": {
+            "title": "Business Case wirkt anschlussfähig",
+            "description": "Der operative Fit ist stark, und die Infrastruktur wirkt nicht mehr wie die Hauptblockade. Jetzt lohnt sich die echte TCO-Prüfung."
+          },
+          "pilot": {
+            "title": "Pilot wirtschaftlich denkbar",
+            "description": "Die Shortlist wirkt plausibel, aber Betrieb oder Infrastruktur sollten vor der Skalierung noch belastbar geprüft werden."
+          },
+          "review": {
+            "title": "Erst Betriebslogik weiter schärfen",
+            "description": "Es gibt brauchbare Ansätze, aber Reichweite, Laden oder Trailerlogik sind noch nicht stark genug für einen sauberen Business Case."
+          },
+          "blocked": {
+            "title": "Noch kein tragfähiger Business Case",
+            "description": "Solange operativ kein plausibles Modell übrig bleibt, sollte die wirtschaftliche Prüfung noch nicht starten."
+          }
+        },
+        "leverage": {
+          "highMileage": {
+            "title": "Hohe Tagesleistung stärkt den Mauthebel",
+            "description": "Mit vielen gefahrenen Kilometern wird der CO2-differenzierte Mautvorteil schnell zu einem spürbaren Kostentreiber im positiven Sinn."
+          },
+          "midMileage": {
+            "title": "Maut und Energie können schon gut wirken",
+            "description": "Im mittleren Tagesprofil beginnen Mautvorteil und Betriebskosten bereits, den höheren Einstiegspreis ernsthaft zu kompensieren."
+          },
+          "selectiveMileage": {
+            "title": "Wirtschaftlichkeit bleibt stärker vom Einsatzfall abhängig",
+            "description": "Bei geringerer Fahrleistung wird der Business Case sensibler. Dann müssen Ladebasis, Einsatztreue und Förderlogik sauber sitzen."
+          }
+        },
+        "risk": {
+          "stableBase": {
+            "title": "Kein dominanter wirtschaftlicher Bremsklotz sichtbar",
+            "description": "Im aktuellen Entwurf ist kein einzelner Blocker dominant. Das spricht dafür, jetzt gezielt mit TCO, Maut und Ladeannahmen weiterzugehen."
+          },
+          "missingChargeBase": {
+            "title": "Ohne Ladebasis kippt der Business Case",
+            "description": "Sobald weder Depotladen noch verlässliche Schnellladung tragfähig sind, wird die wirtschaftliche Logik sehr schnell instabil."
+          },
+          "gridMissing": {
+            "title": "Netzfrage bleibt das Hauptproblem",
+            "description": "Wenn Depotladen geplant ist, aber der Netzstatus fehlt, bleibt der Business Case operativ und wirtschaftlich zu unsicher."
+          },
+          "mcsGap": {
+            "title": "Schnellladeanspruch und Fahrzeug passen noch nicht ganz",
+            "description": "Wenn MCS bevorzugt wird, das Modell aber eher konservativ lädt, sollte der reale Pausen- und Nachladefall genauer geprüft werden."
+          },
+          "rangeTight": {
+            "title": "Reichweite bleibt wirtschaftlich empfindlich",
+            "description": "Ein knapper Reichweitenfit kann zu ungeplanten Ladefenstern, höherem Zeitdruck und damit indirekt auch zu wirtschaftlichen Nachteilen führen."
+          },
+          "payloadTight": {
+            "title": "Nutzlast liegt nah an der Grenze",
+            "description": "Wenn der Nutzlastbedarf kaum Puffer hat, kann ein technisch passender Truck im Alltag trotzdem wirtschaftlich unflexibel werden."
+          },
+          "chargeWindowTight": {
+            "title": "Ladefenster bleibt zu eng",
+            "description": "Enge Ladefenster erhöhen das Risiko, dass Ladeleistung, Pausenlogik und Betriebskosten nicht sauber zusammenlaufen."
+          },
+          "noOperationalFit": {
+            "title": "Die operative Basis ist noch nicht tragfähig",
+            "description": "Bevor Maut, THG oder Energiepreise diskutiert werden, muss erst ein plausibler Truck-Fit im Betrieb stehen."
+          }
+        },
+        "next": {
+          "buildBusinessCase": {
+            "title": "Jetzt die echte Wirtschaftlichkeitsprüfung anschließen",
+            "description": "Als nächstes sollten Maut, Ladepreis, Infrastruktur und Rollout-Annahmen auf dieses Trefferbild gelegt werden."
+          },
+          "clarifyGrid": {
+            "title": "Netzanschluss und Ladebasis zuerst klären",
+            "description": "Vor der TCO-Rechnung sollte geprüft werden, ob die gewählte Ladebasis realistisch und zeitlich erreichbar ist."
+          },
+          "pricePublicCharging": {
+            "title": "Öffentliche Schnellladung sauber bepreisen",
+            "description": "Wenn der Fit stark auf öffentlichem Laden beruht, sollte der Business Case früh mit realistischen Schnellladekosten gespiegelt werden."
+          },
+          "testCcsFallback": {
+            "title": "MCS-Wunsch gegen reale Fahrzeugfähigkeit testen",
+            "description": "Hier lohnt sich ein kurzer Szenariotest: Reicht CCS im Alltag aus oder ist der Fernverkehrsfall wirtschaftlich zu eng?"
+          },
+          "runPilot": {
+            "title": "Mit einem kontrollierten Piloten weitergehen",
+            "description": "Der Fit wirkt interessant, aber ein begrenzter Pilot ist der sauberste Weg, um Betrieb und Wirtschaftlichkeit gemeinsam zu validieren."
+          },
+          "reworkProfile": {
+            "title": "Einsatzprofil erst weiter schärfen",
+            "description": "Noch bevor Zahlen vertieft werden, sollte der Entwurf bei Reichweite, Laden oder Trailerbedarf präziser gemacht werden."
+          }
+        }
+      },
+      "tco": {
+        "purpose": "5-Jahres-Vorschau",
+        "title": "Wie sieht der erste TCO-Vergleich für den Favoriten aus?",
+        "description": "Für den aktuellen Favoriten rechnen wir jetzt eine vereinfachte 5-Jahres-Vorschau gegen ein Diesel-Pendant. So wird sichtbar, ob Maut, Energie, THG und Wartung den höheren Einstiegspreis schon tragen können.",
+        "leadPurpose": "Aktueller Favorit vs. Diesel",
+        "advantageText": "liegt in dieser Vorschau über fünf Jahre bereits unter dem Diesel-Pendant.",
+        "extraCostText": "bleibt in dieser Vorschau über fünf Jahre noch über dem Diesel-Pendant.",
+        "breakEvenBefore": "Die Mehrinvestition würde sich nach etwa {{years}} Jahren amortisieren.",
+        "breakEvenAfter": "Bei diesen Annahmen wird die Mehrinvestition in fünf Jahren noch nicht vollständig aufgeholt.",
+        "assumptions": "Vereinfachte Vorschau mit {{years}} Jahren Laufzeit. Aktuell rechnen wir mit {{depotShare}} Depotladen und {{publicShare}} öffentlicher Schnellladung. Vor einer finalen Entscheidung sollte die Vorschau mit echten Flotten-, Strom- und Mautannahmen gespiegelt werden.",
+        "tags": {
+          "advantage": "5J Vorteil",
+          "check": "TCO prüfen"
+        },
+        "summary": {
+          "annualBenefit": "Jährlicher Vorteil",
+          "annualBenefitText": "So stark wirkt die laufende Differenz pro Jahr aktuell.",
+          "capexDelta": "Mehrinvestition",
+          "capexDeltaText": "So weit liegt der Truck heute über dem Diesel-Pendant.",
+          "chargingMix": "Lademix",
+          "chargingMixText": "Depot- zu Schnellladeanteil in der aktuellen Vorschau.",
+          "yearlyDistance": "Jahresfahrleistung",
+          "yearlyDistanceText": "Abgeleitet aus Tages-km und Einsatzprofil."
+        },
+        "fields": {
+          "energyCost": "Stromkosten pro Jahr",
+          "energyCostText": "Basierend auf Verbrauch, Lademix und Strompreis-Annahmen.",
+          "tollBenefit": "Mautvorteil pro Jahr",
+          "tollBenefitText": "Der CO2-differenzierte Mauthebel bleibt einer der stärksten Treiber.",
+          "thg": "THG-Erlös pro Jahr",
+          "thgText": "Als grobe N3-Vorschau mit heutiger Quotenlogik gespiegelt.",
+          "maintenance": "Wartungsvorteil pro Jahr",
+          "maintenanceText": "Vereinfachter Unterschied zwischen E-Truck und Diesel im Betrieb."
+        }
+      }
+    },
+    "findComparePurpose": "Produktbereiche",
+    "findCompareTitle": "Wähle den richtigen Einstieg in Finden & Vergleichen",
+    "findCompareDescription": "Starte im Berater aus dem Einsatzprofil heraus oder prüfe die Modelle direkt.",
+    "findCompare": {
+      "cards": {
+        "advisor": {
+          "purpose": "1. Truck-Kaufberater",
+          "title": "Passende Fahrzeuge aus dem Einsatzprofil ableiten",
+          "description": "Nicht nur technische Daten, sondern Tourtyp, Ladefenster, Nutzlast und Betriebsvorgaben steuern die erste Fahrzeugauswahl."
+        },
+        "database": {
+          "purpose": "2. Vergleichsdatenbank",
+          "title": "Modelle strukturiert gegenüberstellen",
+          "description": "Die Datenbank stellt Ladeleistung, Batterie, Reichweite, Gewichte, Aufbauoptionen und weitere Vergleichsdaten sauber nebeneinander."
+        },
+        "tco": {
+          "purpose": "3. Wirtschaftlichkeit",
+          "title": "TCO, Maut und Ladeannahmen einordnen",
+          "description": "Nach der Modellauswahl zeigt die wirtschaftliche Einordnung, wie Maut, Energie, THG und Infrastruktur die Wirtschaftlichkeit verschieben."
+        }
+      }
+    },
+    "findCompareNote": "Die wirtschaftliche Anschlussprüfung folgt direkt aus dem Berater heraus, sobald die operative Shortlist steht.",
+    "findModelsPurpose": "Modellübersicht",
+    "findModelsTitle": "Die aktuelle Truck-Datenbasis im Überblick",
+    "findModelsDescription": "Alle verfügbaren E-Lkw auf einen Blick. So prüfst du schnell, welche Modelle heute schon in der Basis liegen.",
+    "findModelsNote": "{{models}} Modelle von {{brands}} Herstellern bilden aktuell die Truck-Datenbasis.",
+    "findModelsOpenAdvisor": "Im Berater einordnen",
+    "topicsPurpose": "Wissensmodule",
+    "topicsTitle": "Die ersten Inhaltsblöcke für hochwertige Informationen",
+    "topicsDescription": "Diese Module bringen die wichtigsten Themen zuerst auf den Punkt. So entsteht ein klarer Informationsbereich für den schnellen Einstieg.",
+    "sections": {
+      "verstehen": {
+        "purpose": "1. Verstehen",
+        "titlePrimary": "E-Lkw",
+        "titleAccent": "einordnen und verstehen",
+        "description": "Hier geht es um das große Bild: warum E-Lkw wichtig werden, welche Marktlogik dahinter steht und in welchen Einsatzprofilen die Technologie heute bereits gut passt.",
+        "cardTitle": "Verstehen",
+        "cardDescription": "Markt, Einsatzprofile und Technologie schnell einordnen.",
+        "panelBadge": "Strategischer Einstieg",
+        "panelTitle": "Warum E-Lkw jetzt relevant werden",
+        "panelDescription": "Dieser Bereich bündelt Marktbild, Grundsignale und operative Einsatzprofile in einer ersten verständlichen Einordnung.",
+        "panel": {
+          "pointOne": "Markt & Hersteller",
+          "pointTwo": "Vier Signalsätze",
+          "pointThree": "Stadt bis Fernverkehr"
+        },
+        "highlights": {
+          "one": "Marktbild",
+          "two": "Signal-Überblick",
+          "three": "Einsatzprofile"
+        }
+      },
+      "wirtschaftlichkeit-betrieb": {
+        "purpose": "2. Wirtschaftlichkeit & Betrieb",
+        "titlePrimary": "Kosten, Laden",
+        "titleAccent": "und Betrieb einordnen",
+        "description": "Hier liegt der betriebliche Kern: welche Kostentreiber wirken, wie Maut und THG helfen, und was Depotladen, Regulierung und Betriebsrealität wirklich bedeuten.",
+        "cardTitle": "Wirtschaftlichkeit & Betrieb",
+        "cardDescription": "TCO, Laden, Rollout und Regulatorik für reale Flottenfragen.",
+        "panelBadge": "Betriebslogik",
+        "panelTitle": "Wirtschaftlichkeit entsteht aus mehreren Hebeln gleichzeitig",
+        "panelDescription": "Nicht der Kaufpreis allein entscheidet. Dieser Bereich verbindet TCO, Maut, Ladeinfrastruktur und Rollout in einer einzigen Betriebsperspektive.",
+        "panel": {
+          "pointOne": "TCO & Maut",
+          "pointTwo": "Rollout & Netzanschluss",
+          "pointThree": "Ladesysteme & Regulierung"
+        },
+        "highlights": {
+          "one": "TCO-Hebel",
+          "two": "Ladebetrieb",
+          "three": "Regulatorik"
+        }
+      },
+      "finden-vergleichen": {
+        "purpose": "3. Finden & Vergleichen",
+        "titlePrimary": "Passende Trucks",
+        "titleAccent": "finden und vergleichen",
+        "description": "Hier laufen Truck-Berater, Modellübersicht und wirtschaftliche Anschlussprüfung in einer klaren Entscheidungsoberfläche zusammen.",
+        "cardTitle": "Finden & Vergleichen",
+        "cardDescription": "Truck-Berater, Modelle und Wirtschaftlichkeit als Arbeitsfläche.",
+        "panelBadge": "Produktaufbau",
+        "panelTitle": "Vom Einsatzprofil zur belastbaren Modellentscheidung",
+        "panelDescription": "Dieser Bereich verbindet Truck-Berater, Modellübersicht und wirtschaftliche Anschlussprüfung in einer Arbeitsfläche.",
+        "panel": {
+          "pointOne": "Truck-Kaufberater",
+          "pointTwo": "Vergleichsdatenbank",
+          "pointThree": "Truck-TCO"
+        },
+        "highlights": {
+          "one": "Berater-Logik",
+          "two": "Modelldaten",
+          "three": "Wirtschaftlichkeitsrechner"
+        }
+      }
+    },
+    "topics": {
+      "market": {
+        "purpose": "Markt & Hersteller",
+        "title": "Marktentwicklung und Anbieter",
+        "description": "Ein Überblick darüber, warum E-Lkw jetzt betriebswirtschaftlich relevant werden und welche Hersteller den Markt prägen.",
+        "pointOne": "Deutschland als wichtiger Leitmarkt für schwere E-Lkw",
+        "pointTwo": "Big Seven, neue Modelle und Wettbewerbsdruck",
+        "pointThree": "Einordnung von Skalierung, Marktanteil und Fernverkehr"
+      },
+      "economics": {
+        "purpose": "TCO & Erlöse",
+        "title": "Wirtschaftlichkeit statt Bauchgefühl",
+        "description": "Ein strukturierter Blick auf Mehrkosten, Mautvorteile, THG-Quote, Energiepreise und operative Einsparungen.",
+        "pointOne": "Maut als stärkster Wirtschaftlichkeitshebel",
+        "pointTwo": "THG-Quote als zusätzliche Erlösquelle",
+        "pointThree": "TCO-Denken statt reiner Anschaffungskosten"
+      },
+      "infrastructure": {
+        "purpose": "Laden & Netz",
+        "title": "Infrastruktur als Schlüsselthema",
+        "description": "Die Seite soll erklären, warum Depotladen, Netzanschluss und MCS über den Erfolg im Alltag entscheiden.",
+        "pointOne": "Depotladen als Haupt-Ladeszenario",
+        "pointTwo": "Netzanschluss und Lastmanagement früh planen",
+        "pointThree": "CCS und MCS je nach Einsatz logisch einordnen"
+      },
+      "operations": {
+        "purpose": "Praxis & Sicherheit",
+        "title": "Reichweite, Betrieb und Qualifikation",
+        "description": "Ein Modul für reale Reichweiten, Nutzlastregeln, DGUV-Qualifizierung, Brandschutz und Fahrerschulung.",
+        "pointOne": "Reale Einsatzfähigkeit statt reiner Herstellerangaben",
+        "pointTwo": "Gewichtsausgleich, 44-Tonnen-Regel und Disposition",
+        "pointThree": "Sicherer Betrieb durch Schulung und Standards"
+      }
+    },
+    "signalsPurpose": "Warum jetzt?",
+    "signalsTitle": "Vier Signale, die den E-Lkw jetzt strategisch relevant machen",
+    "signalsDescription": "Diese erste Lageeinordnung verdichtet Markt, Maut, Skalierung und Infrastruktur in vier klare Gründe, warum E-Lkw schon heute auf die Entscheidungsagenda gehören.",
+    "signals": {
+      "momentum": {
+        "purpose": "Marktdynamik",
+        "stat": "+37,9 %",
+        "title": "Schwere E-Lkw wachsen trotz schwachem Gesamtmarkt",
+        "description": "Die Neuzulassungen schwerer E-Lkw über 16 Tonnen stiegen 2025 in Deutschland laut deiner Sammlung auf 1.398 Fahrzeuge. Das zeigt echten Marktzug, obwohl der Gesamtmarkt rückläufig war."
+      },
+      "scale": {
+        "purpose": "Skalierungslücke",
+        "stat": "2,6 %",
+        "title": "Der Marktanteil ist noch klein, die Skalierung aber zwingend",
+        "description": "Der Anteil schwerer E-Lkw am Absatz bleibt niedrig. Genau deshalb ist die Transformationsphase für Hersteller, Speditionen und Infrastrukturbetreiber jetzt entscheidend."
+      },
+      "toll": {
+        "purpose": "Kostenhebel",
+        "stat": "34,8 ct/km",
+        "title": "Die Maut ist der stärkste kurzfristige Wirtschaftlichkeitstreiber",
+        "description": "Für schwere Diesel-Lkw entstehen hohe Mautkosten, während emissionsfreie Fahrzeuge bis Ende 2025 befreit waren und danach weiter stark begünstigt bleiben."
+      },
+      "infrastructure": {
+        "purpose": "Betriebsrealität",
+        "stat": "~80 %",
+        "title": "Der Erfolg steht und fällt mit Depotladen und Netzanschluss",
+        "description": "Der Großteil der Ladevorgänge wird künftig am Depot stattfinden. Deshalb ist Ladeinfrastruktur kein Nebenthema, sondern betrieblicher Kern des Umstiegs."
+      }
+    },
+    "economicsPurpose": "Wirtschaftlichkeit",
+    "economicsTitle": "Die wichtigsten ökonomischen Hebel zuerst sauber einordnen",
+    "economicsDescription": "Bevor einzelne Modelle verglichen werden, braucht der Bereich eine klare ökonomische Grundlogik. Diese vier Hebel erklären, warum die Entscheidung im Schwerlastbereich fast immer über TCO läuft.",
+    "economics": {
+      "capex": {
+        "purpose": "Anschaffung",
+        "stat": "+200.000 €",
+        "title": "Der Einstieg ist teuer, aber die Differenz ist sichtbar",
+        "description": "Bei schweren Sattelzugmaschinen liegen die Mehrkosten aktuell grob im Bereich von rund 200.000 Euro gegenüber Diesel. Der größte Kostentreiber bleibt die Traktionsbatterie."
+      },
+      "toll": {
+        "purpose": "Mautvorteil",
+        "stat": "~34.800 €/Jahr",
+        "title": "Die Maut kann einen großen Teil der Mehrkosten ausgleichen",
+        "description": "Bei 100.000 Kilometern Jahreslaufleistung ergibt sich für schwere Fahrzeuge ein massiver Vorteil gegenüber Diesel. Dieser Hebel ist in Deutschland aktuell zentral."
+      },
+      "thg": {
+        "purpose": "Zusätzliche Erlöse",
+        "stat": "3.340–4.175 €",
+        "title": "Die THG-Quote kann die Wirtschaftlichkeit zusätzlich stützen",
+        "description": "Für schwere Fahrzeuge der Klasse N3 kann die THG-Prämie eine spürbare Zusatzerlösquelle sein. Gleichzeitig bleiben Höhe und Timing markt- und fristenabhängig."
+      },
+      "opex": {
+        "purpose": "Betriebskosten",
+        "stat": "bis zu -50 %",
+        "title": "Wartung und Verschleiß sinken, Energie wird zum Steuerungsthema",
+        "description": "Der elektrische Antrieb reduziert viele klassische Wartungsaufwände. Gleichzeitig hängt die Wirtschaftlichkeit stark davon ab, wie viel günstig im Depot und wie viel teuer öffentlich geladen wird."
+      }
+    },
+    "economicsNote": "Hinweis: Maut, THG-Prämien, Förderungen und Energiepreise sind zeitkritisch. Werte dieser Art sollten immer mit Prüfdatum und Kontext gelesen werden.",
+    "opsOverviewPurpose": "Schnelleinordnung",
+    "opsOverviewTitle": "Drei Dinge entscheiden auf dieser Seite zuerst",
+    "opsOverviewDescription": "Bevor einzelne Detailblöcke geöffnet werden, hilft diese Kurzsicht: Wo entsteht der größte Vorteil, wo liegt das größte Risiko und welche Frage sollte zuerst beantwortet werden?",
+    "opsOverview": {
+      "cards": {
+        "lever": {
+          "purpose": "Größter Hebel",
+          "title": "Maut und Energielogik verschieben das TCO-Bild am stärksten",
+          "stat": "Maut + Depotladen",
+          "description": "Die größte Verschiebung kommt meist nicht aus einem einzelnen Bauteil, sondern aus dem Zusammenspiel von Mautvorteil und günstigem Strom am Depot."
+        },
+        "risk": {
+          "purpose": "Größtes Risiko",
+          "title": "Ladeinfrastruktur und Netzanschluss bremsen den Rollout häufiger als das Fahrzeug",
+          "stat": "Netz vor Fahrzeug",
+          "description": "Viele Projekte scheitern nicht an der Fahrzeugtechnik, sondern an Vorlaufzeiten für Leistung, Trafo oder belastbare Ladefenster."
+        },
+        "decision": {
+          "purpose": "Erste Entscheidungsfrage",
+          "title": "Nicht 'Welcher Truck?', sondern 'Welche Tour zuerst?'",
+          "stat": "Route vor Modell",
+          "description": "Der wirtschaftliche Einstieg beginnt fast immer mit einer passenden Tour und nicht mit dem technisch spannendsten Modell."
+        }
+      }
+    },
+    "opsSubnav": {
+      "economics": "TCO-Hebel",
+      "rollout": "Einführung",
+      "regulation": "Maut & Förderung",
+      "charging": "Ladesysteme",
+      "checklist": "Prüf-Checkliste"
+    },
+    "opsRouteNav": {
+      "overview": "Überblick",
+      "business-case": "Business Case",
+      "laden-betrieb": "Laden & Betrieb",
+      "regulatorik": "Regulatorik"
+    },
+    "opsSplitPurpose": "Drei Unterbereiche",
+    "opsSplitTitle": "Wähle zuerst die Frage, die du klären willst",
+    "opsSplitDescription": "Statt Kosten, Laden und Regulierung auf einer langen Mischseite zu bündeln, ist dieser Bereich jetzt in drei klarere Perspektiven aufgeteilt.",
+    "opsAreas": {
+      "business-case": {
+        "purpose": "Kosten & Tragfähigkeit",
+        "title": "Business Case zuerst belastbar machen",
+        "description": "Hier geht es um Mehrkosten, Mautvorteile, THG, laufende Kosten und die vier Fragen, die vor einer Bestellung sauber beantwortet sein sollten."
+      },
+      "laden-betrieb": {
+        "purpose": "Rollout & Alltag",
+        "title": "Laden und Betrieb operativ planen",
+        "description": "Hier wird geprüft, wie Pilot, Depotladen, Ladefenster, Netzanschluss und Tagesbetrieb zusammenpassen."
+      },
+      "regulatorik": {
+        "purpose": "Rahmen & Druck",
+        "title": "Maut, Förderung und Ziele einordnen",
+        "description": "Hier stehen die Regeln im Mittelpunkt, die den wirtschaftlichen Druck erhöhen oder Investitionen gezielt verschieben."
+      }
+    },
+    "rolloutPurpose": "Einführungsfahrplan",
+    "rolloutTitle": "So sollte ein Unternehmen den Einstieg strukturiert vorbereiten",
+    "rolloutDescription": "Statt sofort die ganze Flotte umzubauen, spricht fast alles für einen stufenweisen, datenbasierten Einstieg. Diese vier Schritte bilden dafür das erste Grundmuster.",
+    "rollout": {
+      "steps": {
+        "one": {
+          "title": "Pilot-Touren statt Vollumstieg",
+          "description": "Mit 1:1-Ersetzungen auf planbaren Kurz- und Regionalstrecken starten und reale Betriebsdaten sammeln, bevor die Flotte skaliert wird."
+        },
+        "two": {
+          "title": "Netzanschluss früh sichern",
+          "description": "Den Netzbetreiber früh einbinden, weil Leistungserhöhungen und neue Trafostationen schnell ein bis zwei Jahre Vorlauf haben können."
+        },
+        "three": {
+          "title": "Energiemix strategisch aufbauen",
+          "description": "Depotladen, Lastmanagement, PV und Energiemanagement zusammen denken, damit günstiger Strom planbar zum Wettbewerbsvorteil wird."
+        },
+        "four": {
+          "title": "TCO und Routensimulation als Standard",
+          "description": "Nicht der Listenpreis, sondern TCO, Maut, THG, Ladefenster und reale Touren müssen die Entscheidungsbasis bilden."
+        }
+      }
+    },
+    "rolloutNote": "Prüfpunkt: Förderprogramme, Mautsätze und öffentliche Schnellladeverfügbarkeit verändern sich. Diese Inhalte sollten immer mit sauberem Zeitbezug gepflegt werden.",
+    "regulationPurpose": "Förderung & Regulierung",
+    "regulationTitle": "Maut, THG und Förderlage sind kein Randthema, sondern Teil der Investitionslogik",
+    "regulationDescription": "Gerade bei schweren E-Lkw entstehen die wichtigsten betriebswirtschaftlichen Unterschiede nicht nur am Fahrzeug selbst, sondern in Mautsystem, THG-Erlösen, Förderkulisse und Fristenlogik.",
+    "regulation": {
+      "toll": {
+        "purpose": "Mautsystem",
+        "stat": "34,8 ct/km",
+        "title": "Die CO2-differenzierte Maut verschiebt die Wirtschaftlichkeit massiv",
+        "description": "Für schwere Diesel-Lkw entstehen hohe Kilometerkosten, während emissionsfreie Fahrzeuge bis Ende 2025 befreit waren und danach weiterhin stark entlastet bleiben. Dieser Hebel wirkt direkt auf jede gefahrene Tour."
+      },
+      "thg": {
+        "purpose": "THG-Quote",
+        "stat": "3.340–4.175 €",
+        "title": "Die THG-Quote kann ein echter Zusatzbaustein im Business Case sein",
+        "description": "Schwere Fahrzeuge der Klasse N3 können über den pauschalen Stromverbrauch spürbare Prämien erlösen. Gleichzeitig bleiben Marktpreis, Antragspartner und Fristen entscheidend."
+      },
+      "incentives": {
+        "purpose": "Förderkulisse",
+        "stat": "regional statt zentral",
+        "title": "Förderung muss heute deutlich stärker regional geprüft werden",
+        "description": "Nach dem Stopp der zentralen KsNI-Förderung haben Bundesländer und regionale Programme an Bedeutung gewonnen. Für Unternehmen heißt das: Standort, Frist und Programmfenster sauber prüfen."
+      },
+      "compliance": {
+        "purpose": "Fristen & Ziele",
+        "stat": "2030 als Druckpunkt",
+        "title": "Regulatorik zwingt Hersteller und Betreiber zu frühen Entscheidungen",
+        "description": "EU-Flottenziele, CO2-Druck und der Aufbau neuer Infrastruktur sorgen dafür, dass Abwarten selbst ein strategisches Risiko werden kann. Timing wird damit Teil der Wirtschaftlichkeitsrechnung."
+      }
+    },
+    "regulationNote": "Wichtig: Dieser Bereich trennt bewusst zwischen Grundwissen und aktuellem Stand. Mautsätze, Förderprogramme, THG-Erlöse und Fristen können sich kurzfristig verändern.",
+    "chargingPurpose": "Ladesysteme",
+    "chargingTitle": "Welche Ladearten heute wofür sinnvoll sind",
+    "chargingDescription": "Nicht jede Ladeleistung löst dasselbe Problem. Für den E-Lkw-Bereich ist wichtig, die Systeme nach Einsatzszenario, Standzeit und betrieblicher Funktion einzuordnen.",
+    "charging": {
+      "ac": {
+        "purpose": "Langsam & günstig",
+        "title": "AC-Laden",
+        "power": "11–44 kW",
+        "description": "AC ist vor allem ein Depot- und Standzeit-Thema. Für große Fernverkehrsbatterien ist es zu langsam, für ruhige Nachtfenster aber wirtschaftlich.",
+        "time": "Typisch: etwa 10–15 Stunden bei großer Batterie",
+        "useCase": "Sinnvoll: Über Nacht, wenn Zeit wichtiger ist als Tempo"
+      },
+      "ccs": {
+        "purpose": "Depot & Regional",
+        "title": "CCS",
+        "power": "50–150 kW",
+        "description": "CCS deckt heute viele planbare regionale Einsätze ab. Es ist ein sinnvoller Brückenschritt zwischen einfachem Depotladen und sehr schnellem öffentlichen Laden.",
+        "time": "Typisch: etwa 4–8 Stunden bei großer Batterie",
+        "useCase": "Sinnvoll: Depot, Tagesrand und planbare Ladefenster"
+      },
+      "hpc": {
+        "purpose": "Schneller unterwegs",
+        "title": "CCS High Power",
+        "power": "250–400 kW",
+        "description": "High-Power-CCS ist relevant, wenn unterwegs schneller nachgeladen werden muss, ohne schon im Megawatt-Bereich zu sein.",
+        "time": "Typisch: etwa 1,5–2,5 Stunden bei großer Batterie",
+        "useCase": "Sinnvoll: Linienverkehr, schnellere Zwischenladungen, regionale Fernverkehre"
+      },
+      "mcs": {
+        "purpose": "Fernverkehr",
+        "title": "Megawatt Charging System",
+        "power": "750–1.200 kW",
+        "description": "MCS ist der eigentliche Schlüssel für schweren Fernverkehr. Erst damit werden große Batterien in Pausenfenstern wirtschaftlich nachladbar.",
+        "time": "Typisch: etwa 30–45 Minuten bei ~600 kWh",
+        "useCase": "Sinnvoll: Langstrecke, Autobahnkorridore, Ladepausen im Betrieb"
+      }
+    },
+    "chargingNote": "Wichtig: Die reale Ladezeit hängt nicht nur von der Säule ab, sondern auch von Batteriegröße, Ladekurve, Temperatur und verfügbarer Anschlussleistung.",
+    "checklistPurpose": "Prüfstruktur",
+    "checklistTitle": "Diese vier Fragen sollten vor der Bestellung klar beantwortet sein",
+    "checklistDescription": "Diese vier Punkte führen von der Einordnung in eine belastbare Vorprüfung. Sie bilden eine sinnvolle Minimalstruktur vor jedem Pilot oder Fahrzeugkauf.",
+    "checklist": {
+      "items": {
+        "route": {
+          "title": "Welche konkrete Route ist der erste E-Lkw-Kandidat?",
+          "description": "Definiere eine reale Tour mit Laufleistung, Topografie, Standzeiten und Sicherheitsreserve, statt mit einem abstrakten Wunschprofil zu starten."
+        },
+        "charging": {
+          "title": "Wo und wann wird tatsächlich geladen?",
+          "description": "Ohne klares Ladefenster, Depotlogik und Backup-Szenario bleibt selbst ein passendes Fahrzeug operativ unsicher."
+        },
+        "grid": {
+          "title": "Ist die elektrische Leistung betrieblich wirklich absicherbar?",
+          "description": "Netzanschluss, Lastmanagement und mögliche Ausbauzeiten müssen früh geklärt sein, sonst verschiebt sich der gesamte Rollout."
+        },
+        "economics": {
+          "title": "Ist der Business Case mit realen Annahmen gerechnet?",
+          "description": "Maut, THG, Ladepreis-Mix, Wartung und tatsächliche Tourlogik sollten gemeinsam geprüft sein, bevor über Stückzahlen entschieden wird."
+        }
+      }
+    },
+    "opsFaqPurpose": "Vertiefende Fragen",
+    "opsFaqTitle": "Welche Detailfragen meist nach den ersten Zahlen auftauchen",
+    "opsFaqDescription": "Die Hauptseite zeigt nur die Kernlogik. Hier liegen die tieferen Punkte, die oft erst in der zweiten Prüfrunde relevant werden.",
+    "opsFaq": {
+      "items": {
+        "timing": {
+          "question": "Wann lohnt sich der Einstieg in eine echte TCO-Prüfung?",
+          "answer": "Sobald Einsatzprofil, Reichweite und Ladebasis operativ plausibel wirken. Erst dann ergeben Maut, Energiepreis, THG und Infrastrukturannahmen ein Bild, das für eine Flottenentscheidung belastbar ist."
+        },
+        "chargingBase": {
+          "question": "Warum muss die Ladebasis vor der Skalierung geklärt sein?",
+          "answer": "Ohne gesicherte Ladebasis kippt selbst ein guter Modellfit schnell im Alltag. Depotladen, Netzanschluss, Ladefenster und Schnelllade-Backup entscheiden mit darüber, ob die Wirtschaftlichkeit im Betrieb wirklich erreicht werden kann."
+        },
+        "pricing": {
+          "question": "Welche Kostenannahmen sollte man besonders kritisch prüfen?",
+          "answer": "Vor allem öffentliche Schnellladung, tatsächliche Jahresfahrleistung, Mauthebel und Infrastrukturkosten. Diese vier Punkte verschieben den Business Case oft stärker als kleine Unterschiede zwischen einzelnen Truck-Modellen."
+        }
+      }
+    },
+    "useCasesPurpose": "Einsatzprofile",
+    "useCasesTitle": "Wo E-Lkw heute schon gut passen und wo die Hürden noch höher sind",
+    "useCasesDescription": "Nicht jeder Use Case ist gleich reif. Diese erste Einordnung hilft, E-Lkw nach operativer Passung zu denken statt nur nach Technikdaten.",
+    "useCases": {
+      "urban": {
+        "purpose": "Stadt & Nahlogistik",
+        "title": "Urbaner und kommunaler Einsatz",
+        "description": "Hier sind E-Lkw heute oft am plausibelsten: planbare Strecken, viele Stopps, Rekuperation und feste Rückkehr ins Depot spielen dem Antrieb in die Karten.",
+        "strength": "Stärke: Planbare Touren und gute Rekuperation",
+        "constraint": "Hürde: Depot- und Ladeplatzorganisation",
+        "focus": "Zuerst prüfen: Standzeiten, Ladefenster, kommunale Routen"
+      },
+      "regional": {
+        "purpose": "Regionalverkehr",
+        "title": "Regionaler Verteiler- und Linienverkehr",
+        "description": "Regionalprofile sind oft die beste Brücke zur Skalierung. Sie verbinden höhere Tagesleistung mit trotzdem noch gut planbaren Ladepunkten.",
+        "strength": "Stärke: Gute Balance zwischen Reichweite und Planbarkeit",
+        "constraint": "Hürde: Öffentliche Zwischenladung wird teils relevant",
+        "focus": "Zuerst prüfen: Depotladen plus ein belastbares Backup-Ladeszenario"
+      },
+      "longhaul": {
+        "purpose": "Fernverkehr",
+        "title": "Schwerer Fernverkehr",
+        "description": "Der Fernverkehr wird zunehmend realistisch, aber er ist am stärksten von Batteriegröße, Ladeleistung, MCS-Verfügbarkeit und Dispositionsqualität abhängig.",
+        "strength": "Stärke: Hoher Mauthebel und wachsender Technologiefortschritt",
+        "constraint": "Hürde: Öffentliche Schnellladeinfrastruktur und Zeitfenster",
+        "focus": "Zuerst prüfen: reale Route, MCS-Perspektive und betriebliche Puffer"
+      }
+    },
+    "comparisonPurpose": "Technologievergleich",
+    "comparisonTitle": "Warum der E-Lkw aktuell der plausibelste nächste Schritt ist",
+    "comparisonDescription": "Diese Einordnung ersetzt keine komplette Marktstudie, hilft aber schnell zu verstehen, warum batterieelektrische Lkw im Straßengüterverkehr aktuell die stärkste operative Perspektive haben.",
+    "comparison": {
+      "cards": {
+        "bev": {
+          "purpose": "Batterieelektrisch",
+          "title": "Stärkste Perspektive für viele planbare Straßeneinsätze",
+          "stat": "hohe Effizienz",
+          "description": "Direkter Stromeinsatz, Mautvorteile und planbares Depotladen machen BEV-Lkw heute für viele Flotten zum realistischsten Transformationspfad."
+        },
+        "diesel": {
+          "purpose": "Diesel",
+          "title": "Heute noch Referenz, aber mit wachsendem Kostendruck",
+          "stat": "bekannt, aber belastet",
+          "description": "Diesel bleibt in vielen Flotten die Ausgangsbasis, verliert aber bei Maut, CO2-Druck und zukünftiger Strategie zunehmend an Vorteil."
+        },
+        "hydrogen": {
+          "purpose": "Wasserstoff",
+          "title": "Spannend für Spezialfälle, aber derzeit operativ und wirtschaftlich schwächer",
+          "stat": "noch unreifer",
+          "description": "Für den breiten Straßengüterverkehr ist Wasserstoff aktuell meist teurer und infrastrukturseitig deutlich weniger bereit als batterieelektrische Lösungen."
+        }
+      }
+    },
+    "comparisonNote": "Für viele Flotten ist batterieelektrisch heute der plausibelste Einstieg, solange Einsatzprofil, Laden und TCO gemeinsam betrachtet werden.",
+    "faqPurpose": "Häufige Einwände",
+    "faqTitle": "Vier Fragen, die fast immer zuerst gestellt werden",
+    "faqDescription": "Diese Kurzantworten helfen dabei, typische Vorbehalte schneller einzuordnen, bevor tiefer in Modelle, Infrastruktur oder Wirtschaftlichkeit eingestiegen wird.",
+    "faq": {
+      "cards": {
+        "fit": {
+          "purpose": "Einsatzfit",
+          "question": "Passen E-Lkw heute schon für viele reale Touren?",
+          "answer": "Ja, vor allem dort, wo Routen planbar sind, Fahrzeuge regelmäßig ins Depot zurückkehren und Ladefenster sauber organisiert werden können."
+        },
+        "charging": {
+          "purpose": "Ladebasis",
+          "question": "Muss für jeden Einsatz sofort Megawatt-Laden verfügbar sein?",
+          "answer": "Nein. Für viele Stadt- und Regionalprofile reicht Depotladen oder strukturiertes CCS-Laden aus. MCS wird vor allem im schweren Fernverkehr entscheidend."
+        },
+        "cost": {
+          "purpose": "Wirtschaftlichkeit",
+          "question": "Ist der hohe Kaufpreis automatisch ein Ausschlusskriterium?",
+          "answer": "Nicht zwingend. Erst mit Mautvorteil, Energiekosten, THG-Quote, Wartung und realer Laufleistung zeigt sich, ob ein Einsatz wirtschaftlich tragfähig wird."
+        },
+        "timing": {
+          "purpose": "Einführungszeitpunkt",
+          "question": "Sollte man auf spätere Modellgenerationen warten?",
+          "answer": "Nicht pauschal. Für viele Unternehmen ist es sinnvoller, jetzt mit einem belastbaren Pilot zu starten und operative Erfahrung aufzubauen, statt auf den perfekten Zeitpunkt zu warten."
+        }
+      }
+    },
+    "nextPurpose": "Nächster Ausbau",
+    "nextTitle": "Jetzt steht das Grundraster",
+    "nextDescription": "Als nächstes können wir einen dieser drei Stränge gezielt ausarbeiten: Truck-Kaufberater, Modell-Datenbank oder hochwertige Wissensmodule mit echten Inhalten.",
+    "backHome": "Zur Startseite",
+    "goAdvisor": "Zum Kaufberater"
+  },
+  "advisor": {
+    "heroPurpose": "1. Fahrzeug finden",
+    "title": "Kaufberater",
+    "subtitle": "Die erste Version des Kaufberaters führt jetzt über aktivierbare Kriterien, Gut- und OK-Werte und eine bewusste Suche per Klick in die passenden Fahrzeuge.",
+    "statusSearch": "Die Bewertung startet erst nach Klick auf Suchen.",
+    "statusToggle": "Jedes Kriterium kann einzeln ein- oder ausgeschaltet werden.",
+    "statusFlow": "Geeignete Fahrzeuge gehen danach direkt in Vergleich und Rechner.",
+    "setupPurpose": "Kriterien vorbereiten",
+    "setupTitle": "Relevante Werte auswählen und bewusst anwenden",
+    "setupDescription": "Wähle zuerst die Antriebsart. Danach aktivierst du nur die Kriterien, die dir wirklich wichtig sind, und legst für jedes aktive Feld einen Gut- und einen OK-Wert fest.",
+    "drivetrainLabel": "Antriebsart",
+    "drivetrains": {
+      "all": "Alle",
+      "ev": "E-Fahrzeuge",
+      "ice": "Verbrenner"
+    },
+    "appliesTo": {
+      "both": "Für alle",
+      "ev": "Nur EV",
+      "ice": "Nur Verbrenner"
+    },
+    "moreIsBetter": "Mehr ist besser",
+    "lessIsBetter": "Weniger ist besser",
+    "exactMatch": "Exakter Treffer",
+    "multiSelect": "Mehrfachwahl",
+    "goodThreshold": "Gut",
+    "okThreshold": "OK",
+    "desiredValue": "Gewünscht",
+    "desiredValues": "Gewünscht",
+    "noUnit": "Wert",
+    "groupKicker": "Kriterien-Gruppe",
+    "enableCriterion": "Kriterium aktivieren",
+    "disableCriterion": "Kriterium deaktivieren",
+    "criterionDisabledHint": "Dieses Kriterium ist aktuell ausgeschaltet und hat keinen Einfluss auf Punkte oder Filter.",
+    "invalidThresholds": "Bitte sinnvolle Gut- und OK-Werte eintragen.",
+    "selectValueHint": "Bitte einen gewünschten Wert auswählen.",
+    "selectValuePlaceholder": "Wert auswählen",
+    "exactMatchHelp": "Dieses Kriterium wertet nur exakte Treffer.",
+    "multiSelectHelp": "Mehrere Werte sind möglich. Jeder gewählte Wert zählt als exakter Treffer.",
+    "legend": {
+      "good": "Gut · +2",
+      "ok": "OK · +1",
+      "weak": "Schwach · -1",
+      "off": "Egal · aus"
+    },
+    "boolean": {
+      "yes": "Ja",
+      "no": "Nein"
+    },
+    "ruleExact": "Nur exakte Treffer für {{value}} werden empfohlen.",
+    "ruleExactMultiple": "Empfohlen werden nur exakte Treffer für: {{values}}.",
+    "ruleHigher": "Ab {{good}} gut, ab {{ok}} ok, bis {{weak}} noch sichtbar. Darunter ausgeschlossen.",
+    "ruleLower": "Bis {{good}} gut, bis {{ok}} ok, bis {{weak}} noch sichtbar. Darüber ausgeschlossen.",
+    "groups": {
+      "basis": {
+        "title": "Basis",
+        "description": "Preis, Fahrzeugform und erste Kernwerte für den schnellen Zuschnitt."
+      },
+      "praxis": {
+        "title": "Praxis",
+        "description": "Alltag, Familie und Nutzwert für den echten Einsatz."
+      },
+      "technik": {
+        "title": "Technik",
+        "description": "Reichweite, Verbrauch, Laden und Antriebsdetails für die Feinabstimmung."
+      }
+    },
+    "searchPurpose": "Suche anwenden",
+    "searchTitle": "Erst auf Klick bewerten",
+    "searchDescription": "{{count}} aktive Kriterien werden erst mit Suchen auf die Fahrzeuge angewendet.",
+    "loadingVehicles": "Fahrzeuge werden geladen...",
+    "searchCta": "Suchen",
+    "resultsPurpose": "Erste Empfehlungen",
+    "resultsTitle": "Passende Fahrzeuge nach Punkten sortiert",
+    "resultsDescription": "Die Ergebnisse werden nur aus den angewendeten Kriterien berechnet. Fahrzeuge unterhalb der Ausschlussgrenze tauchen hier nicht mehr auf.",
+    "metricCandidates": "Kandidaten",
+    "metricShown": "Angezeigt",
+    "metricExcluded": "Ausgeschlossen",
+    "searchPending": "Stelle die Kriterien ein und starte die Suche bewusst per Klick.",
+    "noResults": "Für diese Kombination aus Kriterien wurden keine passenden Fahrzeuge gefunden.",
+    "points": "Punkte",
+    "fit": {
+      "strong": "Sehr passend",
+      "okay": "Passend",
+      "warning": "Mit Abweichungen",
+      "neutral": "Ohne Wertung"
+    },
+    "resultStatus": {
+      "good": "Gut",
+      "ok": "OK",
+      "weak": "Schwach",
+      "missing": "Keine Daten",
+      "neutral": "Neutral"
+    },
+    "topMatches": "Top-Treffer",
+    "watchouts": "Hinweise",
+    "noTopMatches": "Noch keine klaren Treffer.",
+    "noWatchouts": "Keine Auffälligkeiten.",
+    "resultReasonLead": "Vorne wegen: {{criteria}}.",
+    "resultReasonFallback": "Vorne durch die insgesamt passendere Summe der aktiven Kriterien.",
+    "openCalculator": "Zum Rechner",
+    "addCompare": "Merken",
+    "removeCompare": "Gemerkt",
+    "resultsLimitNote": "Es werden die ersten {{shown}} von {{total}} passenden Fahrzeugen gezeigt.",
+    "principlesPurpose": "Grundlogik",
+    "principlesTitle": "So wird der Kaufberater funktionieren",
+    "principlesDescription": "Phase 1 legt den Einstieg und die Regeln fest, bevor die eigentliche Punkte-Engine und die Kriterienformulare eingebaut werden.",
+    "principles": {
+      "criteriaTitle": "Gut- und OK-Werte",
+      "criteriaDescription": "Für relevante Kennzahlen legst du zwei Schwellen fest. Daraus entstehen Punkte, Warnungen und Ausschlüsse.",
+      "toggleTitle": "Kriterien ausschalten",
+      "toggleDescription": "Wenn dir ein Wert egal ist, schaltest du ihn aus. Dann fließt er weder in Bewertung noch in Filter ein.",
+      "searchTitle": "Suche erst auf Klick",
+      "searchDescription": "Der Berater rechnet nicht bei jeder Eingabe live. Erst mit Suchen werden Kriterien angewendet und Ergebnisse sortiert."
+    },
+    "flowPurpose": "Produktfluss",
+    "flowTitle": "Von der Suche bis zur Kaufentscheidung",
+    "flowDescription": "Der Kaufberater führt in den Vergleich und danach in den Kostenrechner, statt drei getrennte Werkzeuge zu sein.",
+    "flow": {
+      "step1Title": "Fahrzeug finden",
+      "step1Description": "Antriebsart, Profil und aktive Kriterien festlegen.",
+      "step2Title": "Direkt vergleichen",
+      "step2Description": "Geeignete Fahrzeuge merken und nebeneinander prüfen.",
+      "step3Title": "Kosten verstehen",
+      "step3Description": "TCO, Break-even und Kostentreiber im Rechner lesen."
+    },
+    "browsePurpose": "Heute schon nutzbar",
+    "browseTitle": "Bis die Punkte-Logik fertig ist",
+    "browseDescription": "Die Datenbank bleibt der schnellste Weg, um schon jetzt Fahrzeuge zu entdecken und für den nächsten Schritt zu sammeln.",
+    "browsePrimary": "E-Fahrzeuge entdecken",
+    "browseSecondary": "Verbrenner entdecken",
+    "calculatorCta": "Direkt zum Rechner"
   },
   "viewToggle": {
     "grid": "Raster",
@@ -57,6 +1264,7 @@
       "basis": "Basis",
       "range_battery": "Reichweite & Akku",
       "charging": "Laden",
+      "ice_powertrain": "Antrieb & Verbrauch",
       "performance": "Performance",
       "dimensions": "Maße",
       "weight": "Gewicht & Anhängelast",
@@ -111,7 +1319,17 @@
     }
   },
   "calc": {
+    "heroPurpose": "Kosten verstehen",
     "title": "Wirtschaftlichkeitsrechner",
+    "pageSubtitle": "Vergleiche Elektroautos und Verbrenner mit derselben Designsprache wie im Katalog und prüfe die wichtigsten Annahmen direkt im Kontext.",
+    "setupPurpose": "Vergleich aufsetzen",
+    "setupTitle": "Fahrzeuge und Annahmen vorbereiten",
+    "setupDescription": "Wähle deine Fahrzeuge, lege das Nutzungsprofil fest und überprüfe die wichtigsten Kostenannahmen, bevor du ins Ergebnis springst.",
+    "resultsPurpose": "Ergebnis lesen",
+    "resultsTitle": "Kostenbild und Unterschiede verstehen",
+    "resultsDescription": "Sobald beide Seiten vollständig sind, zeigt dir der Rechner zuerst die wichtigsten Aussagen und danach die tieferen Begründungen.",
+    "compareModeLabel": "Vergleichstyp",
+    "detailModeLabel": "Detailtiefe",
     "modeEvIce": "EV vs. Verbrenner",
     "modeEvEv": "EV vs. EV",
     "slotA": "Fahrzeug A",
@@ -123,15 +1341,88 @@
     "fromDatabase": "Aus Datenbank",
     "modeNormal": "Normal",
     "modeExpert": "Experte",
+    "sections": {
+      "vehicleTitle": "Fahrzeug auswählen",
+      "vehicleDescriptionEv": "Wähle das Elektroauto aus der Datenbank aus und prüfe die übernommenen Basisdaten.",
+      "vehicleDescriptionIce": "Wähle einen Verbrenner aus der Datenbank oder trage ihn manuell ein.",
+      "usageTitle": "Nutzungsprofil",
+      "usageDescription": "Diese Angaben gelten für beide Fahrzeuge und bestimmen, wie stark die laufenden Kosten über die Jahre ins Gewicht fallen.",
+      "costsTitle": "Standard-Annahmen",
+      "costsDescriptionEv": "Hier legst du Kaufpreis, Ladepreise und Ladeanteile für Zuhause, öffentliches AC-Laden und Schnellladen fest.",
+      "costsDescriptionIce": "Hier legst du Kaufpreis und Kraftstoffkosten für den Basisvergleich fest.",
+      "expertTitle": "Experten-Annahmen",
+      "expertDescriptionEv": "Feinjustiere Finanzierung, Wartung, Versicherung, Restwert, Förderung, THG, Wallbox und Ladeverluste.",
+      "expertDescriptionIce": "Feinjustiere Finanzierung, Wartung, Versicherung, Steuer und Restwert."
+    },
+    "summary": {
+      "source": "Quelle",
+      "acquisition": "Anschaffung",
+      "financing": "Finanzierung",
+      "usage": "Nutzung",
+      "drivingProfile": "Fahrprofil",
+      "consumption": "Verbrauch",
+      "energy": "Energieprofil",
+      "database": "Datenbank",
+      "manual": "Manuell"
+    },
+    "profile": {
+      "cityLabel": "Stadt",
+      "ruralLabel": "Landstraße",
+      "highwayLabel": "Autobahn",
+      "modes": {
+        "normal": "Normal",
+        "city": "Stadt",
+        "rural": "Landstraße",
+        "highway": "Autobahn"
+      }
+    },
+    "financingTypes": {
+      "cash": "Barkauf",
+      "loan": "Kredit",
+      "lease": "Leasing"
+    },
+    "hints": {
+      "chargeProfile": "Die Ladeanteile dürfen flexibel gesetzt werden. Der Rechner skaliert sie intern auf 100 %, falls die Summe abweicht.",
+      "drivingProfile": "Das Fahrprofil darf flexibel gesetzt werden. Der Rechner skaliert die Anteile intern auf 100 %, falls die Summe abweicht.",
+      "drivingProfileNeutral": "Normal hält den Verbrauch neutral und hat bewusst keinen Zusatz-Effekt auf die Rechnung.",
+      "drivingProfilePreset": "Aktive Gewichtung",
+      "fuelPrice": "Nutze hier deinen realistischen Durchschnittspreis statt nur den heutigen Tageswert."
+    },
+    "validation": {
+      "fixSlotBeforeResults": "Bitte korrigiere die markierten Eingaben, bevor der Rechner ein belastbares Ergebnis anzeigen kann.",
+      "positiveRequired": "Bitte einen Wert größer als 0 eingeben.",
+      "nonNegativeRequired": "Bitte einen Wert größer oder gleich 0 eingeben.",
+      "percentRange": "Bitte einen Prozentwert zwischen 0 und 100 eingeben.",
+      "lossRange": "Bitte einen Ladeverlust zwischen 0 und 50 % eingeben.",
+      "grantExceedsPurchasePrice": "Die Förderung liegt aktuell über dem Kaufpreis und wird rechnerisch gedeckelt.",
+      "profileShareTotalZero": "Mindestens ein Fahrprofil-Anteil muss größer als 0 % sein.",
+      "profileShareNormalized": "Die Fahrprofil-Anteile summieren sich auf {{total}} %. Der Rechner skaliert sie intern auf 100 %.",
+      "chargeShareTotalZero": "Mindestens ein Ladeanteil muss größer als 0 % sein.",
+      "chargeShareNormalized": "Die Ladeanteile summieren sich auf {{total}} %. Der Rechner skaliert sie intern auf 100 %.",
+      "leaseIgnoresResidual": "Beim Leasing wird der Restwert aktuell nicht in die Berechnung einbezogen."
+    },
     "params": {
       "kaufpreis": "Kaufpreis (€)",
       "jahresKm": "Jahreskilometer (km)",
+      "drivingPreset": "Fahrprofil",
+      "cityShare": "Stadt-Anteil (%)",
+      "ruralShare": "Überland-Anteil (%)",
+      "highwayShare": "Autobahn-Anteil (%)",
       "stromPreis": "Strompreis (€/kWh)",
       "acPreis": "AC-Preis (€/kWh)",
       "dcPreis": "DC-Preis (€/kWh)",
+      "homePrice": "Zuhause (€/kWh)",
+      "publicPrice": "Öffentlich AC (€/kWh)",
+      "fastPrice": "Schnellladen (€/kWh)",
       "acProzent": "AC-Anteil (%)",
+      "homeShare": "Zuhause-Anteil (%)",
+      "publicShare": "Öffentlich-AC-Anteil (%)",
+      "fastShare": "Schnelllade-Anteil (%)",
       "acLadeverlust": "Ladeverlust AC (%)",
       "dcLadeverlust": "Ladeverlust DC (%)",
+      "homeLoss": "Ladeverlust Zuhause (%)",
+      "publicLoss": "Ladeverlust Öffentlich AC (%)",
+      "fastLoss": "Ladeverlust Schnellladen (%)",
       "thgQuote": "THG-Quote (€/Jahr)",
       "kraftstoffPreis": "Kraftstoffpreis (€/L)",
       "jahre": "Betrachtungszeitraum (Jahre)",
@@ -140,20 +1431,95 @@
       "steuer": "KFZ-Steuer (€/Jahr)",
       "restwertProzent": "Restwert (%)",
       "foerderung": "Förderung/BAFA (€)",
+      "financingType": "Finanzierungsart",
       "zinsSatz": "Finanzierungszins (%)",
+      "leaseMonthlyRate": "Leasingrate (€/Monat)",
+      "leaseDownPayment": "Sonderzahlung (€)",
+      "wallboxPurchaseCost": "Wallbox-Kauf (€)",
+      "wallboxInstallationCost": "Wallbox-Installation (€)",
       "verbrauchKwh": "Verbrauch (kWh/100km)",
       "verbrauchL": "Verbrauch (L/100km)"
     },
     "results": {
-      "tabMonthly": "Monatliche Kosten",
-      "tabTotal": "Gesamtverlauf",
-      "tabBreakeven": "Break-even",
+      "kicker": "Ergebnisübersicht",
+      "title": "So unterscheiden sich die Gesamtkosten wirklich",
+      "subtitle": "Die Auswertung zeigt dir die wichtigsten Kostentreiber über {{years}} Jahre auf einen Blick.",
+      "bestChoice": "Aktuell günstiger",
+      "cheaperThan": "{{winner}} ist über den Betrachtungszeitraum günstiger als {{loser}}.",
+      "savingsTotal": "Ersparnis gesamt",
+      "savingsMonthly": "Ersparnis pro Monat",
+      "kpiTotal": "Gesamtkosten",
+      "kpiMonthly": "Pro Monat",
+      "kpiPerKm": "Pro Kilometer",
       "monthly": "Monatliche Kosten",
+      "monthlyView": "Monatliche Treiber",
       "totalCost": "Gesamtkosten",
       "breakevenAt": "Break-even nach {{years}} Jahren",
+      "breakevenImmediate": "{{name}} ist bereits ab Jahr 1 günstiger.",
+      "breakevenDescription": "{{name}} holt den Kostenunterschied nach {{years}} Jahren auf.",
       "noBreakeven": "Kein Break-even im Betrachtungszeitraum",
+      "noBreakevenDescription": "{{name}} bleibt über den gewählten Zeitraum die günstigere Option.",
       "cheaper": "{{name}} ist günstiger",
-      "costKaufpreis": "Kaufpreis",
+      "sectionDecision": "Entscheidung",
+      "sectionProfile": "Fahrprofil",
+      "sectionProfileTitle": "Wie verändert dein Fahrprofil den Verbrauch?",
+      "sectionProfileDescription": "Hier siehst du, wie dein Mix aus Stadt, Überland und Autobahn den effektiven Verbrauch jedes Fahrzeugs verschiebt.",
+      "profileInsightPill": "Profil-Effekt sichtbar",
+      "profileBaseConsumption": "Basisverbrauch",
+      "profileAdjustedConsumption": "Effektiver Profil-Verbrauch",
+      "profileDelta": "Abweichung zum Basiswert",
+      "profileNarrativeNormal": "Im Modus Normal bleibt der Verbrauch neutral und wird nicht zusätzlich durch ein spezielles Fahrprofil verschoben.",
+      "profileNarrativeEvCity": "Viel Stadtverkehr spielt diesem Elektroauto eher in die Karten und drückt den effektiven Verbrauch.",
+      "profileNarrativeEvRural": "Ein starker Überland-Anteil hält dieses Elektroauto nahe an seinem Basisverbrauch.",
+      "profileNarrativeEvHighway": "Ein hoher Autobahnanteil hebt den Verbrauch dieses Elektroautos spürbar an.",
+      "profileNarrativeIceCity": "Viel Stadtverkehr erhöht bei diesem Verbrenner den effektiven Verbrauch deutlich.",
+      "profileNarrativeIceRural": "Ein starker Überland-Anteil ist für diesen Verbrenner meist der effizienteste Bereich.",
+      "profileNarrativeIceHighway": "Viel Autobahn hält diesen Verbrenner näher am Basiswert als reiner Stadtverkehr.",
+      "sectionBreakEvenTitle": "Wann kippt der Kostenvergleich?",
+      "sectionCostDrivers": "Kostenstruktur",
+      "sectionBreakdownTitle": "Welche Blöcke treiben die monatlichen Kosten?",
+      "sectionBreakdownDescription": "Hier siehst du, welche Kostenpositionen den größten Anteil an der monatlichen Belastung haben.",
+      "driverLeadPill": "{{category}} prägt den Abstand",
+      "driverAdvantage": "Kostenvorteil",
+      "driverValueLoss": "Wertverlust",
+      "driverRunning": "Laufende Kosten",
+      "driverNarrativeValueLoss": "Hier wirken vor allem Anschaffung und Restwert über die Haltedauer.",
+      "driverNarrativeEnergy": "Hier entscheiden Verbrauch, Fahrprofil und Energiepreis.",
+      "driverNarrativeFinancing": "Hier schlagen Kreditkosten oder Leasingrate unterschiedlich stark zu Buche.",
+      "driverNarrativeRunning": "Hier summieren sich Wartung, Versicherung und Steuer.",
+      "driverNarrativeInfrastructure": "Hier wirken Wallbox und Installationskosten.",
+      "sectionScenario": "Szenarioanalyse",
+      "sectionScenarioTitle": "Wie robust ist das Ergebnis bei anderen Annahmen?",
+      "sectionScenarioDescription": "Teste hier Jahreskilometer sowie Strom- und Kraftstoffpreise. Die Ergebnis-Karten reagieren sofort auf deine Änderungen.",
+      "sectionScenarioControls": "Drei schnelle Was-wäre-wenn-Regler",
+      "scenarioAnnualKm": "Jahreskilometer im Szenario",
+      "scenarioAnnualKmHint": "Dieser Wert wird im Szenario für beide Fahrzeuge verwendet.",
+      "scenarioAnnualKmUnit": "km/Jahr",
+      "scenarioElectricityDelta": "Strompreis-Szenario",
+      "scenarioElectricityHint": "Wirkt gleichzeitig auf Zuhause-, öffentliches AC- und Schnellladen.",
+      "scenarioFuelDelta": "Kraftstoffpreis-Szenario",
+      "scenarioFuelHint": "Wirkt auf den durchschnittlichen Kraftstoffpreis pro Liter.",
+      "scenarioDisabledEv": "Gerade ist kein Elektroauto im Vergleich aktiv.",
+      "scenarioDisabledIce": "Gerade ist kein Verbrenner im Vergleich aktiv.",
+      "scenarioReset": "Szenario zurücksetzen",
+      "scenarioOutcome": "Szenario-Ergebnis",
+      "scenarioGap": "Kostenlücke im Szenario",
+      "scenarioMonthlyGap": "Differenz pro Monat",
+      "scenarioComparedToBase": "gegenüber deiner Basisannahme",
+      "scenarioDeltaTotal": "Delta gesamt",
+      "scenarioDeltaMonthly": "Delta pro Monat",
+      "scenarioNoChange": "Keine Änderung",
+      "scenarioElectricityPill": "Strom",
+      "scenarioFuelPill": "Sprit",
+      "scenarioInactive": "nicht aktiv",
+      "sectionDetails": "Detailvergleich",
+      "sectionTableTitle": "Alle Kostenpositionen im Überblick",
+      "sectionTableDescription": "Die Tabelle zeigt die vollständige Aufschlüsselung inklusive Restwert und THG-Einnahmen.",
+      "yearsLabel": "Jahre",
+      "compareAllCosts": "Alle Kosten vergleichen",
+      "costPosition": "Kostenposition",
+      "costKaufpreis": "Anschaffung / Leasing",
+      "costInfrastruktur": "Infrastruktur",
       "costEnergie": "Energie",
       "costWartung": "Wartung",
       "costVersicherung": "Versicherung",
@@ -173,17 +1539,15 @@
     },
     "addToCalculator": "In Rechner laden",
     "selectBoth": "Bitte beide Fahrzeuge wählen",
+    "fixInputs": "Bitte vervollständige oder korrigiere die markierten Eingaben, um Ergebnisse zu sehen.",
+    "loadingResults": "Ergebnisse werden geladen...",
     "vehicleA": "Fahrzeug A",
     "vehicleB": "Fahrzeug B",
-    "acDcSplit": "Ladeverteilung AC / DC",
+    "chargingSplit": "Ladeverteilung",
     "acLabel": "AC",
-    "dcLabel": "DC"
-  },
-  "landing": {
-    "badge": "399 Fahrzeuge · Echte Daten",
-    "headline": "Der smarteste Weg. Zum richtigen Auto.",
-    "sub": "Vergleiche Elektroautos und Verbrenner — Reichweite, Ladezeit, Kosten.",
-    "ctaAutos": "Autos entdecken",
-    "ctaRechner": "Kosten berechnen"
+    "dcLabel": "DC",
+    "homeLabel": "Zuhause",
+    "publicLabel": "Öffentlich",
+    "fastLabel": "Schnellladen"
   }
 }

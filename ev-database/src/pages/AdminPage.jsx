@@ -4,12 +4,13 @@ import { logout } from '../firebase/auth'
 import { useCarsCollection } from '../hooks/useCars'
 import { addCar, updateCar, deleteCar, importCars } from '../firebase/cars'
 import { addIceCar, updateIceCar, deleteIceCar, importIceCars } from '../firebase/ice-cars'
-import { applyCalculations } from '../utils/calculations'
-import { EV_FIELDS, ICE_FIELDS } from '../config/fields'
+import { applyCalculations } from '../entities/vehicle/calculations.js'
+import { EV_FIELDS, ICE_FIELDS } from '../entities/vehicle/fields.js'
 import AdminPanel from '../components/admin/AdminPanel'
 import './AdminPage.css'
 
 const EV_CONFIG = {
+  vehicleType: 'ev',
   collectionName: 'ev_cars',
   formFields: EV_FIELDS,
   addFn: addCar,
@@ -22,6 +23,7 @@ const EV_CONFIG = {
 }
 
 const ICE_CONFIG = {
+  vehicleType: 'ice',
   collectionName: 'ice_cars',
   formFields: ICE_FIELDS,
   addFn: addIceCar,
@@ -38,6 +40,7 @@ function AdminContent({ config }) {
   return (
     <AdminPanel
       cars={cars}
+      vehicleType={config.vehicleType}
       formFields={config.formFields}
       addFn={config.addFn}
       updateFn={config.updateFn}

@@ -1,44 +1,110 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { Search, SlidersHorizontal } from 'lucide-react'
 import { useCarsCollection } from '../hooks/useCars'
-import { ICE_FIELDS } from '../config/fields'
+import { ICE_CARD_FIELDS, getFieldDefinition } from '../entities/vehicle/fields.js'
 import ViewToggle from '../components/cars/ViewToggle'
 import CarGrid from '../components/cars/CarGrid'
 import CarList from '../components/cars/CarList'
 import CarDetail from '../components/cars/CarDetail'
+import { filterCarsByQuery, getCatalogSortOptions, sortCars } from '../features/catalog/catalogQuery.js'
 import './HomePage.css'
 
-const ICE_SETTINGS = ICE_FIELDS.map((f, i) => ({
-  key: f.key,
-  label_de: f.label,
-  label_en: f.label,
-  visible: i < 6,
-  order: i,
-}))
-
 export default function IceHomePage() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const { cars, loading } = useCarsCollection('ice_cars')
 
   const [view, setView] = useState(() => localStorage.getItem('ice-view') || 'grid')
   const [size, setSize] = useState(() => localStorage.getItem('ice-gridSize') || 'medium')
   const [selectedCar, setSelectedCar] = useState(null)
+  const [searchQuery, setSearchQuery] = useState('')
+  const [sortKey, setSortKey] = useState('default')
+  const [sortDirection, setSortDirection] = useState('desc')
+  const language = i18n.resolvedLanguage?.startsWith('de') ? 'de' : 'en'
+  const sortOptions = useMemo(() => getCatalogSortOptions('ice', language), [language])
+  const filteredCars = useMemo(() => {
+    const matchingCars = filterCarsByQuery(cars, searchQuery)
+    return sortCars(matchingCars, sortKey, sortDirection, 'ice')
+  }, [cars, searchQuery, sortDirection, sortKey])
+  const selectedSortDefinition = sortKey === 'default' ? null : getFieldDefinition(sortKey)
 
   const handleSetView = (v) => { setView(v); localStorage.setItem('ice-view', v) }
   const handleSetSize = (s) => { setSize(s); localStorage.setItem('ice-gridSize', s) }
 
-  if (loading) return <div className="home-page"><p className="home-loading">{t('home.loading')}</p></div>
+  if (loading) {
+    return (
+      <div className="catalog-page">
+        <div className="catalog-shell">
+          <p className="home-loading">{t('home.loading')}</p>
+        </div>
+      </div>
+    )
+  }
 
   return (
-    <div className="home-page">
-      <h1>{t('home.iceTitle')}</h1>
-      <ViewToggle view={view} setView={handleSetView} size={size} setSize={handleSetSize} />
-      {cars.length === 0
-        ? <p className="home-empty">{t('home.noCars')}</p>
-        : view === 'grid'
-          ? <CarGrid cars={cars} fields={ICE_SETTINGS} size={size} onCarClick={setSelectedCar} />
-          : <CarList cars={cars} fields={ICE_SETTINGS} onCarClick={setSelectedCar} />
-      }
+    <div className="catalog-page">
+      <div className="catalog-shell">
+        <section className="catalog-results-stage">
+          <header className="catalog-header">
+            <div className="catalog-results-copy">
+              <span className="catalog-section-kicker">{t('home.resultsPurpose')}</span>
+              <h2 className="catalog-section-title">{t('home.resultsTitleIce')}</h2>
+              <p className="catalog-section-description">{t('home.resultsDescriptionIce')}</p>
+            </div>
+            <div className="catalog-toolbar">
+              <div className="catalog-count-pill">{filteredCars.length} {t('home.vehicles', 'Fahrzeuge')}</div>
+              <ViewToggle view={view} setView={handleSetView} size={size} setSize={handleSetSize} />
+            </div>
+          </header>
+          <div className="catalog-query-bar">
+            <label className="catalog-search-field">
+              <Search size={16} />
+              <input
+                type="search"
+                value={searchQuery}
+                onChange={(event) => setSearchQuery(event.target.value)}
+                placeholder={t('home.searchPlaceholder')}
+              />
+            </label>
+            <div className="catalog-sort-panel">
+              <div className="catalog-sort-head">
+                <SlidersHorizontal size={16} />
+                <span>{t('home.sortLabel')}</span>
+              </div>
+              <select value={sortKey} onChange={(event) => setSortKey(event.target.value)}>
+                {sortOptions.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+              <button
+                type="button"
+                className="catalog-sort-direction"
+                onClick={() => setSortDirection((current) => current === 'desc' ? 'asc' : 'desc')}
+              >
+                {t(sortDirection === 'desc' ? 'home.sortDesc' : 'home.sortAsc')}
+              </button>
+            </div>
+          </div>
+          <main className="catalog-content">
+            {filteredCars.length === 0
+              ? <p className="home-empty">{t('home.noCars')}</p>
+              : view === 'grid'
+                ? <CarGrid cars={filteredCars} fields={ICE_CARD_FIELDS} size={size} onCarClick={setSelectedCar} variant="ice" />
+                : <CarList cars={filteredCars} fields={ICE_CARD_FIELDS} onCarClick={setSelectedCar} variant="ice" />
+            }
+          </main>
+          {selectedSortDefinition && (
+            <p className="catalog-sort-note">
+              {t('home.sortingBy', {
+                field: selectedSortDefinition.labels?.[language] ?? selectedSortDefinition.key,
+                direction: t(sortDirection === 'desc' ? 'home.sortDescLabel' : 'home.sortAscLabel'),
+              })}
+            </p>
+          )}
+        </section>
+      </div>
       {selectedCar && <CarDetail car={selectedCar} onClose={() => setSelectedCar(null)} />}
     </div>
   )

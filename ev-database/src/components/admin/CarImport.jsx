@@ -1,32 +1,33 @@
 import { useState } from 'react'
 import * as XLSX from 'xlsx'
 import { useTranslation } from 'react-i18next'
+import { matchFieldKey } from '../../entities/vehicle/fields.js'
 import './CarImport.css'
 
 // Parst Zahlen in deutschem (89,8 / 1.234,56) und englischem (89.8 / 1,234.56) Format
 function parseNumber(val) {
-  if (val === null || val === undefined || val === '') return 0
+  if (val === null || val === undefined || val === '') return null
   if (typeof val === 'number') return val
   const s = String(val).trim()
   // Deutsches Format: optionale Tausenderpunkte + Komma als Dezimaltrennzeichen
   if (/^\d{1,3}(\.\d{3})*(,\d+)?$/.test(s))
-    return parseFloat(s.replace(/\./g, '').replace(',', '.')) || 0
+    return parseFloat(s.replace(/\./g, '').replace(',', '.')) || null
   // Einfaches Dezimalkomma: 89,8 → 89.8
   if (/^\d+,\d+$/.test(s))
-    return parseFloat(s.replace(',', '.')) || 0
+    return parseFloat(s.replace(',', '.')) || null
   // Englisches Format: optionale Tausenderkommas + Punkt als Dezimaltrennzeichen
   if (/^\d{1,3}(,\d{3})*(\.\d+)?$/.test(s))
-    return parseFloat(s.replace(/,/g, '')) || 0
-  return parseFloat(s) || 0
+    return parseFloat(s.replace(/,/g, '')) || null
+  return parseFloat(s) || null
 }
 
-const autoMatch = (colName, fields) => {
-  const lower = colName.toLowerCase().replace(/\s/g, '_')
-  const found = fields.find(f => f.key && (f.key === lower || f.label.toLowerCase().replace(/\s/g, '_') === lower))
-  return found?.key || ''
+const autoMatch = (colName, fields, vehicleType) => {
+  const allowedKeys = new Set(fields.map((field) => field.key))
+  const matchedKey = matchFieldKey(colName, vehicleType)
+  return allowedKeys.has(matchedKey) ? matchedKey : ''
 }
 
-export default function CarImport({ fields, importFn, transformFn = (c) => c, onDone }) {
+export default function CarImport({ vehicleType, fields, importFn, transformFn = (c) => c, onDone }) {
   const { t } = useTranslation()
   const [columns, setColumns] = useState([])
   const [mapping, setMapping] = useState({})
@@ -49,7 +50,7 @@ export default function CarImport({ fields, importFn, transformFn = (c) => c, on
       setColumns(headers)
       setRows(dataRows)
       const autoMap = {}
-      headers.forEach(h => { autoMap[h] = autoMatch(String(h), fields) })
+      headers.forEach(h => { autoMap[h] = autoMatch(String(h), fields, vehicleType) })
       setMapping(autoMap)
     }
     reader.readAsArrayBuffer(file)
@@ -63,7 +64,7 @@ export default function CarImport({ fields, importFn, transformFn = (c) => c, on
         const dbKey = mapping[col]
         if (!dbKey) return
         const val = row[i]
-        car[dbKey] = numKeys.includes(dbKey) ? parseNumber(val) : (String(val || ''))
+        car[dbKey] = numKeys.includes(dbKey) ? parseNumber(val) : (String(val || '').trim() || null)
       })
       return transformFn(car)
     }).filter(c => c.marke || c.modell)

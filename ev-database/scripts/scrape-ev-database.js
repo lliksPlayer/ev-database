@@ -4,6 +4,7 @@ import { fileURLToPath } from 'url'
 import { writeFileSync } from 'fs'
 import FirecrawlApp from '@mendable/firecrawl-js'
 import { importCars } from './firebase-import.js'
+import { normalizeVehicle } from '../src/entities/vehicle/vehicleSchema.js'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 config({ path: resolve(__dirname, '../.env') })
@@ -16,13 +17,6 @@ function tableVal(md, label) {
   const re = new RegExp(`\\|\\s*${esc}\\s*\\\\?\\*?†?\\s*\\|\\s*([^|\\n]+?)\\s*\\|`, 'im')
   const m = md.match(re)
   return m ? m[1].trim() : null
-}
-
-// Parse number + optional unit from string
-function extractNum(str) {
-  if (!str) return null
-  const m = str.match(/([\d.]+)/)
-  return m ? parseFloat(m[1]) : null
 }
 
 function parseMarkdown(markdown, metadata) {
@@ -48,7 +42,7 @@ function parseMarkdown(markdown, metadata) {
   if (imgMatch) r.bild_url = imgMatch[1]
 
   // preis_de — Germany price (row has markdown link: | [Germany](...) | €44,668 |)
-  const priceMatch = markdown.match(/\|\s*\[Germany\][^\|]*\|\s*€([\d,.]+)/)
+  const priceMatch = markdown.match(/\|\s*\[Germany\][^|]*\|\s*€([\d,.]+)/)
   if (priceMatch) r.preis_de = parseInt(priceMatch[1].replace(/[,.]/g, ''))
 
   // reichweite_wltp — from WLTP section specifically
@@ -154,7 +148,7 @@ function parseMarkdown(markdown, metadata) {
   const hp = tableVal(markdown, 'Heat pump \\(HP\\)')
   if (hp) r.waermepumpe = hp.toLowerCase().startsWith('yes') ? 'Yes' : 'No'
 
-  return r
+  return normalizeVehicle(r, 'ev')
 }
 
 async function getCarUrls() {

@@ -3,33 +3,98 @@ import {
   XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine, ResponsiveContainer
 } from 'recharts'
 
-const COLOR_A = '#2563eb'
-const COLOR_B = '#dc2626'
+const COLOR_A = '#0ea5e9'
+const COLOR_B = '#f97316'
+const GRID_COLOR = '#e2e8f0'
+const AXIS_COLOR = '#64748b'
+const TEXT_COLOR = '#0f172a'
+const BODY_FONT = "'Plus Jakarta Sans', system-ui, sans-serif"
+const HEADING_FONT = "'Outfit', system-ui, sans-serif"
 
 const formatEur = (v) =>
   new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(v)
 
-// Custom tooltip styled to match the app's card aesthetic
+const formatAxisThousands = (value) => `${Math.round(value / 1000)}k €`
+
 const CustomTooltip = ({ active, payload, label }) => {
   if (!active || !payload?.length) return null
   return (
     <div style={{
-      background: '#fff',
-      border: '1px solid #e0e0e0',
-      borderRadius: 8,
-      padding: '10px 14px',
-      boxShadow: '0 4px 16px rgba(0,0,0,0.08)',
+      background: 'rgba(255, 255, 255, 0.98)',
+      border: '1px solid rgba(203, 213, 225, 0.9)',
+      borderRadius: 18,
+      padding: '12px 14px',
+      boxShadow: '0 18px 40px rgba(15, 23, 42, 0.10)',
       fontSize: 13,
-      fontFamily: 'system-ui, -apple-system, sans-serif',
+      fontFamily: BODY_FONT,
+      minWidth: 180,
     }}>
-      <div style={{ fontWeight: 700, color: '#555', marginBottom: 6, fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+      <div style={{
+        fontWeight: 700,
+        color: AXIS_COLOR,
+        marginBottom: 8,
+        fontSize: 11,
+        textTransform: 'uppercase',
+        letterSpacing: '0.08em',
+      }}>
         {label !== undefined ? (typeof label === 'number' ? `Jahr ${label}` : label) : ''}
       </div>
       {payload.map((entry) => (
-        <div key={entry.dataKey} style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 2 }}>
-          <span style={{ width: 10, height: 10, borderRadius: '50%', background: entry.color, display: 'inline-block', flexShrink: 0 }} />
-          <span style={{ color: '#333', flex: 1 }}>{entry.name}:</span>
-          <span style={{ fontWeight: 600, color: '#1a1a2e' }}>{formatEur(entry.value)}</span>
+        <div key={entry.dataKey} style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 4 }}>
+          <span style={{
+            width: 10,
+            height: 10,
+            borderRadius: '50%',
+            background: entry.color,
+            display: 'inline-block',
+            flexShrink: 0,
+            boxShadow: `0 0 0 4px ${entry.color}22`,
+          }} />
+          <span style={{ color: TEXT_COLOR, flex: 1 }}>{entry.name}</span>
+          <span style={{ fontWeight: 700, color: TEXT_COLOR, fontFamily: HEADING_FONT }}>{formatEur(entry.value)}</span>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+const ChartLegend = ({ payload }) => {
+  if (!payload?.length) return null
+
+  return (
+    <div style={{
+      display: 'flex',
+      gap: 10,
+      flexWrap: 'wrap',
+      justifyContent: 'flex-start',
+      paddingTop: 6,
+    }}>
+      {payload.map((entry) => (
+        <div
+          key={entry.value}
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: 8,
+            padding: '8px 12px',
+            borderRadius: 999,
+            background: '#f8fafc',
+            border: '1px solid rgba(203, 213, 225, 0.8)',
+            color: TEXT_COLOR,
+            fontSize: 12,
+            fontWeight: 700,
+            fontFamily: BODY_FONT,
+          }}
+        >
+          <span style={{
+            width: 10,
+            height: 10,
+            borderRadius: '50%',
+            background: entry.color,
+            display: 'inline-block',
+            boxShadow: `0 0 0 4px ${entry.color}22`,
+          }} />
+          {entry.value}
         </div>
       ))}
     </div>
@@ -45,78 +110,82 @@ export function TotalCostChart({ seriesA, seriesB, labelA, labelB, breakevenYear
 
   return (
     <ResponsiveContainer width="100%" height={300}>
-      <LineChart data={data} margin={{ top: 10, right: 20, left: 10, bottom: 0 }}>
-        <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+      <LineChart data={data} margin={{ top: 14, right: 20, left: 4, bottom: 4 }}>
+        <CartesianGrid strokeDasharray="2 8" stroke={GRID_COLOR} vertical={false} />
         <XAxis
           dataKey="year"
-          label={{ value: 'Jahre', position: 'insideBottomRight', offset: -5, fontSize: 11, fill: '#888' }}
-          tick={{ fontSize: 12, fill: '#666' }}
-          axisLine={{ stroke: '#e0e0e0' }}
+          label={{ value: 'Jahre', position: 'insideBottomRight', offset: -5, fontSize: 11, fill: AXIS_COLOR, fontFamily: BODY_FONT }}
+          tick={{ fontSize: 12, fill: AXIS_COLOR, fontFamily: BODY_FONT }}
+          axisLine={{ stroke: GRID_COLOR }}
           tickLine={false}
+          tickMargin={10}
         />
         <YAxis
-          tickFormatter={v => `${Math.round(v / 1000)}k€`}
-          tick={{ fontSize: 12, fill: '#666' }}
+          tickFormatter={formatAxisThousands}
+          tick={{ fontSize: 12, fill: AXIS_COLOR, fontFamily: BODY_FONT }}
           axisLine={false}
           tickLine={false}
-          width={52}
+          width={60}
         />
         <Tooltip content={<CustomTooltip />} />
-        <Legend
-          wrapperStyle={{ fontSize: 12, fontFamily: 'system-ui, -apple-system, sans-serif', paddingTop: 8 }}
-        />
+        <Legend content={<ChartLegend />} />
         {breakevenYear && (
           <ReferenceLine
             x={breakevenYear}
             stroke="#16a34a"
             strokeDasharray="4 4"
             strokeWidth={1.5}
-            label={{ value: 'Break-even', fill: '#16a34a', fontSize: 11, fontWeight: 600 }}
+            label={{ value: 'Break-even', fill: '#16a34a', fontSize: 11, fontWeight: 700, fontFamily: BODY_FONT }}
           />
         )}
-        <Line type="monotone" dataKey={labelA} stroke={COLOR_A} strokeWidth={2} dot={false} activeDot={{ r: 4, strokeWidth: 0 }} />
-        <Line type="monotone" dataKey={labelB} stroke={COLOR_B} strokeWidth={2} dot={false} activeDot={{ r: 4, strokeWidth: 0 }} />
+        <Line
+          type="monotone"
+          dataKey={labelA}
+          stroke={COLOR_A}
+          strokeWidth={3}
+          dot={false}
+          activeDot={{ r: 5, fill: COLOR_A, stroke: '#ffffff', strokeWidth: 3 }}
+        />
+        <Line
+          type="monotone"
+          dataKey={labelB}
+          stroke={COLOR_B}
+          strokeWidth={3}
+          dot={false}
+          activeDot={{ r: 5, fill: COLOR_B, stroke: '#ffffff', strokeWidth: 3 }}
+        />
       </LineChart>
     </ResponsiveContainer>
   )
 }
 
-export function MonthlyCostChart({ tcoA, tcoB, labelA, labelB, years }) {
-  const categories = ['kaufpreis', 'energie', 'wartung', 'versicherung', 'steuer', 'finanzierung']
-  const months = years * 12
-
-  const data = categories.map(key => ({
-    name: key,
-    [labelA]: Math.round((tcoA[key] || 0) / months),
-    [labelB]: Math.round((tcoB[key] || 0) / months),
-  }))
-
+export function MonthlyCostChart({ data, labelA, labelB }) {
   return (
     <ResponsiveContainer width="100%" height={280}>
-      <BarChart data={data} margin={{ top: 10, right: 20, left: 10, bottom: 20 }} barCategoryGap="30%">
-        <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" vertical={false} />
+      <BarChart data={data} margin={{ top: 14, right: 20, left: 4, bottom: 20 }} barCategoryGap="28%">
+        <CartesianGrid strokeDasharray="2 8" stroke={GRID_COLOR} vertical={false} />
         <XAxis
           dataKey="name"
-          angle={-30}
+          angle={-18}
           textAnchor="end"
           interval={0}
-          tick={{ fontSize: 11, fill: '#666' }}
-          axisLine={{ stroke: '#e0e0e0' }}
+          height={60}
+          tick={{ fontSize: 11, fill: AXIS_COLOR, fontFamily: BODY_FONT }}
+          axisLine={{ stroke: GRID_COLOR }}
           tickLine={false}
+          tickMargin={12}
         />
         <YAxis
-          tickFormatter={v => `${v}€`}
-          tick={{ fontSize: 12, fill: '#666' }}
+          tickFormatter={formatEur}
+          tick={{ fontSize: 12, fill: AXIS_COLOR, fontFamily: BODY_FONT }}
           axisLine={false}
           tickLine={false}
-          width={52}
+          width={64}
         />
         <Tooltip content={<CustomTooltip />} />
-        <Legend
-          wrapperStyle={{ fontSize: 12, fontFamily: 'system-ui, -apple-system, sans-serif', paddingTop: 8 }}
-        />
-        <Bar dataKey={labelA} fill={COLOR_A} radius={[3, 3, 0, 0]} />
-        <Bar dataKey={labelB} fill={COLOR_B} radius={[3, 3, 0, 0]} />
+        <Legend content={<ChartLegend />} />
+        <Bar dataKey={labelA} fill={COLOR_A} radius={[10, 10, 0, 0]} maxBarSize={22} />
+        <Bar dataKey={labelB} fill={COLOR_B} radius={[10, 10, 0, 0]} maxBarSize={22} />
       </BarChart>
     </ResponsiveContainer>
   )

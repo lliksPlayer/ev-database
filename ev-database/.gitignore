@@ -4,6 +4,9 @@ dist-ssr
 *.local
 .env
 .env.local
+serviceAccountKey.json
+ev_cars_export.csv
+ev_cars_scraped.json
 .DS_Store
 coverage
 *.log

@@ -2,6 +2,10 @@
 
 Append-only operation history. Each entry starts with `## [YYYY-MM-DD] operation | title`.
 
+## [2026-04-20] task | EV Redesign "EV Magazin" vollständig implementiert — alle 8 Tasks (Fonts, TopNav, Icons, CarCard, LandingPage, Routing, i18n, Sidebar)
+## [2026-04-20] task | EV Redesign Tasks 5–7 — LandingPage hero erstellt, Routing auf /autos verschoben, i18n landing-Keys (de+en)
+## [2026-04-20] task | EV Redesign "EV Magazin" — Design-Spec + Implementierungsplan erstellt (8 Tasks, LandingPage + CarCard + TopNav + Sidebar)
+## [2026-04-20] task | ÜBERSICHT.md erstellt — alle Projektdateien auf Deutsch erklärt für Nicht-Programmierer
 ## [2026-04-20] task | EV Data Enrichment System vollständig implementiert — PR feature/ev-data-enrichment gepusht (9 Tasks, 14 Tests grün)
 ## [2026-04-20] task | EV Data Enrichment — Tasks 6+7: Orchestrator-Script + GitHub Action (nightly cron pipeline)
 ## [2026-04-20] task | EV Data Enrichment System — Design-Spec und Implementierungsplan erstellt (9 Tasks, fetch+cheerio+Claude)
@@ -62,3 +66,4 @@ Parse last 5 entries: `grep "^## \[" log.md | tail -5`
 ## [2026-04-20] task | Projekt-Cleanup: Worktrees entfernt, 10k Zeilen alte Pläne gelöscht, Build-Artefakte bereinigt, .vscode/settings.json angelegt
 ## [2026-04-20] task | ev-vergleich/ dauerhaft ignoriert: .claudeignore + .vscode/settings.json (files.exclude + search.exclude) aktualisiert
 ## [2026-04-20] task | ev-vergleich Refactor: ui.js → toast.js + admin.js + cars.js aufgeteilt; 3 render.js-Bugs gefixt (fehlende Imports); CLAUDE.md auf 15 Zeilen gekürzt
+## [2026-04-24] task | ev-database als einzige aktive App festgelegt; ev-vergleich als Legacy im Arbeitsfluss markiert
